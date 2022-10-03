@@ -1,22 +1,20 @@
 <template>
-    <a class="iconified-text">
-        <font-awesome-icon :icon="[type, icon]" class="icon" />
-        <span class="text">{{ text }}</span>
-    </a>
+    <Icon :name="icon" class="iconified-text-icon" />
+    <span class="iconified-text-text">
+        <slot />
+    </span>
 </template>
 
 <style scoped>
-.iconified-text {
-    padding-left: 0.175rem;
-    padding-right: 0.175rem;
-}
-
-.iconified-text .icon {
+.iconified-text-icon {
+    font-size: 1.2rem;
     margin-right: 0.175rem;
+    margin-bottom: 0.1rem;
 }
 
-.iconified-text .text {
+.iconified-text-text {
     margin-left: 0.175rem;
+    font-style: normal;
 }
 </style>
 
@@ -24,16 +22,7 @@
 export default {
     name: 'IconifiedText',
     props: {
-        type: {
-            type: String,
-            required: false,
-            default: 'fas'
-        },
         icon: {
-            type: String,
-            required: true,
-        },
-        text: {
             type: String,
             required: true,
         }

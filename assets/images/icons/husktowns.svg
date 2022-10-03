@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <clipPath id="clip-HuskTowns">
+      <rect width="1000" height="1000"/>
+    </clipPath>
+  </defs>
+  <g id="HuskTowns" clip-path="url(#clip-HuskTowns)">
+    <rect width="1000" height="1000" fill="#142b42"/>
+    <path id="Intersection_6" data-name="Intersection 6" d="M14.5-73.524v-95.189c14.767,5.57,41.976,13.787,86.848,20.734l77.4-315.836V-713.709H111.889V-974.447H369.631v260.738h-70.1v53.621H547.571v108.921H299.534v87.352L409.761-169.276c133.73-35.871,228.4-86.3,337.543-82.445,46.951,1.36,96.7,17.712,140.609,37.669V-697.741H686.523l328-328V-73.524Zm204.929-63.545c24.411-1.665,47.622-4.165,69.8-7.315L250.61-252.3Z" transform="translate(-14.5 1074)" fill="#fff"/>
+  </g>
+</svg>

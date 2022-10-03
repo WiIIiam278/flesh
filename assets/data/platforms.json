@@ -1,0 +1,32 @@
+{
+  "github": {
+    "name": "GitHub",
+    "url": "https://github.com/{id}",
+    "icon": "fa6-brands fa-github"
+  },
+  "spigot": {
+    "name": "SpigotMC",
+    "url": "https://spigotmc.org/resources/{id}",
+    "icon": "fa6-solid fa-faucet"
+  },
+  "polymart": {
+    "name": "Polymart",
+    "url": "https://polymart.org/resource/{id}",
+    "icon": "fa6-solid fa-p"
+  },
+  "songoda": {
+    "name": "Songoda",
+    "url": "https://songoda.com/marketplace/product/{id}",
+    "icon": "fa6-solid fa-shield-halved"
+  },
+  "itch": {
+    "name": "itch.io",
+    "url": "{id}",
+    "icon": "fa6-brands fa-itch-io"
+  },
+  "modrinth": {
+    "name": "Modrinth",
+    "url": "https://modrinth.com/mod/{id}",
+    "icon": "fa6-solid fa-wrench"
+  }
+}

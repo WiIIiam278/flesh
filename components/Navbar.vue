@@ -1,25 +1,25 @@
 <template>
-    <nav>
+    <nav class="shadow">
         <h1 id="logo">
             <a href="/">William278</a>
         </h1>
         <ul id="navigation">
             <li>
                 <NuxtLink to="/">
-                    <IconifiedText icon="house" text="Home" />
+                    <IconifiedText icon="fa6-solid:house">Home</IconifiedText>
                 </NuxtLink>
             </li>
             <li>
                 <NuxtLink to="/docs">
-                    <IconifiedText icon="book" text="Docs" />
+                    <IconifiedText icon="fa6-solid:book">Docs</IconifiedText>
                 </NuxtLink>
             </li>
             <li>
                 <a href="https://discord.gg/tVYhJfyDWG" target="_blank" class="button">
-                    <IconifiedText icon="comment" text="Support" />
+                    <IconifiedText icon="fa6-brands:discord">Support</IconifiedText>
                 </a>
             </li>
-        </ul> 
+        </ul>
     </nav>
 </template>
 
@@ -34,7 +34,6 @@ nav {
     font-size: 1.2rem;
     font-weight: 500;
     height: 4rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 nav #logo {

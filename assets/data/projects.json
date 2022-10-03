@@ -1,0 +1,375 @@
+[
+  {
+    "id": "huskhomes",
+    "name": "HuskHomes",
+    "repository": "https://github.com/WiIIiam278/HuskHomes2",
+    "ids": {
+      "spigot": "83767",
+      "polymart": "284",
+      "modrinth": "J6U9o3JG"
+    },
+    "tags": [
+      "plugin",
+      "spigot"
+    ],
+    "tagline": "A powerful, intuitive and flexible teleportation plugin",
+    "documentation": true,
+    "icon": {
+      "svg": "huskhomes.svg",
+      "png": "huskhomes.png"
+    },
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "husksync",
+    "name": "HuskSync",
+    "repository": "https://github.com/WiIIiam278/HuskSync",
+    "ids": {
+      "spigot": "97144",
+      "polymart": "1634",
+      "songoda": "758"
+    },
+    "tags": [
+      "plugin",
+      "spigot"
+    ],
+    "tagline": "A modern, cross-server player data synchronisation system",
+    "documentation": true,
+    "icon": {
+      "svg": "husksync.svg",
+      "png": "husksync.png"
+    },
+    "license": "Premium"
+  },
+  {
+    "id": "husktowns",
+    "name": "HuskTowns",
+    "repository": "https://github.com/WiIIiam278/HuskTowns",
+    "ids": {
+      "spigot": "92672",
+      "polymart": "1056",
+      "songoda": "622"
+    },
+    "tags": [
+      "plugin",
+      "spigot"
+    ],
+    "tagline": "A super intuitive and cross-server compatible Towny-style protection",
+    "documentation": true,
+    "icon": {
+      "svg": "husktowns.svg",
+      "png": "husktowns.png"
+    },
+    "assets": {
+      "videos": [
+        {
+          "url": "https://www.youtube.com/watch?v=YnnprTNczeY",
+          "description": "HuskTowns intruduction video"
+        }
+      ]
+    },
+    "license": "Premium"
+  },
+  {
+    "id": "huskchat",
+    "name": "HuskChat",
+    "repository": "https://github.com/WiIIiam278/HuskChat",
+    "ids": {
+      "spigot": "94496",
+      "polymart": "1217",
+      "modrinth": "SSXTD3me"
+    },
+    "tags": [
+      "plugin",
+      "proxy"
+    ],
+    "tagline": "A smart, beautiful & customisable proxy chat plugin",
+    "documentation": true,
+    "icon": {
+      "svg": "huskchat.svg",
+      "png": "huskchat.png"
+    },
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "schematicupload",
+    "name": "SchematicUpload",
+    "repository": "https://github.com/WiIIiam278/SchematicUpload",
+    "ids": {
+      "spigot": "100657",
+      "polymart": "2125",
+      "modrinth": "IHhrl01E"
+    },
+    "tags": [
+      "plugin",
+      "spigot"
+    ],
+    "tagline": "Provide users with a simple web interface for uploading schematics",
+    "icon": {
+      "svg": "schematicupload.svg",
+      "png": "schematicupload.png"
+    },
+    "assets": {
+      "images": [
+        {
+          "url": "schematicupload/in-game-command.png",
+          "description": "The in-game command provided by SchematicUpload"
+        },
+        {
+          "url": "schematicupload/web-interface.png",
+          "description": "The web interface of SchematicUpload"
+        }
+      ]
+    },
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "huskhomesgui",
+    "name": "HuskHomesGUI",
+    "repository": "https://github.com/WiIIiam278/HuskHomesGUI",
+    "ids": {
+      "spigot": "91059",
+      "polymart": "928",
+      "modrinth": "bME80dEI"
+    },
+    "tags": [
+      "plugin",
+      "spigot"
+    ],
+    "tagline": "Show your HuskHomes homes and warps in an easy-to-use GUI menu",
+    "icon": {
+      "svg": "huskhomesgui.svg",
+      "png": "huskhomesgui.png"
+    },
+    "license": "GPL-3.0"
+  },
+  {
+    "id": "huskbungeertp",
+    "name": "HuskBungeeRTP",
+    "repository": "https://github.com/WiIIiam278/HuskBungeeRTP",
+    "ids": {
+      "spigot": "96352"
+    },
+    "tags": [
+      "plugin",
+      "spigot"
+    ],
+    "tagline": "A random teleport system that works cross-server. Requires HuskHomes",
+    "icon": {
+      "svg": "huskbungeertp.svg",
+      "png": "huskbungeertp.png"
+    },
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "signsearch",
+    "name": "SignSearch",
+    "repository": "https://github.com/WiIIiam278/SignSearch",
+    "ids": {
+      "spigot": "92369",
+      "polymart": "1060",
+      "modrinth": "PUtbeCdA"
+    },
+    "tags": [
+      "plugin",
+      "spigot"
+    ],
+    "tagline": "A simple and fast plugin that lets you search text of nearby signs",
+    "icon": {
+      "svg": "signsearch.svg",
+      "png": "signsearch.png"
+    },
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "timetobattle",
+    "name": "TimeToBattle.net",
+    "tags": [
+      "server"
+    ],
+    "tagline": "A Minecraft Survival Multiplayer server with custom battle minigames (2020-2022)",
+    "readme": "/timetobattle",
+    "icon": {
+      "svg": "timetobattle.svg",
+      "png": "timetobattle.png"
+    },
+    "assets": {
+      "images": [
+        {
+          "url": "timetobattle/altenberg-castle.png",
+          "description": "Altenberg Castle"
+        },
+        {
+          "url": "timetobattle/spawn.png",
+          "description": "The survival spawn area"
+        },
+        {
+          "url": "timetobattle/battle-bastion.png",
+          "description": "The Battle Bastion"
+        },
+        {
+          "url": "timetobattle/harrenhall.png",
+          "description": "Harrenhall, by me"
+        },
+        {
+          "url": "timetobattle/hub.png",
+          "description": "The network hub"
+        },
+        {
+          "url": "timetobattle/sphere-battles.png",
+          "description": "The Sphere Battles minigame"
+        }
+      ]
+    }
+  },
+  {
+    "id": "loaded-dice",
+    "name": "Loaded Dice",
+    "tags": [
+      "game",
+      "unity"
+    ],
+    "tagline": "Play as a dude who lives in a die. A GMTK Game Jam '22 Submission for the theme \"Roll the Dice\"",
+    "ids": {
+      "itch": "https://william278.itch.io/loaded-dice"
+    },
+    "readme": "/loaded-dice",
+    "icon": {
+      "png": "loaded-dice.png"
+    },
+    "assets": {
+      "images": [
+        {
+          "url": "loaded-dice/gameplay-4.png",
+          "description": "Loaded Dice gameplay showing the starting area"
+        },
+        {
+          "url": "loaded-dice/gameplay-1.png",
+          "description": "Loaded Dice gameplay showing a spike challenge"
+        },
+        {
+          "url": "loaded-dice/gameplay-2.png",
+          "description": "Loaded Dice gameplay showing a fire challenge"
+        },
+        {
+          "url": "loaded-dice/gameplay-3.png",
+          "description": "Loaded Dice gameplay showing a moving fire challenge"
+        },
+        {
+          "url": "loaded-dice/gameplay-5.png",
+          "description": "Loaded Dice gameplay showing a timing/spike challenge"
+        }
+      ]
+    }
+  },
+  {
+    "id": "better-call-saul-ds",
+    "name": "Better Call Saul DS",
+    "repository": "https://github.com/WiIIiam278/BCSDS",
+    "tags": [
+      "game",
+      "c++"
+    ],
+    "tagline": "Better Call Saul for the Nintendo DS, based on the popular show. Written in NFLib, libnds and C++",
+    "icon": {
+      "png": "bcsds.png"
+    },
+    "license": "Apache-2.0",
+    "assets": {
+      "images": [
+        {
+          "url": "better-call-saul-ds/cover-with-title.jpg",
+          "description": "Game cover with title screen"
+        },
+        {
+          "url": "better-call-saul-ds/ds-foreground-cover.jpg",
+          "description": "DS in front of the cover on the title screen"
+        },
+        {
+          "url": "better-call-saul-ds/gameplay-screen-ds.jpg",
+          "description": "Close-up of gameplay on the DS screen"
+        },
+        {
+          "url": "better-call-saul-ds/reverse-cover-with-gameplay.jpg",
+          "description": "Reverse cover with gameplay on the DS screen"
+        }
+      ],
+      "videos": [
+        {
+          "url": "https://www.youtube.com/watch?v=io08u1cYmsM",
+          "description": "Gameplay video on a DS"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mineget",
+    "name": "Mineget",
+    "repository": "https://github.com/WiIIiam278/Mineget",
+    "tags": [
+      "library",
+      "js"
+    ],
+    "links": [
+      {
+        "link": "https://www.npmjs.com/package/mineget",
+        "text": "npm"
+      }
+    ],
+    "tagline": "Node package for aggregating data about Minecraft resources from various marketplaces",
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "annotaml",
+    "name": "Annotaml",
+    "repository": "https://github.com/WiIIiam278/Annotaml",
+    "tags": [
+      "library",
+      "java"
+    ],
+    "tagline": "A Java library for generating YAML files from Java classes via annotations",
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "paginedown",
+    "name": "PagineDown",
+    "repository": "https://github.com/WiIIiam278/PagineDown",
+    "tags": [
+      "library",
+      "java"
+    ],
+    "tagline": "A library for generating paginated MineDown-formatted chat menu lists",
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "webschematics",
+    "name": "WebSchematics",
+    "repository": "https://github.com/WiIIiam278/WebSchematics",
+    "tags": [
+      "library",
+      "js"
+    ],
+    "icon": {
+      "png": "webschematics.png"
+    },
+    "links": [
+      {
+        "link": "https://WiIIiam278.github.io/WebSchematics",
+        "text": "Preview"
+      }
+    ],
+    "tagline": "Render Minecraft schematics on the web natively in-browser",
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "carcass",
+    "name": "Carcass",
+    "repository": "https://github.com/WiIIiam278/carcass",
+    "tags": [
+      "utility",
+      "python"
+    ],
+    "tagline": "A Python CLI tool for quickly spinning up a network of proxied Minecraft servers",
+    "license": "Apache-2.0"
+  }
+]

@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
     // Modules
     buildModules: ['@nuxtjs/google-fonts'],
+    modules: ['nuxt-icon'],
 
     // Fonts
     googleFonts: {
@@ -10,8 +11,10 @@ export default defineNuxtConfig({
         }
     },
 
-    // CSS and icons
-    css: ['~/assets/css/main.css', '@fortawesome/fontawesome-svg-core/styles.css'],
-
-    gitHead: require('child_process').execSync('git rev-parse HEAD').toString().trim().substring(0, 7)
+    // Runtime components
+    runtimeConfig: {
+        public: {
+            GIT_HASH: require('child_process').execSync('git rev-parse HEAD').toString().trim().substring(0, 7) || 'unknown'
+        }
+    }
 })

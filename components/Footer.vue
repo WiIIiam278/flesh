@@ -4,7 +4,7 @@
         <div id="navigation">
             <ul>
                 <li>
-                    <NuxtLink to="/terms">Support Terms</NuxtLink>
+                    <NuxtLink to="/terms">Terms</NuxtLink>
                 </li>
                 <li>
                     <a href="https://buymeacoff.ee/william278" target="_blank">Tips</a>
@@ -18,8 +18,8 @@
             </ul>
         </div>
         <span id="version">
-            <a href="https://github.com/WiIIiam278/WiIIiam278.net/" target="_blank">
-                <IconifiedText icon="code-branch" :text="git_head" />    
+            <a href="https://github.com/WiIIiam278/William278.net" target="_blank">
+                <IconifiedText icon="fa6-solid:code-branch">{{ git_head }}</IconifiedText>    
             </a>
         </span>
     </footer>
@@ -60,8 +60,10 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0.5rem 2rem;
     color: var(--light-gray);
+    margin-top: auto;
+    justify-content: flex-end;
 }
 </style>
 
@@ -70,7 +72,7 @@ export default {
     data() {
         return {
             current_year: new Date().getFullYear(),
-            git_head: gitHead
+            git_head: useRuntimeConfig().public.GIT_HASH
         }
     }
 }
