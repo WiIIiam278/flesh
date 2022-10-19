@@ -7,7 +7,7 @@
             </p>
         </div>
         <a id="header-icon" href="https://twitter.com/William27528" target="_blank">
-            <img src="assets/images/icons/william-head.png" id="head-graphic" class="shadow"
+            <img src="/images/icons/william-head.png" id="head-graphic" class="shadow"
                 alt="William278's player head" />
         </a>
     </div>
@@ -19,7 +19,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 #main-header #header-text {
@@ -42,7 +42,6 @@
 }
 
 #head-graphic {
-    margin: 1.5em 0;
     border-radius: 0.5em;
 }
 </style>

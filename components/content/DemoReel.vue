@@ -1,7 +1,7 @@
 <template>
     <div class="demo-reel shadow">
         <video autoplay muted playsinline loop>
-            <source :src="'/assets/videos/' + video" type="video/mp4">
+            <source :src="'/videos/' + video" type="video/mp4">
             <span>Your browser does not support HTML5! :-(</span>
         </video>
     </div>

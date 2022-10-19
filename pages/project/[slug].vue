@@ -1,7 +1,9 @@
 <template>
     <NuxtLayout v-if="projects.find(project => project.id === $route.params.slug)">
         <Breadcrumbs :crumbs="crumbs" />
-        <ProjectReadme :project="projects.find(project => project.id === $route.params.slug)" />
+        <article>
+            <ContentDoc />
+        </article>
         <template #sidebar>
             <ProjectSidebar :project="projects.find(project => project.id === $route.params.slug)" />
         </template>
@@ -10,10 +12,6 @@
         <ErrorPage code=404>Project not found: {{ $route.params.slug }}</ErrorPage>
     </NuxtLayout>
 </template>
-
-<style scoped>
-
-</style>
 
 <script setup>
 import projects from '/assets/data/projects.json'

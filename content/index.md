@@ -27,9 +27,22 @@ Docs
 
 ::button-link
 ---
-link: 'https://discord.gg/8Y4Y4Z9'
+link: 'https://discord.gg/tVYhJfyDWG'
 icon: 'fa6-brands:discord'
 hollow: true
 ---
 Discord
 ::
+
+---
+
+### Commissions
+I'm not currently open for commissions. Thank you for your understanding!
+
+### Updates
+I regularly update my plugins to support new versions, add new features and to fix bugs. When I do so, I will issue an announcement in the [HuskHelp Discord](https://discord.gg/tVYhJfyDWG).
+
+If you would like to receive notifications when I post an announcement and/or gain access to preview builds, you can use the buttons in the `#role-picker` channel to opt-in to notifications
+
+### Other projects
+I'm a member of the [Haroohie Translation Club](https://haroohie.club/), a fan-translation group working on translating games from the Haruhi Suzumiya series!

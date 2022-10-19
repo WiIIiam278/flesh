@@ -22,7 +22,7 @@ export default {
 <style scoped>
 .breadcrumbs {
     display: inline-block;
-    margin: 0.2rem 0;
+    margin: 0.5rem 0;
 }
 .crumb .crumb-divider {
     margin: 0 0.4rem;

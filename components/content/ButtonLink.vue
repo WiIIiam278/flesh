@@ -5,7 +5,7 @@
         </div>
         <div v-else :class="hollow ? 'button hollow' : 'button filled'">
             <span v-if="icon">
-                <IconifiedText :type="iconType" :icon="icon">
+                <IconifiedText :icon="icon">
                     <ContentSlot :use="$slots.default" unwrap="p" />
                 </IconifiedText>
             </span>

@@ -1,10 +1,10 @@
 <template>
     <div v-if="project.id" class="project-card">
         <div class="header">
-            <NuxtLink class="image" v-if="project.icon" :to="'project/' + project.id">
-                <object v-if="project.icon.svg" :data="'assets/images/icons/' + project.icon.svg"
+            <NuxtLink class="image hover-image" v-if="project.icon" :to="'project/' + project.id">
+                <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg"
                     type="image/svg+xml" />
-                <img v-else-if="project.icon.png" :src="'assets/images/icons/' + project.icon.png" />
+                <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
             </NuxtLink>
             <div class="details">
                 <NuxtLink :to="'project/' + project.id">
@@ -21,8 +21,8 @@
                     <p>{{ project.tagline }}</p>
                 </div>
                 <div class="buttons">
-                    <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow=true>Docs</ButtonLink>
-                    <ButtonLink v-for="link in project.links" :link="link.link" hollow=true>{{ link.text }}</ButtonLink>
+                    <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>Docs</ButtonLink>
+                    <ButtonLink v-for="link in project.links" :link="link.link" hollow>{{ link.text }}</ButtonLink>
                     <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github"></ButtonLink>
                     <ButtonLink v-if="project.ids && project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io"></ButtonLink>
                     <ButtonLink v-if="project.ids && project.ids.spigot" :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet"></ButtonLink>

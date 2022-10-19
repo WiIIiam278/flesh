@@ -7,7 +7,8 @@ export default defineNuxtConfig({
     // Fonts
     googleFonts: {
         families: {
-            Nunito: [400, 700],
+            'Nunito': [400, 700],
+            'JetBrains Mono': [400, 700]
         }
     },
 
@@ -18,7 +19,23 @@ export default defineNuxtConfig({
         }
     },
 
+    // Content config (https://content.nuxtjs.org/api/configuration)
     content: {
-        // https://content.nuxtjs.org/api/configuration
+        documentDriven: true,
+        highlight: {
+            theme: 'github-dark-dimmed',
+            preload: [
+                'java',
+                'yaml',
+                'json'
+            ]
+        }
+    },
+
+    // Run on startup
+    hooks: {
+        'build:done': () => {
+            require('./hooks/download-content.js').getContent()
+        }
     }
 })
