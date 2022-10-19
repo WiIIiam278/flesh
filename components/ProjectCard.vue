@@ -124,6 +124,30 @@
     display: flex;
     flex-direction: row;
 }
+
+/* Smaller than 350px */
+@media only screen and (max-width: 22em) {
+    .project-card {
+        flex-direction: column;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image {
+        margin-bottom: 0.5rem;
+    }
+
+    .details {
+        margin-right: 0;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+}
 </style>
 
 <script>

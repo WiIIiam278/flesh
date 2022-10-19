@@ -33,6 +33,27 @@
     flex: 1;
     padding: 0 1rem;
 }
+
+/* Less than 725px */
+@media screen and (max-width: 725px) {
+    #page-content {
+        flex-direction: column-reverse;
+        max-width: 85vw;
+        margin: 0 auto;
+    }
+
+    #left-column {
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+    }
+
+    #right-column {
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+    }
+}
 </style>
 
 <script>
