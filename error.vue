@@ -1,12 +1,10 @@
 <template>
     <div id="page-body">
         <Navbar />
-        <div id="error-page">
-            <h1>Error {{ error.statusCode }}</h1>
-            <p>{{ error.statusMessage }}</p>
-            <NuxtLink to="/">
-                <IconifiedText icon="fa6-solid:arrow-left">Back to home</IconifiedText>
-            </NuxtLink>
+        <div>
+            <ErrorPage :code="error.statusCode">
+            {{ error.statusMessage }}
+            </ErrorPage>
         </div>
         <Footer />
     </div>
@@ -17,15 +15,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-
-#error-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 1100px;
 }
 </style>
 

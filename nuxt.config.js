@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
     // Modules
     buildModules: ['@nuxtjs/google-fonts'],
-    modules: ['nuxt-icon'],
+    modules: ['nuxt-icon', '@nuxt/content'],
 
     // Fonts
     googleFonts: {
@@ -16,5 +16,9 @@ export default defineNuxtConfig({
         public: {
             GIT_HASH: require('child_process').execSync('git rev-parse HEAD').toString().trim().substring(0, 7) || 'unknown'
         }
+    },
+
+    content: {
+        // https://content.nuxtjs.org/api/configuration
     }
 })

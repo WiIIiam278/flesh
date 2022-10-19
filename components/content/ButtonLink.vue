@@ -6,11 +6,11 @@
         <div v-else :class="hollow ? 'button hollow' : 'button filled'">
             <span v-if="icon">
                 <IconifiedText :type="iconType" :icon="icon">
-                    <slot />
+                    <ContentSlot :use="$slots.default" unwrap="p" />
                 </IconifiedText>
             </span>
             <span v-else>
-                <slot />
+                <ContentSlot :use="$slots.default" unwrap="p" />
             </span>
         </div>
     </a>
@@ -20,11 +20,12 @@
 
 .button {
     display: inline-block;
-    padding: 0.3rem 0.6rem;
+    padding: 0.25rem 0.5rem;
     border-radius: 1rem;
     text-decoration: none;
     transition: background-color 0.2s ease-in-out;
     border: 0.2rem solid var(--accent);
+    margin: 0.15rem;
 }
 
 .filled {

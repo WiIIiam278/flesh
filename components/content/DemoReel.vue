@@ -1,12 +1,5 @@
 <template>
     <div class="demo-reel shadow">
-        <div class="name">
-            <NuxtLink :to="'/project/' + project.id">
-                <h3 class="title">
-                    <IconifiedText icon="fa6-solid:play">{{ project.name }}</IconifiedText>
-                </h3>
-            </NuxtLink>
-        </div>
         <video autoplay muted playsinline loop>
             <source :src="'/assets/videos/' + video" type="video/mp4">
             <span>Your browser does not support HTML5! :-(</span>
@@ -30,14 +23,6 @@
     height: 100%;
     border-radius: 0.5rem;
 }
-
-.demo-reel .name {
-    z-index: 1;
-    position: absolute;
-    align-self: flex-end;
-    margin: auto;
-    width: auto;
-}
 </style>
 
 <script>
@@ -48,8 +33,13 @@ export default {
             type: String,
             required: true
         },
-        project: {
-            type: Object,
+        alt: {
+            type: String,
+            required: false,
+            default: 'Demo reel video'
+        },
+        project_id: {
+            type: String,
             required: true
         }
     }

@@ -21,14 +21,14 @@
                     <p>{{ project.tagline }}</p>
                 </div>
                 <div class="buttons">
-                    <Button v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow=true>Docs</Button>
-                    <Button v-for="link in project.links" :link="link.link" hollow=true>{{ link.text }}</Button>
-                    <Button v-if="project.repository" :link="project.repository" icon="fa6-brands:github"></Button>
-                    <Button v-if="project.ids && project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io"></Button>
-                    <Button v-if="project.ids && project.ids.spigot" :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet"></Button>
-                    <Button v-if="project.ids && project.ids.polymart" :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p"></Button>
-                    <Button v-if="project.ids && project.ids.songoda" :link="'https://songoda.com/marketplace/product/' + project.ids.songoda" icon="fa6-solid:shield-halved"></Button>
-                    <Button v-if="project.ids && project.ids.modrinth" :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench"></Button>
+                    <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow=true>Docs</ButtonLink>
+                    <ButtonLink v-for="link in project.links" :link="link.link" hollow=true>{{ link.text }}</ButtonLink>
+                    <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.spigot" :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.polymart" :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.songoda" :link="'https://songoda.com/marketplace/product/' + project.ids.songoda" icon="fa6-solid:shield-halved"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.modrinth" :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench"></ButtonLink>
                 
                 </div>
             </div>
