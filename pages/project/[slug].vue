@@ -1,6 +1,6 @@
 <template>
     <NuxtLayout v-if="projects.find(project => project.id === $route.params.slug)">
-        <Breadcrumbs :crumbs="[{ name: 'Project', link: '/' }]" />
+        <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Project', link: `/project/${$route.params.slug}`}]" />
         <article>
             <ContentDoc />
         </article>

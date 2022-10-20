@@ -1,13 +1,13 @@
 <template>
     <div v-if="project.id" class="project-card">
         <div class="header">
-            <NuxtLink class="image hover-image" v-if="project.icon" :to="'project/' + project.id">
+            <NuxtLink class="image hover-image" v-if="project.icon" :to="'/project/' + project.id">
                 <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg"
                     type="image/svg+xml" />
                 <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
             </NuxtLink>
             <div class="details">
-                <NuxtLink :to="'project/' + project.id">
+                <NuxtLink :to="'/project/' + project.id">
                     <h3 class="name">{{ project.name ? project.name : project.id }}</h3>
                 </NuxtLink>
                 <div class="pills">

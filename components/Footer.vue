@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <div id="copyright">&copy; Willima278, {{ current_year }}</div>
+        <div id="copyright">&copy; William278, {{ current_year }}</div>
         <div id="navigation">
             <ul>
                 <li>

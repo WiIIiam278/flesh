@@ -28,7 +28,9 @@ export default defineNuxtConfig({
                 'java',
                 'yaml',
                 'json',
-                'js'
+                'js',
+                'groovy',
+                'xml'
             ]
         }
     },
