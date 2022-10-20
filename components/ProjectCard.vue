@@ -67,7 +67,6 @@
 }
 
 .image {
-    color-scheme: light;
     justify-self: flex-end;
 }
 

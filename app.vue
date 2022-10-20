@@ -58,9 +58,10 @@ a:hover {
   filter: brightness(85%);
 }
 
-/* Disable SVG pointer events */
+/* Disable SVG pointer events and fix coloring */
 object {
   pointer-events: none;
+  color-scheme: light;
 }
 
 /* Box shadow */
