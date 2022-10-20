@@ -104,6 +104,11 @@ article {
   padding: 0;
 }
 
+article h1, h2 {
+  border-bottom: var(--gray) 0.125rem solid;
+  padding-bottom: 0.25rem;
+}
+
 article img,
 article object {
   max-width: 100%;
@@ -126,6 +131,12 @@ article pre code {
   background-color: unset !important;
   padding: unset !important;
   border-radius: unset !important;
+}
+
+article table {
+  display: block;
+  overflow: auto !important;
+  position: relative !important;
 }
 
 /* Tables */

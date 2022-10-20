@@ -27,7 +27,8 @@ export default defineNuxtConfig({
             preload: [
                 'java',
                 'yaml',
-                'json'
+                'json',
+                'js'
             ]
         }
     },
@@ -35,7 +36,8 @@ export default defineNuxtConfig({
     // Run on startup
     hooks: {
         'build:done': () => {
-            require('./hooks/download-content.js').getContent()
+            require('./hooks/fetch-readmes.js').getContent()
+            require('./hooks/fetch-documentation.js').pullDocumentation()
         }
     }
 })

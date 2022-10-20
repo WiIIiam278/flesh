@@ -86,7 +86,6 @@ const getReadmeFromAssets = (project) => {
 }
 
 // Pull README files for each project
-// Export
 module.exports = {
     getContent: () => {
         console.log(`Downloading READMEs for ${projects.length} projects...`)

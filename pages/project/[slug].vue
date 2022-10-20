@@ -1,6 +1,6 @@
 <template>
     <NuxtLayout v-if="projects.find(project => project.id === $route.params.slug)">
-        <Breadcrumbs :crumbs="crumbs" />
+        <Breadcrumbs :crumbs="[{ name: 'Project', link: '/' }]" />
         <article>
             <ContentDoc />
         </article>
@@ -15,12 +15,8 @@
 
 <script setup>
 import projects from '/assets/data/projects.json'
-import Breadcrumbs from '../../components/Breadcrumbs.vue';
-import ErrorPage from '../../components/ErrorPage.vue';
 
 definePageMeta({
     layout: 'project'
 });
-
-const crumbs = [{ name: 'Projects', link: '/' }];
 </script>

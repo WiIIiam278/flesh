@@ -7,4 +7,5 @@ node_modules
 .env
 dist
 content/project/
+content/docs/project/
 public/images/project/

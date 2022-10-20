@@ -65,6 +65,13 @@ footer {
     margin-top: auto;
     justify-content: flex-end;
 }
+
+/* Smaller than 480px */
+@media screen and (max-width: 30em) {
+    #version {
+        display: none;
+    }
+}
 </style>
 
 <script>

@@ -21,7 +21,8 @@ export default {
 
 <style scoped>
 .breadcrumbs {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
     margin: 0.5rem 0;
 }
 .crumb .crumb-divider {

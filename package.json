@@ -1,4 +1,6 @@
 {
+  "name": "william278-site",
+  "displayName": "William278.net Frontend",
   "private": true,
   "scripts": {
     "current-git-sha": "NUXT_ENV_CURRENT_GIT_SHA=`git rev-parse --short HEAD`",
