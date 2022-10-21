@@ -88,6 +88,12 @@ const getReadmeFromAssets = (project) => {
 // Pull README files for each project
 module.exports = {
     getContent: () => {
+        // Check if a ./content/project/ folder exists, if not make it
+        const contentDirectory = './content/project/'
+        if (!fs.existsSync(contentDirectory)) {
+            fs.mkdirSync(contentDirectory)
+        }
+
         console.log(`Downloading READMEs for ${projects.length} projects...`)
         for (const project of projects) {
             if (project.readme) {
