@@ -1,6 +1,7 @@
 <template>
     <NuxtLayout v-if="data">
         <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Transcript', link: `/transcript/${$route.params.id}` }]" />
+        <h1>Ticket #{{ data.ticket.id }}</h1>
         <TranscriptMessages :data="data" />
         <template #sidebar>
             <TranscriptSidebar :data="data" />

@@ -1,0 +1,118 @@
+{
+    "ticket": {
+        "id": 726,
+        "participants": [
+            "185792275899613184",
+            "420673347320283136"
+        ],
+        "creator": "420673347320283136",
+        "open_timestamp": "1666293085069",
+        "close_timestamp": "1666295499588",
+        "project": "HuskHomes",
+        "topic": "Hello, I have updated to the 3.1, Now it also seems to be with the right read out again a problem. \nPlayers now suddenly have more >138 homes space. May only have 15.\nAdmins have only 99 in Luckperms and now after update 199.\n\nsomething is wrong there ^^ registered rights are not correct\n\nConfig was regenerated as described and only the necessary MYSQL data entered."
+    },
+    "users": [
+        {
+            "id": "185792275899613184",
+            "name": "William",
+            "disambiguator": "5204",
+            "pfp": "https://cdn.discordapp.com/avatars/185792275899613184/9d4b7dd0e390e508b1cc386ff8583650.png"
+        },
+        {
+            "id": "420673347320283136",
+            "name": "onlypw",
+            "disambiguator": "3110",
+            "pfp": "https://cdn.discordapp.com/avatars/420673347320283136/1ab5427298bbb7ceb4f6495555b00392.png"
+        },
+        {
+            "id": "901103768995770408",
+            "name": "HuskBot",
+            "disambiguator": "1954",
+            "pfp": "https://cdn.discordapp.com/avatars/901103768995770408/352f8e03d51b1bc6f6eba6e24c57bf2d.png"
+        },
+        {
+            "id": "420673347320283136",
+            "name": "onlypw",
+            "disambiguator": "3110",
+            "pfp": "https://cdn.discordapp.com/avatars/420673347320283136/1ab5427298bbb7ceb4f6495555b00392.png"
+        }
+    ],
+    "emotes": [],
+    "attachments": [],
+    "channels": [],
+    "roles": [
+        {
+            "id": "1007752024009486426",
+            "name": "Ticketer",
+            "color": "607d8b"
+        }
+    ],
+    "messages": [
+        {
+            "sender": "901103768995770408",
+            "timestamp": "1666293085340",
+            "message": "🎫 Thank you for opening a ticket, <!user:420673347320283136>!\n🕙 <!role:1007752024009486426>'s are usually available between 10AM and 10PM UTC (+0).\n🔒 Once your issue is resolved you can close the ticket by using the button below or using `/close-ticket`.\n⠀",
+            "embeds": [
+                {
+                    "color": "00fb9a",
+                    "fields": [
+                        {
+                            "name": "Important Information",
+                            "value": "• A member of staff will be with you to provide support shortly. Please be patient until then - we ask that you don't ping us!\n• Please ensure your issue falls within our scope of coverage by looking at our [terms of service](https://william278.net/terms).\n• If you need support with a premium resource, please make sure you're verified for that resource.\n • If you need to verify your purchase of a premium resource, please send a screenshot of the resource page you bought it from and the payment email address you used.\n⠀",
+                            "inline": false
+                        },
+                        {
+                            "name": "Ticket details",
+                            "value": "• Resource: HuskHomes\n• Topic: Hello, I have updated to the 3.1, Now it also seems to be with the right read out again a problem. \nPlayers now suddenly have more >138 homes space. May only have 15.\nAdmins have only 99 in Luckperms and now after update 199.\n\nsomething is wrong there ^^ registered rights are not correct\n\nConfig was regenerated as described and only the necessary MYSQL data entered.",
+                            "inline": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "sender": "185792275899613184",
+            "timestamp": "1666293310627",
+            "message": "What is the value of your home limit stacking setting in your config file?"
+        },
+        {
+            "sender": "185792275899613184",
+            "timestamp": "1666293397463",
+            "message": "Please carefully read the “Changing set home, public home & free home limits” section here: https://william278.net/docs/huskhomes/Commands",
+            "embeds": [
+                {
+                    "title": "HuskHomes Docs - Commands - William278.net",
+                    "description": "Documentation for HuskHomes - A powerful, intuitive and flexible teleportation plugin - Commands",
+                    "url": "https://william278.net/docs/huskhomes/Commands",
+                    "color": "00fb9a",
+                    "thumbnail": {
+                        "url": "https://william278.net/assets/icons/huskhelp.png",
+                        "proxyURL": "https://images-ext-1.discordapp.net/external/DyKJoEOYaIOzyikC88kzPUQuObqWl2n58RBBjGuNTtY/https/william278.net/assets/icons/huskhelp.png",
+                        "height": 1000,
+                        "width": 1000
+                    }
+                }
+            ]
+        },
+        {
+            "sender": "420673347320283136",
+            "timestamp": "1666293483593",
+            "message": "mean ? stack_permission_limits: true i need false ^^i think"
+        },
+        {
+            "sender": "185792275899613184",
+            "timestamp": "1666293555056",
+            "message": "Are you aware of what that setting does? If true, player limits are calculated from the limit nodes of all permission groups they belong to, including groups they have as part of luckperms’ parental inheritance"
+        },
+        {
+            "sender": "420673347320283136",
+            "timestamp": "1666293724770",
+            "message": "Yes thank you I have overlooked after the regenerate also again to convert. now it seems to be correct again, thank you for the tip and the quick response."
+        },
+        {
+            "sender": "185792275899613184",
+            "timestamp": "1666295489116",
+            "message": "Cool. Thank you very much, have a nice evening!"
+        }
+    ]
+}
