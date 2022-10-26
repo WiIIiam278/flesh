@@ -1,10 +1,14 @@
 <template>
     <NuxtLayout v-if="projects.find(project => project.id === $route.params.project && project.documentation)">
         <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Docs', link: '/' }]" />
-            <article>
+        <article>
             <ContentDoc :path="'/docs/project/' + $route.params.project + '/home'"  />
         </article>
         <template #sidebar>
+            <h1>
+                <IconifiedProject :project="projects.find(project => project.id === $route.params.project)" />
+            </h1>
+            <DocsSearch :project="$route.params.project" />
             <ContentDoc :path="'/docs/project/' + $route.params.project + '/_sidebar'" />
         </template>
     </NuxtLayout>

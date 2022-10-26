@@ -1,3 +1,2 @@
-# Projects
 ::project-doc-list
 ::

@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     // Runtime components
     runtimeConfig: {
         public: {
-            GIT_HASH: require('child_process').execSync('git rev-parse HEAD').toString().trim().substring(0, 7) || 'unknown'
+            GIT_HASH: require('child_process').execSync('git rev-parse HEAD').toString().trim().substring(0, 7) | 'unknown'
         }
     },
 
@@ -24,14 +24,7 @@ export default defineNuxtConfig({
         documentDriven: true,
         highlight: {
             theme: 'github-dark-dimmed',
-            preload: [
-                'java',
-                'yaml',
-                'json',
-                'js',
-                'groovy',
-                'xml'
-            ]
+            preload: ['js', 'java', 'yaml', 'xml', 'groovy']
         }
     },
 

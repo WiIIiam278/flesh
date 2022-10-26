@@ -5,6 +5,8 @@
             <ContentDoc />
         </article>
         <template #sidebar>
+            <h1>Projects</h1>
+            <DocsSearch />
             <ContentDoc path="docs/sidebar" />
         </template>
     </NuxtLayout>

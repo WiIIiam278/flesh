@@ -17,6 +17,7 @@
     "nuxt-icon": "^0.1.6"
   },
   "dependencies": {
+    "discord-markdown": "^2.5.1",
     "sitemap": "^7.1.1"
   }
 }

@@ -17,7 +17,12 @@
                     {{ getTimestampString(parseInt(messages[0].timestamp)) }}
                 </div>
             </div>
-            <MessageText v-for="message in messages" :value="message.message" />
+            <div v-for="message in messages">
+                <MessageText v-if="message.message" :value="message.message" :transcript="transcript" />
+                <div v-if="message.embeds">
+                    <DiscordEmbed v-for="embed in message.embeds" :embed="embed" :transcript="transcript" />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -55,13 +60,10 @@
     flex-direction: column;
     width: 100%;
 }
-
-.content .text {
-    margin: -0.5rem 0;
-}
 </style>
 
 <script>
+import DiscordEmbed from './DiscordEmbed.vue';
 export default {
     props: {
         messages: {
@@ -81,14 +83,14 @@ export default {
             }
             return {
                 id: id,
-                username: 'Unknown User',
-                discriminator: '0000',
+                username: "Unknown User",
+                discriminator: "0000",
                 pfp: null
             };
         },
         getTimestampString(timestamp) {
             const date = new Date(timestamp);
-            return `${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
+            return `${date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} at ${date.toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true })}`;
         },
         getRole(id) {
             const role = this.transcript.roles.find((role) => role.id === id);
@@ -97,8 +99,8 @@ export default {
             }
             return {
                 id: id,
-                name: 'Unknown Role',
-                color: '#000000'
+                name: "Unknown Role",
+                color: "#000000"
             };
         },
         getChannel(id) {
@@ -108,7 +110,7 @@ export default {
             }
             return {
                 id: id,
-                name: 'Unknown Channel'
+                name: "Unknown Channel"
             };
         },
         getEmoji(id) {
@@ -118,10 +120,11 @@ export default {
             }
             return {
                 id: id,
-                name: 'Unknown Emoji',
+                name: "Unknown Emoji",
                 url: null
             };
         }
-    }
+    },
+    components: { DiscordEmbed }
 }
 </script>

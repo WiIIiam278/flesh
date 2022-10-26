@@ -5,6 +5,10 @@
             <ContentDoc :path="'/docs/project/' + $route.params.project + '/' + $route.params.topic.toLowerCase()"  />
         </article>
         <template #sidebar>
+            <h1>
+                <IconifiedProject :project="projects.find(project => project.id === $route.params.project)" />
+            </h1>
+            <DocsSearch :project="$route.params.project" />
             <ContentDoc :path="'/docs/project/' + $route.params.project + '/_sidebar'" />
         </template>
     </NuxtLayout>

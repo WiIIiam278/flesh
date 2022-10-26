@@ -2,7 +2,7 @@
     <ul class="project-doc-list">
         <li v-for="project in projects.filter(p => p.documentation)" :key="project.id" >
             <NuxtLink :to="'/docs/' + project.id">
-                {{ project.name }}
+                <IconifiedProject :project="project" />
             </NuxtLink>
         </li>
     </ul>
