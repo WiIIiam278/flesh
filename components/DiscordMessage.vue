@@ -47,7 +47,8 @@
     border-radius: 100%;
 }
 
-.sender .disambiguator, .sender .timestamp {
+.sender .disambiguator,
+.sender .timestamp {
     color: var(--light-gray);
 }
 

@@ -50,12 +50,34 @@ const formatDiscord = (text, transcript) => {
     return text;
 };
 
+const resolveUser = (id) => {
+    let user = transcript.users.find((user) => user.id === id);
+    if (user) {
+        return user.name;
+    }
+    return id;
+};
+
+const resolveChannel = (id) => {
+    let channel = transcript.channels.find(channel => channel.id === node.id);
+    if (channel) {
+        return channel.name;
+    }
+    return id;
+};
+
+const resolveRole = (id) => {
+    let role = transcript.roles.find(role => role.id === node.id);
+    if (role) {
+        return role.name;
+    }
+    return id;
+};
+
 const parsedMarkdown = toHTML(formatDiscord(value, transcript), {
     embed: embed,
     discordCallback: {
-        user: node => '@' + transcript.users.find(user => user.id === node.id).name,
-        channel: node => '#' + transcript.channels.find(channel => channel.id === node.id).name,
-        role: node => '@' + transcript.roles.find(role => role.id === node.id).name,
+        user: node => '@' + resolveUser(node.id),
     }
 });
 </script>

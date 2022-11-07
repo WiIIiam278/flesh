@@ -14,7 +14,7 @@
 export default {
     props: {
         code: {
-            type: Number,
+            type: String,
             required: false
         }
     }

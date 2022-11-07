@@ -175,4 +175,29 @@ code {
   padding: 0.2rem;
   border-radius: 0.2rem;
 }
+
+/* Summary sections */
+summary {
+  cursor: pointer;
+  outline: none;
+}
+
+details {
+  margin: 0.5rem 0;
+  border: var(--gray) 0.125rem solid;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+details[open] summary {
+  border-bottom: var(--gray) 0.125rem solid;
+  padding-bottom: 0.4rem;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 0.25rem solid var(--gray);
+  padding-left: 0.8rem;
+  margin: 0.5rem 0;
+}
 </style>
