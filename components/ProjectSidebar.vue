@@ -16,7 +16,7 @@
             <div v-for="image in project.assets.images"
                 :class="'image hover-image ' + (project.assets.images.indexOf(image) === 0 ? 'shown' : '')" :key="image"
                 :id="'gallery-' + project.assets.images.indexOf(image)">
-                <img :src="'/images/' + image.url" :alt="image.description" />
+                <img class="shadow" :src="'/images/' + image.url" :alt="image.description" />
             </div>
         </div>
         <div class="tagline">{{ project.tagline }}</div>
@@ -189,6 +189,10 @@ export default {
 
     .buttons {
         text-align: center;
+    }
+
+    .meta .pills {
+        justify-content: center;
     }
 }
 </style>
