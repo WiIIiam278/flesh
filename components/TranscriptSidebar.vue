@@ -51,12 +51,11 @@
 </style>
 
 <script setup>
-// Data prop
-defineProps({
+const { data } = defineProps({
     data: {
         type: Object,
         required: true
-    },
+    }
 });
 
 // Methods
