@@ -26,6 +26,9 @@
             <TranscriptParticipant :user="getParticipant(participant)" :creator="participant === data.ticket.creator" />
         </div>
     </div>
+    <div class="home-button">
+        <ButtonLink link="/" icon="fa6-solid:house" hollow>Home</ButtonLink>
+    </div>
 </template>
 
 <style scoped>
@@ -47,6 +50,10 @@
     overflow-y: hidden;
     max-height: 15rem;
     text-overflow: ellipsis;
+}
+
+.home-button {
+    margin-top: 1.25rem;
 }
 </style>
 
