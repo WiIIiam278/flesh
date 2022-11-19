@@ -9,7 +9,7 @@
         </template>
     </NuxtLayout>
     <NuxtLayout v-else name="default">
-        <ErrorPage code=404>Project not found: {{ $route.params.slug }}</ErrorPage>
+        <ErrorPage code="404">Project not found: {{ $route.params.slug }}</ErrorPage>
     </NuxtLayout>
 </template>
 

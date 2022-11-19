@@ -3,7 +3,6 @@
   "displayName": "William278.net Frontend",
   "private": true,
   "scripts": {
-    "current-git-sha": "NUXT_ENV_CURRENT_GIT_SHA=`git rev-parse --short HEAD`",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -11,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/content": "^2.1.1",
+    "@nuxt/content": "^2.2.2",
     "@nuxtjs/google-fonts": "^3.0.0-0",
     "nuxt": "^3.0.0",
     "nuxt-icon": "^0.1.6"

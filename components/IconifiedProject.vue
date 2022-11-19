@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: fit-content;
 }
 
 .iconified-project .icon {

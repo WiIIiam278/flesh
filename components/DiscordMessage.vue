@@ -65,6 +65,7 @@
 
 <script>
 import DiscordEmbed from './DiscordEmbed.vue';
+
 export default {
     props: {
         messages: {

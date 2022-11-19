@@ -13,7 +13,7 @@
         </template>
     </NuxtLayout>
     <NuxtLayout v-else name="default">
-        <ErrorPage code=404>Documentation not found for: {{ $route.params.project }}</ErrorPage>
+        <ErrorPage code="404">Documentation not found for: {{ $route.params.project }}</ErrorPage>
     </NuxtLayout>
 </template>
 

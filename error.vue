@@ -3,7 +3,7 @@
         <Navbar />
         <div>
             <ErrorPage :code="error.statusCode">
-            {{ error.statusMessage }}
+            {{ error.message }}
             </ErrorPage>
         </div>
         <Footer />

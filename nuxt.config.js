@@ -26,7 +26,6 @@ export default defineNuxtConfig({
 
     // Content config (https://content.nuxtjs.org/api/configuration)
     content: {
-        documentDriven: true,
         highlight: {
             theme: 'github-dark-dimmed',
             preload: ['js', 'java', 'yaml', 'xml', 'groovy']

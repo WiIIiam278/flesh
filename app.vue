@@ -47,6 +47,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Line spacing */
+p {
+  line-height: 1.4rem;
+}
+
+ul,
+ol {
+  line-height: 1.4rem;
+  margin-left: -1rem;
+}
+
 /* Default link styling */
 a {
   text-decoration: none;
@@ -91,6 +102,11 @@ h5 a {
   text-decoration: none !important;
 }
 
+/* Remove heading list spacings */
+h2 + ul, h3 + ul, h4 + ul {
+  margin-top: 0;
+}
+
 /* Horizontal rules */
 hr {
   border: 0;
@@ -105,7 +121,8 @@ article {
   padding: 0;
 }
 
-article h1, h2 {
+article h1,
+h2 {
   border-bottom: var(--gray) 0.125rem solid;
   padding-bottom: 0.25rem;
 }
@@ -199,5 +216,10 @@ blockquote {
   border-left: 0.25rem solid var(--gray);
   padding-left: 0.8rem;
   margin: 0.5rem 0;
+}
+
+/* Common sidebar rules */
+.sidebar h2, .sidebar h3, .sidebar h4 {
+  margin-bottom: 0;
 }
 </style>

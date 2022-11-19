@@ -3,7 +3,7 @@
     <div id="page-body">
         <Navbar />
         <div id="docs-page">
-            <div id="docs-sidebar" class="shadow">
+            <div id="docs-sidebar" class="shadow sidebar">
                 <slot name="sidebar" />
             </div>
             <div id="docs-content">
@@ -49,7 +49,6 @@
     #docs-page {
         flex-direction: column-reverse;
         max-width: 85vw;
-        margin: 0 auto;
     }
 
     #docs-content {

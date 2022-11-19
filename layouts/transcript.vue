@@ -3,7 +3,7 @@
     <div id="page-body">
         <Navbar />
         <div id="transcript-page">
-            <div id="transcript-sidebar" class="shadow">
+            <div id="transcript-sidebar" class="shadow sidebar">
                 <slot name="sidebar" />
             </div>
             <div id="transcript-content">

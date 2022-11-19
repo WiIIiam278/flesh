@@ -15,7 +15,8 @@ export default {
     props: {
         code: {
             type: String,
-            required: false
+            required: false,
+            default: '404'
         }
     }
 }

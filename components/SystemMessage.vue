@@ -22,7 +22,7 @@
 }
 </style>
 
-<script>
+<script lang="js">
 export default {
     props: {
         icon: {

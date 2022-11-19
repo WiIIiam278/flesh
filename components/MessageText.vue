@@ -3,7 +3,8 @@
 </template>
 
 <script setup>
-import { toHTML } from 'discord-markdown';
+import discord from 'discord-markdown';
+const { toHTML } = discord;
 
 const { value, transcript, embed } = defineProps({
     value: {
@@ -77,7 +78,7 @@ const resolveRole = (id) => {
     return id;
 };
 
-const parsedMarkdown = toHTML(formatDiscord(value, transcript), {
+const parsedMarkdown = toHTML(formatDiscord(value, transcript) , {
     embed: embed,
     discordCallback: {
         user: node => '@' + resolveUser(node.id),
