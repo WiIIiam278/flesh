@@ -56,7 +56,7 @@
 }
 </style>
 
-<script>
+<script setup>
 definePageMeta({
     description: 'Open source Minecraft server software & game projects.',
     layout: 'home'

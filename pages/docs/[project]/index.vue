@@ -23,5 +23,4 @@ import projects from '../../../assets/data/projects.json';
 definePageMeta({
     layout: 'docs'
 });
-
 </script>
