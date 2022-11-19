@@ -51,25 +51,28 @@ const formatDiscord = (text, transcript) => {
 };
 
 const resolveUser = (id) => {
-    let user = transcript.users.find((user) => user.id === id);
-    if (user) {
-        return user.name;
+    for (const user of transcript.users) {
+        if (user && user.id && user.id === id && user.name) {
+            return user.name;
+        }
     }
     return id;
 };
 
 const resolveChannel = (id) => {
-    let channel = transcript.channels.find(channel => channel.id === node.id);
-    if (channel) {
-        return channel.name;
+    for (const channel of transcript.channels) {
+        if (channel && channel.id && channel.id === id && channel.name) {
+            return channel.name;
+        }
     }
     return id;
 };
 
 const resolveRole = (id) => {
-    let role = transcript.roles.find(role => role.id === node.id);
-    if (role) {
-        return role.name;
+    for (const role of transcript.roles) {
+        if (role && role.id && role.id === id && role.name) {
+            return role.name;
+        }
     }
     return id;
 };
@@ -78,6 +81,10 @@ const parsedMarkdown = toHTML(formatDiscord(value, transcript), {
     embed: embed,
     discordCallback: {
         user: node => '@' + resolveUser(node.id),
+        channel: node => '#' + resolveChannel(node.id),
+        role: node => '@' + resolveRole(node.id),
+        everyone: () => '@everyone',
+        here: () => '@here',
     }
 });
 </script>

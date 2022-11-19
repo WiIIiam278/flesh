@@ -7,7 +7,7 @@
 
 <style scoped>
 .iconified-text-icon {
-    font-size: 1.2rem;
+    font-size: 115%;
     margin-right: 0.175rem;
     margin-bottom: 0.1rem;
 }

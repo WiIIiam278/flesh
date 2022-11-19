@@ -18,7 +18,7 @@
 }
 
 .dark-gray {
-    background-color: var(--gray);
+    background-color: var(--dark-gray);
 }
 </style>
 
