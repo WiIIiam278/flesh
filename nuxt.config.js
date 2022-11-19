@@ -19,6 +19,11 @@ export default defineNuxtConfig({
         }
     },
 
+    // Build config
+    build: {
+        transpile: ['discord-markdown'],
+    },
+
     // Content config (https://content.nuxtjs.org/api/configuration)
     content: {
         documentDriven: true,
