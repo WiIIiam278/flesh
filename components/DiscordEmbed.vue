@@ -2,7 +2,7 @@
     <div class="discord-embed">
         <div class="highlight"></div>
         <div class="content">
-            <div class="body-section">
+            <div class="body-section" v-if="embed.title || embed.description || (embed.fields && embed.fields.length >= 1)">
                 <div v-if="embed.title">
                     <div v-if="embed.url" class="name">
                         <a :href="embed.url">
@@ -99,8 +99,13 @@ export default {
     display: inline-block;
 }
 
-.content .thumbnail-section {
+.content .thumbnail-section > .thumbnail {
     width: min-content;
+}
+
+.content .thumbnail-section > .image {
+    width: fit-content;
+    max-height: 15rem;
 }
 
 .discord-embed .thumbnail {

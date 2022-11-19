@@ -17,7 +17,7 @@ const parseWikiLinks = (text, id) => {
     const wikiLinks = parsed.matchAll(wikiLinkRegex);
     for (const link of wikiLinks) {
         const linkName = link[1];
-        const linkPath = linkName.replace(/ /g, '-');
+        const linkPath = linkName.replace(/ /g, '-').toLowerCase();
         parsed = parsed.replace(link[0], `[${linkName}](/docs/${project}/${linkPath})`);
     }
     return parsed;
