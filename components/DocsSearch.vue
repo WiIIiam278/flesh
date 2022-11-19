@@ -1,11 +1,10 @@
 <template>
     <div class="search-interface">
         <div class="search">
-            <label for="search">
-                <IconifiedText icon="fa6-solid:magnifying-glass">
-                    <input id="search" placeholder="Search" v-model="query" type="search" autocomplete="off" />
-                </IconifiedText>
+            <label class="magnifying-glass" for="search">
+                <Icon name="fa6-solid:magnifying-glass" />
             </label>
+            <input id="search" placeholder="Search" v-model="query" type="search" autocomplete="off" />
         </div>
         <div class="results" v-if="data.length">
             <ul>
@@ -27,6 +26,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
 }
 
@@ -57,15 +57,27 @@
 }
 
 .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--light-gray);
+    width: 100%;
 }
 
 .search input {
     color: white;
     border: 0.15rem solid var(--light-gray);
     border-radius: 0.5rem;
-    padding: 0.3rem;
+    padding: 0.4rem;
     margin-left: 0.3rem;
+    background-color: transparent;
+    font-family: 'Nunito', sans-serif;
+    width: 80vw;
+}
+
+.search input:focus {
+    border: 0.15rem solid var(--accent);
+    outline: none;
 }
 </style>
 
