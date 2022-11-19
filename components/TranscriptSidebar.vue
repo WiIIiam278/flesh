@@ -22,7 +22,7 @@
     </div>
     <h3>Participants</h3>
     <div class="participants">
-        <div v-for="participant of data.ticket.participants.reverse()">
+        <div v-for="participant of data.ticket.participants">
             <TranscriptParticipant :user="getParticipant(participant)" :creator="participant === data.ticket.creator" />
         </div>
     </div>
@@ -65,14 +65,16 @@ const getTimestampString = (timestamp) => {
 }
 
 const getParticipant = (id) => {
-    for (const user of data.users) {
-        if (user.id && user.id === id) {
-            return user;
+    if (data.users) {
+        for (const user of data.users) {
+            if (user.id && user.id === id) {
+                return user;
+            }
         }
     }
     return {
         id: id,
-        username: 'Unknown',
+        name: 'Unknown',
         disambiguator: '0000',
         pfp: 'https://cdn.discordapp.com/embed/avatars/1.png'
     };
