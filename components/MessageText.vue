@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-const { toHTML } = require('discord-markdown');
+import { toHTML } from 'discord-markdown';
 
 const { value, transcript, embed } = defineProps({
     value: {
