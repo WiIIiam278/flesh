@@ -1,4 +1,4 @@
-# [![William278.net Banner](content/assets/banner.png)](https://github.com/WiIIiam278/William278.net)
+# [![William278.net Banner](public/images/banner.png)](https://github.com/WiIIiam278/William278.net)
 [![Discord](https://img.shields.io/discord/818135932103557162.svg?label=&logo=discord&logoColor=fff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/tVYhJfyDWG)
 
 Source for [my website](https://william278.net), built in Vue.js using Nuxt.js v3, hosted via Vercel. If you'd like to use this as a base for your site, it should be OK, but get in touch with me first!

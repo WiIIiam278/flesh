@@ -18,7 +18,7 @@
             </ul>
         </div>
         <span id="version">
-            <a href="https://github.com/WiIIiam278/William278.net" target="_blank">
+            <a href="https://github.com/WiIIiam278/william278-site" target="_blank">
                 <IconifiedText icon="fa6-solid:code-branch">{{ git_head }}</IconifiedText>    
             </a>
         </span>
