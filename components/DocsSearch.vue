@@ -117,5 +117,5 @@ const { data, refresh } = await useAsyncData('search', () => {
 
 watch([query], () => {
     refresh()
-})
+});
 </script>
