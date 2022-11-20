@@ -14,6 +14,10 @@ export default defineNuxtConfig({
 
     // SEO and meta
     app: {
+        layoutTransition: { 
+            name: 'layout', 
+            mode: 'out-in' 
+        },
         head: {
             charset: 'utf-16',
             title: 'William278.net - Open source Minecraft server software & game projects.',
