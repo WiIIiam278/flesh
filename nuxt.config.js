@@ -61,7 +61,6 @@ export default defineNuxtConfig({
     // Run on startup
     hooks: {
         'build:done': () => {
-            require('./hooks/fetch-stats').fetchStats();
             require('./hooks/fetch-readmes').getContent()
             require('./hooks/fetch-documentation').pullDocumentation()
         }

@@ -202,8 +202,6 @@
 </style>
 
 <script setup>
-import data from '../assets/data/stats.json'
-
 const { project } = defineProps({
     project: {
         type: Object,
@@ -211,5 +209,7 @@ const { project } = defineProps({
     }
 })
 
-const stats = computed(() => data[project.id])
+// Expost stats as a fetch to /api/stats/:id
+let {data} = await useFetch(`/api/stats/${project.id}`)
+const stats = data;
 </script>

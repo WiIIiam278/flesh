@@ -102,8 +102,6 @@
 </template>
 
 <script setup>
-import data from '../assets/data/stats.json'
-
 const { project } = defineProps({
     project: {
         type: Object,
@@ -121,7 +119,8 @@ const galleryClick = () => {
     document.getElementById('gallery-' + galleryIndex).classList.add('shown');
 }
 
-const stats = computed(() => data[project.id])
+let {data} = await useFetch(`/api/stats/${project.id}`)
+const stats = data;
 </script>
 
 <style scoped>
