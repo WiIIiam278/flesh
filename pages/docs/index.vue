@@ -1,5 +1,5 @@
 <template>
-    <NuxtLayout>
+    <NuxtLayout name="docs">
         <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }]" />
         <article>
             <ContentDoc />
@@ -7,13 +7,7 @@
         <template #sidebar>
             <h1>Projects</h1>
             <DocsSearch />
-            <ContentDoc path="docs/sidebar" />
+            <ContentDoc :head="false" path="docs/sidebar" />
         </template>
     </NuxtLayout>
 </template>
-
-<script setup>
-definePageMeta({
-    layout: 'docs'
-});
-</script>

@@ -6,7 +6,7 @@
                 <ProjectGrid />
             </div>
             <div id="right-column">
-                <ContentDoc />
+                <ContentDoc :head="false" />
             </div>
         </div>
     </NuxtLayout>

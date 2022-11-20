@@ -20,7 +20,8 @@
             </div>
         </div>
         <div class="tagline">{{ project.tagline }}</div>
-        <div class="buttons" v-if="project.documentation || (project.links && project.links.length > 0) || project.repository">
+        <div class="buttons"
+            v-if="project.documentation || (project.links && project.links.length > 0) || project.repository">
             <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>
                 Docs
             </ButtonLink>
@@ -32,16 +33,15 @@
             </ButtonLink>
         </div>
         <div class="buttons" v-if="project.ids">
-            <ButtonLink v-if="project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io"
-                hollow>
+            <ButtonLink v-if="project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io" hollow>
                 itch.io
             </ButtonLink>
-            <ButtonLink v-if="project.ids.spigot"
-                :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet" hollow>
+            <ButtonLink v-if="project.ids.spigot" :link="'https://spigotmc.org/resources/' + project.ids.spigot"
+                icon="fa6-solid:faucet" hollow>
                 Spigot
             </ButtonLink>
-            <ButtonLink v-if="project.ids.polymart"
-                :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p" hollow>
+            <ButtonLink v-if="project.ids.polymart" :link="'https://polymart.org/resource/' + project.ids.polymart"
+                icon="fa6-solid:p" hollow>
                 Polymart
             </ButtonLink>
             <ButtonLink v-if="project.ids.songoda"
@@ -58,9 +58,18 @@
             <div class="stat" v-if="stats.lowest_price">
                 <div class="stat-descriptor">Price</div>
                 <div class="stat-data">
-                    <IconifiedText icon="fa6-solid:sterling-sign">
-                        {{ stats.lowest_price.toFixed(2) }}
+                    £{{ stats.lowest_price.toFixed(2) }}
+                </div>
+            </div>
+            <div class="stat" v-else-if="project.license">
+                <div class="stat-descriptor">License</div>
+                <div class="stat-data">
+                    <IconifiedText icon="fa6-solid:scale-balanced">
+                        {{ project.license }}
                     </IconifiedText>
+                    <a v-if="project.repository" :href="project.repository + '/raw/master/LICENSE'">
+                        <Icon class="license-link" name="fa6-solid:arrow-up-right-from-square" /> 
+                    </a>
                 </div>
             </div>
             <div class="stat" v-if="stats.total_downloads">
@@ -74,7 +83,7 @@
                 </div>
             </div>
             <div class="stat" v-if="stats.average_rating">
-                <div class="stat-descriptor">Avg. Rating</div>
+                <div class="stat-descriptor">Average Rating</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:star">
                         {{ stats.average_rating.toFixed(1) }}
@@ -119,7 +128,7 @@ const galleryClick = () => {
     document.getElementById('gallery-' + galleryIndex).classList.add('shown');
 }
 
-let {data} = await useFetch(`/api/stats/${project.id}`)
+let { data } = await useFetch(`/api/stats/${project.id}`)
 const stats = data;
 </script>
 
@@ -197,7 +206,7 @@ const stats = data;
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.5rem;
     margin: 0.5rem 0;
 }
@@ -215,6 +224,11 @@ const stats = data;
 .stat .stat-descriptor {
     font-size: 0.9rem;
     color: var(--light-gray);
+}
+
+.stat .license-link {
+    margin-left: 0.3rem;
+    font-size: 0.8rem;
 }
 
 /* Less than 800px */

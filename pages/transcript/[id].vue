@@ -1,5 +1,11 @@
 <template>
-    <NuxtLayout v-if="data">
+    <NuxtLayout v-if="data" name="transcript">
+        <Head>
+            <Title>Ticket #{{ data.ticket.id }} Transcript - HuskHelp - William278.net</Title>
+            <Meta name="description" :content="description" />
+            <Meta name="og:description" :content="description" />
+            <Meta name="twitter:description" :content="description" />
+        </Head>
         <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Transcript', link: `/transcript/${$route.params.id}` }]" />
         <h1>Ticket #{{ data.ticket.id }}</h1>
         <TranscriptMessages :data="data" />
@@ -47,7 +53,10 @@ const { data } = await useAsyncData('transcript', () => {
     return $fetch(`https://cdn.discordapp.com/attachments/${id}`);
 });
 
-definePageMeta({
-    layout: 'transcript'
+const description = computed(() => {
+    if (!data) {
+        return 'Unknown ticket transcript';
+    }
+    return `Transcript for HuskHelp Support Ticket #${data.ticket.id} &mdash; William278.net`;
 });
 </script>
