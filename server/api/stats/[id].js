@@ -5,6 +5,11 @@ import projects from '../../../assets/data/projects.json'
 let timestamp;
 const stats = {};
 
+const updateStats = async (project) => {
+    stats[project.id] = await get(project.ids);
+    timestamp = Date.now();
+}
+
 export default defineEventHandler(async (event) => {
     const id = event.context.params.id;
     const project = projects.find(p => p.id === id);
@@ -16,12 +21,13 @@ export default defineEventHandler(async (event) => {
     }
 
     // Cache stats for an hour
-    if (Object.keys(stats).includes(project.id) && Date.now() - timestamp < 3600000) {
+    if (!Object.keys(stats).includes(project.id)) {
+        await updateStats(project);
+    }
+    if (Date.now() - timestamp < 3600000) {
         return stats[project.id];
     }
 
-    stats[project.id] = await get(project.ids);
-    timestamp = Date.now();
-
+    updateStats(project);
     return stats[project.id];
 })
