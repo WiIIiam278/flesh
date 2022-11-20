@@ -58,9 +58,9 @@ export default defineNuxtConfig({
         }
     },
 
-    // Run on startup
+    // Fetch neccessary assets / documentation from GitHub
     hooks: {
-        'build:done': () => {
+        'build:before': () => {
             require('./hooks/fetch-readmes').getContent()
             require('./hooks/fetch-documentation').pullDocumentation()
         }
