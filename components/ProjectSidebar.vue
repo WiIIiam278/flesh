@@ -7,7 +7,7 @@
                     <Pill v-for="tag in project.tags" :key="tag">{{ tag }}</Pill>
                 </div>
             </div>
-            <div class="icon">
+            <div class="icon" v-if="project.icon">
                 <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg" type="image/svg+xml" />
                 <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
             </div>
