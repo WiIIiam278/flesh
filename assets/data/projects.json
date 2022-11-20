@@ -54,7 +54,7 @@
       "plugin",
       "spigot"
     ],
-    "tagline": "A super intuitive and cross-server compatible Towny-style protection",
+    "tagline": "An intuitive, cross-server Towny-style protection solution",
     "documentation": true,
     "icon": {
       "svg": "husktowns.svg",
@@ -104,7 +104,7 @@
       "plugin",
       "spigot"
     ],
-    "tagline": "Provide users with a simple web interface for uploading schematics",
+    "tagline": "Give users a simple web interface to upload schematics",
     "icon": {
       "svg": "schematicupload.svg",
       "png": "schematicupload.png"
@@ -136,7 +136,7 @@
       "plugin",
       "spigot"
     ],
-    "tagline": "Show your HuskHomes homes and warps in an easy-to-use GUI menu",
+    "tagline": "Show HuskHomes homes and warps in a simple to use menu",
     "icon": {
       "svg": "huskhomesgui.svg",
       "png": "huskhomesgui.png"

@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "discord-markdown": "^2.5.1",
+    "mineget": "^1.2.4",
     "sitemap": "^7.1.1"
   }
 }

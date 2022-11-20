@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="tagline">{{ project.tagline }}</div>
-        <div class="buttons">
+        <div class="buttons" v-if="project.documentation || (project.links && project.links.length > 0) || project.repository">
             <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>
                 Docs
             </ButtonLink>
@@ -30,19 +30,21 @@
             <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github" hollow>
                 Repository
             </ButtonLink>
-            <ButtonLink v-if="project.ids && project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io"
+        </div>
+        <div class="buttons" v-if="project.ids">
+            <ButtonLink v-if="project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io"
                 hollow>
                 itch.io
             </ButtonLink>
-            <ButtonLink v-if="project.ids && project.ids.spigot"
+            <ButtonLink v-if="project.ids.spigot"
                 :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet" hollow>
-                SpigotMC
+                Spigot
             </ButtonLink>
-            <ButtonLink v-if="project.ids && project.ids.polymart"
+            <ButtonLink v-if="project.ids.polymart"
                 :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p" hollow>
                 Polymart
             </ButtonLink>
-            <ButtonLink v-if="project.ids && project.ids.songoda"
+            <ButtonLink v-if="project.ids.songoda"
                 :link="'https://songoda.com/marketplace/product/' + project.ids.songoda" icon="fa6-solid:shield-halved"
                 hollow>
                 Songoda
@@ -52,34 +54,74 @@
                 Modrinth
             </ButtonLink>
         </div>
-        <div class="statistics">
-
+        <div class="stats">
+            <div class="stat" v-if="stats.lowest_price">
+                <div class="stat-descriptor">Price</div>
+                <div class="stat-data">
+                    <IconifiedText icon="fa6-solid:sterling-sign">
+                        {{ stats.lowest_price.toFixed(2) }}
+                    </IconifiedText>
+                </div>
+            </div>
+            <div class="stat" v-if="stats.total_downloads">
+                <div class="stat-descriptor">Downloads</div>
+                <div class="stat-data">
+                    <IconifiedText icon="fa6-solid:download">
+                        {{ stats.total_downloads >= 1000 ? (stats.total_downloads / 1000).toFixed(1) + 'k' :
+                                stats.total_downloads
+                        }}
+                    </IconifiedText>
+                </div>
+            </div>
+            <div class="stat" v-if="stats.average_rating">
+                <div class="stat-descriptor">Avg. Rating</div>
+                <div class="stat-data">
+                    <IconifiedText icon="fa6-solid:star">
+                        {{ stats.average_rating.toFixed(1) }}
+                    </IconifiedText>
+                </div>
+            </div>
+            <div class="stat" v-if="stats.latest_version">
+                <div class="stat-descriptor">Latest Version</div>
+                <div class="stat-data">
+                    <IconifiedText icon="fa6-solid:code-branch">
+                        {{ stats.latest_version }}
+                    </IconifiedText>
+                </div>
+            </div>
+            <div class="stat" v-if="stats.last_updated">
+                <div class="stat-descriptor">Last Updated</div>
+                <div class="stat-data">
+                    <IconifiedText icon="fa6-solid:clock-rotate-left">
+                        {{ new Date(stats.last_updated * 1000).toLocaleDateString() }}
+                    </IconifiedText>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<script>
-import ButtonLink from './content/ButtonLink.vue';
+<script setup>
+import data from '../assets/data/stats.json'
+
+const { project } = defineProps({
+    project: {
+        type: Object,
+        required: true
+    }
+})
+
 let galleryIndex = 0;
-export default {
-    props: {
-        project: {
-            type: Object,
-            required: true,
-        }
-    },
-    methods: {
-        galleryClick() {
-            document.getElementById('gallery-' + galleryIndex).classList.remove('shown');
-            galleryIndex++;
-            if (galleryIndex >= this.project.assets.images.length) {
-                galleryIndex = 0;
-            }
-            document.getElementById('gallery-' + galleryIndex).classList.add('shown');
-        }
-    },
-    components: { ButtonLink }
+const galleryClick = () => {
+    document.getElementById('gallery-' + galleryIndex).classList.remove('shown');
+    galleryIndex++;
+    if (galleryIndex >= this.project.assets.images.length) {
+        galleryIndex = 0;
+    }
+    document.getElementById('gallery-' + galleryIndex).classList.add('shown');
 }
+
+const stats = computed(() => data[project.id])
 </script>
 
 <style scoped>
@@ -88,6 +130,7 @@ export default {
     flex-direction: column;
     min-width: 20vw;
     max-width: 100%;
+    gap: 0.5rem;
 }
 
 .header {
@@ -95,7 +138,6 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
 }
 
 .header .meta {
@@ -128,8 +170,8 @@ export default {
     border-radius: 0.5rem;
 }
 
-.gallery {
-    margin: 0.5rem 0;
+.tagline {
+    margin: 0.8rem 0;
 }
 
 .gallery .image {
@@ -149,12 +191,31 @@ export default {
     border-radius: 0.5rem;
 }
 
-.tagline {
+
+.buttons {
+    margin-left: -0.35rem;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-gap: 0.5rem;
     margin: 0.5rem 0;
 }
 
-.buttons {
-    margin: 0.5rem -0.35rem;
+.stats .stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0.175rem solid var(--light-gray);
+    border-radius: 0.5rem;
+    padding: 0.4rem 0.5rem;
+}
+
+.stat .stat-descriptor {
+    font-size: 0.9rem;
+    color: var(--light-gray);
 }
 
 /* Less than 800px */
@@ -166,6 +227,7 @@ export default {
 
 /* Less than 650px */
 @media screen and (max-width: 40.625rem) {
+
     /* Align everything centrally */
     .project-sidebar {
         align-items: center;

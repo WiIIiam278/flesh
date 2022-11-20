@@ -17,3 +17,6 @@
         </ContentDoc>
     </NuxtLayout>
 </template>
+
+<script setup>
+</script>

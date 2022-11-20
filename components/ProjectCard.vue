@@ -2,8 +2,7 @@
     <div v-if="project.id" class="project-card">
         <div class="header">
             <NuxtLink class="image hover-image" v-if="project.icon" :to="'/project/' + project.id">
-                <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg"
-                    type="image/svg+xml" />
+                <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg" type="image/svg+xml" />
                 <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
             </NuxtLink>
             <div class="details">
@@ -21,19 +20,42 @@
                     <p>{{ project.tagline }}</p>
                 </div>
                 <div class="buttons">
-                    <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>Docs</ButtonLink>
+                    <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>
+                        Docs</ButtonLink>
                     <ButtonLink v-for="link in project.links" :link="link.link" hollow>{{ link.text }}</ButtonLink>
-                    <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.spigot" :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.polymart" :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.songoda" :link="'https://songoda.com/marketplace/product/' + project.ids.songoda" icon="fa6-solid:shield-halved"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.modrinth" :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench"></ButtonLink>
-                
+                    <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github">
+                    </ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.itch" :link="project.ids.itch"
+                        icon="fa6-brands:itch-io"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.spigot"
+                        :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet">
+                    </ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.polymart"
+                        :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.songoda"
+                        :link="'https://songoda.com/marketplace/product/' + project.ids.songoda"
+                        icon="fa6-solid:shield-halved"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.modrinth"
+                        :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench">
+                    </ButtonLink>
                 </div>
             </div>
-            <div class="stats">
-
+            <div class="stats" v-if="stats">
+                <div class="stat" v-if="stats.total_downloads">
+                    <IconifiedText icon="fa6-solid:download">
+                        {{ stats.total_downloads >= 1000 ? (stats.total_downloads / 1000).toFixed(1) + 'k' : stats.total_downloads }}
+                    </IconifiedText>
+                </div>
+                <div class="stat" v-if="stats.average_rating">
+                    <IconifiedText icon="fa6-solid:star">
+                        {{ stats.average_rating.toFixed(1) }}
+                    </IconifiedText>
+                </div>
+                <div class="stat" v-if="stats.latest_version">
+                    <IconifiedText icon="fa6-solid:code-branch">
+                        {{ stats.latest_version }}
+                    </IconifiedText>
+                </div>
             </div>
         </div>
     </div>
@@ -105,6 +127,11 @@
     font-size: 0.9rem;
 }
 
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
 .buttons {
     display: flex;
     flex-wrap: wrap;
@@ -113,13 +140,25 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    gap: 0.35rem;
 }
 
-.buttons .button-link {
-    margin-right: 0.5rem;
+.stats {
+    display: flex;
+    flex-direction: column;
+    color: var(--light-gray);
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-left: auto;
+    font-size: 0.9rem;
+}
+
+.stats .stat {
+    white-space: nowrap;
 }
 
 .body {
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -133,6 +172,19 @@
     .header {
         flex-direction: column;
         align-items: center;
+    }
+
+    .body {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .stats {
+        margin-top: 0.5rem;
+        margin-left: 0;
+        flex-direction: row;
+        gap: 1rem;
     }
 
     .image {
@@ -149,14 +201,15 @@
 }
 </style>
 
-<script>
-export default {
-    name: 'ProjectCard',
-    props: {
-        project: {
-            type: Object,
-            required: true
-        }
+<script setup>
+import data from '../assets/data/stats.json'
+
+const { project } = defineProps({
+    project: {
+        type: Object,
+        required: true
     }
-}
+})
+
+const stats = computed(() => data[project.id])
 </script>

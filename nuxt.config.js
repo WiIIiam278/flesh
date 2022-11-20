@@ -16,7 +16,6 @@ export default defineNuxtConfig({
     app: {
         head: {
             charset: 'utf-16',
-            viewport: 'width=500, initial-scale=1',
             title: 'William278.net - Open source Minecraft server software & game projects.',
             meta: [
                 { name: 'description', content: 'Easily-accessible documentation and information site for all of William278\'s Minecraft plugins, projects & games!' },
@@ -42,7 +41,7 @@ export default defineNuxtConfig({
     // Runtime components
     runtimeConfig: {
         public: {
-            GIT_HASH: require('child_process').execSync('git rev-parse HEAD').toString().trim().substring(0, 7) | 'unknown'
+            GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),
         }
     },
 
@@ -62,8 +61,9 @@ export default defineNuxtConfig({
     // Run on startup
     hooks: {
         'build:done': () => {
-            require('./hooks/fetch-readmes.js').getContent()
-            require('./hooks/fetch-documentation.js').pullDocumentation()
+            require('./hooks/fetch-stats').fetchStats();
+            require('./hooks/fetch-readmes').getContent()
+            require('./hooks/fetch-documentation').pullDocumentation()
         }
     }
 })

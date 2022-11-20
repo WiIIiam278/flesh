@@ -74,13 +74,9 @@ footer {
 }
 </style>
 
-<script>
-export default {
-    data() {
-        return {
-            current_year: new Date().getFullYear(),
-            git_head: useRuntimeConfig().public.GIT_HASH
-        }
-    }
-}
+<script setup>
+const config = useRuntimeConfig()
+
+const current_year = new Date().getFullYear();
+const git_head = config.public.GIT_HASH;
 </script>
