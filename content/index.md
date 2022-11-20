@@ -23,9 +23,7 @@ videos: [
 ---
 ::
 
-This site contains easily-accessible documentation and information about my various projects.
-Additionally, I provide human support for my Minecraft plugins through the HuskHelp Discord.
-
+Welcome! &mdash; This site contains information and documentation for my various Minecraft plugins and game projects. I hope you can find what you need here, but if you have a question, feel free to reach out over Discord!
 
 ::button-link
 ---
@@ -52,3 +50,6 @@ I regularly update my plugins and projects with new features and bug fixes. To g
 
 ### Other projects
 I'm a member of the [Haroohie Translation Club](https://haroohie.club/) &mdash; a fan-translation group working on localising games from the Haruhi Suzumiya series!
+
+### Contact
+My email address is [will27528+enquiries@gmail.com](mailto:will27528+enquiries@gmail.com), or get in touch over Discord!
