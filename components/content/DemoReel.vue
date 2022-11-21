@@ -62,11 +62,11 @@ setInterval(() => {
     max-height: 210px;
     background-color: var(--dark-gray);
     border-radius: 0.5rem;
-    transform: scale(1.01);
 }
 
 .demo-reel:hover {
     cursor: pointer;
+    transform: scale(1.01);
 }
 
 .demo-reel:hover .overlay {
