@@ -6,6 +6,8 @@ export default defineNuxtConfig({
 
     // Fonts
     googleFonts: {
+        download: true,
+        inject: true,
         families: {
             'Nunito': [400, 700],
             'JetBrains Mono': [400, 700]
