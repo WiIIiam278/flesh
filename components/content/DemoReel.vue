@@ -62,11 +62,15 @@ setInterval(() => {
     max-height: 210px;
     background-color: var(--dark-gray);
     border-radius: 0.5rem;
+    transform: scale(1.01);
 }
 
 .demo-reel:hover {
     cursor: pointer;
-    transform: scale(1.015);
+}
+
+.demo-reel:hover .overlay {
+    opacity: 100%;
 }
 
 .demo-reel video {
@@ -86,8 +90,8 @@ setInterval(() => {
     z-index: 10;
     height: 0;
     width: 100%;
+    opacity: 65%;
     transform: translate(-1rem, -1.6rem);
-    transition: opacity 1s ease-in-out;
 }
 
 .overlay .project-icon {
