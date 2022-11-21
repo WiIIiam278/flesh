@@ -71,7 +71,7 @@
     padding: 0.4rem;
     margin-left: 0.3rem;
     background-color: transparent;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', 'Open Sans', sans-serif;
     width: 80vw;
 }
 

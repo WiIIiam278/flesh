@@ -37,7 +37,7 @@ html {
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', 'Open Sans', sans-serif;
   background-color: var(--background);
   color: var(--white);
 
@@ -116,7 +116,7 @@ hr {
 
 /* Article (markdown) content */
 article {
-  max-width: 80vw;
+  max-width: 85vw;
   margin: 0 auto;
   padding: 0;
 }
