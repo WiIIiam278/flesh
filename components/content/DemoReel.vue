@@ -69,10 +69,6 @@ setInterval(() => {
     transform: scale(1.01);
 }
 
-.demo-reel:hover .overlay {
-    opacity: 100%;
-}
-
 .demo-reel video {
     width: 100%;
     height: 100%;
@@ -90,7 +86,6 @@ setInterval(() => {
     z-index: 10;
     height: 0;
     width: 100%;
-    opacity: 65%;
     transform: translate(-1rem, -1.6rem);
 }
 
