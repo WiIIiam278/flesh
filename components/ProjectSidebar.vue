@@ -61,7 +61,7 @@
                     £{{ stats.lowest_price.toFixed(2) }}
                 </div>
             </div>
-            <div class="stat" v-else-if="project.license">
+            <div class="stat" v-if="project.license">
                 <div class="stat-descriptor">License</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:scale-balanced">
