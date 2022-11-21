@@ -1,7 +1,7 @@
 <template>
     <NuxtLayout v-if="data" name="transcript">
         <Head>
-            <Title>Ticket #{{ data.ticket.id }} Transcript - HuskHelp - William278.net</Title>
+            <Title>Ticket #{{ data.ticket.id }} Transcript - HuskHelp</Title>
             <Meta name="description" :content="description" />
             <Meta name="og:description" :content="description" />
             <Meta name="twitter:description" :content="description" />
