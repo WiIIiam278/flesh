@@ -53,10 +53,5 @@ const { data } = await useAsyncData('transcript', () => {
     return $fetch(`https://cdn.discordapp.com/attachments/${id}`);
 });
 
-const description = computed(() => {
-    if (!data) {
-        return 'Unknown ticket transcript';
-    }
-    return `Transcript for HuskHelp Support Ticket #${data.ticket.id} &mdash; William278.net`;
-});
+const description = 'View a transcript for this HuskHelp Support Ticket.';
 </script>
