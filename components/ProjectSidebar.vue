@@ -122,7 +122,7 @@ let galleryIndex = 0;
 const galleryClick = () => {
     document.getElementById('gallery-' + galleryIndex).classList.remove('shown');
     galleryIndex++;
-    if (galleryIndex >= this.project.assets.images.length) {
+    if (galleryIndex >= project.assets.images.length) {
         galleryIndex = 0;
     }
     document.getElementById('gallery-' + galleryIndex).classList.add('shown');
