@@ -178,6 +178,14 @@ table th {
   font-weight: bold;
 }
 
+table td[align="center"], table th[align="center"] {
+  text-align: center;
+}
+
+table td[align="right"], table th[align="right"] {
+  text-align: right;
+}
+
 table tr:nth-child(even) {
   background-color: var(--gray);
 }
