@@ -48,8 +48,8 @@
 @media screen and (max-width: 850px) {
     #transcript-page {
         flex-direction: column-reverse;
-        max-width: 85vw;
-        margin: 0 auto;
+        max-width: 90vw;
+        gap: 0.5rem;
     }
 
     #transcript-content {
@@ -61,7 +61,8 @@
     #transcript-sidebar {
         max-width: 100%;
         width: 100%;
-        padding: 0;
+        padding: 1rem;
+        box-sizing: border-box;
     }
 }
 </style>
