@@ -22,11 +22,11 @@ const { value, transcript, embed } = defineProps({
     }
 });
 
+// Format message text to use discord formatting
 const formatDiscord = (text, transcript) => {
-    // Get all matches of the <!user:NUMBER> tag
     let tags = ['user', 'emote', 'role', 'channel'];
     for (const tag of tags) {
-        const matches = text.matchAll(new RegExp(`<!${tag}:(\\d+)>`, 'g'));
+        const matches = text.matchAll(new RegExp(`<!${tag}:(.+)>`, 'g'));
         for (const match of matches) {
             let value = match[1];
             if (value) {
@@ -42,7 +42,8 @@ const formatDiscord = (text, transcript) => {
                         text = text.replaceAll(match[0], `<@&${value}>`);
                         break;
                     case 'channel':
-                        text = text.replaceAll(match[0], `<#${value}>`);
+                        let id = transcript.channels.find((channel) => channel.name === value).id;
+                        text = text.replaceAll(match[0], `<#${id}>`);
                         break;
                 }
             }
@@ -62,7 +63,7 @@ const resolveUser = (id) => {
 
 const resolveChannel = (id) => {
     for (const channel of transcript.channels) {
-        if (channel && channel.id && channel.id === id && channel.name) {
+        if (channel && channel.id && (channel.id === id || channel.name === id) && channel.name) {
             return channel.name;
         }
     }

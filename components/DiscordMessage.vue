@@ -1,28 +1,27 @@
 <template>
-    <div class="message-block shadow">
+    <div class="message-block shadow" v-if="sender = getUser(messages[0].sender)">
         <div class="avatar">
             <div class="reply-line" v-if="messages[0].reply_snippet"></div>
-            <img :src="getUser(messages[0].sender).pfp" />
+            <img :src="sender.pfp" />
         </div>
         <div class="content">
             <div class="reply-text" v-if="messages[0].reply_snippet">
-                <span class="reply-sender">
-                    <img :src="getUser(messages[0].reply_snippet.sender).pfp" />
-                    <span class="name">
-                        {{ getUser(messages[0].reply_snippet.sender).name }}
-                    </span>
-                    <span class="disambiguator">
-                            #{{ getUser(messages[0].sender).disambiguator }}
-                    </span>
+                <span class="reply-sender" v-if="replyingTo = getUser(messages[0].reply_snippet.sender)">
+                    <img :src="replyingTo.pfp" />
+                    {{ replyingTo.name }}#{{ replyingTo.disambiguator }}
                 </span>
                 <span class="text">
-                    {{ messages[0].reply_snippet.message }}
+                    <MessageText :value="messages[0].reply_snippet.message" :transcript="transcript" />
                 </span>
             </div>
             <div class="sender">
                 <div class="user">
-                    {{ getUser(messages[0].sender).name }}
-                    #{{ getUser(messages[0].sender).disambiguator }}
+                    <span class="name">
+                        {{ sender.name }}
+                    </span>
+                    <span class="disambiguator">
+                        #{{ sender.disambiguator }}
+                    </span>
                 </div>
                 <div class="timestamp">
                     {{ getTimestampString(parseInt(messages[0].timestamp)) }}
@@ -30,6 +29,9 @@
             </div>
             <div v-for="message in messages">
                 <MessageText v-if="message.message" :value="message.message" :transcript="transcript" />
+                <div v-if="message.attachments">
+                    <MessageAttachment v-for="attachment of message.attachments" :attachment="getAttachment(attachment)" />
+                </div>
                 <div v-if="message.embeds">
                     <DiscordEmbed v-for="embed in message.embeds" :embed="embed" :transcript="transcript" />
                 </div>
@@ -53,7 +55,7 @@
     width: 2rem;
     margin-left: 1.5rem;
     margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 0.7rem;
     border-left: 0.15rem solid var(--light-gray);
     border-top: 0.15rem solid var(--light-gray);
     border-radius: 0.5rem 0 0 0;
@@ -110,6 +112,7 @@
 
 <script>
 import DiscordEmbed from './DiscordEmbed.vue';
+import MessageAttachment from './MessageAttachment.vue';
 
 export default {
     props: {
@@ -151,7 +154,7 @@ export default {
             };
         },
         getChannel(id) {
-            const channel = this.transcript.channels.find((channel) => channel.id === id);
+            const channel = this.transcript.channels.find((channel) => channel.id === id || channel.name === id);
             if (channel) {
                 return channel;
             }
@@ -170,8 +173,20 @@ export default {
                 name: "Unknown Emoji",
                 url: null
             };
+        },
+        getAttachment(id) {
+            const attachment = this.transcript.attachments.find((attachment) => attachment.id === id);
+            if (attachment) {
+                return attachment;
+            }
+            return {
+                id: id,
+                name: "Unknown Attachment",
+                type: "unknown",
+                url: null
+            };
         }
     },
-    components: { DiscordEmbed }
+    components: { DiscordEmbed, MessageAttachment }
 }
 </script>

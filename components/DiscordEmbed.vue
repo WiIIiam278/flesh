@@ -25,10 +25,10 @@
                     </div>
                 </div>
                 <div v-if="embed.image" class="image">
-                    <img :src="embed.image.url" />
+                    <img :src="embed.image.url" @error="this.target.src='/images/missing-image.png'" />
                 </div>
                 <div v-if="embed.footer" class="footer">
-                    <img v-if="embed.footer.icon_url" :src="embed.footer.icon_url" class="icon" />
+                    <img v-if="embed.footer.icon_url" :src="embed.footer.icon_url" @error="this.target.src='/images/missing-image.png'" class="icon" />
                     <div v-if="embed.footer.text" class="text">
                         <MessageText :value="embed.footer.text" :transcript="transcript" embed />
                     </div>
@@ -36,8 +36,8 @@
             </div>
             <div class="thumbnail-section" v-if="embed.thumbnail">
                 <img v-if="embed.title || embed.description || (embed.fields && embed.fields.length > 0) || embed.image"
-                    :src="embed.thumbnail.url" class="thumbnail" />
-                <img v-else :src="embed.thumbnail.url" class="image">
+                    :src="embed.thumbnail.url" @error="this.target.src='/images/missing-image.png'" class="thumbnail" />
+                <img v-else :src="embed.thumbnail.url" @error="this.target.src='/images/missing-image.png'" class="image">
             </div>
         </div>
     </div>
