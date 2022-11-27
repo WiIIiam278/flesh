@@ -30,7 +30,7 @@ const getMessageBlocks = (messages) => {
     let lastTimestamp = null;
     let currentBlock = [];
     for (const message of messages) {
-        if (message.sender !== lastSender || message.timestamp - lastTimestamp > 300000) {
+        if (message.sender !== lastSender || message.timestamp - lastTimestamp > 300000 || message.reply_snippet) {
             if (currentBlock.length > 0) {
                 blocks.push(currentBlock);
             }

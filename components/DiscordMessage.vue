@@ -1,17 +1,28 @@
 <template>
     <div class="message-block shadow">
         <div class="avatar">
+            <div class="reply-line" v-if="messages[0].reply_snippet"></div>
             <img :src="getUser(messages[0].sender).pfp" />
         </div>
         <div class="content">
-            <div class="sender">
-                <div class="user">
+            <div class="reply-text" v-if="messages[0].reply_snippet">
+                <span class="reply-sender">
+                    <img :src="getUser(messages[0].reply_snippet.sender).pfp" />
                     <span class="name">
-                        {{ getUser(messages[0].sender).name }}
+                        {{ getUser(messages[0].reply_snippet.sender).name }}
                     </span>
                     <span class="disambiguator">
-                        #{{ getUser(messages[0].sender).disambiguator }}
+                            #{{ getUser(messages[0].sender).disambiguator }}
                     </span>
+                </span>
+                <span class="text">
+                    {{ messages[0].reply_snippet.message }}
+                </span>
+            </div>
+            <div class="sender">
+                <div class="user">
+                    {{ getUser(messages[0].sender).name }}
+                    #{{ getUser(messages[0].sender).disambiguator }}
                 </div>
                 <div class="timestamp">
                     {{ getTimestampString(parseInt(messages[0].timestamp)) }}
@@ -35,6 +46,40 @@
     padding: 0.75rem;
     border-radius: 0.5rem;
     background-color: var(--gray);
+}
+
+.reply-line {
+    height: 0.7rem;
+    width: 2rem;
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    border-left: 0.15rem solid var(--light-gray);
+    border-top: 0.15rem solid var(--light-gray);
+    border-radius: 0.5rem 0 0 0;
+}
+
+.reply-sender {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 0.3rem;
+}
+
+.reply-sender img {
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 50%;
+    margin-right: 0.2rem;
+}
+
+.reply-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--light-gray);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
 }
 
 .avatar {
