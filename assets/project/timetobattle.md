@@ -2,6 +2,37 @@
 
 TimeToBattle.net was my public-access Minecraft server I ran for just under two years, between August 2020 and June 2022. The server launched to the public after a period of closed testing on August 9, 2020, and was live-streamed through my [Twitch channel](https://twitch.tv/william278). The server ended operations on June 1, 2022. You can still join TimeToBattle's [archived discord server here](https://discord.gg/xceEsXC).
 
+## Downloads
+Downloads for a number of worlds and schematics from the server are available for personal use and inspection only below. 
+::download-grid
+::download-card
+---
+file: survival-world-archive-04-jun-2022.gz
+bucket: time-to-battle-archives
+---
+::
+::download-card
+---
+file: creative-world-archive-03-dec-2022.gz
+bucket: time-to-battle-archives
+---
+::
+::download-card
+---
+file: sphere-battles-map-schematics-03-dec-2022.gz
+bucket: time-to-battle-archives
+---
+::
+::download-card
+---
+file: sphere-battles-lobby-archive-03-dec-2022.gz
+bucket: time-to-battle-archives
+---
+::
+::
+
+&copy; William278 2022, All Rights Reserved
+
 ## Features
 The server contained a number of features and game modes through its run.
 * The premiere game mode was **Survival**, which was a Minecraft 1.16 generated world. The server was updated with the release of Minecraft 1.17.
