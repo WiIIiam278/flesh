@@ -26,4 +26,4 @@ If your host doesn't offer it, you can always buy a Redis server separately (e.g
 
 **Note:** I do not endorse and am not affiliated with any of these services. Visit external sites at your own risk.
 
-Information accurate as of 21/06/2021. I tried to gather some of the more popular hosts, though didn't bother if I had to make an account or go through a long-winded support ticket or email process. If you know of any other hosts that offer Redis, please let me know, and I'll update the list, or submit a [pull request here](https://github.com/WiIIiam278/william278-site).
+Information accurate as of 21/06/2022. I tried to gather some of the more popular hosts, though didn't bother if I had to make an account or go through a long-winded support ticket or email process. If you know of any other hosts that offer Redis, please let me know, and I'll update the list, or submit a [pull request here](https://github.com/WiIIiam278/william278-site).
