@@ -1,11 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000" viewBox="0 0 1000 1000">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1400" height="1400" viewBox="0 0 1400 1400">
   <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#142b42"/>
+      <stop offset="0.626" stop-color="#0e1d2d"/>
+      <stop offset="1" stop-color="#08111b"/>
+    </linearGradient>
+    <filter id="Path_19">
+      <feOffset dx="24" dy="32" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feFlood flood-opacity="0.161" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Path_29" x="181.486" y="79.058" width="1064.026" height="1321.548" filterUnits="userSpaceOnUse">
+      <feOffset dx="24" dy="32" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="24" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
     <clipPath id="clip-HuskHomes">
-      <rect width="1000" height="1000"/>
+      <rect width="1400" height="1400"/>
     </clipPath>
   </defs>
   <g id="HuskHomes" clip-path="url(#clip-HuskHomes)">
-    <rect width="1000" height="1000" fill="#142b42"/>
-    <path id="Intersection_1" data-name="Intersection 1" d="M14,998V951.482c42.523-12.952,176.07-52.93,319.751-88.744l77.831-314.924V298.175H344.789V37.706H602.267v260.47H532.242v53.567H780.025V460.552H532.242v87.262L632.665,803.146c19.354-2.21,37.349-3.668,53.586-4.225,146.005-5,269.221,83.542,327.749,134.59V998ZM462.893,832.627q23.813-5.106,46.98-9.663l-26.506-63.856Z" transform="translate(-14 2)" fill="#fff"/>
+    <g data-type="innerShadowGroup">
+      <path id="Path_19-2" data-name="Path 19" d="M150,0H1250a150,150,0,0,1,150,150V1250a150,150,0,0,1-150,150H150A150,150,0,0,1,0,1250V150A150,150,0,0,1,150,0Z" fill="url(#linear-gradient)"/>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_19)">
+        <path id="Path_19-3" data-name="Path 19" d="M150,0H1250a150,150,0,0,1,150,150V1250a150,150,0,0,1-150,150H150A150,150,0,0,1,0,1250V150A150,150,0,0,1,150,0Z" fill="#fff"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_29)">
+      <path id="Path_29-2" data-name="Path 29" d="M592.487-549.154c-77.08-2.731-121.769-12.4-164.988-21.75-38.011-8.225-73.914-15.993-134.36-18.254C169.322-593.79,75.27-571.081,74.335-570.85A60,60,0,0,1,1.748-614.8a60,60,0,0,1,43.946-72.586c4.18-1.027,97.343-23.525,223.606-22.351l115.109-316.259-.02-.007v-400h-65a25,25,0,0,1-25-25v-250a25,25,0,0,1,25-25h250a25,25,0,0,1,25,25v250a25,25,0,0,1-25,25h-65v400l-.054.02L632.586-673.616a25.1,25.1,0,0,1,1.282,5.161c116.672-.131,213.248-19.269,214.31-19.482a60,60,0,0,1,70.657,46.985A60,60,0,0,1,871.85-570.3c-4.857.977-110.191,21.843-239.061,21.844Q612.963-548.452,592.487-549.154ZM452.876-688.19c16.439,3.556,32.5,7.031,50.363,10.052L444.37-839.878,393.416-699.884C415.168-696.349,434.167-692.238,452.876-688.19ZM384.389-1026Zm120-210v-120h225a25,25,0,0,1,25,25v70a25,25,0,0,1-25,25Z" transform="translate(229.49 1845.06)" fill="#fff"/>
+    </g>
   </g>
 </svg>

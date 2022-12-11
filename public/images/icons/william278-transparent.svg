@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1400" height="1400" viewBox="0 0 1400 1400">
+  <defs>
+    <filter id="Union_1" x="436.126" y="105.058" width="643.749" height="1253.883" filterUnits="userSpaceOnUse">
+      <feOffset dx="24" dy="32" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-William278_Icon">
+      <rect width="1400" height="1400"/>
+    </clipPath>
+  </defs>
+  <g id="William278_Icon" data-name="William278 Icon" clip-path="url(#clip-William278_Icon)">
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Union_1)">
+      <path id="Union_1-2" data-name="Union 1" d="M272.219,1093.427,196.767,886.121l-75.453,207.306a25,25,0,0,1-32.043,14.942l-65.778-23.942a25,25,0,0,1-14.942-32.043L136.805,700.008l-.02-.007h120l-.053.019,128.25,352.365a25,25,0,0,1-14.942,32.043l-65.778,23.942a24.976,24.976,0,0,1-32.043-14.942ZM136.786,700V300h120V700Zm120-210V370h225a25,25,0,0,1,25,25v70a25,25,0,0,1-25,25Zm-185-190a25,25,0,0,1-25-25V25a25,25,0,0,1,25-25h250a25,25,0,0,1,25,25V275a25,25,0,0,1-25,25Z" transform="translate(477.09 145.06)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
