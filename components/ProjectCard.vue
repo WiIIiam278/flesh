@@ -33,7 +33,7 @@
                     <ButtonLink v-if="project.ids && project.ids.polymart"
                         :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p"></ButtonLink>
                     <ButtonLink v-if="project.ids && project.ids.songoda"
-                        :link="'https://songoda.com/marketplace/product/' + project.ids.songoda"
+                        :link="'https://marketplace.songoda.com/marketplace/product/' + project.ids.songoda"
                         icon="fa6-solid:shield-halved"></ButtonLink>
                     <ButtonLink v-if="project.ids && project.ids.modrinth"
                         :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench">

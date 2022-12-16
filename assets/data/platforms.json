@@ -16,7 +16,7 @@
   },
   "songoda": {
     "name": "Songoda",
-    "url": "https://songoda.com/marketplace/product/{id}",
+    "url": "https://marketplace.songoda.com/marketplace/product/{id}",
     "icon": "fa6-solid fa-shield-halved"
   },
   "itch": {

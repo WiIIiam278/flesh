@@ -45,7 +45,7 @@
                 Polymart
             </ButtonLink>
             <ButtonLink v-if="project.ids.songoda"
-                :link="'https://songoda.com/marketplace/product/' + project.ids.songoda" icon="fa6-solid:shield-halved"
+                :link="'https://marketplace.songoda.com/marketplace/product/' + project.ids.songoda" icon="fa6-solid:shield-halved"
                 hollow>
                 Songoda
             </ButtonLink>
