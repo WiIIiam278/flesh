@@ -43,6 +43,42 @@ function convertLinks(body, project) {
         body = body.replace(imageSource, `/${targetPath}/${imageFilename}`)
     }
 
+    const htmlImageRegex = /<img.*?src=\"(?<filename>.*?)\".*?>/g
+    const htmlImages = body.matchAll(htmlImageRegex)
+    for (const image of htmlImages) {
+        const imageSource = image["groups"].filename;
+        let path = imageSource;
+
+        // If the URL is a relative path or does not start with http, it is a local image
+        if (path.startsWith('http')) {
+            continue
+        }
+
+        // If the path starts with ./ or /, remove it
+        path = path.replace(/^\.?\//, '')
+
+        // Get the image path
+        const imagePath = `${getRawUrl(project.repository)}/${imageSource}`
+        const imageFilename = imagePath.split('/').pop()
+        const targetPath = `images/project/${project.id}`
+
+        // Fetch the image from the URL
+        fetch(imagePath)
+            .then(res => res.arrayBuffer())
+            .then(body => {
+                // Write the image to the correct directory
+                const imageDirectory = `./public/${targetPath}`
+                if (!fs.existsSync(imageDirectory + '/')) {
+                    fs.mkdirSync(imageDirectory
+                        + '/', { recursive: true })
+                }
+                fs.writeFileSync(`${imageDirectory}/${imageFilename}`, Buffer.from(body))
+            })
+
+        // Replace the image path in the README body
+        body = body.replace(imageSource, `/${targetPath}/${imageFilename}`)
+    }
+
     return body
 }
 
