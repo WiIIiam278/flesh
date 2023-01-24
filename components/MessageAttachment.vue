@@ -1,17 +1,17 @@
 <template>
     <div class="attachment">
-        <img class="image-attachment shadow" v-if="isImage" :src="attachment.url"
-            @error="this.target.src='/images/missing-image.png'" alt="Message attachment" />
-        <video class="video-attachment shadow" v-else-if="isVideo" controls :src="attachment.url"
+        <img class="image-attachment shadow" v-if="type === 'image'" :src="attachment.url"
+            @error="this.target.src = '/images/missing-image.png'" alt="Message attachment" />
+        <video class="video-attachment shadow" v-else-if="type === 'video'" controls :src="attachment.url"
             alt="Message attachment" />
-        <div class="audio-attachment boxed-attachment shadow" v-else-if="isAudio">
+        <div class="audio-attachment boxed-attachment shadow" v-else-if="type === 'audio'">
             <a class="attachment-link" :href="attachment.url" target="_blank" rel="noopener noreferrer">
                 <IconifiedText icon="fa6-solid:file-audio">{{ attachment.name }}</IconifiedText>
             </a>
             <span>Audio file</span>
             <audio controls :src="attachment.url" alt="Message attachment" />
         </div>
-        <div class="text-attachment boxed-attachment shadow" v-else-if="isText">
+        <div class="text-attachment boxed-attachment shadow" v-else-if="type === 'text'">
             <article class="preview">
                 <code>
                     <pre> {{ getText() }} </pre>
@@ -52,7 +52,6 @@
     max-width: 50vw;
     color: var(--light-gray);
 }
-
 </style>
 
 <script setup>
@@ -63,10 +62,19 @@ const { attachment } = defineProps({
     }
 });
 
-const isImage = attachment.type.startsWith('image');
-const isVideo = attachment.type.startsWith('video');
-const isAudio = attachment.type.startsWith('audio');
-const isText = attachment.type.startsWith('text');
+const type = () => {
+    if (attachment.type.startsWith('image')) {
+        return 'image';
+    } else if (attachment.type.startsWith('video')) {
+        return 'video';
+    } else if (attachment.type.startsWith('audio')) {
+        return 'audio';
+    } else if (attachment.type.startsWith('text')) {
+        return 'text';
+    } else {
+        return 'file';
+    }
+}
 
 // method for fetching text
 const getText = useFetch(attachment.url);
