@@ -1,10 +1,10 @@
 <template>
     <div class="gallery">
-        <div class="shadow gallery-item" v-for="(slide, index) in slides" :key="index"
+        <div class="gallery-item shadow" v-for="(slide, index) in slides" :key="index"
             :style="{ transform: `translateY(-${slideOffset}%)` }">
             <img :src="slide.img" :alt="slide.text" />
             <div class="caption">
-                <a class="caption-link" :href="slide.link">
+                <a class="caption-link shadow" :href="slide.link">
                     {{ slide.text }}
                     <Icon name="fa6-solid:up-right-from-square" />
                 </a>
@@ -46,8 +46,8 @@ onMounted(() => {
     width: 100%;
     height: 200px;
     position: relative;
+    border-radius: 0.5rem;
 }
-
 
 .gallery img {
     width: 100%;
