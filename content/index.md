@@ -5,21 +5,12 @@ title: 'William278.net'
 Open source Minecraft server software & game projects.
 ::
 
-::demo-reel
+::showcase-gallery
 ---
-duration: 14
-videos: [
-    {
-        src: 'loaded-dice-promo-banner.mp4', 
-        alt: 'Loaded Dice gameplay reel', 
-        project: 'loaded-dice'
-    },
-    {
-        src: 'bcsds-promo-banner.mp4',
-        alt: 'BCSDS gameplay reel',
-        project: 'better-call-saul-ds'
-    }
-]
+slides:
+  - { "img": "/images/better-call-saul-ds/cover-with-title.jpg", "link": "/project/better-call-saul-ds", "text": "Better Call Saul DS" }
+  - { "img": "/images/loaded-dice/gameplay-2.png", "link": "/project/loaded-dice", "text": "Loaded Dice" }
+  - { "img": "/images/timetobattle/altenberg-castle.png", "link": "/project/time-to-battle", "text": "Time to Battle" }
 ---
 ::
 
