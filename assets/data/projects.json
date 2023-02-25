@@ -81,7 +81,8 @@
     },
     "tags": [
       "plugin",
-      "proxy"
+      "bungee",
+      "velocity"
     ],
     "tagline": "A smart, beautiful & customisable proxy chat plugin",
     "documentation": true,
@@ -140,6 +141,21 @@
     "icon": {
       "svg": "huskhomesgui.svg",
       "png": "huskhomesgui.png"
+    },
+    "license": "Apache-2.0"
+  },
+  {
+    "id": "velocitab",
+    "name": "Velocitab",
+    "repository": "https://github.com/WiIIiam278/Velocitab",
+    "tags": [
+      "plugin",
+      "velocity"
+    ],
+    "tagline": "A super-simple (sorted!) Velocity TAB menu plugin",
+    "icon": {
+      "svg": "velocitab.svg",
+      "png": "velocitab.png"
     },
     "license": "Apache-2.0"
   },
