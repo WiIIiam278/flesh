@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "discord-markdown": "^2.5.1",
-    "mineget": "^1.2.4",
+    "mineget": "^1.2.5",
     "nuxt-icon": "^0.3.2"
   }
 }
