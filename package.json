@@ -18,6 +18,6 @@
   "dependencies": {
     "discord-markdown": "^2.5.1",
     "mineget": "^1.2.4",
-    "nuxt-icon": "^0.1.6"
+    "nuxt-icon": "^0.3.2"
   }
 }
