@@ -42,7 +42,7 @@ export default defineNuxtConfig({
                 { name: 'og:locale:alternate', content: 'en_US' },
             ],
             script: [
-                { defer, 'data-domain': 'william278.net', src: 'https://analytics.william278.net/js/script.js' }
+                { defer: true, 'data-domain': 'william278.net', src: 'https://analytics.william278.net/js/script.js' }
             ]
         }
     },
