@@ -1,4 +1,10 @@
-# Support Terms
+# Terms
+
+Jump to:
+* [Support Terms](#support-terms)
+* [Privacy Policy](#privacy-policy)
+
+## Support Terms
 
 I offer support for my plugins on the [HuskHelp Discord server](https://discord.gg/tVYhJfyDWG). We try and respond to enquiries as quickly as possible there.
 Once you have joined the Discord, you can use the button in the `#create-ticket` channel to open a ticket and explain your issue and a member of staff will get back to you.
@@ -8,7 +14,7 @@ Please note that all staff members are volunteers, and we reserve the right to r
 If you purchase a premium resource, such as HuskTowns and HuskSync, you will be asked to provide proof of purchase.
 Once proof has been provided, you will be assigned a customer role to confirm your verification. If you leave the HuskSync discord you will need to re-verify.
 
-## <i class="fa-solid fa-ban"></i> Banned topics
+### <i class="fa-solid fa-ban"></i> Banned topics
 
 Please note that we are unable to provide support with the following topics for various reasons. We apologise for the inconvenience.
 
@@ -30,7 +36,7 @@ Please note that we are unable to provide support with the following topics for 
 
 </div>
 
-## <i class="fa-solid fa-gavel"></i> Discord rules
+### <i class="fa-solid fa-gavel"></i> Discord rules
 
 We ask that all users conduct themselves in a proper manner on our Discord server.
 
@@ -43,10 +49,18 @@ We ask that all users conduct themselves in a proper manner on our Discord serve
 7. You understand that we can only provide support within the terms & conditions outlined on this page.
 8. Be nice and have fun!
 
-## <i class="fa-solid fa-file-lines"></i> Ticket transcripts
+### <i class="fa-solid fa-file-lines"></i> Ticket transcripts
 
-We archive tickets for evaluative and historical purposes, generating a .html transcript. We can provide a copy of these transcripts on request.
+When your ticket is closed, it will be archived in a .json format, for evaluative purposes and for your reference. This file is uploaded and stored by Discord, and you will be sent a link to view the file on this website when it has been archived. We are able to delete this file on behalf of Discord on request. Note that attachments may not be included in this archive.
+
+## Privacy policy
+
+We promise to not track you, collect or sell any personal data about you while using william278.net. To monitor site performance, however, we do collect analytics through Plausible.
+
+Plausible is privacy friendly and does not track you, or set any cookies to your browser.
+
+If you have any concerns about your privacy on william278.net, you can email: [`will27528+site-privacy@gmail.com`](mailto://will27528+site-privacy@gmail.com)
 
 <br/>
 
-<p style="font-size: small">Last updated: May 8th, 2022</p>
+<p style="font-size: small">Last updated: March 5th, 2023</p>
