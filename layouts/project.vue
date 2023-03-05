@@ -31,7 +31,7 @@
     flex: 1;
     padding: 0 1rem;
     max-width: 65vw;
-    width: 90vw;
+    width: 95vw;
 }
 
 #project-sidebar {

@@ -21,7 +21,7 @@
     margin: 0 auto;
     padding-top: 1.5rem;
     max-width: 1400px;
-    width: 90vw;
+    width: 95vw;
 }
 
 #left-column {

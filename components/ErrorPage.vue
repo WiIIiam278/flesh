@@ -30,4 +30,9 @@ export default {
     align-items: center;
     margin: 1.5rem 0;
 }
+
+.error-page p {
+    margin: 1rem;
+    text-align: center;
+}
 </style>

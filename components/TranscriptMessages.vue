@@ -50,7 +50,7 @@ const getMessageBlocks = (messages) => {
 <style scoped>
 .messages {
     width: 100%;
-    max-width: 90vw;
+    max-width: 95vw;
     display: flex;
     flex-direction: column;
 }

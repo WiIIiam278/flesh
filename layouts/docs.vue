@@ -31,7 +31,7 @@
     flex: 1;
     padding: 0 2rem;
     max-width: 65vw;
-    width: 90vw;
+    width: 95vw;
 }
 
 #docs-sidebar {
@@ -48,7 +48,7 @@
 @media screen and (max-width: 850px) {
     #docs-page {
         flex-direction: column-reverse;
-        max-width: 90vw;
+        max-width: 95vw;
         gap: 0.5rem;
     }
 
