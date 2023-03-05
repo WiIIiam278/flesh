@@ -1,21 +1,24 @@
 <template>
     <div class="breadcrumbs">
-        <div v-for="crumb of crumbs" class="crumb">
+        <div v-for="crumb of crumbs">
             <NuxtLink class="crumb-link" :to="crumb.link">{{ crumb.name }}</NuxtLink>
-            <span class="crumb-divider">/</span>
+            <BreadcrumbDivider />
         </div>
     </div>
 </template>
 
 <script>
+import BreadcrumbDivider from './BreadcrumbDivider.vue';
+
 export default {
-    name: 'Breadcrumbs',
+    name: "Breadcrumbs",
     props: {
         crumbs: {
             type: Array,
             required: true
         }
-    }
+    },
+    components: { BreadcrumbDivider }
 }
 </script>
 
@@ -24,9 +27,5 @@ export default {
     display: flex;
     flex-direction: row;
     margin: 0.5rem 0;
-}
-.crumb .crumb-divider {
-    margin: 0 0.4rem;
-    color: var(--light-gray);
 }
 </style>

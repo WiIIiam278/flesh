@@ -9,10 +9,10 @@
                             <ContentRendererMarkdown :value="doc" />
                         </article>
                     </div>
-                    <template #empty>
-                        <ErrorPage>Page not found: /{{ $route.params.topic }}</ErrorPage>
-                    </template>
                 </ContentRenderer>
+            </template>
+            <template #not-found>
+                <ErrorPage>Page not found: /{{ $route.params.topic }}</ErrorPage>
             </template>
         </ContentDoc>
     </NuxtLayout>
