@@ -2,7 +2,7 @@
     <div id="page-body">
         <Navbar />
         <div>
-            <ErrorPage :code="error.statusCode">
+            <ErrorPage :code="error.statusCode.toString()">
             {{ error.message }}
             </ErrorPage>
         </div>

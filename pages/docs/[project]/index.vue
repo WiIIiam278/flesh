@@ -19,11 +19,22 @@
         </template>
     </NuxtLayout>
     <NuxtLayout v-else name="default">
-        <ErrorPage code="404">Documentation not found for: {{ $route.params.project }}</ErrorPage>
+        <ErrorPage>
+            Docs not found:&nbsp;
+            <span>
+                <NuxtLink to="/">Home</NuxtLink>
+                <BreadcrumbDivider />
+                <NuxtLink to="/docs/">Docs</NuxtLink>
+                <BreadcrumbDivider />
+                <InvalidPage v-if="project" :name="project.name" />
+                <InvalidPage v-else :name="$route.params.project" />
+            </span>
+        </ErrorPage>
     </NuxtLayout>
 </template>
 
 <script setup>
+import InvalidPage from '../../../components/InvalidPage.vue';
 import projects from '/assets/data/projects.json'
 
 const { params } = useRoute()

@@ -25,15 +25,16 @@
         <template #not-found>
             <NuxtLayout name="default">
                 <ErrorPage>
-                    Page not found:&nbsp;
+                    Docs not found:&nbsp;
                     <span>
                         <NuxtLink to="/">Home</NuxtLink>
                         <BreadcrumbDivider />
                         <NuxtLink to="/docs/">Docs</NuxtLink>
                         <BreadcrumbDivider />
-                        <NuxtLink :to="'/docs/' + project.id.toLowerCase()">{{ project.name }}</NuxtLink>
+                        <NuxtLink v-if="project" :to="'/docs/' + project.id.toLowerCase()">{{ project.name }}</NuxtLink>
+                        <InvalidPage v-else :name="$route.params.project" />
                         <BreadcrumbDivider />
-                        <span class="invalid-page">{{ $route.params.topic }}</span>
+                        <InvalidPage :name="$route.params.topic" />
                     </span>
                 </ErrorPage>
             </NuxtLayout>
@@ -43,6 +44,7 @@
 
 <script setup>
 import BreadcrumbDivider from '../../../components/BreadcrumbDivider.vue';
+import InvalidPage from '../../../components/InvalidPage.vue';
 import projects from '/assets/data/projects.json'
 
 const { params } = useRoute()

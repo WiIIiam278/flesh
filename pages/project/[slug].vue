@@ -15,7 +15,12 @@
         </template>
     </NuxtLayout>
     <NuxtLayout v-else name="default">
-        <ErrorPage code="404">Project not found: {{ $route.params.slug }}</ErrorPage>
+        <ErrorPage code="404">
+            Project not found:&nbsp;
+            <NuxtLink to="/">Home</NuxtLink>
+            <BreadcrumbDivider />
+            <InvalidPage :name="$route.params.slug" />    
+        </ErrorPage>
     </NuxtLayout>
 </template>
 
