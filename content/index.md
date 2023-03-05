@@ -10,7 +10,7 @@ Open source Minecraft server software & game projects.
 slides:
   - { "img": "/images/better-call-saul-ds/cover-with-title.jpg", "link": "/project/better-call-saul-ds", "text": "Better Call Saul DS" }
   - { "img": "/images/loaded-dice/gameplay-2.png", "link": "/project/loaded-dice", "text": "Loaded Dice" }
-  - { "img": "/images/timetobattle/altenberg-castle.png", "link": "/project/time-to-battle", "text": "Time to Battle" }
+  - { "img": "/images/timetobattle/altenberg-castle.png", "link": "/project/timetobattle", "text": "Time to Battle" }
 ---
 ::
 

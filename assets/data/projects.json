@@ -148,6 +148,9 @@
     "id": "velocitab",
     "name": "Velocitab",
     "repository": "https://github.com/WiIIiam278/Velocitab",
+    "ids": {
+      "modrinth": "Q10irTG0"
+    },
     "tags": [
       "plugin",
       "velocity"
