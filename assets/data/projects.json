@@ -183,6 +183,22 @@
     "license": "Apache-2.0"
   },
   {
+    "id": "papiproxybridge",
+    "name": "PAPIProxyBridge",
+    "repository": "https://github.com/WiIIiam278/PAPIProxyBridge",
+    "tags": [
+      "library",
+      "bungee",
+      "velocity"
+    ],
+    "tagline": "A bridge library plugin for using PlaceholderAPI on proxy servers",
+    "icon": {
+      "svg": "papiproxybridge.svg",
+      "png": "papiproxybridge.png"
+    },
+    "license": "Apache-2.0"
+  },
+  {
     "id": "loaded-dice",
     "name": "Loaded Dice",
     "tags": [
