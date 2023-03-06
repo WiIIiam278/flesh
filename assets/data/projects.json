@@ -186,6 +186,11 @@
     "id": "papiproxybridge",
     "name": "PAPIProxyBridge",
     "repository": "https://github.com/WiIIiam278/PAPIProxyBridge",
+    "ids": {
+      "spigot": "108415",
+      "polymart": "3615",
+      "modrinth": "bEIUEGTX"
+    },
     "tags": [
       "library",
       "bungee",
