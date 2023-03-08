@@ -93,6 +93,25 @@
     "license": "Apache-2.0"
   },
   {
+    "id": "velocitab",
+    "name": "Velocitab",
+    "repository": "https://github.com/WiIIiam278/Velocitab",
+    "ids": {
+      "modrinth": "Q10irTG0"
+    },
+    "tags": [
+      "plugin",
+      "velocity"
+    ],
+    "tagline": "A super-simple (sorted!) Velocity TAB menu plugin",
+    "documentation": true,
+    "icon": {
+      "svg": "velocitab.svg",
+      "png": "velocitab.png"
+    },
+    "license": "Apache-2.0"
+  },
+  {
     "id": "schematicupload",
     "name": "SchematicUpload",
     "repository": "https://github.com/WiIIiam278/SchematicUpload",
@@ -141,25 +160,6 @@
     "icon": {
       "svg": "huskhomesgui.svg",
       "png": "huskhomesgui.png"
-    },
-    "license": "Apache-2.0"
-  },
-  {
-    "id": "velocitab",
-    "name": "Velocitab",
-    "repository": "https://github.com/WiIIiam278/Velocitab",
-    "ids": {
-      "modrinth": "Q10irTG0"
-    },
-    "tags": [
-      "plugin",
-      "velocity"
-    ],
-    "tagline": "A super-simple (sorted!) Velocity TAB menu plugin",
-    "documentation": true,
-    "icon": {
-      "svg": "velocitab.svg",
-      "png": "velocitab.png"
     },
     "license": "Apache-2.0"
   },
