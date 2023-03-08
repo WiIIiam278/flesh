@@ -156,6 +156,7 @@
       "velocity"
     ],
     "tagline": "A super-simple (sorted!) Velocity TAB menu plugin",
+    "documentation": true,
     "icon": {
       "svg": "velocitab.svg",
       "png": "velocitab.png"
