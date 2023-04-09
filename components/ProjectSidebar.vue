@@ -61,13 +61,13 @@
                     £{{ stats.lowest_price.toFixed(2) }}
                 </div>
             </div>
-            <div class="stat" v-if="project.license">
+            <div class="stat" v-if="project.license && project.license.id">
                 <div class="stat-descriptor">License</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:scale-balanced">
-                        {{ project.license }}
+                        {{ project.license.id }}
                     </IconifiedText>
-                    <a v-if="project.repository" :href="project.repository + '/raw/master/LICENSE'">
+                    <a v-if="project.license.url" :href="project.license.url">
                         <Icon class="license-link" name="fa6-solid:arrow-up-right-from-square" /> 
                     </a>
                 </div>

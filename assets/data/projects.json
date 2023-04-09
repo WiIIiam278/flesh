@@ -18,7 +18,10 @@
       "svg": "huskhomes.svg",
       "png": "huskhomes.png"
     },
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/HuskHomes2/raw/master/LICENSE"
+    }
   },
   {
     "id": "husksync",
@@ -39,7 +42,10 @@
       "svg": "husksync.svg",
       "png": "husksync.png"
     },
-    "license": "Premium"
+    "license": {
+      "id": "Premium",
+      "url": "https://github.com/WiIIiam278/HuskSync/raw/master/LICENSE"
+    }
   },
   {
     "id": "husktowns",
@@ -68,7 +74,10 @@
         }
       ]
     },
-    "license": "Premium"
+    "license": {
+      "id": "Premium",
+      "url": "https://github.com/WiIIiam278/HuskTowns/raw/master/LICENSE"
+    }
   },
   {
     "id": "huskchat",
@@ -90,7 +99,10 @@
       "svg": "huskchat.svg",
       "png": "huskchat.png"
     },
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/HuskChat/raw/master/LICENSE"
+    }
   },
   {
     "id": "velocitab",
@@ -109,7 +121,10 @@
       "svg": "velocitab.svg",
       "png": "velocitab.png"
     },
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/Velocitab/raw/master/LICENSE"
+    }
   },
   {
     "id": "schematicupload",
@@ -141,7 +156,10 @@
         }
       ]
     },
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/SchematicUpload/raw/master/LICENSE"
+    }
   },
   {
     "id": "huskhomesgui",
@@ -161,7 +179,10 @@
       "svg": "huskhomesgui.svg",
       "png": "huskhomesgui.png"
     },
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/HuskHomesGUI/raw/master/LICENSE"
+    }
   },
   {
     "id": "signsearch",
@@ -181,7 +202,10 @@
       "svg": "signsearch.svg",
       "png": "signsearch.png"
     },
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/SignSearch/raw/master/LICENSE"
+    }
   },
   {
     "id": "papiproxybridge",
@@ -202,7 +226,35 @@
       "svg": "papiproxybridge.svg",
       "png": "papiproxybridge.png"
     },
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/PAPIProxyBridge/raw/master/LICENSE"
+    }
+  },
+  {
+    "id": "serial-loops",
+    "name": "Serial Loops",
+    "tags": [
+      "app",
+      "nds",
+      "c#"
+    ],
+    "links": [
+      {
+        "link": "https://haroohie.club/",
+        "text": "haroohie.club"
+      }
+    ],
+    "tagline": "A Suzumiya Haruhi no Chokuretsu (The Series of Haruhi Suzumiya) level editor, by Jonko & me",
+    "repository": "https://github.com/haroohie-club/SerialLoops",
+    "icon": {
+      "png": "serial-loops.png",
+      "svg": "serial-loops.svg"
+    },
+    "license": {
+      "id": "GPL-3.0",
+      "url": "https://github.com/haroohie-club/SerialLoops/raw/main/LICENSE"
+    }
   },
   {
     "id": "loaded-dice",
@@ -250,13 +302,17 @@
     "repository": "https://github.com/WiIIiam278/BCSDS",
     "tags": [
       "game",
+      "nds",
       "c++"
     ],
     "tagline": "Better Call Saul for the Nintendo DS, based on the popular show. Written in NFLib, libnds and C++",
     "icon": {
       "png": "bcsds.png"
     },
-    "license": "Apache-2.0",
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/BCSDS/raw/master/LICENSE"
+    },
     "assets": {
       "images": [
         {
@@ -299,7 +355,10 @@
       }
     ],
     "tagline": "Node package for aggregating data about Minecraft resources from various marketplaces",
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/Mineget/raw/master/LICENSE"
+    }
   },
   {
     "id": "annotaml",
@@ -310,7 +369,10 @@
       "java"
     ],
     "tagline": "A Java library for generating YAML files from Java classes via annotations",
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/Annotaml/raw/master/LICENSE"
+    }
   },
   {
     "id": "paginedown",
@@ -321,7 +383,10 @@
       "java"
     ],
     "tagline": "A library for generating paginated MineDown-formatted chat menu lists",
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/PagineDown/raw/master/LICENSE"
+    }
   },
   {
     "id": "webschematics",
@@ -341,7 +406,10 @@
       }
     ],
     "tagline": "Render Minecraft schematics on the web natively in-browser",
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/WebSchematics/raw/master/LICENSE"
+    }
   },
   {
     "id": "carcass",
@@ -352,7 +420,10 @@
       "python"
     ],
     "tagline": "A Python CLI tool for quickly spinning up a network of proxied Minecraft servers",
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/carcass/raw/master/LICENSE"
+    }
   },
   {
     "id": "timetobattle",
@@ -411,6 +482,9 @@
       "svg": "huskbungeertp.svg",
       "png": "huskbungeertp.png"
     },
-    "license": "Apache-2.0"
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/HuskBungeeRTP/raw/master/LICENSE"
+    }
   }
 ]
