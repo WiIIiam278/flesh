@@ -28,5 +28,10 @@
     "name": "Modrinth",
     "url": "https://modrinth.com/mod/{id}",
     "icon": "fa6-solid fa-wrench"
+  },
+  "curseforge": {
+    "name": "CurseForge",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/{id}",
+    "icon": "fa6-solid fa-fire"
   }
 }
