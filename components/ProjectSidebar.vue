@@ -111,6 +111,9 @@
                 </div>
             </div>
         </div>
+        <div class="downloads" v-if="project.releases">
+            <ProjectDownloads :project="project.id" />
+        </div>
     </div>
 </template>
 
@@ -187,7 +190,6 @@ const stats = data;
 }
 
 .gallery .image {
-    max-height: 16rem;
     width: 100%;
     height: auto;
     display: none;
@@ -198,8 +200,10 @@ const stats = data;
 }
 
 .image img {
+    max-height: 16rem;
     width: 100%;
-    height: 100%;
+    height: auto;
+    object-fit: cover;
     border-radius: 0.5rem;
 }
 

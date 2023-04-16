@@ -22,6 +22,28 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/HuskHomes2/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Spigot",
+          "description": "Spigot, Paper (1.16.5+)",
+          "icon": "/images/platforms/spigot.png",
+          "match": "HuskHomes-Plugin"
+        },
+        {
+          "name": "Fabric",
+          "description": "Server-Side Mod",
+          "icon": "/images/platforms/fabric.png",
+          "match": "HuskHomes-Fabric"
+        },
+        {
+          "name": "Sponge",
+          "description": "Sponge (API v8)",
+          "icon": "/images/platforms/sponge.png",
+          "match": "HuskHomes-Sponge"
+        }
+      ]
     }
   },
   {
@@ -103,6 +125,16 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/HuskChat/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Plugin",
+          "description": "Bungee/Velocity (1.16.5+)",
+          "icon": "/images/icons/huskchat.png",
+          "match": "HuskChat"
+        }
+      ]
     }
   },
   {
@@ -125,6 +157,16 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/Velocitab/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Velocitab",
+          "description": "Velocity (1.16.5+)",
+          "icon": "/images/platforms/velocity.png",
+          "match": "Velocitab"
+        }
+      ]
     }
   },
   {
@@ -160,6 +202,16 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/SchematicUpload/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Spigot",
+          "description": "Spigot (1.16.5+)",
+          "icon": "/images/platforms/spigot.png",
+          "match": "SchematicUpload"
+        }
+      ]
     }
   },
   {
@@ -183,6 +235,16 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/HuskHomesGUI/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Spigot",
+          "description": "Spigot (1.16.5+)",
+          "icon": "/images/platforms/spigot.png",
+          "match": "HuskHomesGUI"
+        }
+      ]
     }
   },
   {
@@ -206,6 +268,16 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/SignSearch/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "SignSearch",
+          "description": "Spigot (1.16.5+)",
+          "icon": "/images/platforms/spigot.png",
+          "match": "SignSearch"
+        }
+      ]
     }
   },
   {
@@ -230,6 +302,16 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/PAPIProxyBridge/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Plugin",
+          "description": "Spigot, Fabric, Bungee, Velocity",
+          "icon": "/images/icons/papiproxybridge.png",
+          "match": "PAPIProxyBridge"
+        }
+      ]
     }
   },
   {
@@ -242,8 +324,8 @@
     ],
     "links": [
       {
-        "link": "https://haroohie.club/",
-        "text": "haroohie.club"
+        "link": "https://haroohie.club/chokuretsu/serial-loops",
+        "text": "About"
       }
     ],
     "tagline": "A Suzumiya Haruhi no Chokuretsu (The Series of Haruhi Suzumiya) level editor, by Jonko & me",
@@ -252,9 +334,53 @@
       "png": "serial-loops.png",
       "svg": "serial-loops.svg"
     },
+    "assets": {
+      "images": [
+        {
+          "url": "serial-loops/map-editing.png",
+          "description": "Using Serial Loops' map editor"
+        },
+        {
+          "url": "serial-loops/script-editor.png",
+          "description": "Serial Loops' script editor in action"
+        },
+        {
+          "url": "serial-loops/sound-editing.png",
+          "description": "Editing background music in Serial Loops"
+        }
+      ]
+    },
     "license": {
       "id": "GPL-3.0",
       "url": "https://github.com/haroohie-club/SerialLoops/raw/main/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Windows",
+          "description": "Windows (x64)",
+          "icon": "/images/platforms/windows.png",
+          "match": "SerialLoops-windows"
+        },
+        {
+          "name": "macOS",
+          "description": "macOS (x64/Intel)",
+          "icon": "/images/platforms/macos.png",
+          "match": "SerialLoops-macOS-x64"
+        },
+        {
+          "name": "macOS",
+          "description": "macOS (ARM/Apple Silicon)",
+          "icon": "/images/platforms/macos.png",
+          "match": "SerialLoops-macOS-arm"
+        },
+        {
+          "name": "Linux",
+          "description": "Linux (tar.gz)",
+          "icon": "/images/platforms/linux.png",
+          "match": "SerialLoops-linux"
+        }
+      ]
     }
   },
   {
@@ -337,6 +463,16 @@
         {
           "url": "https://www.youtube.com/watch?v=io08u1cYmsM",
           "description": "Gameplay video on a DS"
+        }
+      ]
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "DS ROM",
+          "description": "Nintendo DS (.nds)",
+          "icon": "/images/platforms/nds.png",
+          "match": "bcsds"
         }
       ]
     }
