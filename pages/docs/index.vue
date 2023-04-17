@@ -1,6 +1,11 @@
 <template>
     <NuxtLayout name="docs">
         <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }]" />
+        <Head>
+            <Title>Docs - William278.net</Title>
+            <Meta name="og:title" content="Docs &mdash; William278.net" />
+            <Meta name="twitter:title" content="Docs &mdash; William278.net" />
+        </Head>
         <article>
             <ContentDoc />
         </article>

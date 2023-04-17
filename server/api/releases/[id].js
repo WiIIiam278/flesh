@@ -7,22 +7,20 @@ const releases = {};
 const formatReleases = (json, releases) => {
     const latestReleases = [];
     if (json.length > 0) {
-        json[0].assets.forEach(asset => {
-            releases.platforms.forEach(platform => {
+        releases.platforms.forEach(platform => {
+            json[0].assets.forEach(asset => {
                 if (asset.name.startsWith(platform.match)) {
                     latestReleases.push({
                         platform: platform,
                         name: asset.name,
-                        url: asset.browser_download_url,
-                        platform: platform
+                        url: asset.browser_download_url
                     });
                     return;
                 }
             });
         });
-        return latestReleases;
     }
-    return null;
+    return latestReleases;
 }
 
 export default defineEventHandler(async (event) => {

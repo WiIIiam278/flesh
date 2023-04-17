@@ -1,6 +1,16 @@
 <template>
-    <ContentDoc :path="'/docs/project/' + $route.params.project + '/' + $route.params.topic.toLowerCase()">
+    <ContentDoc :path="'/docs/project/' + $route.params.project + '/' + $route.params.topic.toLowerCase()" :head="false" >
         <template v-slot="{ doc }">
+            <Head>
+                <Title>{{ doc.title }} - {{ project.name }} Docs - William278.net</Title>
+                <Meta name="og:title" :content="`${doc.title} &mdash; ${project.name} Docs &mdash; William278.net`" />
+                <Meta name="twitter:title" :content="`${doc.title} &mdash; ${project.name} Docs &mdash; William278.net`" />
+                <Meta name="description" :content="doc.description" />
+                <Meta name="og:description" :content="doc.description" />
+                <Meta name="twitter:description" :content="doc.description" />
+                <Meta v-if="project.icon && project.icon.png" name="og:image" :content="`/images/icons/${project.icon.png}`" />
+                <Meta v-if="project.icon && project.icon.png" name="twitter:image" :content="`/images/icons/${project.icon.png}`" />
+            </Head>
             <ContentRenderer :value="doc">
                 <NuxtLayout name="docs">
                     <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' },

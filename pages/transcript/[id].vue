@@ -1,10 +1,12 @@
 <template>
     <NuxtLayout v-if="data" name="transcript">
         <Head>
-            <Title>Ticket #{{ data.ticket.id }} Transcript - HuskHelp</Title>
+            <Title>Ticket #{{ data.ticket.id }} Transcript - William278.net</Title>
             <Meta name="description" :content="description" />
             <Meta name="og:description" :content="description" />
             <Meta name="twitter:description" :content="description" />
+            <Meta name="og:title" :content="`Ticket #${data.ticket.id} Transcript &mdash; William278.net`" />
+            <Meta name="twitter:title" :content="`Ticket #${data.ticket.id} Transcript &mdash; William278.net`" />
         </Head>
         <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Transcript', link: `/transcript/${$route.params.id}` }]" />
         <h1>Ticket #{{ data.ticket.id }}</h1>
@@ -53,5 +55,5 @@ const { data } = await useAsyncData('transcript', () => {
     return $fetch(`https://cdn.discordapp.com/attachments/${id}`);
 });
 
-const description = 'View a transcript for this HuskHelp Support Ticket.';
+const description = 'View a transcript of this HuskHelp Support Ticket.';
 </script>

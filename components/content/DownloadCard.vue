@@ -20,12 +20,14 @@
     max-width: 30rem;
     min-width: 20rem;
     border-radius: 0.5rem;
+    border: 0.2rem solid transparent;
     padding: 0.3rem;
 }
 
 .download-card:hover {
     cursor: pointer;
     filter: brightness(0.9);
+    border: 0.2rem solid var(--accent);
     scale: 1.02;
 }
 

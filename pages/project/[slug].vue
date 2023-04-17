@@ -1,15 +1,21 @@
 <template>
     <NuxtLayout v-if="project" name="project">
-        <Head>
-            <Title>{{ project.name }} - {{ project.tagline }}</Title>
-            <Meta name="description" :content="`${project.name} &mdash; ${project.tagline} &mdash; William278.net`" />
-            <Meta name="og:description" :content="`${project.tagline} &mdash; William278.net`" />
-            <Meta name="twitter:description" :content="`${project.tagline} &mdash; William278.net`" />
-        </Head>
-        <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Project', link: `/project/${project.id.toLowerCase()}` }]" />
-        <article>
-            <ContentDoc :head="false" />
-        </article>
+        <ContentDoc v-slot="{doc}" :head="false">
+            <Head>
+                <Title>{{ project.name }} - {{ project.tagline }}</Title>
+                <Meta name="description" :content="doc" />
+                <Meta name="og:description" :content="`${project.name} &mdash; ${project.tagline}`" />
+                <Meta name="twitter:description" :content="`${project.name} &mdash; ${project.tagline}`" />
+                <Meta name="og:title" :content="`${project.name} &mdash; William278.net`" />
+                <Meta name="twitter:title" :content="`${project.name} &mdash; William278.net`" />
+                <Meta v-if="project.icon && project.icon.png" name="og:image" :content="`/images/icons/${project.icon.png}`" />
+                <Meta v-if="project.icon && project.icon.png" name="twitter:image" :content="`/images/icons/${project.icon.png}`" />
+            </Head>
+            <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Project', link: `/project/${project.id.toLowerCase()}` }]" />
+            <article>
+                <ContentRenderer :value="doc" />
+            </article>
+        </ContentDoc>
         <template #sidebar>
             <ProjectSidebar :project="project" />
         </template>
@@ -19,7 +25,7 @@
             Project not found:&nbsp;
             <NuxtLink to="/">Home</NuxtLink>
             <BreadcrumbDivider />
-            <InvalidPage :name="$route.params.slug" />    
+            <InvalidPage :name="$route.params.slug" />
         </ErrorPage>
     </NuxtLayout>
 </template>
