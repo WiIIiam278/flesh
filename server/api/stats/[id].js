@@ -6,7 +6,11 @@ let timestamp;
 const stats = {};
 
 const updateStats = async (project) => {
-    stats[project.id] = await get(project.ids);
+    const ids = {};
+    if (project.repository) {
+        ids['github'] = project.repository.replace('https://github.com/', '');
+    }
+    stats[project.id] = await get(ids);
     timestamp = Date.now();
 }
 
@@ -25,7 +29,7 @@ export default defineEventHandler(async (event) => {
         await updateStats(project);
     }
     if (Date.now() - timestamp < 3600000) {
-        return stats[project.id];
+        //return stats[project.id];
     }
 
     updateStats(project);

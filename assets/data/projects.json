@@ -7,6 +7,7 @@
       "spigot": "83767",
       "polymart": "284",
       "modrinth": "J6U9o3JG",
+      "hangar": "William278/HuskHomes",
       "curseforge": "huskhomes"
     },
     "tags": [
@@ -109,7 +110,8 @@
     "ids": {
       "spigot": "94496",
       "polymart": "1217",
-      "modrinth": "SSXTD3me"
+      "modrinth": "SSXTD3me",
+      "hangar": "William278/HuskChat"
     },
     "tags": [
       "plugin",
@@ -142,7 +144,8 @@
     "name": "Velocitab",
     "repository": "https://github.com/WiIIiam278/Velocitab",
     "ids": {
-      "modrinth": "Q10irTG0"
+      "modrinth": "Q10irTG0",
+      "hangar": "William278/Velocitab"
     },
     "tags": [
       "plugin",
@@ -176,7 +179,8 @@
     "ids": {
       "spigot": "100657",
       "polymart": "2125",
-      "modrinth": "IHhrl01E"
+      "modrinth": "IHhrl01E",
+      "hangar": "William278/SchematicUpload"
     },
     "tags": [
       "plugin",
@@ -221,7 +225,8 @@
     "ids": {
       "spigot": "91059",
       "polymart": "928",
-      "modrinth": "bME80dEI"
+      "modrinth": "bME80dEI",
+      "hangar": "William278/HuskHomesGUI"
     },
     "tags": [
       "plugin",
@@ -254,7 +259,8 @@
     "ids": {
       "spigot": "92369",
       "polymart": "1060",
-      "modrinth": "PUtbeCdA"
+      "modrinth": "PUtbeCdA",
+      "hangar": "William278/SignSearch"
     },
     "tags": [
       "plugin",

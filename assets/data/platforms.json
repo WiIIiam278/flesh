@@ -33,5 +33,10 @@
     "name": "CurseForge",
     "url": "https://www.curseforge.com/minecraft/mc-mods/{id}",
     "icon": "fa6-solid fa-fire"
+  },
+  "hangar": {
+    "name": "Hangar",
+    "url": "https://hangar.papermc.io/{id}",
+    "icon": "fa6-solid fa-paper-plane"
   }
 }

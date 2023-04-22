@@ -53,6 +53,10 @@
                 :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench" hollow>
                 Modrinth
             </ButtonLink>
+            <ButtonLink v-if="project.ids && project.ids.hangar"
+                :link="'https://hangar.papermc.io/' + project.ids.hangar" icon="fa6-solid:paper-plane" hollow>
+                Hangar
+            </ButtonLink>
             <ButtonLink v-if="project.ids && project.ids.curseforge"
                 :link="'https://www.curseforge.com/minecraft/mc-mods/' + project.ids.curseforge" icon="fa6-solid:fire" hollow>
                 CurseForge
