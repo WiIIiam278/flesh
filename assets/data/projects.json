@@ -532,6 +532,20 @@
     }
   },
   {
+    "id": "desertwell",
+    "name": "DesertWell",
+    "repository": "https://github.com/WiIIiam278/DesertWell",
+    "tags": [
+      "library",
+      "java"
+    ],
+    "tagline": "A library providing about menus & update checking for Minecraft projects",
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/DesertWell/raw/master/LICENSE"
+    }
+  },
+  {
     "id": "webschematics",
     "name": "WebSchematics",
     "repository": "https://github.com/WiIIiam278/WebSchematics",
