@@ -1,5 +1,5 @@
 <template>
-    <span class="iconified-project">
+    <span :class="`iconified-project ${centered ? 'centered' : ''}`">
         <span v-if="project.icon" class="icon">
             <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg" type="image/svg+xml" />
             <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
@@ -17,6 +17,11 @@
     flex-direction: row;
     align-items: center;
     width: fit-content;
+}
+
+.centered {
+    margin: 0 auto;
+    justify-content: center;
 }
 
 .iconified-project .icon {
@@ -45,6 +50,10 @@ export default {
         project: {
             type: Object,
             required: true
+        },
+        centered: {
+            type: Boolean,
+            default: false
         }
     }
 }

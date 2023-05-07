@@ -10,13 +10,16 @@
             <Meta v-if="project.icon && project.icon.png" name="og:image" :content="`/images/icons/${project.icon.png}`" />
             <Meta v-if="project.icon && project.icon.png" name="twitter:image" :content="`/images/icons/${project.icon.png}`" />
         </Head>
-        <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Docs', link: '/docs' }]" />
+        <Overbar>
+            <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Docs', link: '/docs' }]" />
+            <ButtonLink hollow icon="fa6-solid:pencil" :link="`${project.repository}/tree/master/docs`">Edit</ButtonLink>
+        </Overbar>
         <article>
             <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/home'"  />
         </article>
         <template #sidebar>
             <h1>
-                <IconifiedProject :project="project" />
+                <IconifiedProject centered :project="project" />
             </h1>
             <DocsSearch :project="project.id.toLowerCase()" />
             <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/_sidebar'" />

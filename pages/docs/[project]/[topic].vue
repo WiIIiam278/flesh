@@ -13,17 +13,18 @@
             </Head>
             <ContentRenderer :value="doc">
                 <NuxtLayout name="docs">
-                    <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' },
-                    { name: 'Docs', link: '/docs' },
-                    { name: project.name, link: `/docs/${project.id}` }]" />
+                    <Overbar>
+                        <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Docs', link: '/docs' }, { name: project.name, link: `/docs/${project.id}` }]" />
+                        <ButtonLink hollow icon="fa6-solid:pencil" :link="`${project.repository}/tree/master/docs`">Edit</ButtonLink>
+                    </Overbar>
                     <article>
                         <h1>{{ doc.title }}</h1>
                         <ContentRendererMarkdown :value="doc" />
                     </article>
                     <template #sidebar>
-                        <h1>
+                        <h1 id="sidebar-title">
                             <NuxtLink :to="'/docs/' + project.id.toLowerCase()">
-                                <IconifiedProject :project="project" />
+                                <IconifiedProject centered :project="project" />
                             </NuxtLink>
                         </h1>
                         <DocsSearch :project="project.id.toLowerCase()" />
