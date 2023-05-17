@@ -14,9 +14,9 @@
     "url": "https://polymart.org/resource/{id}",
     "icon": "fa6-solid fa-p"
   },
-  "songoda": {
-    "name": "Songoda",
-    "url": "https://marketplace.songoda.com/marketplace/product/{id}",
+  "craftaro": {
+    "name": "Craftaro",
+    "url": "https://craftaro.com/marketplace/product/{id}",
     "icon": "fa6-solid fa-shield-halved"
   },
   "itch": {
