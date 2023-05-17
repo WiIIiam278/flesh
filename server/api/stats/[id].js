@@ -3,13 +3,24 @@ import { get } from 'mineget';
 import projects from '../../../assets/data/projects.json'
 
 let timestamp;
+const platforms = ['spigot', 'modrinth', 'craftaro', 'github']
 const stats = {};
 
 const updateStats = async (project) => {
     const ids = {};
+    
+    // Filter by allowed platforms
+    platforms.forEach(platform => {
+        if (project.ids[platform]) {
+            ids[platform] = project.ids[platform];
+        }
+    });
+    
+    // Github
     if (project.repository) {
         ids['github'] = project.repository.replace('https://github.com/', '');
     }
+
     stats[project.id] = await get(ids);
     timestamp = Date.now();
 }
@@ -29,9 +40,9 @@ export default defineEventHandler(async (event) => {
         await updateStats(project);
     }
     if (Date.now() - timestamp < 3600000) {
-        //return stats[project.id];
+        return stats[project.id];
     }
 
-    updateStats(project);
+    await updateStats(project);
     return stats[project.id];
 })
