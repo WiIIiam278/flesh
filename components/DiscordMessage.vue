@@ -8,7 +8,7 @@
             <div class="reply-text" v-if="messages[0].reply_snippet">
                 <span class="reply-sender" v-if="replyingTo = getUser(messages[0].reply_snippet.sender)">
                     <img :src="replyingTo.pfp" />
-                    {{ replyingTo.name }}#{{ replyingTo.disambiguator }}
+                    {{ replyingTo.name }}{{ parseInt(replyingTo.disambiguator) > 0 ? `#${replyingTo.disambiguator}` : "" }}
                 </span>
                 <span class="text">
                     <MessageText :value="messages[0].reply_snippet.message" :transcript="transcript" />
@@ -19,7 +19,7 @@
                     <span class="name">
                         {{ sender.name }}
                     </span>
-                    <span class="disambiguator">
+                    <span class="disambiguator" v-if="parseInt(sender.disambiguator > 0)">
                         #{{ sender.disambiguator }}
                     </span>
                 </div>

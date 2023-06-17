@@ -5,7 +5,7 @@
         </div>
         <div class="profile">
             <div class="name">
-                {{ user.name }}<span class="disambiguator">#{{ user.disambiguator }}</span>
+                {{ user.name }}<span class="disambiguator" v-if="parseInt(user.disambiguator) > 0">#{{ user.disambiguator }}</span>
             </div>
             <div v-if="creator" class="creator">
                 <Pill color="dark-gray">
