@@ -2,7 +2,7 @@
   {
     "id": "huskhomes",
     "name": "HuskHomes",
-    "repository": "https://github.com/WiIIiam278/HuskHomes2",
+    "repository": "https://github.com/WiIIiam278/HuskHomes",
     "ids": {
       "spigot": "83767",
       "polymart": "284",
@@ -22,7 +22,7 @@
     },
     "license": {
       "id": "Apache-2.0",
-      "url": "https://github.com/WiIIiam278/HuskHomes2/raw/master/LICENSE"
+      "url": "https://github.com/WiIIiam278/HuskHomes/raw/master/LICENSE"
     },
     "releases": {
       "platforms": [
