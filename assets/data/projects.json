@@ -67,7 +67,7 @@
       "png": "husksync.png"
     },
     "license": {
-      "id": "Premium",
+      "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/HuskSync/raw/master/LICENSE"
     }
   },
@@ -99,7 +99,7 @@
       ]
     },
     "license": {
-      "id": "Premium",
+      "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/HuskTowns/raw/master/LICENSE"
     }
   },
