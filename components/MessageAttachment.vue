@@ -43,7 +43,7 @@
     margin: 0.5rem 0;
     padding-left: 1rem;
     border-radius: 0.5rem;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .boxed-attachment {
@@ -84,7 +84,8 @@ const getType = () => {
 const text = getType() === 'Text'
     ? await fetch(attachment.url, new Headers({
         'Accept': 'text/plain',
-        'Content-Type': 'text/plain'
+        'Content-Type': 'text/plain',
+        'Access-Control-Allow-Origin': '*'
     }))
         .then(response => {
             if (response && response.ok) {
