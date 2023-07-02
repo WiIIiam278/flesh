@@ -76,6 +76,15 @@ const type = () => {
     }
 }
 
-// method for fetching text
-const getText = useFetch(attachment.url);
+const getText = () => {
+    return fetch(attachment.url)
+        .then(response => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                return attachment.name;
+            }
+        })
+        .catch(() => attachment.name);
+}
 </script>
