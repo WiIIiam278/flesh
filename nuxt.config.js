@@ -1,8 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
     // Modules
-    buildModules: ['@nuxtjs/google-fonts'],
-    modules: ['nuxt-icon', '@nuxt/content'],
+    modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/google-fonts'],
 
     // Fonts
     googleFonts: {
