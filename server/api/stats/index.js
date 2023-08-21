@@ -1,5 +1,5 @@
 // Serve project stats via the api
-import { get } from 'mineget';
+import mineget from "mineget";
 import projects from '../../../assets/data/projects.json';
 
 let timestamp;
@@ -8,7 +8,13 @@ const stats = {};
 const updateStats = async () => {
     for (const project of projects) {
         if (!project.ids) continue;
-        stats[project.id] = await get(project.ids);
+        stats[project.id] = await mineget.get(project.ids)
+            .catch(() => {
+                return {
+                    status_code: 500,
+                    body: 'Internal server error'
+                }
+            });
     }
     timestamp = Date.now();
 }

@@ -390,41 +390,29 @@
     }
   },
   {
-    "id": "loaded-dice",
-    "name": "Loaded Dice",
+    "id": "breaking-bad-ds",
+    "name": "Breaking Bad DS",
+    "repository": "https://github.com/WiIIiam278/breaking-bad-ds",
     "tags": [
       "game",
-      "unity"
+      "nds",
+      "c++"
     ],
-    "tagline": "Play as a dude who lives in a die. A GMTK Game Jam '22 Submission for the theme \"Roll the Dice\"",
-    "ids": {
-      "itch": "https://william278.itch.io/loaded-dice"
-    },
-    "readme": "/loaded-dice",
+    "tagline": "Breaking Bad, as a Nintendo DS game, complete with 3D graphics and models!",
     "icon": {
-      "png": "loaded-dice.png"
+      "png": "breaking-bad-ds.png"
     },
-    "assets": {
-      "images": [
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/breaking-bad-ds/raw/main/LICENSE"
+    },
+    "releases": {
+      "platforms": [
         {
-          "url": "loaded-dice/gameplay-4.png",
-          "description": "Loaded Dice gameplay showing the starting area"
-        },
-        {
-          "url": "loaded-dice/gameplay-1.png",
-          "description": "Loaded Dice gameplay showing a spike challenge"
-        },
-        {
-          "url": "loaded-dice/gameplay-2.png",
-          "description": "Loaded Dice gameplay showing a fire challenge"
-        },
-        {
-          "url": "loaded-dice/gameplay-3.png",
-          "description": "Loaded Dice gameplay showing a moving fire challenge"
-        },
-        {
-          "url": "loaded-dice/gameplay-5.png",
-          "description": "Loaded Dice gameplay showing a timing/spike challenge"
+          "name": "DS ROM",
+          "description": "Nintendo DS (.nds)",
+          "icon": "/images/platforms/nds.png",
+          "match": "breaking-bad-ds"
         }
       ]
     }
@@ -479,6 +467,46 @@
           "description": "Nintendo DS (.nds)",
           "icon": "/images/platforms/nds.png",
           "match": "bcsds"
+        }
+      ]
+    }
+  },
+  {
+    "id": "loaded-dice",
+    "name": "Loaded Dice",
+    "tags": [
+      "game",
+      "unity"
+    ],
+    "tagline": "Play as a dude who lives in a die. A GMTK Game Jam '22 Submission for the theme \"Roll the Dice\"",
+    "ids": {
+      "itch": "https://william278.itch.io/loaded-dice"
+    },
+    "readme": "/loaded-dice",
+    "icon": {
+      "png": "loaded-dice.png"
+    },
+    "assets": {
+      "images": [
+        {
+          "url": "loaded-dice/gameplay-4.png",
+          "description": "Loaded Dice gameplay showing the starting area"
+        },
+        {
+          "url": "loaded-dice/gameplay-1.png",
+          "description": "Loaded Dice gameplay showing a spike challenge"
+        },
+        {
+          "url": "loaded-dice/gameplay-2.png",
+          "description": "Loaded Dice gameplay showing a fire challenge"
+        },
+        {
+          "url": "loaded-dice/gameplay-3.png",
+          "description": "Loaded Dice gameplay showing a moving fire challenge"
+        },
+        {
+          "url": "loaded-dice/gameplay-5.png",
+          "description": "Loaded Dice gameplay showing a timing/spike challenge"
         }
       ]
     }

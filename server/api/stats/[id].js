@@ -1,27 +1,29 @@
 // Serve project stats via the api
-import { get } from 'mineget';
+import mineget from "mineget";
 import projects from '../../../assets/data/projects.json'
 
 let timestamp;
-const platforms = ['spigot', 'modrinth', 'craftaro', 'github']
+const platforms = ['spigot', 'modrinth', 'craftaro', 'polymart', 'github']
 const stats = {};
 
 const updateStats = async (project) => {
     const ids = {};
-    
+
     // Filter by allowed platforms
     platforms.forEach(platform => {
         if (project.ids[platform]) {
             ids[platform] = project.ids[platform];
         }
     });
-    
-    // Github
-    if (project.repository) {
-        ids['github'] = project.repository.replace('https://github.com/', '');
-    }
 
-    stats[project.id] = await get(ids);
+    stats[project.id] = await mineget.get(ids)
+        .catch(e => {
+            console.log(e);
+            return {
+                status_code: 500,
+                body: 'Internal server error'
+            }
+        });
     timestamp = Date.now();
 }
 
