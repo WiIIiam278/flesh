@@ -406,6 +406,44 @@
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/breaking-bad-ds/raw/main/LICENSE"
     },
+    "assets": {
+      "images": [
+        {
+          "url": "breaking-bad-ds/boxart-with-ds.png",
+          "description": "Game cover with title screen"
+        },
+        {
+          "url": "breaking-bad-ds/title-screen.png",
+          "description": "The title screen, with the Breaking Bad logo"
+        },
+        {
+          "url": "breaking-bad-ds/story-mode.png",
+          "description": "Gameplay of story mode"
+        },
+        {
+          "url": "breaking-bad-ds/multiplayer-vs.png",
+          "description": "Gameplay of the local multiplayer vs. mode"
+        },
+        {
+          "url": "breaking-bad-ds/minigame.png",
+          "description": "Gameplay of the pipette reagent minigame"
+        },
+        {
+          "url": "breaking-bad-ds/in-the-lab.png",
+          "description": "Gameplay of Walt moving about the lab"
+        },
+        {
+          "url": "breaking-bad-ds/hank.png",
+          "description": "Hank's minerals (achievemnt system)"
+        }
+      ],
+      "videos": [
+        {
+          "url": "https://www.youtube.com/watch?v=HiiZxOU934E",
+          "description": "I actually made Breaking Bad for the Nintendo DS. Here's how."
+        }
+      ]
+    },
     "releases": {
       "platforms": [
         {

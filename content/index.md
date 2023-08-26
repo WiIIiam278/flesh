@@ -8,9 +8,10 @@ Open source Minecraft server software & game projects.
 ::showcase-gallery
 ---
 slides:
-  - { "img": "/images/better-call-saul-ds/cover-with-title.jpg", "link": "/project/better-call-saul-ds", "text": "Better Call Saul DS" }
+  - { "img": "/images/breaking-bad-ds/boxart-with-ds.png", "link": "/project/breaking-bad-ds", "text": "Breaking Bad DS" }
   - { "img": "/images/loaded-dice/gameplay-2.png", "link": "/project/loaded-dice", "text": "Loaded Dice" }
   - { "img": "/images/serial-loops/script-editor.png", "link": "/project/serial-loops", "text": "Serial Loops" }
+  - { "img": "/images/better-call-saul-ds/cover-with-title.jpg", "link": "/project/better-call-saul-ds", "text": "Better Call Saul DS" }
   - { "img": "/images/timetobattle/altenberg-castle.png", "link": "/project/timetobattle", "text": "Time to Battle" }
 ---
 ::
