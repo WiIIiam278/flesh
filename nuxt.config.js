@@ -1,7 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
     // Modules
-    modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/google-fonts'],
+    modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts'],
 
     // Fonts
     googleFonts: {
@@ -10,6 +10,17 @@ export default defineNuxtConfig({
         families: {
             'Nunito': [400, 700],
             'JetBrains Mono': [400, 700]
+        }
+    },
+
+    // Search
+    algolia: {
+        applicationId: 'VFMYZHO190',
+        apiKey: '8bfbcf46b5b82261235aa088be5d1b79',
+        docSearch: {
+            indexName: 'william278',
+            langAttribute: 'lang',
+            facetFilters: ''
         }
     },
 
@@ -48,7 +59,7 @@ export default defineNuxtConfig({
     // Runtime components
     runtimeConfig: {
         public: {
-            GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),
+            GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim()
         }
     },
 

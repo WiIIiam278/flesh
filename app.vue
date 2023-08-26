@@ -5,7 +5,7 @@
 <script setup>
 useHead({
   titleTemplate: (titleChunk) => {
-    return titleChunk ? `${titleChunk} - William278.net` : 'Open source Minecraft server software & game projects - William278.net';
+    return titleChunk ? `${titleChunk}` : 'Open source Minecraft server software & game projects - William278.net';
   },
   meta: [
     {
@@ -18,8 +18,8 @@ useHead({
 
 <!-- Global styles -->
 <style>
-/* Colors */
 :root {
+  /* Colors */
   --accent: #00fb9a;
   --white: #f5f5f5;
   --light-gray: #969696;
@@ -27,6 +27,25 @@ useHead({
   --dark-gray: #202020;
   --background: #282828;
   --shadow: 0 0 0.75rem rgba(0, 0, 0, 0.1);
+
+  /* DocSearch styling */
+  --docsearch-footer-background: var(--gray) !important;
+  --docsearch-footer-shadow: unset !important;
+  --docsearch-highlight-color: rgba(255, 255, 255, .25) !important;
+  --docsearch-hit-background: #373737 !important;
+  --docsearch-hit-color: var(--white) !important;
+  --docsearch-hit-shadow: unset !important;
+  --docsearch-icon-color: rgba(255, 255, 255, .5) !important;
+  --docsearch-key-gradient: linear-gradient(-225deg, var(--gray), var(--light-gray)) !important;
+  --docsearch-key-shadow: inset 0 -2px 0 0 var(--gray), inset 0 0 1px 1px var(--gray), 0 1px 2px 1px var(--dark-gray) !important;
+  --docsearch-logo-color: var(--accent) !important;
+  --docsearch-modal-background: var(--gray) !important;
+  --docsearch-modal-shadow: inset 1px 1px 0 0 var(--dark-gray)0 3px 8px 0 var(--gray) !important;
+  --docsearch-muted-color: rgba(255, 255, 255, .5) !important;
+  --docsearch-searchbox-background: var(--dark-gray) !important;
+  --docsearch-searchbox-focus-background: var(--gray) !important;
+  --docsearch-searchbox-shadow: inset 0 0 0 2px var(--accent) !important;
+  --docsearch-text-color: var(--white) !important;
 }
 
 /* Scrollbar style rules (font, bg color) */
@@ -103,7 +122,9 @@ h5 a {
 }
 
 /* Remove heading list spacings */
-h2 + ul, h3 + ul, h4 + ul {
+h2+ul,
+h3+ul,
+h4+ul {
   margin-top: 0;
 }
 
@@ -178,11 +199,13 @@ table th {
   font-weight: bold;
 }
 
-table td[align="center"], table th[align="center"] {
+table td[align="center"],
+table th[align="center"] {
   text-align: center;
 }
 
-table td[align="right"], table th[align="right"] {
+table td[align="right"],
+table th[align="right"] {
   text-align: right;
 }
 
@@ -227,7 +250,31 @@ blockquote {
 }
 
 /* Common sidebar rules */
-.sidebar h2, .sidebar h3, .sidebar h4 {
+.sidebar h2,
+.sidebar h3,
+.sidebar h4 {
   margin-bottom: 0;
 }
-</style>
+
+/* Search */
+.DocSearch-Button {
+  padding: 0;
+  font-family: inherit;
+}
+
+.DocSearch-Modal {
+  border-radius: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+.DocSearch-Logo svg .cls-1,
+.DocSearch-Logo svg .cls-2 {
+  fill: var(--accent);
+}
+
+.DocSearch-Hits,
+.DocSearch-Hit[aria-selected=true] {
+  mark {
+    color: var(--accent) !important;
+  }
+}</style>

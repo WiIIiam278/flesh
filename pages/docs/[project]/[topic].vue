@@ -27,7 +27,6 @@
                                 <IconifiedProject centered :project="project" />
                             </NuxtLink>
                         </h1>
-                        <DocsSearch :project="project.id.toLowerCase()" />
                         <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/_sidebar'" />
                     </template>
                 </NuxtLayout>

@@ -11,7 +11,6 @@
         </article>
         <template #sidebar>
             <h1>Projects</h1>
-            <DocsSearch />
             <ContentDoc :head="false" path="docs/sidebar" />
         </template>
     </NuxtLayout>

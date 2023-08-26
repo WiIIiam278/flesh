@@ -3,23 +3,30 @@
         <h1 id="logo">
             <a href="/">William278</a>
         </h1>
-        <ul id="navigation">
-            <li>
-                <NuxtLink to="/">
-                    <IconifiedText icon="fa6-solid:house">Home</IconifiedText>
-                </NuxtLink>
-            </li>
-            <li>
-                <NuxtLink to="/docs">
-                    <IconifiedText icon="fa6-solid:book">Docs</IconifiedText>
-                </NuxtLink>
-            </li>
-            <li>
-                <a href="https://discord.gg/tVYhJfyDWG" target="_blank" class="button">
-                    <IconifiedText icon="fa6-brands:discord">Support</IconifiedText>
-                </a>
-            </li>
-        </ul>
+        <div id="navigation">
+            <div id="search">
+                <AlgoliaDocSearch />
+            </div>
+            <div id="links">
+                <ul>
+                    <li>
+                        <NuxtLink to="/">
+                            <IconifiedText icon="fa6-solid:house">Home</IconifiedText>
+                        </NuxtLink>
+                    </li>
+                    <li>
+                        <NuxtLink to="/docs">
+                            <IconifiedText icon="fa6-solid:book">Docs</IconifiedText>
+                        </NuxtLink>
+                    </li>
+                    <li>
+                        <a href="https://discord.gg/tVYhJfyDWG" target="_blank" class="button">
+                            <IconifiedText icon="fa6-brands:discord">Support</IconifiedText>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </template>
 
@@ -45,11 +52,19 @@ nav #logo {
 }
 
 nav #navigation {
-    width: 17.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+nav #links ul {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 1rem;
     margin: 0;
     padding: 0;
     list-style: none;
