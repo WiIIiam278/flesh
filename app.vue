@@ -5,7 +5,7 @@
 <script setup>
 useHead({
   titleTemplate: (titleChunk) => {
-    return titleChunk ? `${titleChunk}` : 'Open source Minecraft server software & game projects - William278.net';
+    return titleChunk ? `${titleChunk} - William278.net` : 'Open source Minecraft server software & game projects - William278.net';
   },
   meta: [
     {

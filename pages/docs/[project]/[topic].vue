@@ -2,7 +2,7 @@
     <ContentDoc :path="'/docs/project/' + $route.params.project + '/' + $route.params.topic.toLowerCase()" :head="false" >
         <template v-slot="{ doc }">
             <Head>
-                <Title>{{ doc.title }} - {{ project.name }} Docs - William278.net</Title>
+                <Title>{{ doc.title }} - {{ project.name }} Docs</Title>
                 <Meta name="og:title" :content="`${doc.title} &mdash; ${project.name} Docs &mdash; William278.net`" />
                 <Meta name="twitter:title" :content="`${doc.title} &mdash; ${project.name} Docs &mdash; William278.net`" />
                 <Meta name="description" :content="doc.description" />

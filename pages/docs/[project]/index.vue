@@ -1,7 +1,7 @@
 <template>
     <NuxtLayout v-if="project && project.documentation" name="docs">
         <Head>
-            <Title>{{ project.name }} Docs - William278.net</Title>
+            <Title>{{ project.name }} Docs</Title>
             <Meta name="og:title" :content="`${project.name} Docs &mdash; William278.net`" />
             <Meta name="twitter:title" :content="`${project.name} Docs &mdash; William278.net`" />
             <Meta name="description" :content="description" />

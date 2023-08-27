@@ -29,7 +29,7 @@ definePageMeta({
 
 useHead({
     titleTemplate: (titleChunk) => {
-        return `Error - William278.net`;
+        return `Error`;
     },
     meta: [
         {
