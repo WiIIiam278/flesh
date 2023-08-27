@@ -4,11 +4,11 @@
             <a href="/">William278</a>
         </h1>
         <div id="navigation">
-            <div id="search">
-                <AlgoliaDocSearch />
-            </div>
             <div id="links">
                 <ul>
+                    <li id="search">
+                        <AlgoliaDocSearch />
+                    </li>
                     <li>
                         <NuxtLink to="/">
                             <IconifiedText icon="fa6-solid:house">Home</IconifiedText>
@@ -20,7 +20,7 @@
                         </NuxtLink>
                     </li>
                     <li>
-                        <a href="https://discord.gg/tVYhJfyDWG" target="_blank" class="button">
+                        <a href="https://discord.gg/tVYhJfyDWG" target="_blank">
                             <IconifiedText icon="fa6-brands:discord">Support</IconifiedText>
                         </a>
                     </li>
@@ -57,6 +57,12 @@ nav #navigation {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
+}
+
+nav #search {
+    all: unset;
+    display: flex;
+    margin-right: 0.75rem;
 }
 
 nav #links ul {

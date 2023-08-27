@@ -31,27 +31,28 @@ useHead({
   /* DocSearch styling */
   --docsearch-footer-background: var(--gray) !important;
   --docsearch-footer-shadow: unset !important;
-  --docsearch-highlight-color: rgba(255, 255, 255, .25) !important;
-  --docsearch-hit-background: #373737 !important;
+  --docsearch-highlight-color: rgba(255, 255, 255, .4) !important;
+  --docsearch-hit-background: var(--gray) !important;
   --docsearch-hit-color: var(--white) !important;
   --docsearch-hit-shadow: unset !important;
   --docsearch-icon-color: rgba(255, 255, 255, .5) !important;
   --docsearch-key-gradient: linear-gradient(-225deg, var(--gray), var(--light-gray)) !important;
   --docsearch-key-shadow: inset 0 -2px 0 0 var(--gray), inset 0 0 1px 1px var(--gray), 0 1px 2px 1px var(--dark-gray) !important;
   --docsearch-logo-color: var(--accent) !important;
-  --docsearch-modal-background: var(--gray) !important;
-  --docsearch-modal-shadow: inset 1px 1px 0 0 var(--dark-gray)0 3px 8px 0 var(--gray) !important;
+  --docsearch-modal-background: var(--dark-gray) !important;
+  --docsearch-modal-shadow: inset 1px 1px 0 0 var(--background), 0 3px 8px 0 var(--dark-gray) !important;
   --docsearch-muted-color: rgba(255, 255, 255, .5) !important;
   --docsearch-searchbox-background: var(--dark-gray) !important;
   --docsearch-searchbox-focus-background: var(--gray) !important;
   --docsearch-searchbox-shadow: inset 0 0 0 2px var(--accent) !important;
   --docsearch-text-color: var(--white) !important;
+  --docsearch-container-background: rgba(40, 40, 40, 0.85) !important;
+  --docsearch-hit-active-color: unset !important;
 }
 
 /* Scrollbar style rules (font, bg color) */
 html {
   color-scheme: dark;
-  overflow-x: hidden;
   margin-right: calc(-1 * (100vw - 100%));
 }
 
@@ -263,7 +264,6 @@ blockquote {
 }
 
 .DocSearch-Modal {
-  border-radius: 0;
   font-family: "Nunito", sans-serif;
 }
 
@@ -272,9 +272,13 @@ blockquote {
   fill: var(--accent);
 }
 
-.DocSearch-Hits,
-.DocSearch-Hit[aria-selected=true] {
-  mark {
-    color: var(--accent) !important;
-  }
-}</style>
+.DocSearch-Hit[aria-selected=true] mark,
+.DocSearch-Hit-title mark,
+.DocSearch-Hit mark {
+  color: var(--accent) !important;
+}
+
+.DocSearch--active {
+  overflow-y: hidden !important;
+}
+</style>
