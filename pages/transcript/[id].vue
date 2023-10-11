@@ -24,12 +24,27 @@
 let error = {
     status: 404,
     message: 'Transcript not found'
-}
+};
+const bucket = 'https://s3.william278.net/archived-tickets/';
+const discord = 'https://cdn.discordapp.com/attachments/';
+
+const isS3 = (id) => {
+    return id.startsWith(bucket)
+};
 
 // Validate ID
 const validateId = (parsedId) => {
+    if (!parsedId) {
+        return null;
+    }
+
+    // If ID is a valid S3 URL, it's a valid ID
+    if (isS3(parsedId)) {
+        return parsedId;
+    }
+
     // If ID has three parts separated by forward slashes and ends in .json, it's a valid ID
-    if (!parsedId || !parsedId.match(/^[0-9]{1,32}\/[0-9]{1,32}\/[a-zA-Z0-9\-_]{1,32}\.json$/)) {
+    if (!parsedId.match(/^[0-9]{1,32}\/[0-9]{1,32}\/[a-zA-Z0-9\-_]{1,32}\.json$/)) {
         error = { status: 400, message: 'Invalid transcript ID' }
         return null;
     }
@@ -48,11 +63,17 @@ const validateId = (parsedId) => {
 
 // Define async method
 const { data } = await useAsyncData('transcript', () => {
-    const id = validateId(Buffer.from(useRoute().params.id, 'base64url').toString('ascii'));
-    if (!id) {
+    const file = validateId(Buffer.from(useRoute().params.id, 'base64url').toString('ascii'));
+    if (!file) {
         return null;
     }
-    return $fetch(`https://cdn.discordapp.com/attachments/${id}`);
+
+    const fetched = isS3(file) ? $fetch(file) : $fetch(`${discord}${file}`);
+    if (!fetched) {
+        error = { status: "400", message: "That transcript has expired" }
+        return null;
+    }
+    return fetched;
 });
 
 const description = 'View a transcript of this HuskHelp Support Ticket.';

@@ -7,11 +7,7 @@
             <div class="name">
                 {{ user.name }}<span class="disambiguator" v-if="parseInt(user.disambiguator) > 0">#{{ user.disambiguator }}</span>
             </div>
-            <div v-if="creator" class="creator">
-                <Pill color="dark-gray">
-                    <IconifiedText icon="fa6-solid:crown">Creator</IconifiedText>
-                </Pill>
-            </div>
+            <Pill v-if="creator" class="creator" color="dark-gray">Creator</Pill>
         </div>
     </div>
 </template>
@@ -46,6 +42,7 @@
 .profile .creator {
     font-size: 0.9rem;
     margin-top: 0.1rem;
+    margin-left: 0.3rem;
     align-self: flex-start;
 }
 

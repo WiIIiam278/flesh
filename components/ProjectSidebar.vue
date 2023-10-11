@@ -73,11 +73,11 @@
                 <div class="stat-descriptor">License</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:scale-balanced">
-                        {{ project.license.id }}
+                        <span>{{ project.license.id }}</span>
+                        <a v-if="project.license.url" :href="project.license.url">
+                            <Icon class="license-link" name="fa6-solid:arrow-up-right-from-square" /> 
+                        </a>
                     </IconifiedText>
-                    <a v-if="project.license.url" :href="project.license.url">
-                        <Icon class="license-link" name="fa6-solid:arrow-up-right-from-square" /> 
-                    </a>
                 </div>
             </div>
             <div class="stat" v-if="stats.total_downloads">

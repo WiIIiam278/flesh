@@ -8,7 +8,7 @@
             <IconifiedText icon="fa6-solid:hashtag">ticket-{{ data.ticket.id }}</IconifiedText>
         </Pill>
         <Pill color="dark-gray">
-            <IconifiedText icon="fa6-solid:ticket">{{ getTimestampString(data.ticket.close_timestamp) }}
+            <IconifiedText icon="fa6-solid:ticket">{{ getTimestampString(data.ticket.open_timestamp) }}
             </IconifiedText>
         </Pill>
         <Pill color="dark-gray">
