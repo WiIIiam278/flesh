@@ -8,10 +8,10 @@
             <div class="reply-text" v-if="messages[0].reply_snippet">
                 <span class="reply-sender" v-if="replyingTo = getUser(messages[0].reply_snippet.sender)">
                     <img :src="replyingTo.pfp" />
-                    {{ replyingTo.name }}{{ parseInt(replyingTo.disambiguator) > 0 ? `#${replyingTo.disambiguator}` : "" }}
+                    @{{ replyingTo.name }}{{ parseInt(replyingTo.disambiguator) > 0 ? `#${replyingTo.disambiguator}` : "" }}
                 </span>
                 <span class="text">
-                    <MessageText :value="messages[0].reply_snippet.message" :transcript="transcript" />
+                    <MessageText :value="formatReply(messages[0].reply_snippet.message)" :transcript="transcript" />
                 </span>
             </div>
             <div class="sender">
@@ -65,7 +65,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-right: 0.3rem;
+    margin-right: 0.5rem;
 }
 
 .reply-sender img {
@@ -185,6 +185,9 @@ export default {
                 type: "unknown",
                 url: null
             };
+        },
+        formatReply(message) {
+            return message.split('\n')[0].replace(/([*_~`])/g, '\\$1');
         }
     },
     components: { DiscordEmbed, MessageAttachment }

@@ -22,8 +22,8 @@
 
 <script setup>
 let error = {
-    status: 404,
-    message: 'Transcript not found'
+    status: "404",
+    message: 'That transcript could not be found, or the link has expired.'
 };
 const bucket = 'https://s3.william278.net/archived-tickets/';
 const discord = 'https://cdn.discordapp.com/attachments/';
@@ -45,7 +45,7 @@ const validateId = (parsedId) => {
 
     // If ID has three parts separated by forward slashes and ends in .json, it's a valid ID
     if (!parsedId.match(/^[0-9]{1,32}\/[0-9]{1,32}\/[a-zA-Z0-9\-_]{1,32}\.json$/)) {
-        error = { status: 400, message: 'Invalid transcript ID' }
+        error = { status: "400", message: 'Invalid transcript ID' }
         return null;
     }
 
@@ -53,7 +53,7 @@ const validateId = (parsedId) => {
     const allowedChannels = ['885981365491888211', '977649978270969906', '977663053179023380'];
     if (parsedId.split('/')[0]) {
         if (!allowedChannels.includes(parsedId.split('/')[0])) {
-            error = { status: 403, message: 'Forbidden transcript channel' }
+            error = { status: "403", message: 'Forbidden transcript channel' }
             return null;
         }
     }
@@ -70,7 +70,6 @@ const { data } = await useAsyncData('transcript', () => {
 
     const fetched = isS3(file) ? $fetch(file) : $fetch(`${discord}${file}`);
     if (!fetched) {
-        error = { status: "400", message: "That transcript has expired" }
         return null;
     }
     return fetched;
