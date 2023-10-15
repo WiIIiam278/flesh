@@ -36,7 +36,7 @@
             <NuxtLayout name="default">
                 <ErrorPage>
                     Docs not found:&nbsp;
-                    <span>
+                    <PathLine>
                         <NuxtLink to="/">Home</NuxtLink>
                         <BreadcrumbDivider />
                         <NuxtLink to="/docs/">Docs</NuxtLink>
@@ -45,7 +45,7 @@
                         <InvalidPage v-else :name="$route.params.project" />
                         <BreadcrumbDivider />
                         <InvalidPage :name="$route.params.topic" />
-                    </span>
+                    </PathLine>
                 </ErrorPage>
             </NuxtLayout>
         </template>
@@ -55,15 +55,9 @@
 <script setup>
 import BreadcrumbDivider from '../../../components/BreadcrumbDivider.vue';
 import InvalidPage from '../../../components/InvalidPage.vue';
+import PathLine from '../../../components/content/PathLine.vue';
 import projects from '/assets/data/projects.json'
 
 const { params } = useRoute()
 const project = computed(() => projects.find(project => project.id.toLowerCase() === params.project.toLowerCase()))
 </script>
-
-<style scoped>
-.invalid-page {
-    color: var(--light-gray);
-    text-decoration: line-through;
-}
-</style>

@@ -12,7 +12,7 @@
         <h1>Ticket #{{ data.ticket.id }}</h1>
         <TranscriptMessages :data="data" />
         <template #sidebar>
-            <TranscriptSidebar :data="data" />
+            <TranscriptSidebar :data="data" :url="getUrl()" />
         </template>
     </NuxtLayout>
     <NuxtLayout v-else name="default">
@@ -62,13 +62,21 @@ const validateId = (parsedId) => {
 }
 
 // Define async method
-const { data } = await useAsyncData('transcript', () => {
+const getUrl = () => {
     const file = validateId(Buffer.from(useRoute().params.id, 'base64url').toString('ascii'));
     if (!file) {
         return null;
     }
 
-    const fetched = isS3(file) ? $fetch(file) : $fetch(`${discord}${file}`);
+    return isS3(file) ? file : `${discord}${file}`;
+}
+const { data } = await useAsyncData('transcript', () => {
+    const url = getUrl();
+    if (!url) {
+        return null;
+    }
+
+    const fetched = $fetch(url);
     if (!fetched) {
         return null;
     }

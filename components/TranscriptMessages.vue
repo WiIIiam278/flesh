@@ -38,7 +38,9 @@ const getMessageBlocks = (messages) => {
         }
         lastTimestamp = message.timestamp;
         lastSender = message.sender;
-        currentBlock.push(message);
+        if (message.message || message.embeds || message.attachments) {
+            currentBlock.push(message);
+        }
     }
     if (currentBlock.length > 0) {
         blocks.push(currentBlock);

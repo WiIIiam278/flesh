@@ -14,9 +14,11 @@
             <template #not-found>
                 <ErrorPage>
                     Page not found:&nbsp;
-                    <NuxtLink to="/">Home</NuxtLink>
-                    <BreadcrumbDivider />
-                    <InvalidPage :name="$route.params.topic" />
+                    <PathLine>
+                        <NuxtLink to="/">Home</NuxtLink>
+                        <BreadcrumbDivider />
+                        <InvalidPage :name="$route.params.topic" />
+                    </PathLine>
                 </ErrorPage>
             </template>
         </ContentDoc>
@@ -25,5 +27,6 @@
 
 <script setup>
 import InvalidPage from '../components/InvalidPage.vue';
+import PathLine from '../components/content/PathLine.vue';
 
 </script>

@@ -23,14 +23,17 @@
     <NuxtLayout v-else name="default">
         <ErrorPage code="404">
             Project not found:&nbsp;
-            <NuxtLink to="/">Home</NuxtLink>
-            <BreadcrumbDivider />
-            <InvalidPage :name="$route.params.slug" />
+            <PathLine>
+                <NuxtLink to="/">Home</NuxtLink>
+                <BreadcrumbDivider />
+                <InvalidPage :name="$route.params.slug" />
+            </PathLine>
         </ErrorPage>
     </NuxtLayout>
 </template>
 
 <script setup>
+import PathLine from '../../components/content/PathLine.vue';
 import projects from '/assets/data/projects.json'
 
 const { params } = useRoute()

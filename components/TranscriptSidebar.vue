@@ -2,7 +2,7 @@
     <h2>Ticket Transcript</h2>
     <div class="pills">
         <Pill color="dark-gray">
-            <IconifiedText icon="fa6-solid:tag">{{ data.ticket.project }}</IconifiedText>
+            <IconifiedText icon="fa6-solid:tag">{{ data.ticket.project ? data.ticket.project : 'Unknown' }}</IconifiedText>
         </Pill>
         <Pill color="dark-gray">
             <IconifiedText icon="fa6-solid:hashtag">ticket-{{ data.ticket.id }}</IconifiedText>
@@ -26,8 +26,9 @@
             <TranscriptParticipant :user="getParticipant(participant)" :creator="participant === data.ticket.creator" />
         </div>
     </div>
-    <div class="home-button">
+    <div class="transcript-buttons">
         <ButtonLink link="/" icon="fa6-solid:house" hollow>Home</ButtonLink>
+        <ButtonLink :link="url" icon="fa6-solid:download" hollow>Download</ButtonLink>
     </div>
 </template>
 
@@ -47,13 +48,15 @@
 .topic {
     word-break: break-word;
     white-space: pre-wrap;
-    overflow-y: hidden;
-    max-height: 15rem;
+    overflow-y: auto;
+    max-height: 20rem;
     text-overflow: ellipsis;
 }
 
-.home-button {
-    margin-top: 1.25rem;
+.transcript-buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 1.25rem 0;
 }
 </style>
 
@@ -61,6 +64,10 @@
 const { data } = defineProps({
     data: {
         type: Object,
+        required: true
+    },
+    url: {
+        type: String,
         required: true
     }
 });

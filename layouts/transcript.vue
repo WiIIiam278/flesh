@@ -29,15 +29,16 @@
 
 #transcript-content {
     flex: 1;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     max-width: 65vw;
     width: 95vw;
 }
 
 #transcript-sidebar {
     flex: 1;
-    padding: 1rem;
+    padding: 0 1.5rem;
     max-width: 250px;
+    min-width: 250px;
     width: 20vw;
     background-color: var(--gray);
     border-radius: 0.5rem;

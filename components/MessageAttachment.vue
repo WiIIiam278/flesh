@@ -38,9 +38,8 @@
 }
 
 .attachment .preview {
-    max-height: 45vh;
     max-width: 50vw;
-    margin: 0.5rem 0;
+    max-height: 15vw;
     padding-left: 1rem;
     border-radius: 0.5rem;
     overflow: auto;
