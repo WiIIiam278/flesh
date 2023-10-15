@@ -52,7 +52,6 @@
 
 .reply-line {
     height: 0.7rem;
-    width: 2rem;
     margin-left: 1.5rem;
     margin-bottom: 0.5rem;
     margin-top: 0.7rem;
