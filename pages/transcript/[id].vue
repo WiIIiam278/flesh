@@ -21,6 +21,8 @@
 </template>
 
 <script setup>
+import base64url from 'base64url';
+
 let error = {
     status: "404",
     message: 'That transcript could not be found, or the link has expired.'
@@ -63,7 +65,7 @@ const validateId = (parsedId) => {
 
 // Define async method
 const getUrl = () => {
-    const file = validateId(Buffer.from(useRoute().params.id, 'base64url').toString('ascii'));
+    const file = validateId(base64url.decode(useRoute().params.id));
     if (!file) {
         return null;
     }
