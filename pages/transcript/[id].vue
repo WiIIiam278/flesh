@@ -21,6 +21,8 @@
 </template>
 
 <script setup>
+import { Buffer } from 'buffer';
+
 let error = {
     status: "404",
     message: 'That transcript could not be found, or the link has expired.'
