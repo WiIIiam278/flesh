@@ -20,19 +20,16 @@ Please note that we are unable to provide support with the following topics for 
 
 <div class="two-column-list">
 
-- Installing DynMap, BlueMap, SquareMap, or setting up a reverse proxy.
-- Installing Redis. 
-  - Some of my plugins make use of it, and although we are happy to provide recommendations we do not offer system administration services.
-- Installing or upgrading MySQL.
+- Setting up a proxy network, or installing plugins other than my own
+- Setting up a reverse proxy
+- Installing or upgrading database software (MySQL, MariaDB)
+- Installing or upgrading Redis (some of my plugins make use of this &mdash; apologies, but we can't offer sysadmin services)
 - Installing Pterodactyl&#xFF0D;or other system administration tasks.
 - Integration with [CMI](https://www.spigotmc.org/resources/cmi.3742/) (Content Management Interface). CMI is a complex plugin that tends to not work well with other resources. 
   - Unfortunately, we will have to decline requests that involve implementing or fixing issues with CMI.
-- Support for HuskHomes v1.x&#xFF0D;Please update to the latest version of HuskHomes (v2.x).
-- Support for fixing issues caused by running a cracked (offline mode) server. 
-  - If you're getting "Subquery returned more than one row" errors, see [here](docs/huskhomes/Setup#sql-error-subquery-returns-multiple-rows).
-- Support for fixing issues caused by changes made by forks of Paper/Waterfall. 
-  - My plugins support Spigot, Paper, BungeeCord, Waterfall or Velocity. 
-  - Proxy forks like Flamecord in particular are known to cause problems.
+- Support for legacy or discontinued projects. We encourage staying up-to-date!
+- Support for fixing issues caused by running a cracked (offline mode) server
+- Support for issues caused by running my stuff on unsupported platforms (sorry, but stuff _can_ break if you run Arclight!)
 
 </div>
 
