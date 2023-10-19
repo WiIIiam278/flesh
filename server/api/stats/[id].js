@@ -9,12 +9,19 @@ const stats = {};
 const updateStats = async (project) => {
     const ids = {};
 
+    // Add github id if available
+    if (project.repository && project.repository.includes('github.com')) { 
+        ids['github'] = project.repository.replace('https://github.com/', ''); 
+    }
+
     // Filter by allowed platforms
-    platforms.forEach(platform => {
-        if (project.ids[platform]) {
-            ids[platform] = project.ids[platform];
-        }
-    });
+    if (project.ids) {
+        platforms.forEach(platform => {
+            if (project.ids[platform]) {
+                ids[platform] = project.ids[platform];
+            }
+        });
+    }
 
     stats[project.id] = await mineget.get(ids)
         .catch(e => {

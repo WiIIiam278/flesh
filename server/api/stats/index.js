@@ -3,13 +3,30 @@ import mineget from "mineget";
 import projects from '../../../assets/data/projects.json';
 
 let timestamp;
+const platforms = ['spigot', 'modrinth', 'craftaro', 'polymart', 'github']
 const stats = {};
 
 const updateStats = async () => {
     for (const project of projects) {
-        if (!project.ids) continue;
-        stats[project.id] = await mineget.get(project.ids)
-            .catch(() => {
+        const ids = {};
+
+        // Add github id if available
+        if (project.repository && project.repository.includes('github.com')) { 
+            ids['github'] = project.repository.replace('https://github.com/', ''); 
+        }
+    
+        // Filter by allowed platforms
+        if (project.ids) {
+            platforms.forEach(platform => {
+                if (project.ids[platform]) {
+                    ids[platform] = project.ids[platform];
+                }
+            });
+        }
+    
+        stats[project.id] = await mineget.get(ids)
+            .catch(e => {
+                console.log(e);
                 return {
                     status_code: 500,
                     body: 'Internal server error'
