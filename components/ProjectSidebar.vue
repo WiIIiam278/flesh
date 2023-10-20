@@ -110,7 +110,7 @@
                 <div class="stat-descriptor">Last Updated</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:clock-rotate-left">
-                        {{ new Date(stats.last_updated * 1000).toLocaleDateString() }}
+                        {{ new Date(stats.last_updated).toLocaleDateString() }}
                     </IconifiedText>
                 </div>
             </div>
