@@ -13,7 +13,7 @@ const updateStats = async (project) => {
     if (project.repository && project.repository.includes('github.com')) { 
         ids['github'] = project.repository.replace('https://github.com/', ''); 
     }
-
+    
     // Filter by allowed platforms
     if (project.ids) {
         platforms.forEach(platform => {
@@ -37,7 +37,7 @@ const updateStats = async (project) => {
 export default defineEventHandler(async (event) => {
     const id = event.context.params.id;
     const project = projects.find(p => p.id === id);
-    if (!project || !project.ids) {
+    if (!project || !(project.ids || project.repository)) {
         return {
             status_code: 404,
             body: 'Not found'
