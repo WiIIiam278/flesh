@@ -165,7 +165,7 @@
       "platforms": [
         {
           "name": "Velocitab",
-          "description": "Velocity (1.16.5+)",
+          "description": "Velocity (1.8+)",
           "icon": "/images/platforms/velocity.png",
           "match": "Velocitab"
         }
