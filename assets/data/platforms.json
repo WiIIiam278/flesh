@@ -17,7 +17,7 @@
   "craftaro": {
     "name": "Craftaro",
     "url": "https://craftaro.com/marketplace/product/{id}",
-    "icon": "fa6-solid fa-shield-halved"
+    "icon": "fa6-solid fa-c"
   },
   "itch": {
     "name": "itch.io",
@@ -38,5 +38,10 @@
     "name": "Hangar",
     "url": "https://hangar.papermc.io/{id}",
     "icon": "fa6-solid fa-paper-plane"
+  },
+  "builtbybit": {
+    "name": "BuiltByBit",
+    "url": "https://builtbybit.com/resources/{id}",
+    "icon": "fa6-solid fa-cube"
   }
 }

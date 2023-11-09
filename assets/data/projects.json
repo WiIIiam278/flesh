@@ -54,7 +54,8 @@
     "ids": {
       "spigot": "97144",
       "polymart": "1634",
-      "craftaro": "758"
+      "craftaro": "758",
+      "builtbybit": "34956"
     },
     "tags": [
       "plugin",
@@ -78,7 +79,8 @@
     "ids": {
       "spigot": "92672",
       "polymart": "1056",
-      "craftaro": "622"
+      "craftaro": "622",
+      "builtbybit": "34959"
     },
     "tags": [
       "plugin",
