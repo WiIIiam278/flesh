@@ -35,6 +35,9 @@
                     <ButtonLink v-if="project.ids && project.ids.modrinth"
                         :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench">
                     </ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.builtbybit"
+                        :link="'https://builtbybit.com/resources/' + project.ids.builtbybit" icon="fa6-solid:cube">
+                    </ButtonLink>
                 </div>
             </div>
             <div class="stats" v-if="stats">

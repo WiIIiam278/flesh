@@ -45,7 +45,7 @@
                 Polymart
             </ButtonLink>
             <ButtonLink v-if="project.ids.craftaro"
-                :link="'https://craftaro.com/marketplace/product/' + project.ids.craftaro" icon="fa6-solid:cube"
+                :link="'https://craftaro.com/marketplace/product/' + project.ids.craftaro" icon="fa6-solid:c"
                 hollow>
                 Craftaro
             </ButtonLink>
@@ -60,6 +60,10 @@
             <ButtonLink v-if="project.ids && project.ids.curseforge"
                 :link="'https://www.curseforge.com/minecraft/mc-mods/' + project.ids.curseforge" icon="fa6-solid:fire" hollow>
                 CurseForge
+            </ButtonLink>
+            <ButtonLink v-if="project.ids && project.ids.builtbybit"
+                :link="'https://builtbybit.com/resources/' + project.ids.builtbybit" icon="fa6-solid:cube" hollow>
+                BuiltByBit
             </ButtonLink>
         </div>
         <div class="stats">
