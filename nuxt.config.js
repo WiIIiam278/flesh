@@ -79,6 +79,7 @@ export default defineNuxtConfig({
     // Fetch neccessary assets / documentation from GitHub
     hooks: {
         'build:before': () => {
+            require('./hooks/fetch-emulator').getEmulator()
             require('./hooks/fetch-readmes').getContent()
             require('./hooks/fetch-documentation').pullDocumentation()
         }

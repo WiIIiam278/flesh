@@ -411,6 +411,10 @@
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/breaking-bad-ds/raw/main/LICENSE"
     },
+    "emulator": {
+      "core": "desmume2015",
+      "rom_url": "https://github.com/WiIIiam278/breaking-bad-ds/releases/download/1.0.6/breaking-bad-ds.nds"
+    },
     "assets": {
       "images": [
         {
@@ -476,6 +480,10 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/BCSDS/raw/master/LICENSE"
+    },
+    "emulator": {
+      "core": "desmume2015",
+      "rom_url": "https://github.com/WiIIiam278/BCSDS/releases/download/1.0/bcsds.nds"
     },
     "assets": {
       "images": [

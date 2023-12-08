@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<body style="margin:0;padding:0;background-color:black;">
+    <div style="margin:0;padding:0;width:360px;height:540px;max-width:100%;border:0">
+        <div id="game"></div>
+    </div>
+    <script>
+        EJS_player = "#game";
+        EJS_core = "nds";
+        EJS_color = "#00fb9a";
+        EJS_pathtodata = "/emulator-js/data/";
+
+        // Read "gameUrl", "gameName", "width", "height", "max-width", and "core" from query params
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('gameUrl')) {
+            EJS_gameUrl = urlParams.get('gameUrl');
+        }
+        if (urlParams.has('gameName')) {
+            EJS_gameName = urlParams.get('gameName');
+        }
+        if (urlParams.has('core')) {
+            EJS_core = urlParams.get('core');
+        }
+
+        // Set the desmume_screens_gap to "70"
+        let key = `ejs-${EJS_core}-settings`;
+        // if localStorage doesn't have the key, add it
+        if (!localStorage.getItem(key)) {
+            localStorage.setItem(key, JSON.stringify({ cheats: [], controlSettings: {}, settings: { "desmume_screens_gap": 70 } }));
+            localStorage.setItem("ejs-settings", JSON.stringify({ "muted": false, "volume": 0.5 }));
+        } else {
+            // if localStorage has the key, update it
+            let settings = JSON.parse(localStorage.getItem(key));
+            settings.settings.desmume_screens_gap = 70;
+            localStorage.setItem(key, JSON.stringify(settings));
+        }
+
+    </script>
+    <script src="/emulator-js/data/loader.js"></script>
+</body>
+
+</html>
