@@ -20,14 +20,12 @@ function getEmulatorJs() {
     execSync(`git clone ${emulatorPath} ${destPath}`);
 
     // Remove every file and directory aside from data/
-    fs.readdirSync(destPath, { withFileTypes: true }).forEach(dirent => {
-        const filePath = `${destPath}/${dirent.name}`
-        if (dirent.isDirectory()) {
-            fs.rmSync(filePath, { recursive: true })
-        } else if (dirent.isFile()) {
-            fs.rmSync(filePath)
+    const files = fs.readdirSync(destPath);
+    for (const file of files) {
+        if (file !== 'data') {
+            execSync(`rm -rf ${destPath}/${file}`);
         }
-    });
+    }
 }
 
 function downloadRom(project) {
