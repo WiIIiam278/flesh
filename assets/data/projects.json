@@ -106,6 +106,21 @@
     }
   },
   {
+    "id": "huskclaims",
+    "name": "HuskClaims",
+    "repository": "https://github.com/WiIIiam278/HuskClaims",
+    "tags": [
+      "plugin",
+      "spigot"
+    ],
+    "tagline": "A clean, cross-server compatible grief prevention plugin",
+    "documentation": true,
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/HuskClaims/raw/master/LICENSE"
+    }
+  },
+  {
     "id": "huskchat",
     "name": "HuskChat",
     "repository": "https://github.com/WiIIiam278/HuskChat",
@@ -594,6 +609,20 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/Annotaml/raw/master/LICENSE"
+    }
+  },
+  {
+    "id": "cloplib",
+    "name": "ClopLib",
+    "repository": "https://github.com/WiIIiam278/ClopLib",
+    "tags": [
+      "library",
+      "java"
+    ],
+    "tagline": "A ibrary for handling events that take place in varying positions within game worlds",
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/ClopLib/raw/master/LICENSE"
     }
   },
   {
