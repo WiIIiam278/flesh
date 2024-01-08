@@ -627,7 +627,7 @@
       "svg": "cloplib.svg",
       "png": "cloplib.png"
     },
-    "tagline": "A ibrary for handling events that take place in varying positions within game worlds",
+    "tagline": "A library for handling events that take place in varying positions within game worlds",
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/ClopLib/raw/master/LICENSE"
