@@ -115,6 +115,10 @@
     ],
     "tagline": "A clean, cross-server compatible grief prevention plugin",
     "documentation": true,
+    "icon": {
+      "svg": "huskclaims.svg",
+      "png": "huskclaims.png"
+    },
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/HuskClaims/raw/master/LICENSE"
@@ -619,6 +623,10 @@
       "library",
       "java"
     ],
+    "icon": {
+      "svg": "cloplib.svg",
+      "png": "cloplib.png"
+    },
     "tagline": "A ibrary for handling events that take place in varying positions within game worlds",
     "license": {
       "id": "Apache-2.0",
