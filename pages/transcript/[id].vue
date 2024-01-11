@@ -27,11 +27,11 @@ let error = {
     status: "404",
     message: 'That transcript could not be found, or the link has expired.'
 };
-const bucket = 'https://s3.william278.net/archived-tickets/';
+const buckets = {'https://s3.william278.net/archived-tickets/', 'https://3bdd3bd3adb4679930d487e0b5f2d934.r2.cloudflarestorage.com/archived-tickets/'};
 const discord = 'https://cdn.discordapp.com/attachments/';
 
 const isS3 = (id) => {
-    return id.startsWith(bucket)
+    return buckets.some(bucket => id.startsWith(bucket));
 };
 
 // Validate ID
