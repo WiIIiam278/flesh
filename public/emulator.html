@@ -22,20 +22,6 @@
         if (urlParams.has('core')) {
             EJS_core = urlParams.get('core');
         }
-
-        // Set the desmume_screens_gap to "70"
-        let key = `ejs-${EJS_core}-settings`;
-        // if localStorage doesn't have the key, add it
-        if (!localStorage.getItem(key)) {
-            localStorage.setItem(key, JSON.stringify({ cheats: [], controlSettings: {}, settings: { "desmume_screens_gap": 70 } }));
-            localStorage.setItem("ejs-settings", JSON.stringify({ "muted": false, "volume": 0.5 }));
-        } else {
-            // if localStorage has the key, update it
-            let settings = JSON.parse(localStorage.getItem(key));
-            settings.settings.desmume_screens_gap = 70;
-            localStorage.setItem(key, JSON.stringify(settings));
-        }
-
     </script>
     <script src="/emulator-js/data/loader.js"></script>
 </body>

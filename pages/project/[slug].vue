@@ -1,6 +1,7 @@
 <template>
     <NuxtLayout v-if="project" name="project">
-        <ContentDoc v-slot="{doc}" :head="false">
+        <ContentDoc v-slot="{ doc }" :head="false">
+
             <Head>
                 <Title>{{ project.name }} - {{ project.tagline }}</Title>
                 <Meta name="description" :content="doc" />
@@ -8,16 +9,21 @@
                 <Meta name="twitter:description" :content="`${project.name} &mdash; ${project.tagline}`" />
                 <Meta name="og:title" :content="`${project.name} &mdash; William278.net`" />
                 <Meta name="twitter:title" :content="`${project.name} &mdash; William278.net`" />
-                <Meta v-if="project.icon && project.icon.png" name="og:image" :content="`/images/icons/${project.icon.png}`" />
-                <Meta v-if="project.icon && project.icon.png" name="twitter:image" :content="`/images/icons/${project.icon.png}`" />
+                <Meta v-if="project.icon && project.icon.png" name="og:image"
+                    :content="`/images/icons/${project.icon.png}`" />
+                <Meta v-if="project.icon && project.icon.png" name="twitter:image"
+                    :content="`/images/icons/${project.icon.png}`" />
             </Head>
-            <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Project', link: `/project/${project.id.toLowerCase()}` }]" />
-            <div v-if="project.emulator">
-                <DsEmulator :game-name="project.name" :game-core="project.emulator.core" :game-url="`/emulator-js/roms/${project.id}`" />
-            </div>
-            <article>
-                <ContentRenderer :value="doc" />
-            </article>
+            <!-- <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Project', link: `/project/${project.id.toLowerCase()}` }]" /> -->
+            <ProjectTabs v-model:selected="activeTab" :project="project" >
+                <article v-if="activeTab === 'about'">
+                    <ContentRenderer :value="doc" />
+                </article>
+                <div v-if="activeTab === 'play'">
+                    <DsEmulator :game-name="project.name" :game-core="project.emulator.core"
+                        :game-url="`/emulator-js/roms/${project.id}`" />
+                </div>
+            </ProjectTabs>
         </ContentDoc>
         <template #sidebar>
             <ProjectSidebar :project="project" />
@@ -43,4 +49,6 @@ import projects from '/assets/data/projects.json'
 
 const { params } = useRoute()
 const project = computed(() => projects.find(project => project.id.toLowerCase() === params.slug.toLowerCase()))
+
+const activeTab = defineModel('activeTab')
 </script>

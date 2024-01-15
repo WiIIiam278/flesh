@@ -1,19 +1,37 @@
 <template>
-    <div class="emulator-content">
-        <div class="ds">
-            <iframe class="emulator-frame shadow"
-                :src="`/emulator.html?gameUrl=${urlEncodeUrl}&gameName=${urlEncodeName}&core=${urlEncodeCore}`"
-                width="360px" height="540px" frameBorder="0" scrolling="no"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullscreen allowTransparency></iframe>
-            <object class="system-overlay" width="610" height="640" data="/images/nintendo-dsi.svg">
-                <img src="/images/nintendo-dsi.png" alt="Nintendo DS system" />
-            </object>
+    <div class="emulator">
+        <div class="column">
+            <div class="detials">
+                <h2>Controls</h2>
+                <p>Use the following controls to play the game. Press ESC to exit the emulator.</p>
+            </div>
+            <div class="controls">
+                <ControlMapping button="A" keybind="Z" />
+                <ControlMapping button="B" keybind="X" />
+                <ControlMapping button="X" keybind="A" />
+                <ControlMapping button="Y" keybind="S" />
+                <ControlMapping button="L" keybind="Q" />
+                <ControlMapping button="R" keybind="E" />
+                <ControlMapping button="Start" keybind="ENTER" />
+                <ControlMapping button="Select" keybind="V" />
+                <ControlMapping button="DPAD" keybind="Arrow Keys" />
+                <ControlMapping button="Touch" keybind="Mouse" />
+            </div>
+        </div>
+        <div class="column">
+            <iframe class="frame shadow"
+                    :src="`/emulator.html?gameUrl=${urlEncodeUrl}&gameName=${urlEncodeName}&core=${urlEncodeCore}`"
+                    width="360px" height="540px" frameBorder="0" scrolling="no"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullscreen allowTransparency>
+            </iframe>
         </div>
     </div>
 </template>
 
 <script setup>
+import ControlMapping from './ControlMapping.vue';
+
 const { gameUrl, gameName, gameCore } = defineProps({
     gameUrl: String,
     gameName: String,
@@ -26,32 +44,49 @@ const urlEncodeCore = computed(() => encodeURIComponent(gameCore));
 </script>
 
 <style scoped>
-.emulator-content {
+.emulator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+@media (max-width: 1080px) {
+    .emulator {
+        flex-direction: column-reverse;
+    }
+
+    .column, .controls {
+        width: 100% !important;
+    }
+}
+
+.column {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0 1em;
+    width: 45%;
+}
+
+.column .detials {
     margin: 1rem 0;
 }
 
-.ds {
-    position: relative;
-    z-index: 2;
-    width: 610px;
-    height: 640px;
-    margin: 0 auto;
-    background: var(--main-gray);
-    border-radius: 10px;
-    overflow: hidden;
-    pointer-events: none;
+.column .controls {
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0.5rem;
+    justify-items: center;
 }
 
-.ds .emulator-frame {
-    position: absolute;
-    z-index: -1;
-    left: 127px;
-    top: 48px;
-    object-fit: cover;
-    pointer-events: all !important;
+.column .frame {
+    border-radius: 0.5rem;
+    box-shadow: 0 0 4rem var(--gray);
+    margin: 0 1rem;
 }
 </style>
