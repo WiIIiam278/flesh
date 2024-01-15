@@ -15,6 +15,9 @@ const { project } = defineProps({
 });
 const tabs = [{ name: 'About', id: 'about'}];
 const selectedTab = defineModel('selected');
+if (project.releases) {
+    tabs.push({ name: 'Download', id: 'download' });
+}
 if (project.emulator) {
     tabs.unshift({ name: 'Play', id: 'play' });
 }
@@ -42,7 +45,7 @@ selectedTab.value = tabs[0].id;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0 0.4em;
+    margin-right: 0.5rem;
     padding: 0.35rem 0.85rem;
     border-radius: 0.5rem;
     background-color: var(--gray);

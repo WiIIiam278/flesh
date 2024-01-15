@@ -119,9 +119,6 @@
                 </div>
             </div>
         </div>
-        <div class="downloads" v-if="project.releases">
-            <ProjectDownloads :project="project.id" />
-        </div>
     </div>
 </template>
 

@@ -13,7 +13,8 @@ const formatReleases = (json, releases) => {
                     latestReleases.push({
                         platform: platform,
                         name: asset.name,
-                        url: asset.browser_download_url
+                        url: asset.browser_download_url,
+                        size: asset.size,
                     });
                     return;
                 }

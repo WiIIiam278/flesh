@@ -1,7 +1,6 @@
 <template>
     <NuxtLayout v-if="project" name="project">
         <ContentDoc v-slot="{ doc }" :head="false">
-
             <Head>
                 <Title>{{ project.name }} - {{ project.tagline }}</Title>
                 <Meta name="description" :content="doc" />
@@ -14,11 +13,13 @@
                 <Meta v-if="project.icon && project.icon.png" name="twitter:image"
                     :content="`/images/icons/${project.icon.png}`" />
             </Head>
-            <!-- <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Project', link: `/project/${project.id.toLowerCase()}` }]" /> -->
             <ProjectTabs v-model:selected="activeTab" :project="project" >
                 <article v-if="activeTab === 'about'">
                     <ContentRenderer :value="doc" />
                 </article>
+                <div v-if="activeTab === 'download'">
+                    <DownloadsMenu :project="project" />
+                </div>
                 <div v-if="activeTab === 'play'">
                     <DsEmulator :game-name="project.name" :game-core="project.emulator.core"
                         :game-url="`/emulator-js/roms/${project.id}`" />
@@ -44,6 +45,7 @@
 <script setup>
 import PathLine from '../../components/content/PathLine.vue';
 import DsEmulator from '../../components/content/DsEmulator.vue';
+import DownloadsMenu from '../../components/content/DownloadsMenu.vue';
 
 import projects from '/assets/data/projects.json'
 

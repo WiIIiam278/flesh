@@ -1,106 +1,103 @@
 <template>
-<div class="download-card" @click="download">
-    <div class="file-icon">
-        <Icon name="fa6-solid:file-zipper" />
+    <div class="download-card" @click="download" :class="`platform-${release.platform.name.toLowerCase()} ${primary ? 'primary' : ''}`">
+        <img class="icon" :src="release.platform.icon" :alt="`${release.platform.name} icon`" />
+        <div class="platform">
+            <div class="details">
+                <span class="name">{{ projectName }} &ndash; {{ release.platform.name }}</span>
+                <span class="description">{{ release.platform.description }}</span>
+                <code class="file">{{ release.name }}<span v-if="release.size">&nbsp;({{ formatSize(release.size) }})</span></code>
+            </div>
+        </div>
     </div>
-    <div class="file-details">
-        <div class="file-name">{{ file }}</div>
-        <div class="file-size" v-if="size">{{ sizeString }}</div>
-        <div class="file-size" v-else>Download</div>
-    </div>
-</div>
 </template>
 
 <style scoped>
 .download-card {
+    border: 0.2rem transparent solid;
+    background-color: var(--gray);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: var(--gray);
-    max-width: 30rem;
-    min-width: 20rem;
-    border-radius: 0.5rem;
-    border: 0.2rem solid transparent;
-    padding: 0.3rem;
 }
 
 .download-card:hover {
-    cursor: pointer;
-    filter: brightness(0.9);
     border: 0.2rem solid var(--accent);
-    scale: 1.02;
+    cursor: pointer;
 }
 
-.file-icon {
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
+.platform .name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--accent);
 }
 
-.file-details {
+.details {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 0.5rem;
 }
 
-.file-name {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: var(--accent)
-}
-
-.file-size {
+.details .file {
     font-size: 0.9rem;
-    color :var(--light-gray);
+    margin-top: 0.2rem;
+    color: var(--light-gray);
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+    margin: 0.5rem;
+}
+.primary {
+    margin: 1rem 0;
+}
+
+.platform-spigot:hover {
+    border-color: #ff8c00 !important;
+}
+
+.platform-fabric:hover {
+    border-color: #c6bca5 !important;
+}
+
+.platform-sponge:hover {
+    border-color: #ffe206 !important;
 }
 </style>
 
 <script setup>
-const { bucket, file, endpoint } = defineProps({
-    bucket: {
-        type: String,
-        required: true
+const { release } = defineProps({
+    projectName: {
+        type: String
     },
-    file: {
-        type: String,
-        required: true
+    release: {
+        type: Object
     },
-    endpoint: {
-        type: String,
-        required: false,
-        default: 'https://s3.william278.net/'
+    primary: {
+        type: Boolean,
+        default: false
     }
-})
-
-const url = computed(() => {
-    return endpoint + bucket + '/' + file
 })
 
 // Download
 const download = () => {
-    window.open(url.value, '_blank')
+    window.open(release.url, '_blank')
 }
 
 // Fetch file size using HEAD request
-const size = ref(0)
-const sizeString = computed(() => {
-    if (size.value < 1024) {
-        return size.value + ' B'
-    } else if (size.value < 1024 * 1024) {
-        return (size.value / 1024).toFixed(2) + ' KB'
-    } else if (size.value < 1024 * 1024 * 1024) {
-        return (size.value / 1024 / 1024).toFixed(2) + ' MB'
+const formatSize = (size) => {
+    if (size < 1024) {
+        return size + ' B'
+    } else if (size < 1024 * 1024) {
+        return (size / 1024).toFixed(2) + ' KB'
+    } else if (size < 1024 * 1024 * 1024) {
+        return (size / 1024 / 1024).toFixed(2) + ' MB'
     } else {
-        return (size.value / 1024 / 1024 / 1024).toFixed(2) + ' GB'
+        return (size / 1024 / 1024 / 1024).toFixed(2) + ' GB'
     }
-})
-
-const fetchSize = async () => {
-    const response = await fetch(url.value, {
-        method: 'HEAD'
-    })
-    size.value = parseInt(response.headers.get('Content-Length'))
-}
-fetchSize()
+};
 </script>
