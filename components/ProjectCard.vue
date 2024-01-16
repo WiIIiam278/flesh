@@ -27,6 +27,8 @@
                     </ButtonLink>
                     <ButtonLink v-if="project.ids && project.ids.itch" :link="project.ids.itch"
                         icon="fa6-brands:itch-io"></ButtonLink>
+                    <ButtonLink v-if="project.ids && project.ids.universaldb" :link="project.ids.universaldb"
+                        icon="fa6-solid:down-long"></ButtonLink>
                     <ButtonLink v-if="project.ids && project.ids.spigot"
                         :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet">
                     </ButtonLink>

@@ -24,6 +24,11 @@
     "url": "{id}",
     "icon": "fa6-brands fa-itch-io"
   },
+  "universaldb": {
+    "name": "Universal-DB",
+    "url": "{id}",
+    "icon": "fa6-solid fa-down-long"
+  },
   "modrinth": {
     "name": "Modrinth",
     "url": "https://modrinth.com/mod/{id}",

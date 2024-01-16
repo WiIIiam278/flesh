@@ -36,6 +36,9 @@
             <ButtonLink v-if="project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io" hollow>
                 itch.io
             </ButtonLink>
+            <ButtonLink v-if="project.ids.universaldb" :link="project.ids.universaldb" icon="fa6-solid:down-long" hollow>
+                Universal-DB
+            </ButtonLink>
             <ButtonLink v-if="project.ids.spigot" :link="'https://spigotmc.org/resources/' + project.ids.spigot"
                 icon="fa6-solid:faucet" hollow>
                 Spigot

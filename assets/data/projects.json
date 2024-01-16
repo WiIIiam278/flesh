@@ -421,7 +421,8 @@
     ],
     "tagline": "Breaking Bad, as a Nintendo DS game, complete with 3D graphics and models!",
     "ids": {
-      "itch": "https://william278.itch.io/breaking-bad-ds"
+      "itch": "https://william278.itch.io/breaking-bad-ds",
+      "universaldb": "https://db.universal-team.net/ds/breaking-bad-ds"
     },
     "icon": {
       "png": "breaking-bad-ds.png"
@@ -493,6 +494,9 @@
       "c++"
     ],
     "tagline": "Better Call Saul for the Nintendo DS, based on the popular show. Written in NFLib, libnds and C++",
+    "ids": {
+      "universaldb": "https://db.universal-team.net/ds/better-call-saul-ds"
+    },
     "icon": {
       "png": "bcsds.png"
     },

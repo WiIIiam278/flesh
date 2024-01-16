@@ -1,21 +1,20 @@
 <template>
-    <ul class="project-doc-list">
-        <li v-for="project in projects.filter(p => p.documentation)" :key="project.id" >
-            <NuxtLink :to="'/docs/' + project.id">
-                <IconifiedProject :project="project" />
-            </NuxtLink>
-        </li>
-    </ul>
+    <div class="project-docs-grid">
+        <NuxtLink v-for="project in projects.filter(p => p.documentation)" :key="project.id" :to="'/docs/' + project.id">
+            <IconifiedProject :project="project" />
+        </NuxtLink>
+    </div>
 </template>
 
-<script>
+<script setup>
 import projects from '/assets/data/projects.json'
-
-export default {
-    data() {
-        return {
-            projects: projects
-        }
-    }
-}
 </script>
+
+<style scoped>
+.project-docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 1rem;
+    padding: 0 0.25rem;
+}
+</style>

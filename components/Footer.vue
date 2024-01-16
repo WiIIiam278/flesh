@@ -7,10 +7,13 @@
                     <NuxtLink to="/terms">Terms</NuxtLink>
                 </li>
                 <li>
-                    <a href="https://buymeacoff.ee/william278" target="_blank">Tips</a>
+                    <a href="https://buymeacoff.ee/william278" target="_blank">BuyMeACoffee</a>
                 </li>
                 <li>
-                    <a href="https://twitter.com/William27528" target="_blank">Twitter</a>
+                    <a href="https://x.com/William27528" target="_blank">Twitter/X</a>
+                </li>
+                <li>
+                    <a href="https://youtube.com/@william278" target="_blank">YouTube</a>
                 </li>
                 <li>
                     <a href="https://github.com/WiIIiam278" target="_blank">GitHub</a>
@@ -70,6 +73,14 @@ footer {
 @media screen and (max-width: 30em) {
     #version {
         display: none;
+    }
+
+    #navigation li::after {
+        content: none;
+    }
+
+    #navigation li {
+        margin: 0 0.3rem;
     }
 }
 </style>
