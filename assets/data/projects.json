@@ -109,6 +109,12 @@
     "id": "huskclaims",
     "name": "HuskClaims",
     "repository": "https://github.com/WiIIiam278/HuskClaims",
+    "ids": {
+      "spigot": "114467",
+      "polymart": "5336",
+      "craftaro": "2765",
+      "builtbybit": "37536"
+    },
     "tags": [
       "plugin",
       "spigot"
