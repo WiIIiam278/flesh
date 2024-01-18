@@ -86,6 +86,7 @@
     },
     "tags": [
       "minecraft",
+      "plugin",
       "java"
     ],
     "tagline": "An intuitive, cross-server Towny-style protection solution",
@@ -145,6 +146,7 @@
     },
     "tags": [
       "minecraft",
+      "plugin",
       "java"
     ],
     "tagline": "A smart, beautiful & customisable proxy chat plugin",
