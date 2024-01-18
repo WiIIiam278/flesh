@@ -4,7 +4,7 @@
             <div class="meta">
                 <h1 class="name">{{ project.name }}</h1>
                 <div class="pills">
-                    <Pill v-for="tag in project.tags" :key="tag">{{ tag }}</Pill>
+                    <TagPill v-for="tag in project.tags" :tag="tag" />
                 </div>
             </div>
             <div class="icon" v-if="project.icon">
@@ -126,6 +126,8 @@
 </template>
 
 <script setup>
+import TagPill from './TagPill.vue';
+
 const { project } = defineProps({
     project: {
         type: Object,

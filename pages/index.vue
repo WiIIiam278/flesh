@@ -3,7 +3,6 @@
         <NuxtLayout>
             <div id="page-content">
                 <div id="left-column">
-                    <h1>My projects</h1>
                     <ProjectGrid />
                 </div>
                 <div id="right-column">

@@ -11,8 +11,9 @@
       "curseforge": "huskhomes"
     },
     "tags": [
+      "minecraft",
       "plugin",
-      "spigot"
+      "java"
     ],
     "tagline": "The powerful and intuitive set homes, warps, and teleports plugin/mod",
     "documentation": true,
@@ -58,8 +59,9 @@
       "builtbybit": "34956"
     },
     "tags": [
+      "minecraft",
       "plugin",
-      "spigot"
+      "java"
     ],
     "tagline": "A modern, cross-server player data synchronisation system",
     "documentation": true,
@@ -83,8 +85,8 @@
       "builtbybit": "34959"
     },
     "tags": [
-      "plugin",
-      "spigot"
+      "minecraft",
+      "java"
     ],
     "tagline": "An intuitive, cross-server Towny-style protection solution",
     "documentation": true,
@@ -116,8 +118,9 @@
       "builtbybit": "37536"
     },
     "tags": [
+      "minecraft",
       "plugin",
-      "spigot"
+      "java"
     ],
     "tagline": "A clean, cross-server compatible grief prevention plugin",
     "documentation": true,
@@ -141,9 +144,8 @@
       "hangar": "William278/HuskChat"
     },
     "tags": [
-      "plugin",
-      "bungee",
-      "velocity"
+      "minecraft",
+      "java"
     ],
     "tagline": "A smart, beautiful & customisable proxy chat plugin",
     "documentation": true,
@@ -175,8 +177,9 @@
       "hangar": "William278/Velocitab"
     },
     "tags": [
+      "minecraft",
       "plugin",
-      "velocity"
+      "java"
     ],
     "tagline": "A beautiful and versatile TAB list plugin for Velocity proxies",
     "documentation": true,
@@ -210,8 +213,9 @@
       "hangar": "William278/SchematicUpload"
     },
     "tags": [
+      "minecraft",
       "plugin",
-      "spigot"
+      "java"
     ],
     "tagline": "Give users a simple web interface to upload schematics",
     "icon": {
@@ -256,8 +260,9 @@
       "hangar": "William278/HuskHomesGUI"
     },
     "tags": [
+      "minecraft",
       "plugin",
-      "spigot"
+      "java"
     ],
     "tagline": "Show HuskHomes homes and warps in a simple to use menu",
     "icon": {
@@ -290,8 +295,9 @@
       "hangar": "William278/SignSearch"
     },
     "tags": [
+      "minecraft",
       "plugin",
-      "spigot"
+      "java"
     ],
     "tagline": "A simple and fast plugin that lets you search text of nearby signs",
     "icon": {
@@ -323,9 +329,10 @@
       "modrinth": "bEIUEGTX"
     },
     "tags": [
+      "minecraft",
       "library",
-      "bungee",
-      "velocity"
+      "plugin",
+      "java"
     ],
     "tagline": "A bridge library plugin for using PlaceholderAPI on proxy servers",
     "icon": {
@@ -351,9 +358,9 @@
     "id": "serial-loops",
     "name": "Serial Loops",
     "tags": [
-      "app",
       "nds",
-      "c#"
+      "tool",
+      "csharp"
     ],
     "links": [
       {
@@ -421,9 +428,9 @@
     "name": "Breaking Bad DS",
     "repository": "https://github.com/WiIIiam278/breaking-bad-ds",
     "tags": [
-      "game",
       "nds",
-      "c++"
+      "game",
+      "cpp"
     ],
     "tagline": "Breaking Bad, as a Nintendo DS game, complete with 3D graphics and models!",
     "ids": {
@@ -495,9 +502,9 @@
     "name": "Better Call Saul DS",
     "repository": "https://github.com/WiIIiam278/BCSDS",
     "tags": [
-      "game",
       "nds",
-      "c++"
+      "game",
+      "cpp"
     ],
     "tagline": "Better Call Saul for the Nintendo DS, based on the popular show. Written in NFLib, libnds and C++",
     "ids": {
@@ -556,7 +563,7 @@
     "name": "Loaded Dice",
     "tags": [
       "game",
-      "unity"
+      "csharp"
     ],
     "tagline": "Play as a dude who lives in a die. A GMTK Game Jam '22 Submission for the theme \"Roll the Dice\"",
     "ids": {
@@ -596,6 +603,7 @@
     "name": "Mineget",
     "repository": "https://github.com/WiIIiam278/Mineget",
     "tags": [
+      "web",
       "library",
       "js"
     ],
@@ -630,6 +638,7 @@
     "name": "ClopLib",
     "repository": "https://github.com/WiIIiam278/ClopLib",
     "tags": [
+      "minecraft",
       "library",
       "java"
     ],
@@ -648,6 +657,7 @@
     "name": "PagineDown",
     "repository": "https://github.com/WiIIiam278/PagineDown",
     "tags": [
+      "minecraft",
       "library",
       "java"
     ],
@@ -662,6 +672,7 @@
     "name": "DesertWell",
     "repository": "https://github.com/WiIIiam278/DesertWell",
     "tags": [
+      "minecraft",
       "library",
       "java"
     ],
@@ -676,6 +687,7 @@
     "name": "WebSchematics",
     "repository": "https://github.com/WiIIiam278/WebSchematics",
     "tags": [
+      "web",
       "library",
       "js"
     ],
@@ -699,7 +711,8 @@
     "name": "Carcass",
     "repository": "https://github.com/WiIIiam278/carcass",
     "tags": [
-      "utility",
+      "minecraft",
+      "tool",
       "python"
     ],
     "tagline": "A Python CLI tool for quickly spinning up a network of proxied Minecraft servers",
@@ -712,7 +725,7 @@
     "id": "timetobattle",
     "name": "TimeToBattle.net",
     "tags": [
-      "server"
+      "minecraft"
     ],
     "tagline": "(Discontinued) A Minecraft SMP server with custom battle minigames (2020-2022)",
     "readme": "/timetobattle",
@@ -757,8 +770,9 @@
       "spigot": "96352"
     },
     "tags": [
+      "minecraft",
       "plugin",
-      "spigot"
+      "java"
     ],
     "tagline": "(Discontinued) A random teleport system that works cross-server. Requires HuskHomes",
     "icon": {

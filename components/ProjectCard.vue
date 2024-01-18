@@ -10,7 +10,7 @@
                     <h3 class="name">{{ project.name ? project.name : project.id }}</h3>
                 </NuxtLink>
                 <div class="pills">
-                    <Pill v-for="tag in project.tags" :key="tag">{{ tag }}</Pill>
+                    <TagPill v-for="tag in project.tags.slice(0, 3)" :tag="tag" :key="tag" />
                 </div>
             </div>
         </div>
@@ -204,6 +204,8 @@
 </style>
 
 <script setup>
+import TagPill from './TagPill.vue';
+
 const { project } = defineProps({
     project: {
         type: Object,
