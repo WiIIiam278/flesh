@@ -1,15 +1,17 @@
 <template>
-    <NuxtLayout>
-        <div id="page-content">
-            <div id="left-column">
-                <h1>My projects</h1>
-                <ProjectGrid />
+    <div>
+        <NuxtLayout>
+            <div id="page-content">
+                <div id="left-column">
+                    <h1>My projects</h1>
+                    <ProjectGrid />
+                </div>
+                <div id="right-column">
+                    <ContentDoc :head="false" />
+                </div>
             </div>
-            <div id="right-column">
-                <ContentDoc :head="false" />
-            </div>
-        </div>
-    </NuxtLayout>
+        </NuxtLayout>
+    </div>
 </template>
 
 <style scoped>

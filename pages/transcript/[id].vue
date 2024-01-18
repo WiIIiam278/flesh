@@ -1,23 +1,27 @@
 <template>
-    <NuxtLayout v-if="data" name="transcript">
-        <Head>
-            <Title>Ticket #{{ data.ticket.id }} Transcript</Title>
-            <Meta name="description" :content="description" />
-            <Meta name="og:description" :content="description" />
-            <Meta name="twitter:description" :content="description" />
-            <Meta name="og:title" :content="`Ticket #${data.ticket.id} Transcript &mdash; William278.net`" />
-            <Meta name="twitter:title" :content="`Ticket #${data.ticket.id} Transcript &mdash; William278.net`" />
-        </Head>
-        <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Transcript', link: `/transcript/${$route.params.id}` }]" />
-        <h1>Ticket #{{ data.ticket.id }}</h1>
-        <TranscriptMessages :data="data" />
-        <template #sidebar>
-            <TranscriptSidebar :data="data" :url="getUrl()" />
-        </template>
-    </NuxtLayout>
-    <NuxtLayout v-else name="default">
-        <ErrorPage :code="error.status">{{ error.message }}</ErrorPage>
-    </NuxtLayout>
+    <div>
+        <NuxtLayout v-if="data" name="transcript">
+
+            <Head>
+                <Title>Ticket #{{ data.ticket.id }} Transcript</Title>
+                <Meta name="description" :content="description" />
+                <Meta name="og:description" :content="description" />
+                <Meta name="twitter:description" :content="description" />
+                <Meta name="og:title" :content="`Ticket #${data.ticket.id} Transcript &mdash; William278.net`" />
+                <Meta name="twitter:title" :content="`Ticket #${data.ticket.id} Transcript &mdash; William278.net`" />
+            </Head>
+            <Breadcrumbs
+                :crumbs="[{ name: 'Home', link: '/' }, { name: 'Transcript', link: `/transcript/${$route.params.id}` }]" />
+            <h1>Ticket #{{ data.ticket.id }}</h1>
+            <TranscriptMessages :data="data" />
+            <template #sidebar>
+                <TranscriptSidebar :data="data" :url="getUrl()" />
+            </template>
+        </NuxtLayout>
+        <NuxtLayout v-else name="default">
+            <ErrorPage :code="error.status">{{ error.message }}</ErrorPage>
+        </NuxtLayout>
+    </div>
 </template>
 
 <script setup>
