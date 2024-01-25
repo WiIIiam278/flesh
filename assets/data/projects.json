@@ -252,41 +252,6 @@
     }
   },
   {
-    "id": "huskhomesgui",
-    "name": "HuskHomesGUI",
-    "repository": "https://github.com/WiIIiam278/HuskHomesGUI",
-    "ids": {
-      "spigot": "91059",
-      "polymart": "928",
-      "modrinth": "bME80dEI",
-      "hangar": "William278/HuskHomesGUI"
-    },
-    "tags": [
-      "minecraft",
-      "plugin",
-      "java"
-    ],
-    "tagline": "Show HuskHomes homes and warps in a simple to use menu",
-    "icon": {
-      "svg": "huskhomesgui.svg",
-      "png": "huskhomesgui.png"
-    },
-    "license": {
-      "id": "Apache-2.0",
-      "url": "https://github.com/WiIIiam278/HuskHomesGUI/raw/master/LICENSE"
-    },
-    "releases": {
-      "platforms": [
-        {
-          "name": "Spigot",
-          "description": "Spigot, Paper, etc. (MC 1.16.5 to 1.20.x)",
-          "icon": "/images/platforms/spigot.png",
-          "match": "HuskHomesGUI"
-        }
-      ]
-    }
-  },
-  {
     "id": "signsearch",
     "name": "SignSearch",
     "repository": "https://github.com/WiIIiam278/SignSearch",
@@ -724,12 +689,71 @@
     }
   },
   {
+    "id": "huskhomesgui",
+    "name": "HuskHomesGUI",
+    "repository": "https://github.com/WiIIiam278/HuskHomesGUI",
+    "ids": {
+      "spigot": "91059",
+      "polymart": "928",
+      "modrinth": "bME80dEI"
+    },
+    "tags": [
+      "minecraft",
+      "plugin",
+      "java"
+    ],
+    "tagline": "Show HuskHomes homes and warps in a simple to use menu",
+    "discontinued": true,
+    "icon": {
+      "svg": "huskhomesgui.svg",
+      "png": "huskhomesgui.png"
+    },
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/HuskHomesGUI/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Spigot",
+          "description": "Spigot, Paper, etc. (MC 1.16.5 to 1.20.x)",
+          "icon": "/images/platforms/spigot.png",
+          "match": "HuskHomesGUI"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huskbungeertp",
+    "name": "HuskBungeeRTP",
+    "repository": "https://github.com/WiIIiam278/HuskBungeeRTP",
+    "ids": {
+      "spigot": "96352"
+    },
+    "tags": [
+      "minecraft",
+      "plugin",
+      "java"
+    ],
+    "tagline": "A random teleport system that works cross-server. Requires HuskHomes",
+    "discontinued": true,
+    "icon": {
+      "svg": "huskbungeertp.svg",
+      "png": "huskbungeertp.png"
+    },
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/HuskBungeeRTP/raw/master/LICENSE"
+    }
+  },
+  {
     "id": "timetobattle",
     "name": "TimeToBattle.net",
     "tags": [
       "minecraft"
     ],
-    "tagline": "(Discontinued) A Minecraft SMP server with custom battle minigames (2020-2022)",
+    "tagline": "A Minecraft SMP server with custom battle minigames (2020-2022)",
+    "discontinued": true,
     "readme": "/timetobattle",
     "icon": {
       "svg": "timetobattle.svg",
@@ -762,28 +786,6 @@
           "description": "The Sphere Battles minigame"
         }
       ]
-    }
-  },
-  {
-    "id": "huskbungeertp",
-    "name": "HuskBungeeRTP",
-    "repository": "https://github.com/WiIIiam278/HuskBungeeRTP",
-    "ids": {
-      "spigot": "96352"
-    },
-    "tags": [
-      "minecraft",
-      "plugin",
-      "java"
-    ],
-    "tagline": "(Discontinued) A random teleport system that works cross-server. Requires HuskHomes",
-    "icon": {
-      "svg": "huskbungeertp.svg",
-      "png": "huskbungeertp.png"
-    },
-    "license": {
-      "id": "Apache-2.0",
-      "url": "https://github.com/WiIIiam278/HuskBungeeRTP/raw/master/LICENSE"
     }
   }
 ]

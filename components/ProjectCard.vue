@@ -17,6 +17,7 @@
         <div class="body">
             <div class="description">
                 <div class="tagline" v-if="project.tagline">
+                    <IconifiedText class="discontinued" v-if="project.discontinued" icon="fa6-solid:box-archive">Discontinued</IconifiedText>
                     <p>{{ project.tagline }}</p>
                 </div>
                 <div class="buttons">
@@ -132,6 +133,12 @@
 .description {
     display: flex;
     flex-direction: column;
+}
+
+.tagline .discontinued {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--light-gray)
 }
 
 .buttons {

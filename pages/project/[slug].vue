@@ -13,6 +13,13 @@
                     <Meta v-if="project.icon && project.icon.png" name="twitter:image"
                         :content="`/images/icons/${project.icon.png}`" />
                 </Head>
+                <div v-if="project.discontinued" class="discontinued">
+                    <Icon class="icon" name="fa6-solid:box-archive" />
+                    <span class="text">
+                        {{ project.name }} has been discontinued. <span class="grayed">I won't be releasing any more updates for it, 
+                        and won't be able to answer related support questions&mdash;sorry about that!</span>
+                    </span>
+                </div>
                 <ProjectTabs v-model:selected="activeTab" :project="project">
                     <article v-if="activeTab === 'about'">
                         <ContentRenderer :value="doc" />
@@ -42,6 +49,23 @@
         </NuxtLayout>
     </div>
 </template>
+
+<style scoped>
+.discontinued {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    color: var(--light-gray);
+    border: 0.2rem solid var(--light-gray);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.discontinued .icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+</style>
 
 <script setup>
 import PathLine from '../../components/content/PathLine.vue';
