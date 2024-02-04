@@ -12,6 +12,7 @@ If your host doesn't offer it, you can always buy a Redis server separately (e.g
 
 | Host           | Site                              | Redis | Notes                                                                               |
 |----------------|-----------------------------------|-------|-------------------------------------------------------------------------------------|
+| Lilypad        | https://lilypad.gg                | ✅    | Available for free upon request                                                     |
 | Bloom Host     | https://bloom.host                | ✅    | Available through their "Split servers" feature at the cost of some of your RAM     |
 | Falix Nodes    | https://falixnodes.net/           | ✅    | Available separately as a paid service.                                             |
 | GGServers      | https://ggservers.com             | 🚫    | Asked me if I meant the "Rediscovered mod" when I enquired their support chat (lol) |
