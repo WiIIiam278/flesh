@@ -41,7 +41,7 @@
         },
         {
           "name": "Sponge",
-          "description": "Sponge (API 8)",
+          "description": "Sponge (API 10)",
           "icon": "/images/platforms/sponge.png",
           "match": "HuskHomes-Sponge"
         }
