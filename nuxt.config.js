@@ -65,14 +65,14 @@ export default defineNuxtConfig({
 
   // Build config
   build: {
-      transpile: ['discord-markdown'],
+      transpile: ['@odiffey/discord-markdown'],
   },
 
   // Content config (https://content.nuxtjs.org/api/configuration)
   content: {
       highlight: {
           theme: 'github-dark-dimmed',
-          preload: ['js', 'java', 'yaml', 'xml', 'groovy']
+          preload: ['js', 'java', 'yaml', 'toml', 'xml', 'groovy']
       }
   },
 
