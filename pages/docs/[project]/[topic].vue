@@ -19,8 +19,10 @@
                         <Overbar>
                             <Breadcrumbs
                                 :crumbs="[{ name: t('link-home'), link: '/' }, { name: t('link-docs'), link: '/docs' }, { name: project.name, link: `/docs/${project.id}` }]" />
-                            <ButtonLink hollow icon="fa6-solid:pencil" :link="`${project.repository}/tree/master/docs`">Edit
-                            </ButtonLink>
+                                <span>
+                                    <ButtonLink hollow icon="fa6-solid:pencil" :link="`${project.repository}/tree/master/docs`">{{ $t('docs-edit-button') }}</ButtonLink>
+                                    <ButtonLink hollow icon="fa6-solid:language" link="/translate">{{ $t('docs-translate-button') }}</ButtonLink>
+                                </span>
                         </Overbar>
                         <article>
                             <h1>{{ doc.title }}</h1>
