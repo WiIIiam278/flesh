@@ -47,11 +47,6 @@
                 icon="fa6-solid:p" hollow>
                 Polymart
             </ButtonLink>
-            <ButtonLink v-if="project.ids.craftaro"
-                :link="'https://craftaro.com/marketplace/product/' + project.ids.craftaro" icon="fa6-solid:c"
-                hollow>
-                Craftaro
-            </ButtonLink>
             <ButtonLink v-if="project.ids && project.ids.modrinth"
                 :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench" hollow>
                 Modrinth

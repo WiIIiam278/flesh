@@ -14,11 +14,6 @@
     "url": "https://polymart.org/resource/{id}",
     "icon": "fa6-solid fa-p"
   },
-  "craftaro": {
-    "name": "Craftaro",
-    "url": "https://craftaro.com/marketplace/product/{id}",
-    "icon": "fa6-solid fa-c"
-  },
   "itch": {
     "name": "itch.io",
     "url": "{id}",
