@@ -1,3 +1,9 @@
+---
+title: 'Redis Server Hosts'
+description: 'A list of Minecraft server hosts and whether they offer Redis, either as standard or on request.'
+locale: 'en'
+---
+
 # Redis Hosts
 
 This page contains a list of Minecraft server hosts and whether they offer Redis, either as standard or on request.
