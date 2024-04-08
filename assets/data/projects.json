@@ -29,13 +29,13 @@
       "platforms": [
         {
           "name": "Spigot",
-          "description": "Spigot, Paper, etc. (MC 1.16.5 to 1.20.x)",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.20.x)",
           "icon": "/images/platforms/spigot.png",
           "match": "HuskHomes-Paper"
         },
         {
           "name": "Fabric",
-          "description": "Fabric (MC 1.20.2)",
+          "description": "Fabric (MC 1.20.4)",
           "icon": "/images/platforms/fabric.png",
           "match": "HuskHomes-Fabric"
         },
@@ -163,7 +163,7 @@
       "platforms": [
         {
           "name": "Multi-platform .JAR",
-          "description": "Spigot, Bungee, Velocity (MC 1.16.5 to 1.20.x)",
+          "description": "Spigot, Bungee, Velocity (MC 1.17.1 to 1.20.x)",
           "icon": "/images/icons/huskchat.png",
           "match": "HuskChat"
         }
@@ -244,7 +244,7 @@
       "platforms": [
         {
           "name": "Spigot",
-          "description": "Spigot, Paper, etc. (MC 1.16.5 to 1.20.x)",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.20.x)",
           "icon": "/images/platforms/spigot.png",
           "match": "SchematicUpload"
         }
@@ -279,7 +279,7 @@
       "platforms": [
         {
           "name": "SignSearch",
-          "description": "Spigot, Paper, etc. (MC 1.16.5 to 1.20.x)",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.20.x)",
           "icon": "/images/platforms/spigot.png",
           "match": "SignSearch"
         }
@@ -314,7 +314,7 @@
       "platforms": [
         {
           "name": "Multi-platform .JAR",
-          "description": "Spigot, Bungee, Velocity (MC 1.16.5 to 1.20.x) or Fabric (1.20.1)",
+          "description": "Spigot, Bungee, Velocity (MC 1.17.1 to 1.20.x) or Fabric (1.20.1)",
           "icon": "/images/icons/papiproxybridge.png",
           "match": "PAPIProxyBridge"
         }
@@ -716,7 +716,7 @@
       "platforms": [
         {
           "name": "Spigot",
-          "description": "Spigot, Paper, etc. (MC 1.16.5 to 1.20.x)",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.20.x)",
           "icon": "/images/platforms/spigot.png",
           "match": "HuskHomesGUI"
         }
