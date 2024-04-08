@@ -34,20 +34,25 @@ function getDocumentationFromRepository(project) {
     // Remove the .git directory
     fs.rmSync(`${wikiPath}/.git`, { recursive: true })
 
+    // Make locale dir for default locale
+    if (!fs.existsSync(`${wikiPath}/en`)){
+        fs.mkdirSync(`${wikiPath}/en`, { recursive: true })
+    }
+    
     // Iterate through each item recursively in the wiki directory and rename each file to lower case
     fs.readdirSync(wikiPath, { withFileTypes: true }).forEach(dirent => {
         const filePath = `${wikiPath}/${dirent.name}`
-        if (dirent.isDirectory()) {
-            fs.readdirSync(filePath, { withFileTypes: true }).forEach(dirent => {
-                const filePath = `${wikiPath}/${dirent.name}`
-                if (dirent.isFile()) {
-                    addNameHeader(filePath, dirent.name);
-                    fs.renameSync(filePath, filePath.toLowerCase())
-                }
+        if (dirent.isFile()) {
+            const enFilePath = `${wikiPath}/en/${dirent.name.toLowerCase()}`;
+            fs.renameSync(filePath, enFilePath);
+            addNameHeader(enFilePath, dirent.name);
+        }
+        else if (dirent.isDirectory()) {
+            fs.readdirSync(filePath, { withFileTypes: true }).forEach(subdirent => {
+                const subfilePath = `${filePath}/${subdirent.name}`
+                fs.renameSync(subfilePath, subfilePath.toLowerCase());
+                addNameHeader(subfilePath, subdirent.name);
             })
-        } else if (dirent.isFile()) {
-            addNameHeader(filePath, dirent.name);
-            fs.renameSync(filePath, filePath.toLowerCase())
         }
     })
 }

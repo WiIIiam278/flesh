@@ -20,13 +20,13 @@
                 </ButtonLink>
             </Overbar>
             <article>
-                <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/home'" />
+                <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/' + locale + '/home'" />
             </article>
             <template #sidebar>
                 <h1>
                     <IconifiedProject centered :project="project" />
                 </h1>
-                <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/_sidebar'" />
+                <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/' + locale + '/_sidebar'" />
             </template>
         </NuxtLayout>
         <NuxtLayout v-else name="default">

@@ -4,17 +4,22 @@ description: 'Learn how you can help translate William278.net into different lan
 locale: 'en'
 ---
 
-Here's how to help translate William278.net (this site) into different languages. The site files are [located on GitHub](https://github.com/WiIIiam278/william278-site). To get started, clone the site (`git clone https://github.com/WiIIiam278/william278-site`)
+# Translate William278.net
+
+Here's how to help translate William278.net (this site) into different languages. The site files are [located on GitHub](https://github.com/WiIIiam278/william278-site). To get started, clone the site 
+* *Example*: `git clone https://github.com/WiIIiam278/william278-site`
 
 Please note "joke" language translations are not accepted. English text on this site can be in either British/American English (I still accept PRs for typo corrections in English of course!).
 
 ## Site locales
 Interface locales can be found [in `locales/en.json`](https://github.com/WiIIiam278/william278-site/blob/master/locales/en.json). To create new locales for a language:
 
-* Create an interface locale file for the language code (e.g. `locales/zh-cn.json`)
-* Add a locale key to all existing files containing the language name (e.g. `"language-zh-cn": "汉语"`)
-* Add the locale to the `locales` section of `nuxt.config.js` (e.g. `{ code: 'zh-cn', iso: 'zh-cn', file: 'locales/zh-cn.json', dir: 'ltr' },`)
-* Please see the "project docs" section for how to credit yourself.
+* Create an interface locale file for the language code (copy `en.json` to get started) 
+  * *Example*: `locales/zh-cn.json`
+* Add a locale key to all existing files containing the language name
+  * *Example*: `"language-zh-cn": "汉语"`
+* Add the locale to the `locales` section of `nuxt.config.js` 
+  * *Example*: `{ code: 'zh-cn', iso: 'zh-cn', file: 'locales/zh-cn.json', dir: 'ltr' },`
 
 Additionally, you can translate the index page and docs homepage if you wish:
 
@@ -28,8 +33,9 @@ The most valuable part of translating the site is to allow for international tra
 
 Project docs for each language are located on each project repo within `/docs/<language_code>/...` (English-language locales are in the root directory).
 
-To create locales for a language, you'll need to `git clone https://github.com/WiIIiam278/WiIIiam278/PROJECT_REPO` the project repository and:
-* Navigate to `/docs/` and create a folder for the language (e.g. `/docs/zh-cn/`)
+To create locales for a language, you'll need to `git clone` the project repository and:
+* Navigate to `/docs/` and create a folder for the language 
+  * *Example*: `/docs/zh-cn/`
 * Copy the English locales located in the root `/docs` directory. Do *not* change the file names!
 * Delete `__Footer.md`.
 * Translate each file and add a `---` header section (see below)
@@ -52,5 +58,5 @@ locale: 'zn-cn' # replace this with your lang code
 ```
 
 ### Projects with docs
-::project-docs-list
+::project-doc-list
 ::

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ContentDoc :path="'/docs/project/' + $route.params.project + '/' + $route.params.topic.toLowerCase()" :head="false">
+        <ContentDoc :path="'/docs/project/' + $route.params.project + '/' + locale + '/' + $route.params.topic.toLowerCase()" :head="false">
             <template v-slot="{ doc }">
                 <Head>
                     <Title>{{ doc.title }} &mdash; {{ $t('docs-title', {'project': project.name}) }} &mdash; {{ $t('index-title') }}</Title>
@@ -32,7 +32,7 @@
                                     <IconifiedProject centered :project="project" />
                                 </NuxtLink>
                             </h1>
-                            <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/_sidebar'" />
+                            <ContentDoc :head="false" :path="'/docs/project/' + project.id.toLowerCase() + '/' + locale + '/_sidebar'" />
                         </template>
                     </NuxtLayout>
                 </ContentRenderer>
