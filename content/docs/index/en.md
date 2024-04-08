@@ -1,3 +1,7 @@
+---
+locale: 'en'
+---
+
 # Documentation
 You can find documentation for my various projects here. Please click through to view to the relevant project to find the information you need.
 

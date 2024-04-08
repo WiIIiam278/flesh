@@ -20,6 +20,7 @@
     "@docsearch/css": "^3.5.2",
     "@docsearch/js": "^3.5.2",
     "@nuxtjs/algolia": "^1.10.1",
+    "@nuxtjs/i18n": "^8.3.0",
     "@odiffey/discord-markdown": "^2.6.0",
     "algoliasearch": "^4.22.1",
     "buffer": "^6.0.3",

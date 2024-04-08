@@ -17,12 +17,15 @@
         <div class="body">
             <div class="description">
                 <div class="tagline" v-if="project.tagline">
-                    <IconifiedText class="discontinued" v-if="project.discontinued" icon="fa6-solid:box-archive">Discontinued</IconifiedText>
+                    <IconifiedText class="discontinued" v-if="project.discontinued" icon="fa6-solid:box-archive">
+                        {{$t('project-discontinued')}}
+                    </IconifiedText>
                     <p>{{ project.tagline }}</p>
                 </div>
                 <div class="buttons">
                     <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>
-                        Docs</ButtonLink>
+                        {{$t('link-docs')}}
+                    </ButtonLink>
                     <ButtonLink v-for="link in project.links" :link="link.link" hollow>{{ link.text }}</ButtonLink>
                     <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github">
                     </ButtonLink>
@@ -63,6 +66,23 @@
         </div>
     </div>
 </template>
+
+<script setup>
+import TagPill from './TagPill.vue';
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+const { project } = defineProps({
+    project: {
+        type: Object,
+        required: true
+    }
+})
+
+// Expost stats as a fetch to /api/stats/:id
+let {data} = await useFetch(`/api/stats/${project.id}`)
+const stats = data;
+</script>
 
 <style scoped>
 .project-card {
@@ -209,18 +229,3 @@
     }
 }
 </style>
-
-<script setup>
-import TagPill from './TagPill.vue';
-
-const { project } = defineProps({
-    project: {
-        type: Object,
-        required: true
-    }
-})
-
-// Expost stats as a fetch to /api/stats/:id
-let {data} = await useFetch(`/api/stats/${project.id}`)
-const stats = data;
-</script>

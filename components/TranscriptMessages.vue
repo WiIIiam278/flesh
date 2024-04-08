@@ -1,7 +1,7 @@
 <template>
     <div class="messages">
         <SystemMessage>
-            Ticket opened on {{ getTimestampString(parseInt(data.ticket.open_timestamp)) }}
+            {{ $t('ticket-transcript-opened', {'timestamp': getTimestampString(parseInt(data.ticket.open_timestamp))}) }}
         </SystemMessage>
         <DiscordMessage v-for="messages in getMessageBlocks(data.messages)" :transcript="data" :messages="messages" />
         <SystemMessage icon="fa6-solid:lock">
@@ -11,6 +11,9 @@
 </template>
 
 <script setup>
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
 const { data } = defineProps({
     data: {
         type: Object,

@@ -1,8 +1,9 @@
 <template>
-    <h2>Ticket Transcript</h2>
+    <h2>{{ $t('ticket-transcript-header') }}</h2>
     <div class="pills">
         <Pill color="dark-gray">
-            <IconifiedText icon="fa6-solid:tag">{{ data.ticket.project ? data.ticket.project : 'Unknown' }}</IconifiedText>
+            <IconifiedText icon="fa6-solid:tag">{{ data.ticket.project ? data.ticket.project : 'Unknown' }}
+            </IconifiedText>
         </Pill>
         <Pill color="dark-gray">
             <IconifiedText icon="fa6-solid:hashtag">ticket-{{ data.ticket.id }}</IconifiedText>
@@ -16,51 +17,26 @@
             </IconifiedText>
         </Pill>
     </div>
-    <h3>Topic</h3>
+    <h3>{{ $t('ticket-transcript-topic') }}</h3>
     <div class="topic">
         {{ data.ticket.topic }}
     </div>
-    <h3>Participants</h3>
+    <h3>{{ $t('ticket-transcript-participants') }}</h3>
     <div class="participants">
         <div v-for="participant of data.ticket.participants">
             <TranscriptParticipant :user="getParticipant(participant)" :creator="participant === data.ticket.creator" />
         </div>
     </div>
     <div class="transcript-buttons">
-        <ButtonLink link="/" icon="fa6-solid:house" hollow>Home</ButtonLink>
-        <ButtonLink :link="url" icon="fa6-solid:download" hollow>Download</ButtonLink>
+        <ButtonLink link="/" icon="fa6-solid:house" hollow>{{ $t('link-home') }}</ButtonLink>
+        <ButtonLink :link="url" icon="fa6-solid:download" hollow>{{ $t('ticket-transcript-download') }}</ButtonLink>
     </div>
 </template>
 
-<style scoped>
-.pills {
-    font-size: 0.9em !important;
-    flex-direction: row;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-}
-
-.pills span {
-    margin: 0;
-}
-
-.topic {
-    word-break: break-word;
-    white-space: pre-wrap;
-    overflow-y: auto;
-    max-height: 20rem;
-    text-overflow: ellipsis;
-}
-
-.transcript-buttons {
-    display: flex;
-    flex-direction: row;
-    margin: 1.25rem 0;
-}
-</style>
-
 <script setup>
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
 const { data } = defineProps({
     data: {
         type: Object,
@@ -94,3 +70,31 @@ const getParticipant = (id) => {
     };
 }
 </script>
+
+<style scoped>
+.pills {
+    font-size: 0.9em !important;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.pills span {
+    margin: 0;
+}
+
+.topic {
+    word-break: break-word;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    max-height: 20rem;
+    text-overflow: ellipsis;
+}
+
+.transcript-buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 1.25rem 0;
+}
+</style>

@@ -1,6 +1,7 @@
 ::main-header
 ---
 title: 'William278.net'
+locale: 'en'
 ---
 Open source Minecraft server software & game projects.
 ::

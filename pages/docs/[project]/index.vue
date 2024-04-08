@@ -1,11 +1,10 @@
 <template>
     <div>
         <NuxtLayout v-if="project && project.documentation" name="docs">
-
             <Head>
-                <Title>{{ project.name }} Docs</Title>
-                <Meta name="og:title" :content="`${project.name} Docs &mdash; William278.net`" />
-                <Meta name="twitter:title" :content="`${project.name} Docs &mdash; William278.net`" />
+                <Title>{{ $t('docs-title', {'project': project.name}) }}</Title>
+                <Meta name="og:title" :content="`${t('docs-title', {'project': project.name})} &mdash; ${t('index-title')}`" />
+                <Meta name="twitter:title" :content="`${t('docs-title', {'project': project.name})} &mdash; ${t('index-title')}`" />
                 <Meta name="description" :content="description" />
                 <Meta name="og:description" :content="description" />
                 <Meta name="twitter:description" :content="description" />
@@ -15,8 +14,9 @@
                     :content="`/images/icons/${project.icon.png}`" />
             </Head>
             <Overbar>
-                <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }, { name: 'Docs', link: '/docs' }]" />
-                <ButtonLink hollow icon="fa6-solid:pencil" :link="`${project.repository}/tree/master/docs`">Edit
+                <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }, { name: t('link-docs'), link: '/docs' }]" />
+                <ButtonLink hollow icon="fa6-solid:pencil" :link="`${project.repository}/tree/master/docs`">
+                    {{ $t('docs-edit-button') }}
                 </ButtonLink>
             </Overbar>
             <article>
@@ -31,11 +31,11 @@
         </NuxtLayout>
         <NuxtLayout v-else name="default">
             <ErrorPage>
-                Docs not found:&nbsp;
+                {{ $t('error-page-not-found') }}&nbsp;
                 <PathLine>
-                    <NuxtLink to="/">Home</NuxtLink>
+                    <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
                     <BreadcrumbDivider />
-                    <NuxtLink to="/docs/">Docs</NuxtLink>
+                    <NuxtLink to="/docs/">{{ $t('link-docs') }}</NuxtLink>
                     <BreadcrumbDivider />
                     <InvalidPage v-if="project" :name="project.name" />
                     <InvalidPage v-else :name="$route.params.project" />
@@ -49,6 +49,9 @@
 import InvalidPage from '../../../components/InvalidPage.vue';
 import PathLine from '../../../components/content/PathLine.vue';
 import projects from '/assets/data/projects.json'
+
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
 
 const { params } = useRoute()
 const project = computed(() => projects.find(project => project.id.toLowerCase() === params.project.toLowerCase()))

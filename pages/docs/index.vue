@@ -1,20 +1,25 @@
 <template>
     <div>
         <NuxtLayout name="docs">
-            <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }]" />
+            <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
 
             <Head>
-                <Title>Docs</Title>
-                <Meta name="og:title" content="Docs &mdash; William278.net" />
-                <Meta name="twitter:title" content="Docs &mdash; William278.net" />
+                <Title>{{ $t('link-docs') }}</Title>
+                <Meta name="og:title" :content="`${t('link-docs')} &mdash; ${t('index-title')}}`" />
+                <Meta name="twitter:title" :content="`${t('link-docs')} &mdash; ${t('index-title')}}`" />
             </Head>
             <article>
-                <ContentDoc />
+                <ContentDoc :path="`docs/index/${locale}`"  />
             </article>
             <template #sidebar>
-                <h1>Projects</h1>
+                <h1>{{ $t('link-projects') }}</h1>
                 <ContentDoc :head="false" path="docs/sidebar" />
             </template>
         </NuxtLayout>
     </div>
 </template>
+
+<script setup>
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+</script>

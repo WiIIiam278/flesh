@@ -3,11 +3,11 @@
         <NuxtLayout v-if="project" name="project">
             <ContentDoc v-slot="{ doc }" :head="false">
                 <Head>
-                    <Title>{{ project.name }} - {{ project.tagline }}</Title>
-                    <Meta name="og:description" :content="`${project.name} &mdash; ${project.tagline}`" />
-                    <Meta name="twitter:description" :content="`${project.name} &mdash; ${project.tagline}`" />
-                    <Meta name="og:title" :content="`${project.name} &mdash; William278.net`" />
-                    <Meta name="twitter:title" :content="`${project.name} &mdash; William278.net`" />
+                    <Title>{{ $t('project-title', {'project': project.name, 'tagline': project.tagline})}}</Title>
+                    <Meta name="og:description" :content="`${t('project-title', {'project': project.name, 'tagline': project.tagline})}`" />
+                    <Meta name="twitter:description" :content="`${t('project-title', {'project': project.name, 'tagline': project.tagline})}`" />
+                    <Meta name="og:title" :content="`${project.name} &mdash; ${t('index-title')}`" />
+                    <Meta name="twitter:title" :content="`${project.name} &mdash; ${t('index-title')}`" />
                     <Meta v-if="project.icon && project.icon.png" name="og:image"
                         :content="`/images/icons/${project.icon.png}`" />
                     <Meta v-if="project.icon && project.icon.png" name="twitter:image"
@@ -16,8 +16,8 @@
                 <div v-if="project.discontinued" class="discontinued">
                     <Icon class="icon" name="fa6-solid:box-archive" />
                     <span class="text">
-                        {{ project.name }} has been discontinued. <span class="grayed">I won't be releasing any more updates for it, 
-                        and won't be able to answer related support questions&mdash;sorry about that!</span>
+                        {{ $t('project-archived-header', {'project': project.name}) }}
+                        <span class=grayed>{{$t('project-archived-details')}}</span>
                     </span>
                 </div>
                 <ProjectTabs v-model:selected="activeTab" :project="project">
@@ -39,9 +39,9 @@
         </NuxtLayout>
         <NuxtLayout v-else name="default">
             <ErrorPage code="404">
-                Project not found:&nbsp;
+                {{ $t('error-page-not-found') }}&nbsp;
                 <PathLine>
-                    <NuxtLink to="/">Home</NuxtLink>
+                    <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
                     <BreadcrumbDivider />
                     <InvalidPage :name="$route.params.slug" />
                 </PathLine>
@@ -49,6 +49,20 @@
         </NuxtLayout>
     </div>
 </template>
+
+<script setup>
+import PathLine from '../../components/content/PathLine.vue';
+import DsEmulator from '../../components/content/DsEmulator.vue';
+import DownloadsMenu from '../../components/content/DownloadsMenu.vue';
+import projects from '/assets/data/projects.json'
+
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+const { params } = useRoute()
+const project = computed(() => projects.find(project => project.id.toLowerCase() === params.slug.toLowerCase()))
+const activeTab = defineModel('activeTab')
+</script>
 
 <style scoped>
 .discontinued {
@@ -66,16 +80,3 @@
     margin-right: 1rem;
 }
 </style>
-
-<script setup>
-import PathLine from '../../components/content/PathLine.vue';
-import DsEmulator from '../../components/content/DsEmulator.vue';
-import DownloadsMenu from '../../components/content/DownloadsMenu.vue';
-
-import projects from '/assets/data/projects.json'
-
-const { params } = useRoute()
-const project = computed(() => projects.find(project => project.id.toLowerCase() === params.slug.toLowerCase()))
-
-const activeTab = defineModel('activeTab')
-</script>

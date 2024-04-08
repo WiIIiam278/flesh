@@ -1,27 +1,27 @@
 <template>
     <nav class="shadow">
         <h1 id="logo">
-            <a href="/">William278</a>
+            <a href="/">{{ $t('site-name') }}</a>
         </h1>
         <div id="navigation">
             <div id="links">
                 <ul>
                     <li id="search">
-                        <AlgoliaDocSearch />
+                        <AlgoliaDocSearch :translations="{'button': {'buttonText': t('search-button'), 'buttonAriaLabel': t('search-button')}}" />
                     </li>
                     <li>
                         <NuxtLink to="/">
-                            <IconifiedText icon="fa6-solid:house">Home</IconifiedText>
+                            <IconifiedText icon="fa6-solid:house">{{ $t('link-home') }}</IconifiedText>
                         </NuxtLink>
                     </li>
                     <li>
                         <NuxtLink to="/docs">
-                            <IconifiedText icon="fa6-solid:book">Docs</IconifiedText>
+                            <IconifiedText icon="fa6-solid:book">{{ $t('link-docs') }}</IconifiedText>
                         </NuxtLink>
                     </li>
                     <li>
                         <a href="https://discord.gg/tVYhJfyDWG" target="_blank">
-                            <IconifiedText icon="fa6-brands:discord">Support</IconifiedText>
+                            <IconifiedText icon="fa6-brands:discord">{{ $t('link-support') }}</IconifiedText>
                         </a>
                     </li>
                 </ul>
@@ -29,6 +29,11 @@
         </div>
     </nav>
 </template>
+
+<script setup>
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+</script>
 
 <style scoped>
 nav {

@@ -1,6 +1,6 @@
 <template>
     <div id="grid-title">
-        <h1>My projects</h1>
+        <h1>{{ $t('index-grid-header') }}</h1>
         <div class="filter-tags">
             <Icon class="tag-icon" name="fa6-solid:tag" />
             <span class="filters">
@@ -18,11 +18,39 @@
     </div>
     <div id="below-grid" v-if="filtered().length > shown">
         <a id="grid-size-button" @click="expanded = !expanded">
-            <IconifiedText v-if="expanded" icon="fa6-solid:chevron-up">Show less</IconifiedText>
-            <IconifiedText v-else icon="fa6-solid:chevron-down">Show more</IconifiedText>
+            <IconifiedText v-if="expanded" icon="fa6-solid:chevron-up">{{ $t('index-grid-collapse') }}</IconifiedText>
+            <IconifiedText v-else icon="fa6-solid:chevron-down">{{ $t('index-grid-expand') }}</IconifiedText>
         </a>
     </div>
 </template>
+<script setup>
+import tags from '/assets/data/tags.json'
+import projects from '/assets/data/projects.json'
+import TagPill from './TagPill.vue';
+
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+const expanded = ref(false);
+const selectedTags = ref([]);
+    
+const { shown } = defineProps({
+    shown: {
+        type: Number,
+        default: 6
+    }
+});
+
+const onTagSelected = (tag) => {
+    if (selectedTags.value.includes(tag)) {
+        selectedTags.value.splice(selectedTags.value.indexOf(tag), 1);
+    } else {
+        selectedTags.value.push(tag);
+    }
+}
+
+const filtered = () => selectedTags.value.length ? projects.filter(p => !p.tags || selectedTags.value.every(tag => p.tags.includes(tag))) : projects;
+</script>
 
 <style scoped>
 #projects-grid {
@@ -73,29 +101,3 @@
     cursor: pointer;
 }
 </style>
-
-<script setup>
-import tags from '/assets/data/tags.json'
-import projects from '/assets/data/projects.json'
-import TagPill from './TagPill.vue';
-
-const expanded = ref(false);
-const selectedTags = ref([]);
-    
-const { shown } = defineProps({
-    shown: {
-        type: Number,
-        default: 6
-    }
-});
-
-const onTagSelected = (tag) => {
-    if (selectedTags.value.includes(tag)) {
-        selectedTags.value.splice(selectedTags.value.indexOf(tag), 1);
-    } else {
-        selectedTags.value.push(tag);
-    }
-}
-
-const filtered = () => selectedTags.value.length ? projects.filter(p => !p.tags || selectedTags.value.every(tag => p.tags.includes(tag))) : projects;
-</script>

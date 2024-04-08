@@ -1,32 +1,41 @@
 <template>
     <footer>
-        <div id="copyright">&copy; William278, {{ current_year }}</div>
+        <div id="copyright">{{ $t('footer-copyright', { 'year': currentYear }) }}</div>
         <div id="navigation">
             <ul>
                 <li>
-                    <NuxtLink to="/terms">Terms</NuxtLink>
+                    <NuxtLink to="/terms">{{ $t('link-terms') }}</NuxtLink>
                 </li>
                 <li>
-                    <a href="https://buymeacoff.ee/william278" target="_blank">BuyMeACoffee</a>
+                    <a href="https://buymeacoff.ee/william278" target="_blank">{{ $t('footer-buymeacoffee') }}</a>
                 </li>
                 <li>
-                    <a href="https://x.com/William27528" target="_blank">Twitter/X</a>
+                    <a href="https://x.com/William27528" target="_blank">{{ $t('footer-twitter-x') }}</a>
                 </li>
                 <li>
-                    <a href="https://youtube.com/@william278" target="_blank">YouTube</a>
+                    <a href="https://youtube.com/@william278" target="_blank">{{ $t('footer-youtube') }}</a>
                 </li>
                 <li>
-                    <a href="https://github.com/WiIIiam278" target="_blank">GitHub</a>
+                    <a href="https://github.com/WiIIiam278" target="_blank">{{ $t('footer-github') }}</a>
                 </li>
             </ul>
         </div>
         <span id="version">
             <a href="https://github.com/WiIIiam278/william278-site" target="_blank">
-                <IconifiedText icon="fa6-solid:code-branch">{{ git_head }}</IconifiedText>    
+                <IconifiedText icon="fa6-solid:code-branch">{{ gitHead }}</IconifiedText>
             </a>
         </span>
     </footer>
 </template>
+
+<script setup>
+const config = useRuntimeConfig()
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+const currentYear = new Date().getFullYear();
+const gitHead = config.public.GIT_HASH;
+</script>
 
 <style scoped>
 #version {
@@ -84,10 +93,3 @@ footer {
     }
 }
 </style>
-
-<script setup>
-const config = useRuntimeConfig()
-
-const current_year = new Date().getFullYear();
-const git_head = config.public.GIT_HASH;
-</script>

@@ -1,17 +1,14 @@
 <template>
     <div>
-        <ContentDoc :path="'/docs/project/' + $route.params.project + '/' + $route.params.topic.toLowerCase()"
-            :head="false">
+        <ContentDoc :path="'/docs/project/' + $route.params.project + '/' + $route.params.topic.toLowerCase()" :head="false">
             <template v-slot="{ doc }">
-
                 <Head>
-                    <Title>{{ doc.title }} - {{ project.name }} Docs</Title>
-                    <Meta name="og:title" :content="`${doc.title} &mdash; ${project.name} Docs &mdash; William278.net`" />
-                    <Meta name="twitter:title"
-                        :content="`${doc.title} &mdash; ${project.name} Docs &mdash; William278.net`" />
-                    <Meta name="description" :content="doc.description" />
-                    <Meta name="og:description" :content="doc.description" />
-                    <Meta name="twitter:description" :content="doc.description" />
+                    <Title>{{ doc.title }} &mdash; {{ $t('docs-title', {'project': project.name}) }} &mdash; {{ $t('index-title') }}</Title>
+                    <Meta name="og:title" :content="`${doc.title} &mdash; ${t('docs-title', {'project': project.name})} &mdash; ${t('index-title')}`" />
+                    <Meta name="twitter:title" :content="`${doc.title} &mdash; ${t('docs-title', {'project': project.name})} &mdash; ${t('index-title')}`" />
+                    <Meta name="description" :content="description" />
+                    <Meta name="og:description" :content="description" />
+                    <Meta name="twitter:description" :content="description" />
                     <Meta v-if="project.icon && project.icon.png" name="og:image"
                         :content="`/images/icons/${project.icon.png}`" />
                     <Meta v-if="project.icon && project.icon.png" name="twitter:image"
@@ -21,7 +18,7 @@
                     <NuxtLayout name="docs">
                         <Overbar>
                             <Breadcrumbs
-                                :crumbs="[{ name: 'Home', link: '/' }, { name: 'Docs', link: '/docs' }, { name: project.name, link: `/docs/${project.id}` }]" />
+                                :crumbs="[{ name: t('link-home'), link: '/' }, { name: t('link-docs'), link: '/docs' }, { name: project.name, link: `/docs/${project.id}` }]" />
                             <ButtonLink hollow icon="fa6-solid:pencil" :link="`${project.repository}/tree/master/docs`">Edit
                             </ButtonLink>
                         </Overbar>
@@ -43,11 +40,11 @@
             <template #not-found>
                 <NuxtLayout name="default">
                     <ErrorPage>
-                        Docs not found:&nbsp;
+                        {{ $t('error-page-not-found') }}&nbsp;
                         <PathLine>
-                            <NuxtLink to="/">Home</NuxtLink>
+                            <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
                             <BreadcrumbDivider />
-                            <NuxtLink to="/docs/">Docs</NuxtLink>
+                            <NuxtLink to="/docs/">{{ $t('link-docs') }}</NuxtLink>
                             <BreadcrumbDivider />
                             <NuxtLink v-if="project" :to="'/docs/' + project.id.toLowerCase()">{{ project.name }}</NuxtLink>
                             <InvalidPage v-else :name="$route.params.project" />
@@ -66,6 +63,9 @@ import BreadcrumbDivider from '../../../components/BreadcrumbDivider.vue';
 import InvalidPage from '../../../components/InvalidPage.vue';
 import PathLine from '../../../components/content/PathLine.vue';
 import projects from '/assets/data/projects.json'
+
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
 
 const { params } = useRoute()
 const project = computed(() => projects.find(project => project.id.toLowerCase() === params.project.toLowerCase()))

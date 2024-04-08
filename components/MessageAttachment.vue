@@ -1,14 +1,15 @@
 <template>
     <div class="attachment">
         <img class="image-attachment shadow" v-if="getType() === 'Image'" :src="attachment.url"
-            @error="this.target.src = '/images/missing-image.png'" alt="Message attachment" />
+            @error="this.target.src = '/images/missing-image.png'" 
+            :alt="t('ticket-transcript-attachment')" />
         <video class="video-attachment shadow" v-else-if="getType() === 'Video'" controls :src="attachment.url"
-            alt="Message attachment" />
+            :alt="t('ticket-transcript-attachment')" />
         <div class="audio-attachment boxed-attachment shadow" v-else-if="getType() === 'Audio'">
             <a class="attachment-link" :href="attachment.url" target="_blank" rel="noopener noreferrer">
                 <IconifiedText icon="fa6-solid:file-audio">{{ attachment.name }}</IconifiedText>
             </a>
-            <audio controls :src="attachment.url" alt="Message attachment" />
+            <audio controls :src="attachment.url" :alt="t('ticket-transcript-attachment')" />
         </div>
         <div class="text-attachment boxed-attachment shadow" v-else-if="getType() === 'Text'">
             <a class="attachment-link" :href="attachment.url" target="_blank" rel="noopener noreferrer">
@@ -22,43 +23,15 @@
             <a class="attachment-link" :href="attachment.url" target="_blank" rel="noopener noreferrer">
                 <IconifiedText icon="fa6-solid:file-arrow-down">{{ attachment.name }}</IconifiedText>
             </a>
-            <span>{{ getType() }} attachment</span>
+            <span>{{$t('ticket-transcript-file-attachment', {'type': getType()})}}</span>
         </div>
     </div>
 </template>
 
-<style scoped>
-.attachment,
-.attachment video,
-.attachment img {
-    max-height: 45vh;
-    max-width: 50vw;
-    margin: 0.5rem 0;
-    border-radius: 0.5rem;
-}
-
-.attachment .preview {
-    max-width: 50vw;
-    max-height: 15vw;
-    padding-left: 1rem;
-    border-radius: 0.5rem;
-    overflow: auto;
-}
-
-.boxed-attachment {
-    background-color: var(--background);
-    padding: 1rem;
-    display: flex;
-    border-radius: 0.5rem;
-    flex-direction: column;
-    width: fit-content;
-    gap: 0.5rem;
-    max-width: 50vw;
-    color: var(--light-gray);
-}
-</style>
-
 <script setup>
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
 const { attachment } = defineProps({
     attachment: {
         type: Object,
@@ -96,3 +69,34 @@ const text = getType() === 'Text'
         .catch(() => "Download to view file")
     : attachment.name;
 </script>
+
+<style scoped>
+.attachment,
+.attachment video,
+.attachment img {
+    max-height: 45vh;
+    max-width: 50vw;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+}
+
+.attachment .preview {
+    max-width: 50vw;
+    max-height: 15vw;
+    padding-left: 1rem;
+    border-radius: 0.5rem;
+    overflow: auto;
+}
+
+.boxed-attachment {
+    background-color: var(--background);
+    padding: 1rem;
+    display: flex;
+    border-radius: 0.5rem;
+    flex-direction: column;
+    width: fit-content;
+    gap: 0.5rem;
+    max-width: 50vw;
+    color: var(--light-gray);
+}
+</style>

@@ -5,7 +5,7 @@
                 <template v-slot="{ doc }">
                     <ContentRenderer :value="doc">
                         <div>
-                            <Breadcrumbs :crumbs="[{ name: 'Home', link: '/' }]" />
+                            <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
                             <article>
                                 <ContentRendererMarkdown :value="doc" />
                             </article>
@@ -14,9 +14,9 @@
                 </template>
                 <template #not-found>
                     <ErrorPage>
-                        Page not found:&nbsp;
+                        {{ $t('error-page-not-found') }} &nbsp;
                         <PathLine>
-                            <NuxtLink to="/">Home</NuxtLink>
+                            <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
                             <BreadcrumbDivider />
                             <InvalidPage :name="$route.params.topic" />
                         </PathLine>
@@ -31,4 +31,6 @@
 import InvalidPage from '../components/InvalidPage.vue';
 import PathLine from '../components/content/PathLine.vue';
 
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
 </script>

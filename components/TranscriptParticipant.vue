@@ -5,12 +5,30 @@
         </div>
         <div class="profile">
             <div class="name">
-                {{ user.name }}<span class="disambiguator" v-if="parseInt(user.disambiguator) > 0">#{{ user.disambiguator }}</span>
+                {{ user.name }}<span class="disambiguator" v-if="parseInt(user.disambiguator) > 0">#{{
+                user.disambiguator }}</span>
             </div>
-            <Pill v-if="creator" class="creator" color="dark-gray">Creator</Pill>
+            <Pill v-if="creator" class="creator" color="dark-gray">{{ $t('ticket-transcript-creator') }}</Pill>
         </div>
     </div>
 </template>
+
+<script setup>
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+const { user, creator } = defineProps({
+    user: {
+        type: Object,
+        required: true
+    },
+    creator: {
+        type: Boolean,
+        required: false,
+        default: false
+    }
+});
+</script>
 
 <style scoped>
 .transcript-participant {
@@ -54,19 +72,3 @@
     color: var(--light-gray);
 }
 </style>
-
-<script>
-export default {
-    props: {
-        user: {
-            type: Object,
-            required: true
-        },
-        creator: {
-            type: Boolean,
-            required: false,
-            default: false
-        }
-    }
-}
-</script>

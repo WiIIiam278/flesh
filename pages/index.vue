@@ -6,12 +6,23 @@
                     <ProjectGrid />
                 </div>
                 <div id="right-column">
-                    <ContentDoc :head="false" />
+                    <ContentDoc :head="false" :path="`index/${locale}`" />
                 </div>
             </div>
         </NuxtLayout>
     </div>
 </template>
+
+<script setup>
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+definePageMeta({
+    title: computed(() => t('index-title')),
+    description: computed(() => t('index-description')),
+    layout: 'home'
+})
+</script>
 
 <style scoped>
 #page-content {
@@ -56,10 +67,3 @@
     }
 }
 </style>
-
-<script setup>
-definePageMeta({
-    description: 'Open source Minecraft server software & game projects.',
-    layout: 'home'
-})
-</script>

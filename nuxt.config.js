@@ -1,7 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   // Modules
-  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts'],
+  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n'],
 
   // Fonts
   googleFonts: {
@@ -32,6 +32,7 @@ export default defineNuxtConfig({
       },
       head: {
           charset: 'utf-16',
+          viewport: 'width=device-width, initial-scale=1',
           title: 'William278.net - Open source Minecraft server software & game projects.',
           meta: [
               { name: 'description', content: 'Easily-accessible documentation and information site for all of William278\'s Minecraft plugins, projects & games!' },
@@ -74,6 +75,18 @@ export default defineNuxtConfig({
           theme: 'github-dark-dimmed',
           preload: ['js', 'java', 'yaml', 'toml', 'xml', 'groovy']
       }
+  },
+
+  // Internationalization
+  i18n: {
+      detectBrowserLanguage: {
+          useCookie: false,
+          redirectOn: 'root',
+      },
+      locales: [
+          { code: 'en', iso: 'en', file: 'locales/en.json', dir: 'ltr' },
+      ],
+      defaultLocale: 'en'
   },
 
   // Fetch neccessary assets / documentation from GitHub

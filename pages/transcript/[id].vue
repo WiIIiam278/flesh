@@ -1,18 +1,16 @@
 <template>
     <div>
         <NuxtLayout v-if="data" name="transcript">
-
             <Head>
-                <Title>Ticket #{{ data.ticket.id }} Transcript</Title>
-                <Meta name="description" :content="description" />
-                <Meta name="og:description" :content="description" />
-                <Meta name="twitter:description" :content="description" />
-                <Meta name="og:title" :content="`Ticket #${data.ticket.id} Transcript &mdash; William278.net`" />
-                <Meta name="twitter:title" :content="`Ticket #${data.ticket.id} Transcript &mdash; William278.net`" />
+                <Title>{{ $t('ticket-transcript-title', { 'ticket': data.ticket.id }) }}</Title>
+                <Meta name="description" :content="t('ticket-transcript-description')" />
+                <Meta name="og:description" :content="t('ticket-transcript-description')" />
+                <Meta name="twitter:description" :content="t('ticket-transcript-description')" />
+                <Meta name="og:title" :content="`${t('ticket-transcript-title', {'ticket': data.ticket.id})} &mdash; ${t('index-title')}`" />
+                <Meta name="twitter:title" :content="`${t('ticket-transcript-title', {'ticket': data.ticket.id})} &mdash; ${t('index-title')}`" />
             </Head>
-            <Breadcrumbs
-                :crumbs="[{ name: 'Home', link: '/' }, { name: 'Transcript', link: `/transcript/${$route.params.id}` }]" />
-            <h1>Ticket #{{ data.ticket.id }}</h1>
+            <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }, { name: t('link-transcript'), link: `/transcript/${$route.params.id}` }]" />
+            <h1>{{ $t('ticket-transcript-ticket-number', {'ticket': data.ticket.id }) }}</h1>
             <TranscriptMessages :data="data" />
             <template #sidebar>
                 <TranscriptSidebar :data="data" :url="getUrl()" />
@@ -26,10 +24,12 @@
 
 <script setup>
 import { Buffer } from 'buffer'
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
 
 let error = {
     status: "404",
-    message: 'That transcript could not be found, or the link has expired.'
+    message: computed(() => t('error-transcript-not-found'))
 };
 const bucket = 'https://3bdd3bd3adb4679930d487e0b5f2d934.r2.cloudflarestorage.com/archived-tickets/';
 const discord = 'https://cdn.discordapp.com/attachments/';
@@ -51,7 +51,7 @@ const validateId = (parsedId) => {
 
     // If ID has three parts separated by forward slashes and ends in .json, it's a valid ID
     if (!parsedId.match(/^[0-9]{1,32}\/[0-9]{1,32}\/[a-zA-Z0-9\-_]{1,32}\.json$/)) {
-        error = { status: "400", message: 'Invalid transcript ID' }
+        error = { status: "400", message: computed(() => t('error-transcript-bad-id')) }
         return null;
     }
 
@@ -59,7 +59,7 @@ const validateId = (parsedId) => {
     const allowedChannels = ['885981365491888211', '977649978270969906', '977663053179023380'];
     if (parsedId.split('/')[0]) {
         if (!allowedChannels.includes(parsedId.split('/')[0])) {
-            error = { status: "403", message: 'Forbidden transcript channel' }
+            error = { status: "403", message: computed(() => t('error-transcript-forbidden'))}
             return null;
         }
     }
@@ -88,6 +88,4 @@ const { data } = await useAsyncData('transcript', () => {
     }
     return fetched;
 });
-
-const description = 'View a transcript of this HuskHelp Support Ticket.';
 </script>

@@ -1,0 +1,70 @@
+{
+    "language-en": "English",
+
+    "site-name": "William278",
+
+    "link-home": "Home",
+    "link-projects": "Projects",
+    "link-docs": "Docs",
+    "link-transcript": "Transcript",
+    "link-terms": "Terms",
+    "link-support": "Support",
+
+    "index-title": "William278.net",
+    "index-description": "Open source Minecraft server software & game projects.",
+    "index-grid-header": "My projects",
+    "index-grid-expand": "Show more",
+    "index-grid-collapse": "Show less",
+
+    "project-title": "{project} - {tagline}",
+    "project-archived": "Discontinued",
+    "project-archived-header": "{project} has been discontinued.",
+    "project-archived-details": "I won't be releasing any more updates for it, and won't be able to answer related support questions; sorry about that!",
+    "project-price": "Price",
+    "project-price-sterling": "£{price}",
+    "project-licence": "Licence",
+    "project-downloads": "Downloads",
+    "project-latest-version": "Latest version",
+    "project-average-rating": "Average rating",
+    "project-last-updated": "Last updated",
+    "project-link-repository": "Repository",
+    "project-link-itch": "itch.io",
+    "project-link-spigot": "SpigotMC",
+    "project-link-modrinth": "Modrinth",
+    "project-link-polymart": "Polymart",
+    "project-link-builtbybit": "BuiltByBit",
+    "project-link-curseforge": "CurseForge",
+    "project-link-hangar": "Hangar",
+    "project-link-universaldb": "Universal-DB",
+
+    "docs-title": "{project} Docs",
+    "docs-edit-button": "Edit",
+    
+    "search-button": "Search",
+
+    "ticket-transcript-title": "Ticket #{ticket} Transcript",
+    "ticket-transcript-header": "Ticket Transcript",
+    "ticket-transcript-description": "View a transcript of this HuskHelp Support Ticket.",
+    "ticket-transcript-ticket-number": "Ticket #{ticket}",
+    "ticket-transcript-attachment": "Message Attachment",
+    "ticket-transcript-file-attachment": "{type} Attachment",
+    "ticket-transcript-opened": "Ticket opened on {timestamp}",
+    "ticket-transcript-closed": "Ticket closed on {timestamp}",
+    "ticket-transcript-topic": "Topic",
+    "ticket-transcript-participants": "Participants",
+    "ticket-transcript-download": "Download",
+
+    "button-back-to-home": "Back to home",
+
+    "footer-copyright": "© William278, {year}",
+    "footer-buymeacoffee": "BuyMeACoffee",
+    "footer-twitter-x": "Twitter/X",
+    "footer-github": "GitHub",
+    "footer-youtube": "YouTube",
+
+    "error-page-title": "Error {code}",
+    "error-page-not-found": "Page not found.",
+    "error-transcript-not-found": "That transcript could not be found, or the link has expired.",
+    "error-transcript-bad-id": "Invalid transcript ID.",
+    "error-transcript-forbidden": "Forbidden transcript channel."
+}

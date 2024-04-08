@@ -23,56 +23,56 @@
         <div class="buttons"
             v-if="project.documentation || (project.links && project.links.length > 0) || project.repository">
             <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>
-                Docs
+                {{ $t('link-docs') }}
             </ButtonLink>
             <ButtonLink v-for="link in project.links" :link="link.link" hollow>
                 {{ link.text }}
             </ButtonLink>
             <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github" hollow>
-                Repository
+                {{ $t('project-link-repository') }}
             </ButtonLink>
         </div>
         <div class="buttons" v-if="project.ids">
             <ButtonLink v-if="project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io" hollow>
-                itch.io
+                {{ $t('project-link-itch') }}
             </ButtonLink>
             <ButtonLink v-if="project.ids.universaldb" :link="project.ids.universaldb" icon="fa6-solid:down-long" hollow>
-                Universal-DB
+                {{ $t('project-link-universaldb') }}
             </ButtonLink>
             <ButtonLink v-if="project.ids.spigot" :link="'https://spigotmc.org/resources/' + project.ids.spigot"
                 icon="fa6-solid:faucet" hollow>
-                Spigot
+                {{ $t('project-link-spigot') }}
             </ButtonLink>
             <ButtonLink v-if="project.ids.polymart" :link="'https://polymart.org/resource/' + project.ids.polymart"
                 icon="fa6-solid:p" hollow>
-                Polymart
+                {{ $t('project-link-polymart') }}
             </ButtonLink>
             <ButtonLink v-if="project.ids && project.ids.modrinth"
                 :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench" hollow>
-                Modrinth
+                {{ $t('project-link-modrinth') }}
             </ButtonLink>
             <ButtonLink v-if="project.ids && project.ids.hangar"
                 :link="'https://hangar.papermc.io/' + project.ids.hangar" icon="fa6-solid:paper-plane" hollow>
-                Hangar
+                {{ $t('project-link-hangar') }}
             </ButtonLink>
             <ButtonLink v-if="project.ids && project.ids.curseforge"
                 :link="'https://www.curseforge.com/minecraft/mc-mods/' + project.ids.curseforge" icon="fa6-solid:fire" hollow>
-                CurseForge
+                {{ $t('project-link-curseforge') }}
             </ButtonLink>
             <ButtonLink v-if="project.ids && project.ids.builtbybit"
                 :link="'https://builtbybit.com/resources/' + project.ids.builtbybit" icon="fa6-solid:cube" hollow>
-                BuiltByBit
+                {{ $t('project-link-builtbybit') }}
             </ButtonLink>
         </div>
         <div class="stats">
             <div class="stat" v-if="stats.lowest_price">
-                <div class="stat-descriptor">Price</div>
+                <div class="stat-descriptor">{{ $t('project-price') }}</div>
                 <div class="stat-data">
-                    £{{ stats.lowest_price.toFixed(2) }}
+                    {{$t('project-price-sterling', {'price': stats.lowest_price.toFixed(2)})}}
                 </div>
             </div>
             <div class="stat" v-if="project.license && project.license.id">
-                <div class="stat-descriptor">License</div>
+                <div class="stat-descriptor">{{ $t('project-license') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:scale-balanced">
                         <span>{{ project.license.id }}</span>
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="stat" v-if="stats.total_downloads">
-                <div class="stat-descriptor">Downloads</div>
+                <div class="stat-descriptor">{{ $t('project-downloads') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:download">
                         {{ stats.total_downloads >= 1000 ? (stats.total_downloads / 1000).toFixed(1) + 'k' :
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="stat" v-if="stats.average_rating">
-                <div class="stat-descriptor">Average Rating</div>
+                <div class="stat-descriptor">{{ $t('project-average-rating') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:star">
                         {{ stats.average_rating.toFixed(1) }}
@@ -101,7 +101,7 @@
                 </div>
             </div>
             <div class="stat" v-if="stats.latest_version">
-                <div class="stat-descriptor">Latest Version</div>
+                <div class="stat-descriptor">{{ $t('project-latest-version') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:code-branch">
                         {{ stats.latest_version }}
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="stat" v-if="stats.last_updated">
-                <div class="stat-descriptor">Last Updated</div>
+                <div class="stat-descriptor">{{ $t('project-last-updated') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:clock-rotate-left">
                         {{ new Date(stats.last_updated).toLocaleDateString() }}
@@ -122,6 +122,9 @@
 
 <script setup>
 import TagPill from './TagPill.vue';
+
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
 
 const { project } = defineProps({
     project: {
