@@ -53,6 +53,7 @@
     "ticket-transcript-closed": "Ticket closed on {timestamp}",
     "ticket-transcript-topic": "Topic",
     "ticket-transcript-participants": "Participants",
+    "ticket-transcript-creator": "Creator",
     "ticket-transcript-download": "Download",
 
     "button-back-to-home": "Back to home",
