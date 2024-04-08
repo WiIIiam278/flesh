@@ -18,7 +18,7 @@
             <div class="description">
                 <div class="tagline" v-if="project.tagline">
                     <IconifiedText class="discontinued" v-if="project.discontinued" icon="fa6-solid:box-archive">
-                        {{$t('project-discontinued')}}
+                        {{$t('project-archived')}}
                     </IconifiedText>
                     <p>{{ project.tagline }}</p>
                 </div>

@@ -1,3 +1,7 @@
+---
+locale: 'en'
+---
+
 # Terms
 
 Jump to:

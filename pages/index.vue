@@ -6,7 +6,7 @@
                     <ProjectGrid />
                 </div>
                 <div id="right-column">
-                    <ContentDoc :head="false" :path="`index/${locale}`" />
+                    <ContentDoc :head="false" :path="`/${locale}`" />
                 </div>
             </div>
         </NuxtLayout>
