@@ -3,6 +3,16 @@ const fs = require('fs')
 const { execSync } = require('child_process')
 const projects = require('../assets/data/projects.json').filter(p => p.repository && p.documentation)
 
+// Adds the canonical title of the page
+function addNameHeader(filePath, name) {
+    const file = fs.readFileSync(filePath, 'utf8');
+    const header = `---\ntitle: ${name.replace('.md', '').replace(/-/g, ' ')}\n---\n`;
+    if (!file.startsWith('---')) {
+        fs.writeFileSync(filePath, header + file);
+    }
+}
+
+// Fetches and clones docs for each project repo
 function getDocumentationFromRepository(project) {
     const wikiUrl = `${project.repository}.wiki.git`
     const projectPath = './content/docs/project'
@@ -31,10 +41,12 @@ function getDocumentationFromRepository(project) {
             fs.readdirSync(filePath, { withFileTypes: true }).forEach(dirent => {
                 const filePath = `${wikiPath}/${dirent.name}`
                 if (dirent.isFile()) {
+                    addNameHeader(filePath, dirent.name);
                     fs.renameSync(filePath, filePath.toLowerCase())
                 }
             })
         } else if (dirent.isFile()) {
+            addNameHeader(filePath, dirent.name);
             fs.renameSync(filePath, filePath.toLowerCase())
         }
     })
