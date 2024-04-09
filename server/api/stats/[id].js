@@ -3,7 +3,7 @@ import mineget from "mineget";
 import projects from '../../../assets/data/projects.json'
 
 let timestamp;
-const platforms = ['spigot', 'modrinth', 'polymart', 'github']
+const platforms = ['spigot', 'modrinth', 'polymart', 'hangar', 'github']
 const stats = {};
 
 const updateStats = async (project) => {
