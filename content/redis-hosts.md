@@ -30,6 +30,7 @@ If your host doesn't offer it, you can always buy a Redis server separately (e.g
 | Nodecraft      | https://nodecraft.com             | 🚫    | "Hey there! No, we do not"                                                          |
 | PebbleHost     | https://pebblehost.com/           | 🚫    | "No, we do not offer redis natively, sorry about that."                             |
 | Revivenode     | https://revivenode.com/           | 🚫    | Not offered when asked                                                              | 
+| Bisest Hosting | https://bisecthosting.com/        | 🚫    | "We do not support the use of Redis."                                               |
 | Apex Minecraft | https://apexminecrafthosting.com/ | ❓    | Their [FAQ](https://apexminecrafthosting.com/faq/) only specifies MySQL             |
 
 **Note:** I do not endorse and am not affiliated with any of these services. Visit external sites at your own risk.
