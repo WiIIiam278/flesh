@@ -29,13 +29,13 @@
       "platforms": [
         {
           "name": "Spigot",
-          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.20.x)",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.21.x)",
           "icon": "/images/platforms/spigot.png",
           "match": "HuskHomes-Paper"
         },
         {
           "name": "Fabric",
-          "description": "Fabric (MC 1.20.4)",
+          "description": "Fabric (MC 1.21)",
           "icon": "/images/platforms/fabric.png",
           "match": "HuskHomes-Fabric"
         },
@@ -160,7 +160,7 @@
       "platforms": [
         {
           "name": "Multi-platform .JAR",
-          "description": "Spigot, Bungee, Velocity (MC 1.17.1 to 1.20.x)",
+          "description": "Spigot, Bungee, Velocity (MC 1.17.1 to 1.21.x)",
           "icon": "/images/icons/huskchat.png",
           "match": "HuskChat"
         }
@@ -194,7 +194,7 @@
       "platforms": [
         {
           "name": "Velocity",
-          "description": "Velocity (MC 1.8.9 to 1.20.x)",
+          "description": "Velocity (MC 1.8.9 to 1.21.x)",
           "icon": "/images/platforms/velocity.png",
           "match": "Velocitab"
         }
@@ -241,7 +241,7 @@
       "platforms": [
         {
           "name": "Spigot",
-          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.20.x)",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.21.x)",
           "icon": "/images/platforms/spigot.png",
           "match": "SchematicUpload"
         }
@@ -276,7 +276,7 @@
       "platforms": [
         {
           "name": "SignSearch",
-          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.20.x)",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.21.x)",
           "icon": "/images/platforms/spigot.png",
           "match": "SignSearch"
         }
@@ -311,7 +311,7 @@
       "platforms": [
         {
           "name": "Multi-platform .JAR",
-          "description": "Spigot, Bungee, Velocity (MC 1.17.1 to 1.20.x) or Fabric (1.20.1)",
+          "description": "Spigot, Bungee, Velocity (MC 1.17.1 to 1.21.x) or Fabric (1.21)",
           "icon": "/images/icons/papiproxybridge.png",
           "match": "PAPIProxyBridge"
         }
@@ -584,20 +584,6 @@
     }
   },
   {
-    "id": "annotaml",
-    "name": "Annotaml",
-    "repository": "https://github.com/WiIIiam278/Annotaml",
-    "tags": [
-      "library",
-      "java"
-    ],
-    "tagline": "A Java library for generating YAML files from Java classes via annotations",
-    "license": {
-      "id": "Apache-2.0",
-      "url": "https://github.com/WiIIiam278/Annotaml/raw/master/LICENSE"
-    }
-  },
-  {
     "id": "cloplib",
     "name": "ClopLib",
     "repository": "https://github.com/WiIIiam278/ClopLib",
@@ -614,6 +600,39 @@
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/ClopLib/raw/master/LICENSE"
+    }
+  },
+  {
+    "id": "uniform",
+    "name": "Uniform",
+    "repository": "https://github.com/WiIIiam278/Uniform",
+    "tags": [
+      "minecraft",
+      "library",
+      "java"
+    ],
+    "icon": {
+      "svg": "uniform.svg",
+      "png": "uniform.png"
+    },
+    "tagline": "A cross-platform wrapper library for making Brigadier commands",
+    "license": {
+      "id": "GPL-3.0",
+      "url": "https://github.com/WiIIiam278/Uniform/raw/master/LICENSE"
+    }
+  },
+  {
+    "id": "annotaml",
+    "name": "Annotaml",
+    "repository": "https://github.com/WiIIiam278/Annotaml",
+    "tags": [
+      "library",
+      "java"
+    ],
+    "tagline": "A Java library for generating YAML files from Java classes via annotations",
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/Annotaml/raw/master/LICENSE"
     }
   },
   {
