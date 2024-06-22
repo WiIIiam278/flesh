@@ -21,6 +21,7 @@ If your host doesn't offer it, you can always buy a Redis server separately (e.g
 | Lilypad        | https://lilypad.gg                | ✅    | Available for free upon request                                                     |
 | Bloom Host     | https://bloom.host                | ✅    | Available through their "Split servers" feature at the cost of some of your RAM     |
 | Falix Nodes    | https://falixnodes.net/           | ✅    | Available separately as a paid service.                                             |
+| Revivenode     | https://revivenode.com/           | ✅    | Available separately as a paid service (VPS).                                             | 
 | GGServers      | https://ggservers.com             | 🚫    | Asked me if I meant the "Rediscovered mod" when I enquired their support chat (lol) |
 | MCProHosting   | https://mcprohosting.com          | 🚫    | Not currently, but they're "looking into adding" \[Redis\] "in the future"          |
 | Shockbyte      | https://shockbyte.com             | 🚫    | To quote their support assistant; "Unfortunately, we only MySQL \[sic\]."           |
@@ -29,7 +30,6 @@ If your host doesn't offer it, you can always buy a Redis server separately (e.g
 | Meloncube      | https://meloncube.net             | 🚫    | Not offered                                                                         |
 | Nodecraft      | https://nodecraft.com             | 🚫    | "Hey there! No, we do not"                                                          |
 | PebbleHost     | https://pebblehost.com/           | 🚫    | "No, we do not offer redis natively, sorry about that."                             |
-| Revivenode     | https://revivenode.com/           | 🚫    | Not offered when asked                                                              | 
 | Bisest Hosting | https://bisecthosting.com/        | 🚫    | "We do not support the use of Redis."                                               |
 | Apex Minecraft | https://apexminecrafthosting.com/ | ❓    | Their [FAQ](https://apexminecrafthosting.com/faq/) only specifies MySQL             |
 
