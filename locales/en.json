@@ -17,8 +17,8 @@
     "index-grid-collapse": "Show less",
 
     "project-title": "{project} - {tagline}",
-    "project-archived": "Discontinued",
-    "project-archived-header": "{project} has been discontinued.",
+    "project-archived": "Archived",
+    "project-archived-header": "{project} has been archived.",
     "project-archived-details": "I won't be releasing any more updates for it, and won't be able to answer related support questions; sorry about that!",
     "project-price": "Price",
     "project-price-sterling": "£{price}",

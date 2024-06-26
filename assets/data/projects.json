@@ -35,7 +35,7 @@
         },
         {
           "name": "Fabric",
-          "description": "Fabric (MC 1.21)",
+          "description": "Fabric, Quilt, etc.",
           "icon": "/images/platforms/fabric.png",
           "match": "HuskHomes-Fabric"
         },
@@ -197,88 +197,6 @@
           "description": "Velocity (MC 1.8.9 to 1.21.x)",
           "icon": "/images/platforms/velocity.png",
           "match": "Velocitab"
-        }
-      ]
-    }
-  },
-  {
-    "id": "schematicupload",
-    "name": "SchematicUpload",
-    "repository": "https://github.com/WiIIiam278/SchematicUpload",
-    "ids": {
-      "spigot": "100657",
-      "polymart": "2125",
-      "modrinth": "IHhrl01E",
-      "hangar": "William278/SchematicUpload"
-    },
-    "tags": [
-      "minecraft",
-      "plugin",
-      "java"
-    ],
-    "tagline": "Give users a simple web interface to upload schematics",
-    "icon": {
-      "svg": "schematicupload.svg",
-      "png": "schematicupload.png"
-    },
-    "assets": {
-      "images": [
-        {
-          "url": "schematicupload/in-game-command.png",
-          "description": "The in-game command provided by SchematicUpload"
-        },
-        {
-          "url": "schematicupload/web-interface.png",
-          "description": "The web interface of SchematicUpload"
-        }
-      ]
-    },
-    "license": {
-      "id": "Apache-2.0",
-      "url": "https://github.com/WiIIiam278/SchematicUpload/raw/master/LICENSE"
-    },
-    "releases": {
-      "platforms": [
-        {
-          "name": "Spigot",
-          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.21.x)",
-          "icon": "/images/platforms/spigot.png",
-          "match": "SchematicUpload"
-        }
-      ]
-    }
-  },
-  {
-    "id": "signsearch",
-    "name": "SignSearch",
-    "repository": "https://github.com/WiIIiam278/SignSearch",
-    "ids": {
-      "spigot": "92369",
-      "polymart": "1060",
-      "modrinth": "PUtbeCdA",
-      "hangar": "William278/SignSearch"
-    },
-    "tags": [
-      "minecraft",
-      "plugin",
-      "java"
-    ],
-    "tagline": "A simple and fast plugin that lets you search text of nearby signs",
-    "icon": {
-      "svg": "signsearch.svg",
-      "png": "signsearch.png"
-    },
-    "license": {
-      "id": "Apache-2.0",
-      "url": "https://github.com/WiIIiam278/SignSearch/raw/master/LICENSE"
-    },
-    "releases": {
-      "platforms": [
-        {
-          "name": "SignSearch",
-          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.21.x)",
-          "icon": "/images/platforms/spigot.png",
-          "match": "SignSearch"
         }
       ]
     }
@@ -684,6 +602,7 @@
       }
     ],
     "tagline": "Render Minecraft schematics on the web natively in-browser",
+    "discontinued": true,
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/WebSchematics/raw/master/LICENSE"
@@ -699,9 +618,94 @@
       "python"
     ],
     "tagline": "A Python CLI tool for quickly spinning up a network of proxied Minecraft servers",
+    "discontinued": true,
     "license": {
       "id": "Apache-2.0",
       "url": "https://github.com/WiIIiam278/carcass/raw/master/LICENSE"
+    }
+  },
+  {
+    "id": "schematicupload",
+    "name": "SchematicUpload",
+    "repository": "https://github.com/WiIIiam278/SchematicUpload",
+    "ids": {
+      "spigot": "100657",
+      "polymart": "2125",
+      "modrinth": "IHhrl01E",
+      "hangar": "William278/SchematicUpload"
+    },
+    "tags": [
+      "minecraft",
+      "plugin",
+      "java"
+    ],
+    "tagline": "Give users a simple web interface to upload schematics",
+    "discontinued": true,
+    "icon": {
+      "svg": "schematicupload.svg",
+      "png": "schematicupload.png"
+    },
+    "assets": {
+      "images": [
+        {
+          "url": "schematicupload/in-game-command.png",
+          "description": "The in-game command provided by SchematicUpload"
+        },
+        {
+          "url": "schematicupload/web-interface.png",
+          "description": "The web interface of SchematicUpload"
+        }
+      ]
+    },
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/SchematicUpload/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "Spigot",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.21.x)",
+          "icon": "/images/platforms/spigot.png",
+          "match": "SchematicUpload"
+        }
+      ]
+    }
+  },
+  {
+    "id": "signsearch",
+    "name": "SignSearch",
+    "repository": "https://github.com/WiIIiam278/SignSearch",
+    "ids": {
+      "spigot": "92369",
+      "polymart": "1060",
+      "modrinth": "PUtbeCdA",
+      "hangar": "William278/SignSearch"
+    },
+    "tags": [
+      "minecraft",
+      "plugin",
+      "java"
+    ],
+    "tagline": "A simple and fast plugin that lets you search text of nearby signs",
+    "discontinued": true,
+    "icon": {
+      "svg": "signsearch.svg",
+      "png": "signsearch.png"
+    },
+    "license": {
+      "id": "Apache-2.0",
+      "url": "https://github.com/WiIIiam278/SignSearch/raw/master/LICENSE"
+    },
+    "releases": {
+      "platforms": [
+        {
+          "name": "SignSearch",
+          "description": "Spigot, Paper, etc. (MC 1.17.1 to 1.21.x)",
+          "icon": "/images/platforms/spigot.png",
+          "match": "SignSearch"
+        }
+      ]
     }
   },
   {

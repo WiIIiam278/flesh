@@ -22,7 +22,7 @@ useHead({
   /* Colors */
   --accent: #00fb9a;
   --white: #f5f5f5;
-  --light-gray: #616161;
+  --light-gray: #818181;
   --gray: #313131;
   --dark-gray: #262626;
   --background: #212121;

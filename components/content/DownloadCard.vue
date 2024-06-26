@@ -5,7 +5,10 @@
             <div class="details">
                 <span class="name">{{ projectName }} &ndash; {{ release.platform.name }}</span>
                 <span class="description">{{ release.platform.description }}</span>
-                <code class="file">{{ release.name }}<span v-if="release.size">&nbsp;({{ formatSize(release.size) }})</span></code>
+                <code class="file">
+                    <div>{{ release.name }}</div>
+                    <div v-if="release.size">{{ formatSize(release.size) }}</div>
+                </code>
             </div>
         </div>
     </div>
@@ -45,6 +48,9 @@
     font-size: 0.9rem;
     margin-top: 0.2rem;
     color: var(--light-gray);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .icon {
