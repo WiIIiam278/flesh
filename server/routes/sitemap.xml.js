@@ -3,9 +3,18 @@ import { SitemapStream, streamToPromise } from 'sitemap'
 
 // If the path contains docs/project/ replace it with docs/
 const filterPath = (path) => {
-  if (path.includes('docs/project/')) {
-    return path.replace('docs/project/', 'docs/')
+  // If the path matches a regex of /docs/project/NAME/LANG/TOPIC, replace with /docs/NAME/TOPIC
+  const match = path.match(/\/docs\/project\/([^/]+)\/([^/]+)\/([^/]+)/)
+  if (match) {
+    return `/docs/${match[1]}/${match[3]}`
   }
+  
+  // If the path ends with /LANG, remove it
+  const langMatch = path.match(/(.+)\/[a-z]{2}$/)
+  if (langMatch) {
+    return langMatch[1]
+  }
+  
   return path;
 }
 

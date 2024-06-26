@@ -22,10 +22,10 @@ useHead({
   /* Colors */
   --accent: #00fb9a;
   --white: #f5f5f5;
-  --light-gray: #969696;
-  --gray: #373737;
-  --dark-gray: #202020;
-  --background: #282828;
+  --light-gray: #616161;
+  --gray: #313131;
+  --dark-gray: #262626;
+  --background: #212121;
   --shadow: 0 0 0.75rem rgba(0, 0, 0, 0.1);
 
   /* DocSearch styling */
