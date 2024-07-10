@@ -10,11 +10,6 @@
                         <AlgoliaDocSearch :translations="{'button': {'buttonText': t('search-button'), 'buttonAriaLabel': t('search-button')}}" />
                     </li>
                     <li>
-                        <NuxtLink to="/">
-                            <IconifiedText icon="fa6-solid:house">{{ $t('link-home') }}</IconifiedText>
-                        </NuxtLink>
-                    </li>
-                    <li>
                         <NuxtLink to="/docs">
                             <IconifiedText icon="fa6-solid:book">{{ $t('link-docs') }}</IconifiedText>
                         </NuxtLink>
@@ -24,6 +19,16 @@
                             <IconifiedText icon="fa6-brands:discord">{{ $t('link-support') }}</IconifiedText>
                         </a>
                     </li>
+                    <li v-if="auth">
+                        <NuxtLink to="/account">
+                            <IconifiedText icon="fa6-solid:user">{{ $t('link-my-account') }}</IconifiedText>
+                        </NuxtLink>
+                    </li>
+                    <li v-else>
+                        <a :href="`${useRuntimeConfig().public.API_BASE_URL}/login`">
+                            <IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -31,8 +36,8 @@
 </template>
 
 <script setup>
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
+const auth = useAuth()?.value
+const { t } = useI18n()
 </script>
 
 <style scoped>

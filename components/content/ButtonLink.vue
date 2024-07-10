@@ -17,7 +17,6 @@
 </template>
 
 <style scoped>
-
 .button {
     display: inline-block;
     padding: 0.25rem 0.5rem;

@@ -6,6 +6,9 @@
     "link-home": "Home",
     "link-projects": "Projects",
     "link-docs": "Docs",
+    "link-my-account": "My Account",
+    "link-log-in": "Login",
+    "link-log-out": "Logout",
     "link-transcript": "Transcript",
     "link-terms": "Terms",
     "link-support": "Support",
@@ -55,6 +58,11 @@
     "ticket-transcript-participants": "Participants",
     "ticket-transcript-creator": "Creator",
     "ticket-transcript-download": "Download",
+
+    "account-title": "Account",
+    "account-description": "Manage your William278.net account details.",
+    "delete-account": "Delete Account",
+    "delete-account-confirm": "Are you sure you want to delete your account? This will delete your account data and disassociate your Discord account from William278.net. Account data will be re-linked if you log in again.",
 
     "button-back-to-home": "Back to home",
 

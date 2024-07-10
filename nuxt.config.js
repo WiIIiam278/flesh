@@ -60,7 +60,8 @@ export default defineNuxtConfig({
   // Runtime components
   runtimeConfig: {
       public: {
-          GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim()
+          GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),
+          API_BASE_URL: 'http://localhost:8080',
       }
   },
 
@@ -102,5 +103,7 @@ export default defineNuxtConfig({
     timeline: {
       enabled: true
     }
-  }
+  },
+
+  compatibilityDate: '2024-07-09'
 })
