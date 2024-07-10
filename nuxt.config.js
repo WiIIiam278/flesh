@@ -61,7 +61,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
       public: {
           GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),
-          API_BASE_URL: 'http://localhost:8080',
+          API_BASE_URL: 'http://localhost:8080'
       }
   },
 

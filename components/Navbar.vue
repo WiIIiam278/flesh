@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-const auth = useAuth()?.value
+const { auth } = useAuth()
 const { t } = useI18n()
 </script>
 
