@@ -6,7 +6,7 @@
                     <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
                     <div class="account-grid">
                         <div class="profile grid-item shadow">
-                            <h2 class="item-title">{{ $t('my-account') }}</h2>
+                            <h1 class="item-title">{{ $t('my-account') }}</h1>
                             <div class="profile-bg"></div>
                             <div class="item-body">
                                 <div class="user-container shadow">
@@ -16,7 +16,7 @@
                                         <div class="user-details">
                                             <div class="name-role">
                                                 <span class="name">{{ user.name }}</span>
-                                                <Pill class="shadow" v-if="!user.admin">{{ $t('user-role-admin') }}</Pill>
+                                                <Pill class="shadow" v-if="user.admin">{{ $t('user-role-admin') }}</Pill>
                                             </div>
                                             <div class="email" v-if="user.email">{{ user.email }}</div>
                                         </div>
