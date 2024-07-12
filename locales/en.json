@@ -19,6 +19,10 @@
     "index-grid-expand": "Show more",
     "index-grid-collapse": "Show less",
 
+    "tab-about": "About",
+    "tab-download": "Download",
+    "tab-play": "Play",
+
     "project-title": "{project} - {tagline}",
     "project-archived": "Archived",
     "project-archived-header": "{project} has been archived.",

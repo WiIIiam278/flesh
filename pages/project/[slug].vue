@@ -20,18 +20,18 @@
                         <span class=grayed>{{$t('project-archived-details')}}</span>
                     </span>
                 </div>
-                <ProjectTabs v-model:selected="activeTab" :project="project">
-                    <article v-if="activeTab === 'about'">
+                <Tabs :tabs="tabs" v-model:selected="selectedTab">
+                    <article v-if="selectedTab === 'about'">
                         <ContentRenderer :value="doc" />
                     </article>
-                    <div v-if="activeTab === 'download'">
+                    <div v-if="selectedTab === 'download'">
                         <DownloadsMenu :project="project" />
                     </div>
-                    <div v-if="activeTab === 'play'">
+                    <div v-if="selectedTab === 'play'">
                         <DsEmulator :game-name="project.name" :game-core="project.emulator.core"
                             :game-url="`/emulator-js/roms/${project.id}`" />
                     </div>
-                </ProjectTabs>
+                </Tabs>
             </ContentDoc>
             <template #sidebar>
                 <ProjectSidebar :project="project" />
@@ -51,17 +51,24 @@
 </template>
 
 <script setup>
-import PathLine from '../../components/content/PathLine.vue';
-import DsEmulator from '../../components/content/DsEmulator.vue';
-import DownloadsMenu from '../../components/content/DownloadsMenu.vue';
 import projects from '/assets/data/projects.json'
-
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
-
+const { t } = useI18n()
 const { params } = useRoute()
+
+// Get the project
 const project = computed(() => projects.find(project => project.id.toLowerCase() === params.slug.toLowerCase()))
-const activeTab = defineModel('activeTab')
+
+// Setup tabs
+const tabs = [{ id: 'about', name: t('tab-about') }];
+const selectedTab = defineModel('selectedTab')
+selectedTab.value = 'about';
+if (project.value?.releases) {
+    tabs.push({ id: 'download', name: t('tab-download') }); 
+}
+if (project.value?.emulator) {
+    tabs.unshift({ id: 'play', name: t('tab-play') });
+    selectedTab.value = 'play';
+}
 </script>
 
 <style scoped>

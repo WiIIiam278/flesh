@@ -23,9 +23,9 @@ useHead({
   --accent: #00fb9a;
   --white: #f5f5f5;
   --light-gray: #818181;
-  --gray: #313131;
-  --dark-gray: #262626;
-  --background: #212121;
+  --gray: #333333;
+  --background: #222222;
+  --dark-gray: #191919;
   --shadow: 0 0 0.75rem rgba(0, 0, 0, 0.1);
 
   /* DocSearch styling */

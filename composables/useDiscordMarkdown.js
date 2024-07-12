@@ -10,7 +10,7 @@ export const useDiscordMarkdown = (text, roles = [], channels = [], users = [], 
         embed: embed,
         discordCallback: {
             user: node => `@${user(users, node.id)}`,
-            channel: node => `@${channel(channels, node.id)}`,
+            channel: node => `#${channel(channels, node.id)}`,
             role: node => `@${role(roles, node.id)}`,
         }
     });
