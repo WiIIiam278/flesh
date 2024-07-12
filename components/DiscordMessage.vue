@@ -5,12 +5,12 @@
             <img :src="sender.pfp" />
         </div>
         <div class="content">
-            <div class="reply-text" v-if="messages[0].reply_snippet">
+            <div class="reply-content" v-if="messages[0].reply_snippet">
                 <span class="reply-sender" v-if="replyingTo = getUser(messages[0].reply_snippet.sender)">
                     <img :src="replyingTo.pfp" />
                     @{{ replyingTo.name }}{{ parseInt(replyingTo.disambiguator) > 0 ? `#${replyingTo.disambiguator}` : "" }}
                 </span>
-                <span class="text">
+                <span class="reply-text">
                     <MessageText :value="formatReply(messages[0].reply_snippet.message)" :transcript="transcript" />
                 </span>
             </div>
@@ -27,7 +27,7 @@
                     {{ getTimestampString(parseInt(messages[0].timestamp)) }}
                 </div>
             </div>
-            <div v-for="message in messages">
+            <div class="message-text" v-for="message in messages">
                 <MessageText v-if="message.message" :value="message.message" :transcript="transcript" />
                 <div v-if="message.attachments">
                     <MessageAttachment v-for="attachment of message.attachments" :attachment="getAttachment(attachment)" />
@@ -59,6 +59,8 @@
     border-left: 0.15rem solid var(--light-gray);
     border-top: 0.15rem solid var(--light-gray);
     border-radius: 0.5rem 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .reply-sender {
@@ -75,7 +77,7 @@
     margin-right: 0.2rem;
 }
 
-.reply-text {
+.reply-content {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -107,6 +109,17 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+.message-block .content .message-text {
+    word-wrap: break-word;
+    max-width: 90%;
+}
+
+.message-block .content .reply-text {
+    white-space: nowrap;
+    word-wrap: unset;
+    overflow: hidden;
 }
 </style>
 

@@ -1,10 +1,8 @@
 <template>
-    <article class="text" v-html="parsedMarkdown" />
+    <article class="text" v-html="formatted" />
 </template>
 
 <script setup>
-import { toHTML } from '@odiffey/discord-markdown';
-
 const { value, transcript, embed } = defineProps({
     value: {
         type: String,
@@ -51,43 +49,7 @@ const formatDiscord = (text, transcript) => {
     return text;
 };
 
-const resolveUser = (id) => {
-    for (const user of transcript.users) {
-        if (user && user.id && user.id === id && user.name) {
-            return user.name;
-        }
-    }
-    return id;
-};
-
-const resolveChannel = (id) => {
-    for (const channel of transcript.channels) {
-        if (channel && channel.id && (channel.id === id || channel.name === id) && channel.name) {
-            return channel.name;
-        }
-    }
-    return id;
-};
-
-const resolveRole = (id) => {
-    for (const role of transcript.roles) {
-        if (role && role.id && role.id === id && role.name) {
-            return role.name;
-        }
-    }
-    return id;
-};
-
-const parsedMarkdown = toHTML(formatDiscord(value, transcript) , {
-    embed: embed,
-    discordCallback: {
-        user: node => '@' + resolveUser(node.id),
-        channel: node => '#' + resolveChannel(node.id),
-        role: node => '@' + resolveRole(node.id),
-        everyone: () => '@everyone',
-        here: () => '@here',
-    }
-});
+const formatted = useDiscordMarkdown(formatDiscord(value, transcript), transcript.roles, transcript.channels, transcript.users, embed);
 </script>
 
 <style scoped>

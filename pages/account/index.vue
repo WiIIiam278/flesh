@@ -143,10 +143,10 @@ definePageMeta({
 
 @keyframes slide {
   0% {
-    transform: translate3d(0, -60vh, 0);
+    transform: translate3d(0, -52vh, 0);
   }
   100% {
-    transform: translate3d(-60vw, 0, 0); /* The image width */
+    transform: translate3d(-30vw, 0, 0); /* The image width */
   }
 }
 
@@ -180,7 +180,7 @@ definePageMeta({
     z-index: -1;
     background-image: url('/images/icons/promo-grid.png');
     background-size: 125px;
-    animation: slide 120s linear infinite;
+    animation: slide 60s linear infinite;
 }
 
 .user-card {
