@@ -1,5 +1,9 @@
 <template>
     <div>
+        <Head>
+            <Title>William278.net &ndash; Terms, Conditions, & Privacy Notice</Title>
+            <Meta name="description" content="Terms, conditions, and privacy notice for William278.net." />
+        </Head>
         <NuxtLayout>
             <article class="page-content">
                 <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }]" />
@@ -16,7 +20,6 @@
 </template>
 
 <script setup>
-const { t } = useI18n()
 const tabs = [
     { id: 'terms-and-conditions', name: 'Terms & Conditions' },
     { id: 'privacy-notice', name: 'Privacy Notice' },
