@@ -3,18 +3,18 @@
         <NuxtLayout v-if="project" name="project">
             <LazyContentDoc v-slot="{ doc }" :head="false">
                 <Head>
-                    <Title>{{ $t('project-title', {'project': project.metadata.name, 'tagline': project.metadata.tagline})}}</Title>
-                    <Meta name="og:description" :content="`${t('project-title', {'project': project.metadata.name, 'tagline': project.metadata.tagline})}`" />
-                    <Meta name="twitter:description" :content="`${t('project-title', {'project': project.metadata.name, 'tagline': project.metadata.tagline})}`" />
-                    <Meta name="og:title" :content="`${project.metadata.name} &mdash; ${t('index-title')}`" />
-                    <Meta name="twitter:title" :content="`${project.metadata.name} &mdash; ${t('index-title')}`" />
-                    <Meta v-if="project.metadata.icons['PNG']" name="og:image" :content="`/images/icons/${project.metadata.icons['PNG']}`" />
-                    <Meta v-if="project.metadata.icons['PNG']" name="twitter:image" :content="`/images/icons/${project.metadata.icons['PNG']}`" />
+                    <Title>{{ $t('project-title', {'project': meta.name, 'tagline': meta.tagline})}}</Title>
+                    <Meta name="og:description" :content="`${t('project-title', {'project': meta.name, 'tagline': meta.tagline})}`" />
+                    <Meta name="twitter:description" :content="`${t('project-title', {'project': meta.name, 'tagline': meta.tagline})}`" />
+                    <Meta name="og:title" :content="`${meta.name} &mdash; ${t('index-title')}`" />
+                    <Meta name="twitter:title" :content="`${meta.name} &mdash; ${t('index-title')}`" />
+                    <Meta v-if="meta.icons['PNG']" name="og:image" :content="`/images/icons/${meta.icons['PNG']}`" />
+                    <Meta v-if="meta.icons['PNG']" name="twitter:image" :content="`/images/icons/${meta.icons['PNG']}`" />
                 </Head>
-                <div v-if="project.metadata.archived" class="archived">
+                <div v-if="meta.archived" class="archived">
                     <Icon class="icon" name="fa6-solid:box-archive" />
                     <span class="text">
-                        {{ $t('project-archived-header', {'project': project.metadata.name}) }}
+                        {{ $t('project-archived-header', {'project': meta.name}) }}
                         <span class=grayed>{{$t('project-archived-details')}}</span>
                     </span>
                 </div>
@@ -26,9 +26,8 @@
                         <DownloadsMenu :project="project" />
                     </div>
                     <div v-if="selectedTab === 'play'">
-                        <!-- todo revisit -->
-                        <DsEmulator :game-name="project.metadata.name" game-core="desmume2015"
-                            :game-url="`/emulator-js/roms/${project.metadata.name}`" />
+                        <DsEmulator :game-name="meta.name" :game-core="meta.properties.emulator?.core"
+                            :game-url="`/emulator-js/roms/${meta.properties?.emulator?.rom}`" />
                     </div>
                 </Tabs>
             </LazyContentDoc>
@@ -53,19 +52,19 @@
 const { t } = useI18n()
 const { params } = useRoute()
 const project = await useProject(params.slug.toLowerCase());
+const { metadata: meta } = project.value;
 
 // Setup tabs
 const tabs = [{ id: 'about', name: t('tab-about') }];
 const selectedTab = defineModel('selectedTab')
 selectedTab.value = 'about';
-// if (project.value?.releases) {
-//     tabs.push({ id: 'download', name: t('tab-download') }); 
-// }
-// if (project.value?.emulator) {
-//     tabs.unshift({ id: 'play', name: t('tab-play') });
-//     selectedTab.value = 'play';
-// }
-// todo revisit
+if (meta?.listDownloads) {
+    tabs.push({ id: 'download', name: t('tab-download') }); 
+}
+if (meta?.properties?.emulator) {
+    tabs.unshift({ id: 'play', name: t('tab-play') });
+    selectedTab.value = 'play';
+}
 </script>
 
 <style scoped>

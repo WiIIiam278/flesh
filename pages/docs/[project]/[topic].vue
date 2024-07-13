@@ -3,22 +3,22 @@
         <LazyContentDoc :path="'/docs/project/' + $route.params.project + '/' + locale + '/' + $route.params.topic.toLowerCase()" :head="false">
             <template v-slot="{ doc }">
                 <Head>
-                    <Title>{{ doc.title }} &mdash; {{ $t('docs-title', {'project': project.metadata.name}) }} &mdash; {{ $t('index-title') }}</Title>
-                    <Meta name="og:title" :content="`${doc.title} &mdash; ${t('docs-title', {'project': project.metadata.name})} &mdash; ${t('index-title')}`" />
-                    <Meta name="twitter:title" :content="`${doc.title} &mdash; ${t('docs-title', {'project': project.metadata.name})} &mdash; ${t('index-title')}`" />
+                    <Title>{{ doc.title }} &mdash; {{ $t('docs-title', {'project': meta.name}) }} &mdash; {{ $t('index-title') }}</Title>
+                    <Meta name="og:title" :content="`${doc.title} &mdash; ${t('docs-title', {'project': meta.name})} &mdash; ${t('index-title')}`" />
+                    <Meta name="twitter:title" :content="`${doc.title} &mdash; ${t('docs-title', {'project': meta.name})} &mdash; ${t('index-title')}`" />
                     <Meta name="description" :content="description" />
                     <Meta name="og:description" :content="description" />
                     <Meta name="twitter:description" :content="description" />
-                    <Meta v-if="project.metadata.icons['PNG']" name="og:image" :content="`/images/icons/${project.metadata.icons['PNG']}`" />
-                    <Meta v-if="project.metadata.icons['PNG']" name="twitter:image" :content="`/images/icons/${project.metadata.icons['PNG']}`" />
+                    <Meta v-if="meta.icons['PNG']" name="og:image" :content="`/images/icons/${meta.icons['PNG']}`" />
+                    <Meta v-if="meta.icons['PNG']" name="twitter:image" :content="`/images/icons/${meta.icons['PNG']}`" />
                 </Head>
                 <ContentRenderer :value="doc">
                     <NuxtLayout name="docs">
                         <Overbar>
                             <Breadcrumbs
-                                :crumbs="[{ name: t('link-home'), link: '/' }, { name: t('link-docs'), link: '/docs' }, { name: project.metadata.name, link: `/docs/${project.slug}` }]" />
+                                :crumbs="[{ name: t('link-home'), link: '/' }, { name: t('link-docs'), link: '/docs' }, { name: meta.name, link: `/docs/${project.slug}` }]" />
                                 <span>
-                                    <ButtonLink hollow icon="fa6-solid:pencil" :link="`${project.metadata.repository}/tree/master/docs`">{{ $t('docs-edit-button') }}</ButtonLink>
+                                    <ButtonLink hollow icon="fa6-solid:pencil" :link="`${meta.repository}/tree/master/docs`">{{ $t('docs-edit-button') }}</ButtonLink>
                                     <ButtonLink hollow icon="fa6-solid:language" link="/translate">{{ $t('docs-translate-button') }}</ButtonLink>
                                 </span>
                         </Overbar>
@@ -46,7 +46,7 @@
                             <BreadcrumbDivider />
                             <NuxtLink to="/docs/">{{ $t('link-docs') }}</NuxtLink>
                             <BreadcrumbDivider />
-                            <NuxtLink v-if="project" :to="'/docs/' + project.slug.toLowerCase()">{{ project.metadata.name }}</NuxtLink>
+                            <NuxtLink v-if="project" :to="'/docs/' + project.slug.toLowerCase()">{{ meta.name }}</NuxtLink>
                             <InvalidPage v-else :name="$route.params.project" />
                             <BreadcrumbDivider />
                             <InvalidPage :name="$route.params.topic" />
@@ -66,4 +66,5 @@ import PathLine from '../../../components/content/PathLine.vue';
 const { locale, t } = useI18n()
 const { params } = useRoute()
 const project = await useProject(params.project.toLowerCase());
+const { metadata: meta } = project.value;
 </script>
