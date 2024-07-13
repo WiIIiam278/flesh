@@ -2,107 +2,69 @@
     <div class="project-sidebar">
         <div class="header">
             <div class="meta">
-                <h1 class="name">{{ project.metadata.name }}</h1>
+                <h1 class="name">{{ meta.name }}</h1>
                 <div class="pills">
-                    <TagPill v-for="tag in project.metadata.tags" :tag="tag" />
+                    <TagPill v-for="tag in meta.tags" :tag="tag" />
                 </div>
             </div>
-            <div class="icon" v-if="project.metadata.icons">
-                <object v-if="project.metadata.icons['SVG']" :data="`/images/icons/${project.metadata.icons['SVG']}`" type="image/svg+xml" />
-                <img v-else-if="project.metadata.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
+            <div class="icon" v-if="meta.icons">
+                <object v-if="meta.icons['SVG']" :data="`/images/icons/${meta.icons['SVG']}`" type="image/svg+xml" />
+                <img v-else-if="meta.icons['PNG']" :src="`/images/icons/${meta.icons['PNG']}`" />
             </div>
         </div>
-        <div class="gallery" v-if="project.metadata.images" @click="galleryClick()">
-            <div v-for="image in project.metadata.images"
-                :class="'image hover-image ' + (project.metadata.images.indexOf(image) === 0 ? 'shown' : '')" :key="image"
-                :id="'gallery-' + project.metadata.images.indexOf(image)">
+        <div class="gallery" v-if="meta.images" @click="galleryClick()">
+            <div v-for="image in meta.images"
+                :class="'image hover-image ' + (meta.images.indexOf(image) === 0 ? 'shown' : '')" :key="image"
+                :id="'gallery-' + meta.images.indexOf(image)">
                 <img class="shadow" :src="`/images/${image.url}`" :alt="image.description" />
             </div>
         </div>
-        <div class="tagline">{{ project.metadata.tagline }}</div>
-        <div class="buttons" v-if="project.metadata.documentation || project.metadata.repository">
-            <ButtonLink v-if="project.metadata.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
+        <div class="tagline">{{ meta.tagline }}</div>
+        <div class="buttons" v-if="meta.documentation || meta.repository">
+            <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
                 {{ $t('link-docs') }}
             </ButtonLink>
-            <ButtonLink v-if="project.metadata.repository" icon="fa6-brands:github" :link="project.metadata.repository" hollow>
+            <ButtonLink v-if="meta.repository" icon="fa6-brands:github" :link="meta.repository" hollow>
                 {{ $t('project-link-repository') }}
             </ButtonLink>
         </div>
-        <div class="buttons" v-if="project.ids">
-            <ButtonLink v-if="project.metadata.links?.itch" icon="fa6-brands:itch-io" :link="project.metadata.links.itch" hollow>
-                {{ $t('project-link-itch') }}
-            </ButtonLink>
-            <ButtonLink v-if="project.metadata.links?.universaldb" icon="fa6-solid:down-long" :link="project.metadata.links.universaldb" hollow>
-                {{ $t('project-link-universaldb') }}
-            </ButtonLink>
-            <ButtonLink v-if="project.metadata.links?.spigot" icon="fa6-solid:faucet" :link="project.metadata.links.spigot">
-                {{ $t('project-link-spigot') }}
-            </ButtonLink>
-            <ButtonLink v-if="project.metadata.links?.polymart" icon="fa6-solid:p" :link="project.metadata.links.polymart" hollow>
-                {{ $t('project-link-polymart') }}
-            </ButtonLink>
-            <ButtonLink v-if="project.metadata.links?.modrinth" icon="fa6-solid:wrench" :link="project.metadata.links.modrinth" hollow>
-                {{ $t('project-link-modrinth') }}
-            </ButtonLink>
-            <ButtonLink v-if="project.metadata.links?.builtbybit" icon="fa6-solid:cube" :link="project.metadata.links.builtbybit" hollow>
-                {{ $t('project-link-builtbybit') }}
-            </ButtonLink>
-            <ButtonLink v-if="project.metadata.links?.hangar" icon="fa6-solid:paper-plane" :link="project.metadata.links.hangar" hollow>
-                {{ $t('project-link-hangar') }}
-            </ButtonLink>
-            <ButtonLink v-if="project.metadata.links?.curseforge" icon="fa6-solid:fire" :link="project.metadata.links.curseforge" hollow>
-                {{ $t('project-link-curseforge') }}
+        <div class="buttons" v-if="meta.links">
+            <ButtonLink v-for="link in meta.links" :link="link.url" :icon="useLinkIcon(link)" hollow>
+                {{ $t(`project-link-${link.id}`) }}
             </ButtonLink>
         </div>
         <div class="stats">
-            <div class="stat" v-if="stats.lowest_price">
+            <div class="stat" v-if="project.restricted && meta.suggestedRetailPrice">
                 <div class="stat-descriptor">{{ $t('project-price') }}</div>
                 <div class="stat-data">
-                    {{$t('project-price-sterling', {'price': stats.lowest_price.toFixed(2)})}}
+                    {{$t('project-price-sterling', {'price': meta.suggestedRetailPrice.toFixed(2)})}}
                 </div>
             </div>
-            <div class="stat" v-if="project.license && project.license.id">
+            <div class="stat" v-if="meta.license?.length">
                 <div class="stat-descriptor">{{ $t('project-license') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:scale-balanced">
-                        <span>{{ project.license.id }}</span>
-                        <a v-if="project.license.url" :href="project.license.url">
-                            <Icon class="license-link" name="fa6-solid:arrow-up-right-from-square" /> 
-                        </a>
+                        {{ meta.license }}
                     </IconifiedText>
                 </div>
             </div>
-            <div class="stat" v-if="stats.total_downloads">
+            <div class="stat" v-if="stats.downloadCount">
                 <div class="stat-descriptor">{{ $t('project-downloads') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:download">
-                        {{ stats.total_downloads >= 1000 ? (stats.total_downloads / 1000).toFixed(1) + 'k' :
-                                stats.total_downloads
+                        {{ 
+                            stats.downloadCount >= 1000
+                                ? (stats.downloadCount / 1000).toFixed(1) + 'k' 
+                                : stats.downloadCount
                         }}
                     </IconifiedText>
                 </div>
             </div>
-            <div class="stat" v-if="stats.average_rating">
+            <div class="stat" v-if="stats.averageRating">
                 <div class="stat-descriptor">{{ $t('project-average-rating') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:star">
-                        {{ stats.average_rating.toFixed(1) }}
-                    </IconifiedText>
-                </div>
-            </div>
-            <div class="stat" v-if="stats.latest_version">
-                <div class="stat-descriptor">{{ $t('project-latest-version') }}</div>
-                <div class="stat-data">
-                    <IconifiedText icon="fa6-solid:code-branch">
-                        {{ stats.latest_version }}
-                    </IconifiedText>
-                </div>
-            </div>
-            <div class="stat" v-if="stats.last_updated">
-                <div class="stat-descriptor">{{ $t('project-last-updated') }}</div>
-                <div class="stat-data">
-                    <IconifiedText icon="fa6-solid:clock-rotate-left">
-                        {{ new Date(stats.last_updated).toLocaleDateString() }}
+                        {{ stats.averageRating.toFixed(1) }}
                     </IconifiedText>
                 </div>
             </div>
@@ -111,17 +73,14 @@
 </template>
 
 <script setup>
-import TagPill from './TagPill.vue';
-
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
-
 const { project } = defineProps({
     project: {
         type: Object,
         required: true
     }
 })
+const { metadata: meta } = project;
+const stats = await useProjectStats(project.slug);
 
 let galleryIndex = 0;
 const galleryClick = () => {
@@ -132,9 +91,6 @@ const galleryClick = () => {
     }
     document.getElementById('gallery-' + galleryIndex).classList.add('shown');
 }
-
-let { data } = await useFetch(`/api/stats/${project.id}`)
-const stats = data;
 </script>
 
 <style scoped>

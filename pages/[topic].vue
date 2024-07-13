@@ -4,12 +4,10 @@
             <LazyContentDoc>
                 <template v-slot="{ doc }">
                     <ContentRenderer :value="doc">
-                        <div>
+                        <article class="page-content">
                             <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
-                            <article>
-                                <ContentRendererMarkdown :value="doc" />
-                            </article>
-                        </div>
+                            <ContentRendererMarkdown :value="doc" />
+                        </article>
                     </ContentRenderer>
                 </template>
                 <template #not-found>
@@ -33,3 +31,11 @@ import PathLine from '../components/content/PathLine.vue';
 
 const { t } = useI18n()
 </script>
+
+<style scoped>
+.page-content {
+    margin-top: 1rem;
+    max-width: 95vw;
+    width: 1100px;
+}
+</style>

@@ -6,7 +6,7 @@
                     <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
                     <div class="account-grid">
                         <div class="profile grid-item shadow">
-                            <h1 class="item-title">{{ $t('my-account') }}</h1>
+                            <h1 class="item-title">{{ $t('your-account') }}</h1>
                             <div class="profile-bg"></div>
                             <div class="item-body">
                                 <div class="user-container shadow">
@@ -30,14 +30,14 @@
                             </div>
                         </div>
                         <Tabs class="tabs grid-item" :tabs="tabs" v-model:selected="activeTab">
-                            <div v-if="activeTab === 'my-purchases'" class="item-body library">
+                            <div v-if="activeTab === 'your-purchases'" class="item-body library">
                                 <div v-if="user.projects.length">
                                     <ProjectCard v-for="product in restricted.filter(r => user.projects.includes(r.slug))" 
                                         :key="product.slug" :project="product" />
                                 </div>
                                 <IconifiedText v-else class="empty-notice" icon="fa6-solid:bag-shopping">{{ $t('no-products-notice') }}</IconifiedText>
                             </div>
-                            <div v-if="activeTab === 'my-support-tickets'" class="item-body tickets">
+                            <div v-if="activeTab === 'your-support-tickets'" class="item-body tickets">
                                 <IconifiedText class="empty-notice" icon="fa6-solid:ticket">{{ $t('no-support-tickets-notice') }}</IconifiedText>
                             </div>
                         </Tabs>
@@ -73,11 +73,11 @@ const deleteAccount = () => {
 }
 
 const tabs = [
-    { id: 'my-purchases', name: t('my-purchases') },
-    { id: 'my-support-tickets', name: t('my-support-tickets') }
+    { id: 'your-purchases', name: t('your-purchases') },
+    { id: 'your-support-tickets', name: t('your-support-tickets') }
 ];
 const activeTab = defineModel('activeTab');
-activeTab.value = 'my-purchases';
+activeTab.value = 'your-purchases';
 
 definePageMeta({
     title: computed(() => t('account-title')),

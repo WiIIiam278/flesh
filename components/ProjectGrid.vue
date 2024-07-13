@@ -15,7 +15,7 @@
             <ProjectCard v-if="expanded || index < shown" :index="index" :key="project.slug" :project="project" />
         </template>
     </div>
-    <div id="below-grid" v-if="filtered.length > shown">
+    <div id="below-grid" v-if="filtered?.length > shown">
         <a id="grid-size-button" @click="expanded = !expanded">
             <IconifiedText v-if="expanded" icon="fa6-solid:chevron-up">{{ $t('index-grid-collapse') }}</IconifiedText>
             <IconifiedText v-else icon="fa6-solid:chevron-down">{{ $t('index-grid-expand') }}</IconifiedText>
@@ -25,8 +25,6 @@
 
 <script setup>
 const projects = await useAllProjects();
-console.log(projects);
-
 const expanded = ref(false);
 const selectedTags = ref([]);
     

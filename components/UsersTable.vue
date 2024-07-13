@@ -1,5 +1,12 @@
 <template>
     <article class="users-table">
+        <div v-if="users.value" class="search-options">
+            <b>Displaying {{ users.value.numberOfElements }} user record(s)</b>
+            <form class="search-box" v-on:submit="(e) => { e.preventDefault(); updateUsers(); }">
+                <input type="text" v-model="searchText" placeholder="Search by username" />
+                <button type="submit">Search</button>
+            </form>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -20,7 +27,7 @@
                     <td><code>{{ user.id }}</code></td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.admin ? 'Admin' : 'User' }}</td>
+                    <td :class="user.admin ? 'admin-role' : ''">{{ user.admin ? 'Admin' : 'User' }}</td>
                     <td>
                         <div class="purchased-products" v-for="project in restrictedProjects" :key="project.slug">
                             <label :for="`${user.id}-project-${project.slug}`">
@@ -53,7 +60,6 @@
                     <option value="30">30</option>
                     <option value="50">50</option>
                 </select>
-                <label>({{ users.value.numberOfElements }} total)</label>
             </div>
         </div>
     </article>
@@ -64,12 +70,13 @@ const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const pageNumber = ref(1);
 const itemsPerPage = ref(15);
 const users = ref(null);
+const searchText = ref('');
 
 const { auth, xsrf } = useAuth();
 const restrictedProjects = await useRestrictedProjects();
 
 const updateUsers = (async () => {
-    users.value = await useAllUsers(pageNumber.value - 1, itemsPerPage.value);
+    users.value = await useAllUsers(pageNumber.value - 1, itemsPerPage.value, searchText.value);
 });
 await updateUsers();
 
@@ -125,6 +132,10 @@ const deleteUser = async (user) => {
     border-radius: 100%;
 }
 
+.admin-role {
+    color: var(--red);
+}
+
 .role {
     width: 10% !important;
 }
@@ -149,6 +160,22 @@ const deleteUser = async (user) => {
 
 .no-purchased-products {
     color: var(--light-gray);
+}
+
+.search-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 1rem;
+}
+
+.search-options .search-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .pagination-buttons {
