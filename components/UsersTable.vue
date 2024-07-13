@@ -12,8 +12,8 @@
                     <th class="actions">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr v-for="user in users.content" :key="user.id">
+            <tbody v-if="users.value">
+                <tr v-for="user in users.value.content" :key="user.id">
                     <td class="avatar">
                         <img :src="user.avatar" alt="User avatar" />
                     </td>
@@ -38,20 +38,22 @@
                 </tr>
             </tbody>
         </table>
-        <div class="pagination-buttons">
+        <div v-if="users.value" class="pagination-buttons">
             <div class="button-row">
                 <label>Page:</label>
-                <button @click="pageNumber--" :disabled="pageNumber === 1">Previous</button>
-                <input class="page-input" v-model="pageNumber" type="number" min="1" :max="Math.ceil(users.total / itemsPerPage)" />
-                <button @click="pageNumber++" :disabled="pageNumber * itemsPerPage >= users.total">Next</button>
+                <button @click="() => {pageNumber--; updateUsers()}" :disabled="pageNumber === 1">Previous</button>
+                <input class="page-input" v-model="pageNumber" @change="updateUsers" type="number" min="1" :max="Math.ceil(users.value.numberOfElements / itemsPerPage)" />
+                <label>/ {{ Math.ceil(users.value.numberOfElements / itemsPerPage) }}</label>
+                <button @click="() => {pageNumber++; updateUsers()}" :disabled="pageNumber * itemsPerPage >= users.value.numberOfElements">Next</button>
             </div>
             <div class="button-row">
                 <label>Per page:</label>
-                <select class="page-input" v-model="itemsPerPage">
+                <select class="page-input" v-model="itemsPerPage" @change="updateUsers">
                     <option value="15">15</option>
                     <option value="30">30</option>
                     <option value="50">50</option>
                 </select>
+                <label>({{ users.value.numberOfElements }} total)</label>
             </div>
         </div>
     </article>
@@ -61,10 +63,15 @@
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const pageNumber = ref(1);
 const itemsPerPage = ref(15);
+const users = ref(null);
 
 const { auth, xsrf } = useAuth();
-const users = await useAllUsers(pageNumber.value - 1, itemsPerPage.value);
 const restrictedProjects = await useRestrictedProjects();
+
+const updateUsers = (async () => {
+    users.value = await useAllUsers(pageNumber.value - 1, itemsPerPage.value);
+});
+await updateUsers();
 
 const updateUserProjects = async (user, projectId) => {
     user.projects = user.projects.includes(projectId) ? user.projects.filter(p => p !== projectId) : [...user.projects, projectId];
@@ -98,7 +105,7 @@ const deleteUser = async (user) => {
                 'X-XSRF-TOKEN': xsrf
             },
         });
-        users.content = users.content.filter(u => u.id !== user.id);
+        users.value.content = users.value.content.filter(u => u.id !== user.id);
     }
 };
 </script>
