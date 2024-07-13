@@ -6,7 +6,7 @@
     "link-home": "Home",
     "link-projects": "Projects",
     "link-docs": "Docs",
-    "link-my-account": "My Account",
+    "link-account": "Account",
     "link-log-in": "Log in",
     "link-log-out": "Log out",
     "link-transcript": "Transcript",
@@ -75,8 +75,7 @@
     "logged-in-with-discord": "Logged in with Discord",
     "no-products-notice": "When you've purchased a product and verified your purchase on Discord, it will appear here.",
     "no-support-tickets-notice": "The ability to access ticket transcripts from your account page is coming soon!",
-    "session-expired": "Session Expired",
-    "session-expired-details": "Your session has expired. Please log in again.",
+    "admin-panel": "Admin Panel",
 
     "button-back-to-home": "Back to home",
 

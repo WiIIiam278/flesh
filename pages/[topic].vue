@@ -1,7 +1,7 @@
 <template>
     <div>
         <NuxtLayout>
-            <ContentDoc>
+            <LazyContentDoc>
                 <template v-slot="{ doc }">
                     <ContentRenderer :value="doc">
                         <div>
@@ -22,7 +22,7 @@
                         </PathLine>
                     </ErrorPage>
                 </template>
-            </ContentDoc>
+            </LazyContentDoc>
         </NuxtLayout>
     </div>
 </template>
@@ -31,6 +31,5 @@
 import InvalidPage from '../components/InvalidPage.vue';
 import PathLine from '../components/content/PathLine.vue';
 
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
+const { t } = useI18n()
 </script>

@@ -2,7 +2,7 @@
     <div>
         <NuxtLayout>
             <div id="page-content">
-                <article v-if="user" class="account-page">
+                <article class="account-page">
                     <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
                     <div class="account-grid">
                         <div class="profile grid-item shadow">
@@ -23,35 +23,26 @@
                                     </div>
                                     <div class="management-buttons">
                                         <ButtonLink href="/account/logout" class="shadow" hollow icon="fa6-solid:person-running">{{ t('link-log-out') }}</ButtonLink>
+                                        <ButtonLink v-if="user.admin" href="/account/admin" class="shadow" hollow icon="fa6-solid:gear">{{ t('admin-panel') }}</ButtonLink>
                                         <ButtonLink @click="deleteAccount()" class="shadow" hollow color="red" icon="fa6-solid:trash-can">{{ t('delete-account') }}</ButtonLink>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="library grid-item">
-                            <h2 class="item-title">{{ $t('my-purchases') }}</h2>
-                            <div class="item-body">
-                                <ul v-if="user.products?.length">
-                                    <li v-for="product in user.products" :key="product.id">
-                                        <NuxtLink :to="`/project/${product.id}`">{{ product.name }}</NuxtLink>
-                                    </li>
-                                </ul>
+                        <Tabs class="tabs grid-item" :tabs="tabs" v-model:selected="activeTab">
+                            <div v-if="activeTab === 'my-purchases'" class="item-body library">
+                                <div v-if="user.projects.length">
+                                    <ProjectCard v-for="product in restricted.filter(r => user.projects.includes(r.slug))" 
+                                        :key="product.slug" :project="product" />
+                                </div>
                                 <IconifiedText v-else class="empty-notice" icon="fa6-solid:bag-shopping">{{ $t('no-products-notice') }}</IconifiedText>
                             </div>
-                        </div>
-                        <div class="tickets grid-item">
-                            <h2 class="item-title">{{ $t('my-support-tickets') }}</h2>
-                            <div class="item-body">
+                            <div v-if="activeTab === 'my-support-tickets'" class="item-body tickets">
                                 <IconifiedText class="empty-notice" icon="fa6-solid:ticket">{{ $t('no-support-tickets-notice') }}</IconifiedText>
                             </div>
-                        </div>
+                        </Tabs>
                     </div>
                 </article>
-                <div v-else class="session-expired">
-                    <h2>{{ $t('session-expired') }}</h2>
-                    <p>{{ $t('session-expired-details') }}</p>
-                    <ButtonLink href="/account/logout" class="shadow" hollow icon="fa6-solid:person-running">{{ t('link-log-out') }}</ButtonLink>
-                </div>
             </div>
         </NuxtLayout>
     </div>
@@ -62,18 +53,12 @@ const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 
 const { t } = useI18n()
 const { auth, xsrf } = useAuth();
-const { data: user } = await useFetch(`${BASE_URL}/v1/user`, {
-    method: 'GET',
-    credentials: auth ? 'include' : 'omit',
-    headers: {
-        'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-        'X-XSRF-TOKEN': xsrf
-    }
-});
+const user = await useUser();
+const restricted = await useRestrictedProjects();
 
 const deleteAccount = () => {
     if (confirm(t('delete-account-confirm'))) {
-        $fetch(`${BASE_URL}/v1/user`, 
+        $fetch(`${BASE_URL}/v1/users/@me`, 
         { 
             method: 'DELETE',
             credentials: auth ? 'include' : 'omit',
@@ -86,7 +71,14 @@ const deleteAccount = () => {
         })
     }
 }
- 
+
+const tabs = [
+    { id: 'my-purchases', name: t('my-purchases') },
+    { id: 'my-support-tickets', name: t('my-support-tickets') }
+];
+const activeTab = defineModel('activeTab');
+activeTab.value = 'my-purchases';
+
 definePageMeta({
     title: computed(() => t('account-title')),
     description: computed(() => t('account-description')),
@@ -96,26 +88,17 @@ definePageMeta({
 
 <style scoped>
 #page-content {
-    padding-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .account-page {
+    width: 1200px;
     max-width: 95vw;
-    min-width: 60vw;
-}
-
-.session-expired {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
 }
 
 .account-grid {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
 }
 
 .account-grid .grid-item {
@@ -132,7 +115,7 @@ definePageMeta({
     height: 100%;
 }
 
-.grid-item .item-body {
+.item-body {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -218,7 +201,7 @@ definePageMeta({
 }
 
 .empty-notice {
-    margin: 1rem 0;
+    margin: 2rem 0;
     color: var(--light-gray)
 }
 </style>

@@ -21,6 +21,7 @@ useHead({
 :root {
   /* Colors */
   --accent: #00fb9a;
+  --red: #ff4242;
   --white: #f5f5f5;
   --light-gray: #818181;
   --gray: #333333;
@@ -248,6 +249,77 @@ blockquote {
   border-left: 0.25rem solid var(--gray);
   padding-left: 0.8rem;
   margin: 0.5rem 0;
+}
+
+/* Input controls */
+button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  border: 0.1rem solid var(--gray);
+  border-radius: 0.5rem;
+  background-color: var(--gray);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.1;
+}
+
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+}
+
+input, textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  border: 0.1rem solid var(--gray);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+input, textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  border: 0.1rem solid var(--gray);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+button[disabled] {
+  background-color: var(--dark-gray);
+  color: var(--light-gray);
+  cursor: not-allowed;
+}
+
+button.delete {
+  color: var(--red);
+}
+
+button:hover {
+  background-color: var(--dark-gray);
+  border-color: var(--accent);
+}
+
+button.delete:hover {
+  border-color: var(--red) !important;
+}
+
+select {
+  width: 250px;
+  max-width: 100%;
+  padding: 0.3rem 0.4rem;
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  border: 0.1rem solid var(--gray);
+  border-radius: 0.5rem;
+  box-sizing: border-box;
 }
 
 /* Common sidebar rules */

@@ -9,11 +9,11 @@
                 <Meta name="twitter:title" :content="`${t('link-docs')} &mdash; ${t('index-title')}}`" />
             </Head>
             <article>
-                <ContentDoc :path="`/docs/home/${locale}`"  />
+                <LazyContentDoc :path="`/docs/home/${locale}`"  />
             </article>
             <template #sidebar>
                 <h1>{{ $t('link-projects') }}</h1>
-                <ContentDoc :head="false" path="/docs/sidebar" />
+                <LazyContentDoc :head="false" path="/docs/sidebar" />
             </template>
         </NuxtLayout>
     </div>

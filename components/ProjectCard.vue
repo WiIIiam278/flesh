@@ -1,49 +1,39 @@
 <template>
-    <div v-if="project.id" class="project-card">
+    <div v-if="project.slug && project.metadata" class="project-card">
         <div class="header">
-            <NuxtLink class="image hover-image" v-if="project.icon" :to="'/project/' + project.id">
-                <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg" type="image/svg+xml" />
-                <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
+            <NuxtLink class="image hover-image" v-if="project.metadata.icons" :to="`/project/${project.slug}`">
+                <object v-if="project.metadata.icons['SVG']" :data="`/images/icons/${project.metadata.icons['SVG']}`" type="image/svg+xml" />
+                <img v-else-if="project.metadata.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
             </NuxtLink>
             <div class="details">
-                <NuxtLink :to="'/project/' + project.id">
-                    <h3 class="name">{{ project.name ? project.name : project.id }}</h3>
+                <NuxtLink :to="`/project/${project.slug}`">
+                    <h3 class="name">{{ project.metadata.name ? project.metadata.name : project.slug }}</h3>
                 </NuxtLink>
                 <div class="pills">
-                    <TagPill v-for="tag in project.tags.slice(0, 3)" :tag="tag" :key="tag" />
+                    <TagPill v-for="tag in project.metadata.tags.slice(0, 3)" :tag="tag" :key="tag" />
                 </div>
             </div>
         </div>
         <div class="body">
             <div class="description">
-                <div class="tagline" v-if="project.tagline">
-                    <IconifiedText class="discontinued" v-if="project.discontinued" icon="fa6-solid:box-archive">
+                <div class="tagline" v-if="project.metadata.tagline">
+                    <IconifiedText class="archived" v-if="project.metadata.archived" icon="fa6-solid:box-archive">
                         {{$t('project-archived')}}
                     </IconifiedText>
-                    <p>{{ project.tagline }}</p>
+                    <p>{{ project.metadata.tagline }}</p>
                 </div>
                 <div class="buttons">
-                    <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>
+                    <ButtonLink v-if="project.metadata.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
                         {{$t('link-docs')}}
                     </ButtonLink>
-                    <ButtonLink v-for="link in project.links" :link="link.link" hollow>{{ link.text }}</ButtonLink>
-                    <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github">
-                    </ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.itch" :link="project.ids.itch"
-                        icon="fa6-brands:itch-io"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.universaldb" :link="project.ids.universaldb"
-                        icon="fa6-solid:down-long"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.spigot"
-                        :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet">
-                    </ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.polymart"
-                        :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.modrinth"
-                        :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench">
-                    </ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.builtbybit"
-                        :link="'https://builtbybit.com/resources/' + project.ids.builtbybit" icon="fa6-solid:cube">
-                    </ButtonLink>
+                    <!-- <ButtonLink v-for="link in project.metadata.links" :link="link.link" hollow>{{ link.text }}</ButtonLink> -->
+                    <ButtonLink v-if="project.metadata.repository" icon="fa6-brands:github"  :link="project.metadata.repository"></ButtonLink>
+                    <ButtonLink v-if="project.metadata.links?.itch" icon="fa6-brands:itch-io"  :link="project.metadata.links.itch" ></ButtonLink>
+                    <ButtonLink v-if="project.metadata.links?.universaldb" icon="fa6-solid:down-long" :link="project.metadata.links.universaldb"></ButtonLink>
+                    <ButtonLink v-if="project.metadata.links?.spigot" icon="fa6-solid:faucet" :link="project.metadata.links.spigot"> </ButtonLink>
+                    <ButtonLink v-if="project.metadata.links?.polymart" icon="fa6-solid:p" :link="project.metadata.links.polymart"></ButtonLink>
+                    <ButtonLink v-if="project.metadata.links?.modrinth" icon="fa6-solid:wrench" :link="project.metadata.links.modrinth"></ButtonLink>
+                    <ButtonLink v-if="project.metadata.links?.builtbybit" icon="fa6-solid:cube" :link="project.metadata.links.builtbybit"></ButtonLink>
                 </div>
             </div>
             <div class="stats" v-if="stats">
@@ -79,8 +69,8 @@ const { project } = defineProps({
     }
 })
 
-// Expost stats as a fetch to /api/stats/:id
-let {data} = await useFetch(`/api/stats/${project.id}`)
+// Expost stats as a fetch to /api/stats/:id 
+let {data} = await useFetch(`/api/stats/${project.slug}`)
 const stats = data;
 </script>
 
@@ -155,7 +145,7 @@ const stats = data;
     flex-direction: column;
 }
 
-.tagline .discontinued {
+.tagline .archived {
     margin-bottom: 0.75rem;
     font-size: 0.9rem;
     color: var(--light-gray)

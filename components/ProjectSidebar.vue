@@ -2,66 +2,56 @@
     <div class="project-sidebar">
         <div class="header">
             <div class="meta">
-                <h1 class="name">{{ project.name }}</h1>
+                <h1 class="name">{{ project.metadata.name }}</h1>
                 <div class="pills">
-                    <TagPill v-for="tag in project.tags" :tag="tag" />
+                    <TagPill v-for="tag in project.metadata.tags" :tag="tag" />
                 </div>
             </div>
-            <div class="icon" v-if="project.icon">
-                <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg" type="image/svg+xml" />
-                <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
+            <div class="icon" v-if="project.metadata.icons">
+                <object v-if="project.metadata.icons['SVG']" :data="`/images/icons/${project.metadata.icons['SVG']}`" type="image/svg+xml" />
+                <img v-else-if="project.metadata.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
             </div>
         </div>
-        <div class="gallery" v-if="project.assets && project.assets.images" @click="galleryClick()">
-            <div v-for="image in project.assets.images"
-                :class="'image hover-image ' + (project.assets.images.indexOf(image) === 0 ? 'shown' : '')" :key="image"
-                :id="'gallery-' + project.assets.images.indexOf(image)">
-                <img class="shadow" :src="'/images/' + image.url" :alt="image.description" />
+        <div class="gallery" v-if="project.metadata.images" @click="galleryClick()">
+            <div v-for="image in project.metadata.images"
+                :class="'image hover-image ' + (project.metadata.images.indexOf(image) === 0 ? 'shown' : '')" :key="image"
+                :id="'gallery-' + project.metadata.images.indexOf(image)">
+                <img class="shadow" :src="`/images/${image.url}`" :alt="image.description" />
             </div>
         </div>
-        <div class="tagline">{{ project.tagline }}</div>
-        <div class="buttons"
-            v-if="project.documentation || (project.links && project.links.length > 0) || project.repository">
-            <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>
+        <div class="tagline">{{ project.metadata.tagline }}</div>
+        <div class="buttons" v-if="project.metadata.documentation || project.metadata.repository">
+            <ButtonLink v-if="project.metadata.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
                 {{ $t('link-docs') }}
             </ButtonLink>
-            <ButtonLink v-for="link in project.links" :link="link.link" hollow>
-                {{ link.text }}
-            </ButtonLink>
-            <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github" hollow>
+            <ButtonLink v-if="project.metadata.repository" icon="fa6-brands:github" :link="project.metadata.repository" hollow>
                 {{ $t('project-link-repository') }}
             </ButtonLink>
         </div>
         <div class="buttons" v-if="project.ids">
-            <ButtonLink v-if="project.ids.itch" :link="project.ids.itch" icon="fa6-brands:itch-io" hollow>
+            <ButtonLink v-if="project.metadata.links?.itch" icon="fa6-brands:itch-io" :link="project.metadata.links.itch" hollow>
                 {{ $t('project-link-itch') }}
             </ButtonLink>
-            <ButtonLink v-if="project.ids.universaldb" :link="project.ids.universaldb" icon="fa6-solid:down-long" hollow>
+            <ButtonLink v-if="project.metadata.links?.universaldb" icon="fa6-solid:down-long" :link="project.metadata.links.universaldb" hollow>
                 {{ $t('project-link-universaldb') }}
             </ButtonLink>
-            <ButtonLink v-if="project.ids.spigot" :link="'https://spigotmc.org/resources/' + project.ids.spigot"
-                icon="fa6-solid:faucet" hollow>
+            <ButtonLink v-if="project.metadata.links?.spigot" icon="fa6-solid:faucet" :link="project.metadata.links.spigot">
                 {{ $t('project-link-spigot') }}
             </ButtonLink>
-            <ButtonLink v-if="project.ids.polymart" :link="'https://polymart.org/resource/' + project.ids.polymart"
-                icon="fa6-solid:p" hollow>
+            <ButtonLink v-if="project.metadata.links?.polymart" icon="fa6-solid:p" :link="project.metadata.links.polymart" hollow>
                 {{ $t('project-link-polymart') }}
             </ButtonLink>
-            <ButtonLink v-if="project.ids && project.ids.modrinth"
-                :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench" hollow>
+            <ButtonLink v-if="project.metadata.links?.modrinth" icon="fa6-solid:wrench" :link="project.metadata.links.modrinth" hollow>
                 {{ $t('project-link-modrinth') }}
             </ButtonLink>
-            <ButtonLink v-if="project.ids && project.ids.hangar"
-                :link="'https://hangar.papermc.io/' + project.ids.hangar" icon="fa6-solid:paper-plane" hollow>
+            <ButtonLink v-if="project.metadata.links?.builtbybit" icon="fa6-solid:cube" :link="project.metadata.links.builtbybit" hollow>
+                {{ $t('project-link-builtbybit') }}
+            </ButtonLink>
+            <ButtonLink v-if="project.metadata.links?.hangar" icon="fa6-solid:paper-plane" :link="project.metadata.links.hangar" hollow>
                 {{ $t('project-link-hangar') }}
             </ButtonLink>
-            <ButtonLink v-if="project.ids && project.ids.curseforge"
-                :link="'https://www.curseforge.com/minecraft/mc-mods/' + project.ids.curseforge" icon="fa6-solid:fire" hollow>
+            <ButtonLink v-if="project.metadata.links?.curseforge" icon="fa6-solid:fire" :link="project.metadata.links.curseforge" hollow>
                 {{ $t('project-link-curseforge') }}
-            </ButtonLink>
-            <ButtonLink v-if="project.ids && project.ids.builtbybit"
-                :link="'https://builtbybit.com/resources/' + project.ids.builtbybit" icon="fa6-solid:cube" hollow>
-                {{ $t('project-link-builtbybit') }}
             </ButtonLink>
         </div>
         <div class="stats">

@@ -9,7 +9,7 @@
                 <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }]" />
                 <h1>Terms, Conditions & Privacy Notice</h1>
                 <Tabs class="tabs" :tabs="tabs" v-model:selected="selectedTab">
-                    <ContentDoc :head="false" :path="`/legal/${selectedTab}`" />
+                    <LazyContentDoc :head="false" :path="`/legal/${selectedTab}`" />
                 </Tabs>
                 <div class="footer">
                     <p>Last updated: July 12th, 2024</p>

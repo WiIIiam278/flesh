@@ -19,9 +19,10 @@
                             <IconifiedText icon="fa6-brands:discord">{{ $t('link-support') }}</IconifiedText>
                         </a>
                     </li>
-                    <li v-if="auth">
-                        <NuxtLink to="/account">
-                            <IconifiedText icon="fa6-solid:user">{{ $t('link-my-account') }}</IconifiedText>
+                    <li v-if="user">
+                        <NuxtLink class="account-link" to="/account">
+                            <img v-if="user?.avatar" class="shadow" :src="user.avatar" :alt="`${user.name} Discord avatar`" />
+                            <span>{{ $t('link-account') }}</span>
                         </NuxtLink>
                     </li>
                     <li v-else>
@@ -36,7 +37,7 @@
 </template>
 
 <script setup>
-const { auth } = useAuth()
+const user = await useUser()
 const { t } = useI18n()
 </script>
 
@@ -84,6 +85,19 @@ nav #links ul {
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+.account-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.account-link img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
 }
 
 /* Less than 600px */

@@ -1,11 +1,7 @@
 <template>
     <div class="tabs" v-if="tabs?.length > 1">
-        <div
-            v-for="tab in tabs"
-            :class="`tab ${tab.id === selected ? 'selected' : ''}`"
-            :key="tab.id"
-            @click="selected = tab.id"
-        >
+        <div v-for="tab in tabs" :class="`tab ${tab.id === selected ? 'selected' : ''}`" 
+            :key="tab.id" @click="select(tab.id)">
             {{ tab?.name ?? tab.id }}
         </div>
     </div>
@@ -22,6 +18,21 @@ const { tabs } = defineProps({
     }
 });
 const selected = defineModel('selected');
+
+// Update selected tab based on hash
+const { hash } = useRoute();
+if (hash && tabs?.length > 1) {
+    if (tabs.find(tab => tab.id === hash.substring(1).toLowerCase())) {
+        selected.value = hash.substring(1).toLowerCase();
+    }
+}
+
+// Change tab and update hash
+const select = (id) => {
+    if (selected.value === id) return;
+    selected.value = id;
+    navigateTo(`#${id}`);
+}
 </script>
 
 <style scoped>

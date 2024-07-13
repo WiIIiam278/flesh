@@ -40,8 +40,8 @@
 }
 
 .filled-color-red {
-    border: 0.2rem solid rgb(255, 66, 66);
-    background-color: rgb(255, 66, 66);
+    border: 0.2rem solid var(--red);
+    background-color: var(--red);
 }
 
 .hollow {
@@ -54,8 +54,8 @@
 }
 
 .hollow-color-red {
-    border: 0.2rem solid rgb(255, 66, 66);
-    color: rgb(255, 66, 66);
+    border: 0.2rem solid var(--red);
+    color: var(--red);
 }
 
 .button-icon {

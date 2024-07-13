@@ -1,17 +1,16 @@
 <template>
     <span :class="`iconified-project ${centered ? 'centered' : ''}`">
-        <span v-if="project.icon" class="icon">
-            <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg" type="image/svg+xml" />
-            <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
+        <span v-if="project.metadata.icons" class="icon">
+            <object v-if="project.metadata.icons['SVG']" :data="`/images/icons/${project.metadata.icons['SVG']}`" type="image/svg+xml" />
+            <img v-else-if="project.metadata.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
         </span>
         <span class="name">
-            {{ project.name ? project.name : project.id }}
+            {{ project.metadata.name ? project.metadata.name : project.slug }}
         </span>
     </span>
 </template>
 
 <style scoped>
-
 .iconified-project {
     display: flex;
     flex-direction: row;
@@ -44,17 +43,16 @@
 }
 </style>
 
-<script>
-export default {
-    props: {
-        project: {
-            type: Object,
-            required: true
-        },
-        centered: {
-            type: Boolean,
-            default: false
-        }
+<script setup>
+defineProps({
+    project: {
+        type: Object,
+        required: true
+    },
+    centered: {
+        type: Boolean,
+        default: false,
+        required: false
     }
-}
+})
 </script>

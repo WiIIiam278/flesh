@@ -1,13 +1,13 @@
 <template>
     <div class="project-docs-grid">
-        <NuxtLink v-for="project in projects.filter(p => p.documentation)" :key="project.id" :to="'/docs/' + project.id">
+        <NuxtLink v-for="project in projects.filter(p => p.metadata.documentation)" :key="project.slug" :to="`/docs/${project.slug}`">
             <IconifiedProject :project="project" />
         </NuxtLink>
     </div>
 </template>
 
 <script setup>
-import projects from '/assets/data/projects.json'
+const { value: projects } = await useAllProjects();
 </script>
 
 <style scoped>

@@ -1,15 +1,15 @@
 <template>
     <div v-if="releases.length > 0">
-        <div class="title">Download {{ project.name }}</div>
+        <div class="title">Download {{ project.metadata.name }}</div>
         <div class="releases">
-            <DownloadCard v-for="(release, index) in releases" :key="index" :projectName="project.name" :release="release" :primary="index === 0" />
+            <DownloadCard v-for="(release, index) in releases" :key="index" :projectName="project.metadata.name" :release="release" :primary="index === 0" />
         </div>
     </div>
     <div v-else>
-        <div class="title">(No releases found for {{ project.name }}&hellip;)</div>
+        <div class="title">(No releases found for {{ project.metadata.name }}&hellip;)</div>
     </div>
     <div class="links">
-        <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github" hollow>Past releases & changelogs&hellip;</ButtonLink>
+        <ButtonLink v-if="project.metadata.repository" :link="project.metadata.repository" icon="fa6-brands:github" hollow>Past releases & changelogs&hellip;</ButtonLink>
     </div>
 </template>
 
@@ -20,7 +20,7 @@ const { project } = defineProps({
     }
 });
 
-const { data: releases } = await useFetch(`/api/releases/${project.id}`);
+const { data: releases } = await useFetch(`/api/releases/${project.slug}`);
 </script>
 
 <style scoped>
