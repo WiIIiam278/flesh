@@ -23,11 +23,15 @@
                     <p>{{ meta.tagline }}</p>
                 </div>
                 <div class="buttons">
+                    <ButtonLink v-if="meta.listDownloads" :link="`/project/${project.slug}#download`" icon="fa6-solid:download" hollow>
+                        {{$t('link-download')}}
+                    </ButtonLink>
                     <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
                         {{$t('link-docs')}}
                     </ButtonLink>
-                    <ButtonLink v-if="meta.github" icon="fa6-brands:github"  :link="meta.github"></ButtonLink>
-                    <ButtonLink v-for="link in meta.links.slice(0, 3)" :link="link.url" :icon="useLinkIcon(link)"></ButtonLink>
+                    <ButtonLink v-if="meta.github && !(meta.listDownloads && meta.documentation)" icon="fa6-brands:github" :link="meta.github"></ButtonLink>
+                    <ButtonLink v-if="!(meta.listDownloads && meta.documentation)" v-for="link in meta.links.slice(0, 3)" 
+                        :link="link.url" :icon="useLinkIcon(link)"></ButtonLink>
                 </div>
             </div>
             <div class="stats" v-if="stats">
@@ -80,8 +84,10 @@ const stats = await useProjectStats(project.slug);
 }
 
 .details {
+    display: flex;
     justify-self: flex-end;
     margin-right: auto;
+    flex-direction: column;
 }
 
 .image {
@@ -106,11 +112,6 @@ const stats = await useProjectStats(project.slug);
     border-radius: 0.5rem;
 }
 
-.details {
-    display: flex;
-    flex-direction: column;
-}
-
 .name {
     margin: 0;
 }
@@ -121,6 +122,7 @@ const stats = await useProjectStats(project.slug);
     -webkit-flex-wrap: wrap;
     margin: 0.4rem -0.2rem;
     font-size: 0.9rem;
+    align-items: center;
 }
 
 .description {
@@ -195,6 +197,7 @@ const stats = await useProjectStats(project.slug);
 
     .details {
         margin-right: 0;
+        align-items: center;
     }
 
     .buttons {

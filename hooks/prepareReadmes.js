@@ -1,10 +1,13 @@
 // Download project documentation and READMEs from GitHub
-const fs = require('fs')
-const fetch = require('node-fetch')
-const projects = require('../assets/data/projects.json')
+import fs from 'node:fs'
+import fetch from 'node-fetch'
+
+// Get filtered projects
+const getProjects = async () => await fetch(`${process.env.API_BASE_URL}/v1/projects`)
+    .then(res => res.json());
 
 // Convert links in a README file
-function convertLinks(body, project) {
+const convertLinks = (body, project) => {
     // Find references to images in the README body, including images wrapped within links
     const imageRegex = /(?<alt>!\[[^\]]*\])\((?<filename>.*?)(?=\"|\))\)/g
     const images = body.matchAll(imageRegex)
@@ -23,9 +26,9 @@ function convertLinks(body, project) {
         path = path.replace(/^\.?\//, '')
 
         // Get the image path
-        const imagePath = `${getRawUrl(project.repository)}/${imageSource}`
+        const imagePath = `${getRawGithubURL(project.metadata?.github)}/${imageSource}`
         const imageFilename = imagePath.split('/').pop()
-        const targetPath = `images/project/${project.id}`
+        const targetPath = `images/project/${project.slug}`
 
         // Fetch the image from the URL
         fetch(imagePath)
@@ -58,9 +61,9 @@ function convertLinks(body, project) {
         path = path.replace(/^\.?\//, '')
 
         // Get the image path
-        const imagePath = `${getRawUrl(project.repository)}/${imageSource}`
+        const imagePath = `${getRawGithubURL(project.metadata.github)}/${imageSource}`
         const imageFilename = imagePath.split('/').pop()
-        const targetPath = `images/project/${project.id}`
+        const targetPath = `images/project/${project.slug}`
 
         // Fetch the image from the URL
         fetch(imagePath)
@@ -83,19 +86,18 @@ function convertLinks(body, project) {
 }
 
 // Get the raw URL for a repository
-function getRawUrl(repository) {
-    return repository.replace('https://github.com/', 'https://raw.githubusercontent.com/') + '/master';
-}
+const getRawGithubURL = (github) => github.replace('https://github.com/', 'https://raw.githubusercontent.com/') + '/master';
 
 // Get a README file from a project repo
-function getReadmeFromRepository(project) {
-    if (!project.repository) {
+const getReadmeFromRepository = (project) => {
+    const { github } = project.metadata;
+    if (!github) {
         return
     }
 
     // Fetch the readme file from URL as plaintext, allowing redirects
-    const url = `${getRawUrl(project.repository)}/README.md`
-    const path = `./content/project/${project.id}.md`
+    const url = `${getRawGithubURL(github)}/README.md`
+    const path = `./content/project/${project.slug}.md`
     fetch(url)
         .then(res => res.text())
         .then(body => {
@@ -106,34 +108,29 @@ function getReadmeFromRepository(project) {
         })
 }
 
-// Get a project README file from the assets folder
-const getReadmeFromAssets = (project) => {
-    if (!project.readme) {
-        return
+// Get a project README file from the project
+const writeReadmeContentFile = (project) => {
+    const { readmeBody: body } = project.metadata;
+    if (body) {
+        return fs.writeFileSync(`./content/project/${project.id}.md`, body)
     }
-
-    // Copy the readme file from the assets folder to the content/project folder
-    const path = `./assets/project/${project.id}.md`
-    if (fs.existsSync(path)) {
-        fs.copyFileSync(path, `./content/project/${project.id}.md`)
-    } else {
-        console.warn(`No readme file for project ${project.id}`)
-    }
+    console.warn(`No readme file for project ${project.id}`)
 }
 
 // Pull README files for each project
 module.exports = {
-    getContent: () => {
+    prepareReadmes: async () => {
         // Check if a ./content/project/ folder exists, if not make it
         const contentDirectory = './content/project/'
         if (!fs.existsSync(contentDirectory)) {
             fs.mkdirSync(contentDirectory)
         }
 
-        console.log(`Downloading READMEs for ${projects.length} projects...`)
+        const projects = await getProjects()
+        console.log(`Preparing READMEs for ${projects.length} projects...`)
         for (const project of projects) {
-            if (project.readme) {
-                getReadmeFromAssets(project);
+            if (!project.metadata.pullReadmeFromGithub) {
+                writeReadmeContentFile(project);
                 continue;
             }
             getReadmeFromRepository(project);

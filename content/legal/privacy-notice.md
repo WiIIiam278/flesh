@@ -72,12 +72,12 @@ If you remain unhappy with how we’ve used your data after raising a complaint 
 
 The ICO’s address:           
 
-> Information Commissioner’s Office  
-> Wycliffe House  
-> Water Lane  
-> Wilmslow  
-> Cheshire  
-> SK9 5AF  
+Information Commissioner’s Office  
+Wycliffe House  
+Water Lane  
+Wilmslow  
+Cheshire  
+SK9 5AF  
 
 * Helpline number: 0303 123 1113
 * Website: [https://www.ico.org.uk/make-a-complaint](https://ico.org.uk/make-a-complaint/ "Make a complaint")

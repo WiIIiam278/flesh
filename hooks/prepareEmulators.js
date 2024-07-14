@@ -1,10 +1,14 @@
 // Download project documentation and READMEs from GitHub
-const fs = require('fs');
-const { execSync } = require('child_process');
-const fetch = require('node-fetch')
-const projects = require('../assets/data/projects.json').filter(p => p.emulator && p.emulator.rom_url)
+import fs from 'node:fs'
+import fetch from 'node-fetch'
+import { execSync } from 'node:child_process'
 
-function getEmulatorJs() {
+// Get filtered projects
+const getProjects = async () => await fetch(`${process.env.API_BASE_URL}/v1/projects`)
+    .then(res => res.json())
+    .then(projects => projects.filter(project => project.metadata?.properties?.emulator));
+
+const getEmulatorJs = () => {
     const emulatorPath = `https://github.com/EmulatorJS/EmulatorJS.git`;
     const destPath = './public/emulator-js';
 
@@ -28,9 +32,13 @@ function getEmulatorJs() {
     }
 }
 
-function downloadRom(project) {
+const downloadRom = (project) => {
     // Download project.emulator.rom_url and put it in /emulator-js/roms/
-    const romUrl = `${project.emulator.rom_url}`;
+    const romUrl = project.metadata.properties?.emulator?.rom;
+    if (!romUrl) {
+        console.log(`No ROM found for ${project.name}, skipping...`);
+        return;
+    }
     const romPath = `./public/emulator-js/roms`;
     console.log(`Downloading ${project.name} ROM...`);
     
@@ -54,8 +62,9 @@ function downloadRom(project) {
 
 // Pull documentation for all projects with documentation
 module.exports = {
-    getEmulator: () => {
+    prepareEmulators: async () => {
         console.log(`Cloning EmulatorJS source...`);
+        const projects = await getProjects();
         getEmulatorJs();
         console.log(`Downloading ROMs for ${projects.length} projects...`);
         for (const project of projects) {

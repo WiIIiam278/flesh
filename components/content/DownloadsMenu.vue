@@ -2,7 +2,8 @@
     <div v-if="releases.length > 0">
         <div class="title">Download {{ project.metadata.name }}</div>
         <div class="releases">
-            <DownloadCard v-for="(release, index) in releases" :key="index" :projectName="project.metadata.name" :release="release" :primary="index === 0" />
+            <!-- <DownloadCard v-for="(release, index) in releases" :key="index" :projectName="project.metadata.name" :release="release" :primary="index === 0" /> -->
+            <div v-for="(release, index) in releases">{{release}}</div>
         </div>
     </div>
     <div v-else>

@@ -163,7 +163,8 @@ const galleryClick = () => {
 
 
 .buttons {
-    margin-left: -0.35rem;
+    display: flex;
+    gap: 0.35rem;
 }
 
 .stats {

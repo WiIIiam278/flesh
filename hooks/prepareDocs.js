@@ -1,10 +1,15 @@
 // Download project documentation and READMEs from GitHub
-const fs = require('fs')
-const { execSync } = require('child_process')
-const projects = require('../assets/data/projects.json').filter(p => p.repository && p.documentation)
+import fs from 'node:fs'
+import fetch from 'node-fetch'
+import { execSync } from 'node:child_process'
+
+// Get filtered projects
+const getProjects = async () => await fetch(`${process.env.API_BASE_URL}/v1/projects`)
+    .then(res => res.json())
+    .then(projects => projects.filter(project => project.metadata.documentation && project.metadata.github));
 
 // Adds the canonical title of the page
-function addNameHeader(filePath, name) {
+const addNameHeader = (filePath, name) => {
     const file = fs.readFileSync(filePath, 'utf8');
     const header = `---\ntitle: ${name.replace('.md', '').replace(/-/g, ' ')}\n---\n`;
     if (!file.startsWith('---')) {
@@ -13,10 +18,10 @@ function addNameHeader(filePath, name) {
 }
 
 // Fetches and clones docs for each project repo
-function getDocumentationFromRepository(project) {
-    const wikiUrl = `${project.repository}.wiki.git`
+const getDocumentationFromRepository = (project) => {
+    const wikiUrl = `${project.metadata.github}.wiki.git`
     const projectPath = './content/docs/project'
-    const wikiPath = `${projectPath}/${project.id}`
+    const wikiPath = `${projectPath}/${project.slug}`
 
     // If the project path does not exist, make the directory
     if (!fs.existsSync(projectPath + '/')) {
@@ -59,7 +64,8 @@ function getDocumentationFromRepository(project) {
 
 // Pull documentation for all projects with documentation
 module.exports = {
-    pullDocumentation: () => {
+    prepareDocs: async () => {
+        const projects = await getProjects();
         console.log(`Pulling documentation for ${projects.length} projects...`)
         for (const project of projects) {
             getDocumentationFromRepository(project);

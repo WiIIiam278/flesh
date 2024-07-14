@@ -49,6 +49,7 @@ const select = (id) => {
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-align: center;
     margin-right: 0.5rem;
     padding: 0.35rem 0.85rem;
     border-radius: 0.5rem;

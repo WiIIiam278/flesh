@@ -23,7 +23,6 @@
     border-radius: 1rem;
     text-decoration: none;
     transition: background-color 0.2s ease-in-out;
-    margin: 0.15rem;
 }
 
 .button:hover {

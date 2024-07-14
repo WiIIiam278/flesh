@@ -59,12 +59,8 @@
 </template>
 
 <script setup>
-import BreadcrumbDivider from '../../../components/BreadcrumbDivider.vue';
-import InvalidPage from '../../../components/InvalidPage.vue';
-import PathLine from '../../../components/content/PathLine.vue';
-
 const { locale, t } = useI18n()
 const { params } = useRoute()
 const project = await useProject(params.project.toLowerCase());
-const { metadata: meta } = project.value;
+const { metadata: meta } = project.value || {};
 </script>

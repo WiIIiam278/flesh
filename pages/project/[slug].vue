@@ -52,7 +52,7 @@
 const { t } = useI18n()
 const { params } = useRoute()
 const project = await useProject(params.slug.toLowerCase());
-const { metadata: meta } = project.value;
+const { metadata: meta } = project.value || {};
 
 // Setup tabs
 const tabs = [{ id: 'about', name: t('tab-about') }];

@@ -1,11 +1,4 @@
-// Match all ""> **Text:** Blah" and replace with the following. If the text is "Warning", then type should be warning:
-// ::notice
-// ----
-// title: Text
-// type: info
-// ----
-// Blah
-// ::
+// Special wiki markup parsing
 const parseNotices = (text) => {
     let parsed = text;
 

@@ -115,6 +115,12 @@ definePageMeta({
     height: 100%;
 }
 
+.profile .management-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
 .item-body {
     width: 100%;
     display: flex;
@@ -152,6 +158,7 @@ definePageMeta({
     background-color: rgb(33, 33, 33, 0.95);
     padding: 1rem;
     width: 40%;
+    min-width: 500px;
     border-radius: 0.5rem;
     gap: 1rem;
 }
@@ -164,6 +171,29 @@ definePageMeta({
     background-image: url('/images/icons/promo-grid.png');
     background-size: 125px;
     animation: slide 60s linear infinite;
+}
+
+/* Mobile user container */
+@media screen and (max-width: 550px) {
+    .profile-bg {
+        visibility: hidden;
+    }
+    
+    .profile {
+        height: fit-content !important;
+        background: none;
+    }
+
+    .profile .user-container {
+        width: 100%;
+        background-color: transparent;
+    }
+
+    /* management buttons */
+    .profile .management-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .user-card {
