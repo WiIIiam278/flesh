@@ -302,6 +302,11 @@ button.delete {
   color: var(--red);
 }
 
+button[disabled]:hover, button[disabled].delete:hover {
+  background-color: var(--dark-gray) !important;
+  border-color: var(--gray) !important;
+}
+
 button:hover {
   background-color: var(--dark-gray);
   border-color: var(--accent);

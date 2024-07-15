@@ -2,7 +2,7 @@
     <article class="users-table">
         <div v-if="users.value" class="search-options">
             <b>Displaying {{ users.value.numberOfElements }} user record(s)</b>
-            <form class="search-box" v-on:submit="(e) => { e.preventDefault(); updateUsers(); }">
+            <form class="search-box" v-on:submit="(e) => { e.preventDefault(); updateUsers(pageNumber.value, itemsPerPage.value); }">
                 <input type="text" v-model="searchText" placeholder="Search by username" />
                 <button type="submit">Search</button>
             </form>
@@ -12,6 +12,7 @@
                 <tr>
                     <th class="avatar">Avatar</th>
                     <th class="id">ID</th>
+                    <th class="created">Created</th>
                     <th class="username">Username</th>
                     <th class="email">Email</th>
                     <th class="role">Role</th>
@@ -25,19 +26,20 @@
                         <img :src="user.avatar" alt="User avatar" />
                     </td>
                     <td><code>{{ user.id }}</code></td>
+                    <td>{{ new Date(user.createdAt).toLocaleString() }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
                     <td :class="user.admin ? 'admin-role' : ''">{{ user.admin ? 'Admin' : 'User' }}</td>
                     <td>
                         <div class="purchased-products" v-for="project in restrictedProjects" :key="project.slug">
                             <label :for="`${user.id}-project-${project.slug}`">
-                                <span v-if="user.projects.includes(project.slug)">{{ project.metadata.name }}</span>
+                                <span v-if="user.purchases.includes(project.slug)">{{ project.metadata.name }}</span>
                                 <span v-else  class="unchecked">{{ project.metadata.name }}</span>
                             </label>
-                            <input type="checkbox" :id="`${user.id}-project-${project.slug}`" :checked="user.projects.includes(project.slug)"
+                            <input type="checkbox" :id="`${user.id}-project-${project.slug}`" :checked="user.purchases.includes(project.slug)"
                                 @change="updateUserProjects(user, project.slug)" />
                         </div>
-                        <div class="no-purchased-products" v-if="!restrictedProjects.length">No products are restricted</div>
+                        <div class="no-purchased-products" v-if="!restrictedProjects.length">No products can be purchased</div>
                     </td>
                     <td>
                         <button class="delete" :disabled="user.admin" @click="deleteUser(user)">Delete</button>
@@ -45,23 +47,7 @@
                 </tr>
             </tbody>
         </table>
-        <div v-if="users.value" class="pagination-buttons">
-            <div class="button-row">
-                <label>Page:</label>
-                <button @click="() => {pageNumber--; updateUsers()}" :disabled="pageNumber === 1">Previous</button>
-                <input class="page-input" v-model="pageNumber" @change="updateUsers" type="number" min="1" :max="Math.ceil(users.value.numberOfElements / itemsPerPage)" />
-                <label>/ {{ Math.ceil(users.value.numberOfElements / itemsPerPage) }}</label>
-                <button @click="() => {pageNumber++; updateUsers()}" :disabled="pageNumber * itemsPerPage >= users.value.numberOfElements">Next</button>
-            </div>
-            <div class="button-row">
-                <label>Per page:</label>
-                <select class="page-input" v-model="itemsPerPage" @change="updateUsers">
-                    <option value="15">15</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
-                </select>
-            </div>
-        </div>
+        <Pagination v-if="users.value" :data="users.value" v-on:update="(page, perPage) => updateUsers(page, perPage)" />
     </article>
 </template>
 
@@ -75,22 +61,24 @@ const searchText = ref('');
 const { auth, xsrf } = useAuth();
 const restrictedProjects = await useRestrictedProjects();
 
-const updateUsers = (async () => {
+const updateUsers = (async (page, perPage) => {
+    pageNumber.value = Math.max(1, page || pageNumber.value);
+    itemsPerPage.value = Math.max(15, perPage || itemsPerPage.value);
     users.value = await useAllUsers(pageNumber.value - 1, itemsPerPage.value, searchText.value);
 });
-await updateUsers();
+await updateUsers(pageNumber.value, itemsPerPage.value);
 
 const updateUserProjects = async (user, projectId) => {
-    user.projects = user.projects.includes(projectId) ? user.projects.filter(p => p !== projectId) : [...user.projects, projectId];
+    user.purchases = user.purchases.includes(projectId) ? user.purchases.filter(p => p !== projectId) : [...user.purchases, projectId];
     try {
-        await $fetch(`${BASE_URL}/v1/users/${user.id}/projects`, {
+        await $fetch(`${BASE_URL}/v1/users/${user.id}/purchases`, {
             method: 'PUT',
             credentials: auth ? 'include' : 'omit',
             headers: {
                 'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
                 'X-XSRF-TOKEN': xsrf
             },
-            body: JSON.stringify(user.projects)
+            body: JSON.stringify(user.purchases)
         });
     } catch (err) {
         alert('Failed to update user\'s products: ' + err);
@@ -137,11 +125,11 @@ const deleteUser = async (user) => {
 }
 
 .role {
-    width: 10% !important;
+    width: 8% !important;
 }
 
-.id, .username, .email {
-    width: 20% !important;
+.id, .username, .email, .created {
+    width: 15% !important;
 }
 
 .purchased-products {
@@ -176,21 +164,5 @@ const deleteUser = async (user) => {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-}
-
-.pagination-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 1rem;
-}
-
-.pagination-buttons .page-input {
-    width: 4rem;
-    margin: 0 0.5rem;
-}
-
-.pagination-buttons label {
-    margin-right: 0.5rem;
 }
 </style>

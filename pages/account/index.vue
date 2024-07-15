@@ -31,8 +31,8 @@
                         </div>
                         <Tabs class="tabs grid-item" :tabs="tabs" v-model:selected="activeTab">
                             <div v-if="activeTab === 'your-purchases'" class="item-body library">
-                                <div v-if="user.projects.length">
-                                    <ProjectCard v-for="product in restricted.filter(r => user.projects.includes(r.slug))" 
+                                <div v-if="user.purchases.length">
+                                    <ProjectCard v-for="product in restricted.filter(r => user.purchases.includes(r.slug))" 
                                         :key="product.slug" :project="product" />
                                 </div>
                                 <IconifiedText v-else class="empty-notice" icon="fa6-solid:bag-shopping">{{ $t('no-products-notice') }}</IconifiedText>

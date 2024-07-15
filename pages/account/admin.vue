@@ -10,6 +10,9 @@
                             <div v-if="activeTab === 'projects'">
                                 <ProjectEditor />
                             </div>
+                            <div v-if="activeTab === 'versions'">
+                                <VersionImporter />
+                            </div>
                             <div v-if="activeTab === 'users'">
                                 <UsersTable />
                             </div>
@@ -24,6 +27,7 @@
 <script setup>
 const tabs = [
     { id: 'projects', name: 'Projects' },
+    { id: 'versions', name: 'Versions' },
     { id: 'users', name: 'Users' },
 ]
 const activeTab = defineModel('activeTab')

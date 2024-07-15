@@ -10,6 +10,9 @@
                 </select>
             </div>
             <div class="button-panel">
+                <NuxtLink v-if="editing" :to="`/project/${editing?.slug}#about`">
+                    <IconifiedText icon="fa6-solid:arrow-up-right-from-square">View Project</IconifiedText>
+                </NuxtLink>
                 <button :disabled="!editing" class="delete" @click="deleteProject">Delete</button>
                 <button :disabled="!editing" @click="saveProject">Save</button>
                 <Icon v-if="saved" class="saved-check" name="fa6-solid:check" />
@@ -163,6 +166,11 @@
                     <input v-model="editing.metadata.suggestedRetailPrice" type="number" step="0.01" placeholder="0.00" />
                 </div>
             </div>
+            <!-- metadata.linkedDiscordRole box, 18 chars -->
+            <div v-if="editing.restricted">
+                <label for="linkedDiscordRole">Linked Discord Role ID</label>
+                <input v-model="editing.metadata.linkedDiscordRole" type="text" placeholder="Linked Discord Role ID" />
+            </div>
             <!-- metadata.pullReadmeFromGithub checkbox -->
             <div>
                 <label for="pullReadmeFromGithub">Pull README from GitHub</label>
@@ -211,6 +219,7 @@ const getDefaultProject = ((slug) => `
       "William278"
     ],
     "suggestedRetailPrice": "0",
+    "linkedDiscordRole": "",
     "archived": false,
     "documentation": true,
     "listDownloads": true,

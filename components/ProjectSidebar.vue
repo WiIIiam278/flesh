@@ -20,11 +20,11 @@
             </div>
         </div>
         <div class="tagline">{{ meta.tagline }}</div>
-        <div class="buttons" v-if="meta.documentation || meta.repository">
+        <div class="buttons" v-if="meta.documentation || meta.github">
             <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
                 {{ $t('link-docs') }}
             </ButtonLink>
-            <ButtonLink v-if="meta.repository" icon="fa6-brands:github" :link="meta.repository" hollow>
+            <ButtonLink v-if="meta.github" icon="fa6-brands:github" :link="meta.github" hollow>
                 {{ $t('project-link-repository') }}
             </ButtonLink>
         </div>
@@ -161,10 +161,10 @@ const galleryClick = () => {
     border-radius: 0.5rem;
 }
 
-
 .buttons {
     display: flex;
     gap: 0.35rem;
+    flex-wrap: wrap;
 }
 
 .stats {
