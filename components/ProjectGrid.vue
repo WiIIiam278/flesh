@@ -42,10 +42,10 @@ const { shown } = defineProps({
 
 const filtered = computed(() => {
     let filtered;
-    if (selectedTags.value.length) {
+    if (projects.value && selectedTags.value.length) {
         filtered = projects.value.filter(p => !p.metadata?.tags || selectedTags.value.every(tag => p.metadata.tags.includes(tag)));
     } else {
-        filtered = projects.value;
+        filtered = projects.value || [];
     }
     return filtered.sort((a, b) => (a.metadata?.sortWeight || 0) - (b.metadata?.sortWeight || 0));
 });

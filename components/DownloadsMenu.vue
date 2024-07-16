@@ -1,23 +1,21 @@
 <template>
-    <div>
-        <div class="channel-picker">
+    <div class="version-options">
+        <div class="option channel-picker">
             <label for="dist-select">Channel:</label>
-            <select v-model="selectedChannel" @change="updateVersions">
+            <select :disabled="releaseChannels.length <= 1" v-model="selectedChannel" @change="updateVersions">
                 <option v-for="channel in releaseChannels" :key="channel" :value="channel">{{ channel }}</option>
             </select>
         </div>
-        <div class="dist-group-picker">
+        <div class="option dist-group-picker">
             <label for="dist-group-select">Platform:</label>
-            <div class="dist-group" v-for="(name, group) in distGroups" :key="groupName">
-                <label :for="`dist-group-${group}`">
-                    <!-- todo icon -->
-                    {{ group }}
-                </label>
+            <label v-for="(name, group) in distGroups" :for="`dist-group-${group}`" :key="groupName"
+                :class="`dist-group ${selectedDistGroup === group ? 'checked' : ''}`">
+                {{ group }}
                 <input type="radio" :id="`dist-group-${group}`" name="dist-group" :value="name" 
                     @change="updateDistSelection" v-model="selectedDistGroup" />
-            </div>
+            </label>
         </div>
-        <div class="dist-picker" v-if="selectedDistGroup && selectedDistGroup.length > 1">
+        <div class="option dist-picker" v-if="selectedDistGroup && selectedDistGroup.length > 1">
             <label for="dist-select">Distribution:</label>
             <select v-model="selectedDist" @change="updateVersions">
                 <option v-for="dist in selectedDistGroup" :key="dist.id" :value="dist.id">{{ dist.description }}</option>
@@ -72,3 +70,40 @@ const updateVersions = (async (page, perPage) => {
 await updateVersions(pageNumber.value, itemsPerPage.value);
 
 </script>
+
+<style scoped>
+.version-options {
+    display: flex;
+    gap: 1rem;
+}
+
+.option select {
+    width: 150px;
+}
+
+.dist-group-picker .dist-group {
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+  border: 0.1rem solid var(--gray);
+  border-radius: 0.5rem;
+  background-color: var(--gray);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.dist-group-picker .dist-group.checked {
+    background-color: var(--accent) !important;
+}
+
+.dist-group input[type="radio"] {
+    display: none;
+}
+
+.version-options .option {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+</style>
