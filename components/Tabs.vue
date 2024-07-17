@@ -46,24 +46,21 @@ const select = (id) => {
 }
 
 .tabs .tab {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    margin-right: 0.5rem;
     padding: 0.35rem 0.85rem;
+    border: 0.15rem solid var(--gray);
     border-radius: 0.5rem;
     background-color: var(--gray);
+    color: var(--accent);
     cursor: pointer;
-    box-sizing: border-box;
-    border: 0.15rem solid transparent;
+    display: flex;
+    margin-right: 0.5rem;
 }
 
 .tabs .tab.selected {
-    background-color: var(--dark-gray);
+    border: 0.15rem solid var(--accent);
 }
 
 .tabs .tab:hover {
-    border: 0.15rem solid var(--accent);
+    background-color: var(--dark-gray);
 }
 </style>

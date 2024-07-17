@@ -22,14 +22,14 @@
 }
 
 #project-page {
+    display: flex;
     margin: 1rem auto;
     max-width: 1400px;
-    display: flex;
+    gap: 1rem;
 }
 
 #project-readme {
     flex: 1;
-    padding: 0 1rem;
     max-width: 65vw;
     width: 95vw;
 }
@@ -37,14 +37,13 @@
 #project-sidebar {
     flex: 1;
     padding: 0 1rem;
-    max-width: 350px;
-    width: 25vw;
+    max-width: 300px;
 }
 
 /* Less than 650px */
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 900px) {
     #project-page {
-        flex-direction: column-reverse;
+        flex-direction: column;
         max-width: 85vw;
         margin: 0 auto;
     }

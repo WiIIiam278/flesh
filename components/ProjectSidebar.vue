@@ -97,7 +97,6 @@ const galleryClick = () => {
 .project-sidebar {
     display: flex;
     flex-direction: column;
-    min-width: 20vw;
     max-width: 100%;
     gap: 0.5rem;
 }

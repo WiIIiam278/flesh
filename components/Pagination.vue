@@ -4,8 +4,8 @@
             <label>Page:</label>
             <button @click="() => {pageNumber--; $emit('update', pageNumber, itemsPerPage)}" :disabled="pageNumber === 1">Previous</button>
             <input class="page-input" v-model="pageNumber" @change="updateUsers" type="number" min="1" :max="Math.ceil(data.numberOfElements / itemsPerPage)" />
-            <label>/ {{ Math.ceil(data.numberOfElements / itemsPerPage) }}</label>
-            <button @click="() => {pageNumber++; $emit('update', pageNumber, itemsPerPage)}" :disabled="pageNumber * itemsPerPage >= data.numberOfElements">Next</button>
+            <label>/ {{ data.totalPages }}</label>
+            <button @click="() => {pageNumber++; $emit('update', pageNumber, itemsPerPage)}" :disabled="pageNumber >= data.totalPages">Next</button>
         </div>
         <div class="button-row">
             <label>Per page:</label>
@@ -40,7 +40,7 @@ const emit = defineEmits(['update']);
 }
 
 .pagination-buttons .page-input {
-    width: 4rem;
+    width: min-content;
     margin: 0 0.5rem;
 }
 

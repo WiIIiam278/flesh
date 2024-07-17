@@ -1,25 +1,79 @@
 <template>
-    <div class="version-options">
-        <div class="option channel-picker">
-            <label for="dist-select">Channel:</label>
-            <select :disabled="releaseChannels.length <= 1" v-model="selectedChannel" @change="updateVersions">
-                <option v-for="channel in releaseChannels" :key="channel" :value="channel">{{ channel }}</option>
-            </select>
+    <div v-if="!ownsProject()" class="upsell">
+        <div v-if="user" class="upsell-error">
+            <IconifiedText icon="fa6-solid:lock"><h3>You don't own this project!</h3></IconifiedText>
+            <p>
+                <span>Please purchase the project and verify your purchase on our </span>
+                <a href="https://discord.gg/tVYhJfyDWG" target="_blank">Discord Server</a>
+                <span> by opening a ticket.</span>
+            </p>
         </div>
-        <div class="option dist-group-picker">
-            <label for="dist-group-select">Platform:</label>
-            <label v-for="(name, group) in distGroups" :for="`dist-group-${group}`" :key="groupName"
-                :class="`dist-group ${selectedDistGroup === group ? 'checked' : ''}`">
-                {{ group }}
-                <input type="radio" :id="`dist-group-${group}`" name="dist-group" :value="name" 
-                    @change="updateDistSelection" v-model="selectedDistGroup" />
-            </label>
+        <div v-else  class="upsell-error">
+            <IconifiedText icon="fa6-solid:lock"><h3>Please log in to access this project's downloads.</h3></IconifiedText>
+            <ButtonLink :href="`${useRuntimeConfig().public.API_BASE_URL}/login`" icon="fa6-solid:key" hollow>{{ $t('link-log-in') }}</ButtonLink>
         </div>
-        <div class="option dist-picker" v-if="selectedDistGroup && selectedDistGroup.length > 1">
-            <label for="dist-select">Distribution:</label>
-            <select v-model="selectedDist" @change="updateVersions">
-                <option v-for="dist in selectedDistGroup" :key="dist.id" :value="dist.id">{{ dist.description }}</option>
-            </select>
+    </div>
+    <div v-else class="downloads-menu">
+        <div class="latest-release" v-if="latestRelease">
+            <div class="download-buttons">
+                <a class="button" :href="downloadUrl(latestRelease, DEFAULT_CHANNEL, download.distribution)" v-for="download of latestRelease.downloads">
+                    <img class="icon" :src="`/images/platforms/${download.distribution.groupName}.png`" onerror="this.style.display='none'" />
+                    <div class="details">
+                        <div class="name">{{ download.distribution.description }}</div>
+                        <div class="file">
+                            <span class="file">{{ download.name }}</span>
+                            <span class="size-hash">{{ formatFileSize(download.fileSize) }}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="changelog">
+                <h2 class="release-name">{{ project.metadata.name }} {{ latestRelease.name }} ({{ new Date(latestRelease.timestamp).toLocaleDateString() }})</h2>
+                <article v-html="getChangelog(latestRelease)" />
+            </div>
+        </div>
+        <div class="other-releases">
+            <h3 class="channel-picker">
+                <span>Browse All</span>
+                <select v-model="selectedChannel" @change="updateVersions(pageNumber, itemsPerPage)">
+                    <option v-for="channel in releaseChannels" :key="channel" :value="channel">{{ capitalize(channel) }}</option>
+                </select>
+                <span>Versions</span>
+            </h3>
+            <div class="version-options">
+                <div class="option dist-group-picker">
+                    <label for="dist-group-select">Filter:</label>
+                    <label v-for="(_, group) in getDistGroups()" :for="`dist-group-${group}`" :key="groupName"
+                        :class="`dist-group ${selectedDistGroup === group ? 'selected' : ''}`">
+                        <img class="icon" :src="`/images/platforms/${group}.png`" onerror="this.style.display='none'" />
+                        <span class="name">{{ capitalize(group) }}</span>
+                        <input type="radio" :id="`dist-group-${group}`" name="dist-group" :value="group" 
+                            @change="updateDistSelection" v-model="selectedDistGroup" />
+                    </label>
+                </div>
+                <div class="dist-picker" v-if="selectedDistGroup && getDistGroups()[selectedDistGroup].length > 1">
+                    <label for="dist-select">Version:</label>
+                    <select v-model="selectedDist" @change="updateVersions(pageNumber, itemsPerPage)">
+                        <option v-for="dist in getDistGroups()[selectedDistGroup]" :key="dist.name" :value="dist">{{ dist.description }}</option>
+                    </select>
+                </div>
+            </div>
+            <div v-if="versions.value" class="version-browser">
+                <div class="versions">
+                    <div class="version" v-for="version in versions.value.content">
+                        <div class="download-details">
+                            <a class="download-button" :href="downloadUrl(version, selectedChannel, selectedDist)">
+                                <IconifiedText icon="fa6-solid:download">{{ version.name }}</IconifiedText>
+                            </a>
+                            <article class="download-changelog" v-html="getChangelog(version, true)" />
+                        </div>
+                        <div class="download-date">
+                            {{ new Date(version.timestamp).toLocaleDateString() }}
+                        </div>
+                    </div>
+                </div>
+                <Pagination :data="versions.value" v-on:update="(page, perPage) => updateVersions(page, perPage)" />
+            </div>
         </div>
     </div>
 </template>
@@ -27,7 +81,18 @@
 <script setup>
 const DEFAULT_CHANNEL = 'release';
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
-const { auth, xsrf } = useAuth();
+
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+};
+const downloadUrl = (release, channel, dist) => `${BASE_URL}/v1/projects/${project.slug}/channels/${channel}/versions/${release.name}/distributions/${dist.name}`;
+const getChangelog = (release, short = false) => useDiscordMarkdown(!short ? release.changelog : release.changelog.split('\n')[0]);
+const ownsProject = () => user.value && user.value.admin || user.value.purchases.some(p => p === project.slug);
 
 const { project } = defineProps({
     project: {
@@ -44,18 +109,25 @@ const versions = ref(null);
 const selectedDistGroup = ref(null);
 const selectedDist = ref(null);
 const selectedChannel = ref(DEFAULT_CHANNEL);
-const updateDistSelection = () => {
-    selectedDistGroup.value = selectedDistGroup.value ?? Object.keys(distGroups.value)[0];
-    selectedDist.value = selectedDistGroup.value[0].id;
-    updateVersions();
+const updateDistSelection = async () => {
+    selectedDistGroup.value = selectedDistGroup.value;
+    pageNumber.value = 1;
+    selectedDist.value = selectedDistGroup.value ? getDistGroups()[selectedDistGroup.value][0] : null;
+    await updateVersions(pageNumber.value, itemsPerPage.value)
 };
 
+const latestRelease = await useLatestVersion(project.slug, DEFAULT_CHANNEL);
 const distributions = await useDistributions(project.slug);
-const distGroups = computed(() => {
+const user = await useUser();
+const getDistGroups = (() => {
     const grouped = {};
     for (const dist of distributions.value) {
         if (!grouped[dist.groupName]) {
             grouped[dist.groupName] = [];
+        }
+        if (!selectedDistGroup.value) {
+            selectedDistGroup.value = dist.groupName;
+            updateDistSelection();
         }
         grouped[dist.groupName].push(dist);
     }
@@ -65,16 +137,132 @@ const distGroups = computed(() => {
 const updateVersions = (async (page, perPage) => {
     pageNumber.value = Math.max(1, page || pageNumber.value);
     itemsPerPage.value = Math.max(15, perPage || itemsPerPage.value);
-    versions.value = await useVersions(project.slug, selectedChannel.value, pageNumber.value - 1, itemsPerPage.value);
+    versions.value = await useVersions(project.slug, selectedChannel.value, selectedDist.value?.name, pageNumber.value - 1, itemsPerPage.value);
 });
 await updateVersions(pageNumber.value, itemsPerPage.value);
-
 </script>
 
 <style scoped>
+.upsell {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.upsell-error {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.latest-release {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    max-width: 100%;
+    justify-content: space-between;
+}
+
+.latest-release .download-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 40%;
+}
+
+.latest-release .changelog {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.changelog .release-name {
+    width: fit-content;
+    margin: 0 0 1rem 0;
+}
+
+.changelog .content {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.download-buttons .button {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border: 0.15rem solid var(--gray);
+    border-radius: 0.5rem;
+    background-color: var(--gray);
+    color: var(--accent);
+    cursor: pointer;
+}
+
+.download-buttons .button:hover, .version .download-button:hover {
+    background-color: var(--dark-gray);
+    background: linear-gradient(transparent, #00fb9b1e);
+    text-decoration: none;
+}
+
+.button .icon {
+    width: 2rem;
+    max-height: 4rem;
+}
+
+.button .details {
+    display: flex;
+    flex-direction: column;
+}
+
+.details .name {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.details .file {
+    color: var(--light-gray);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.other-releases {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.other-releases .channel-picker {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    border-bottom: 0.15rem solid var(--gray);
+    padding-bottom: 0.5rem;
+}
+
+.channel-picker select, .dist-picker select {
+    width: min-content;
+    margin: 0 0.5rem;
+}
+
 .version-options {
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
 }
 
 .option select {
@@ -82,19 +270,34 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
 }
 
 .dist-group-picker .dist-group {
-  padding: 0.3rem 0.5rem;
-  font-size: 1rem;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 500;
-  border: 0.1rem solid var(--gray);
-  border-radius: 0.5rem;
-  background-color: var(--gray);
-  color: var(--accent);
-  cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    border: 0.15rem solid var(--gray);
+    border-radius: 0.5rem;
+    background-color: var(--gray);
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
 }
 
-.dist-group-picker .dist-group.checked {
-    background-color: var(--accent) !important;
+.dist-group:hover {
+    background-color: var(--dark-gray);
+}
+
+.dist-group .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.dist-group .name {
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    flex: 1;
+}
+
+.dist-group.selected {
+    border-color: var(--accent);
 }
 
 .dist-group input[type="radio"] {
@@ -105,5 +308,50 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
     display: flex;
     gap: 0.5rem;
     align-items: center;
+}
+
+.versions {
+    display: flex;
+    flex-direction: column;
+}
+
+.versions .version {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
+    align-items: center;
+}
+
+.version .download-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.download-details .download-changelog {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 40vw;
+}
+
+.versions .version:hover {
+    background-color: var(--dark-gray);
+    border-radius: 0.5rem;
+    transition: background-color 0.1s;
+}
+
+.version .download-button {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    border: 0.15rem solid var(--gray);
+    min-width: 4.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--gray);
+    color: var(--accent);
+    cursor: pointer;
 }
 </style>
