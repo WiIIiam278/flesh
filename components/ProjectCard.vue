@@ -42,7 +42,7 @@
                 </div>
                 <div class="stat" v-if="stats.averageRating">
                     <IconifiedText icon="fa6-solid:star">
-                        {{ stats.averageRating.toFixed(1) }}
+                        {{ parseFloat(stats.averageRating).toFixed(1) }}
                     </IconifiedText>
                 </div>
             </div>

@@ -95,6 +95,7 @@ export default defineNuxtConfig({
   // Fetch necessary assets / documentation from GitHub
   hooks: {
       'build:before': () => {
+          console.log('Started web service!')
           require('./hooks/prepareEmulators').prepareEmulators()
           require('./hooks/prepareReadmes').prepareReadmes()
           require('./hooks/prepareDocs').prepareDocs()

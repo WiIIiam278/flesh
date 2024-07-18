@@ -3,13 +3,14 @@
         <div class="button-row">
             <label>Page:</label>
             <button @click="() => {pageNumber--; $emit('update', pageNumber, itemsPerPage)}" :disabled="pageNumber === 1">Previous</button>
-            <input class="page-input" v-model="pageNumber" @change="updateUsers" type="number" min="1" :max="Math.ceil(data.numberOfElements / itemsPerPage)" />
+            <input class="page-input" v-model="pageNumber" @change="$emit('update', pageNumber, itemsPerPage)" type="number" 
+                min="1" :max="Math.ceil(data.numberOfElements / itemsPerPage)" />
             <label>/ {{ data.totalPages }}</label>
             <button @click="() => {pageNumber++; $emit('update', pageNumber, itemsPerPage)}" :disabled="pageNumber >= data.totalPages">Next</button>
         </div>
         <div class="button-row">
             <label>Per page:</label>
-            <select class="page-input" v-model="itemsPerPage" @change="updateUsers">
+            <select class="page-input" v-model="itemsPerPage" @change="$emit('update', pageNumber, itemsPerPage)">
                 <option value="15">15</option>
                 <option value="30">30</option>
                 <option value="50">50</option>

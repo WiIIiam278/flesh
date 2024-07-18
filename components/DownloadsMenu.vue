@@ -84,15 +84,15 @@ const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) return '0 B';
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 };
 const downloadUrl = (release, channel, dist) => `${BASE_URL}/v1/projects/${project.slug}/channels/${channel}/versions/${release.name}/distributions/${dist.name}`;
 const getChangelog = (release, short = false) => useDiscordMarkdown(!short ? release.changelog : release.changelog.split('\n')[0]);
-const ownsProject = () => user.value && user.value.admin || user.value.purchases.some(p => p === project.slug);
+const ownsProject = () => user.value && (user.value.admin || user.value.purchases.some(p => p === project.slug));
 
 const { project } = defineProps({
     project: {
