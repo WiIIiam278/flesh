@@ -4,7 +4,7 @@ const XSRF_COOKIE = "XSRF-TOKEN";
 export const useAuth = () => {
     const cookieDomain = useRuntimeConfig().public.COOKIE_DOMAIN;
     const auth = useCookie(AUTH_COOKIE, { domain: cookieDomain });
-    const xsrf = useCookie(XSRF_COOKIE);
+    const xsrf = useCookie(XSRF_COOKIE, { domain: cookieDomain });
 
     if (import.meta.server) {
         auth.value = useCookie(AUTH_COOKIE, { domain: cookieDomain, value: auth.value }).value;
