@@ -34,7 +34,7 @@ const getEmulatorJs = () => {
 
 const downloadRom = (project) => {
     // Download project.emulator.rom_url and put it in /emulator-js/roms/
-    const romUrl = project.metadata.properties?.emulator?.rom;
+    const romUrl = project.metadata.properties?.emulator_rom;
     if (!romUrl) {
         console.log(`No ROM found for ${project.name}, skipping...`);
         return;
