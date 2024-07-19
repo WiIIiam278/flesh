@@ -76,7 +76,7 @@ const updateUserProjects = async (user, projectId) => {
             credentials: auth ? 'include' : 'omit',
             headers: {
                 'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                'X-Xsrf-Token': xsrf
+                'X-XSRF-TOKEN': xsrf
             },
             body: JSON.stringify(user.purchases)
         });
@@ -97,7 +97,7 @@ const deleteUser = async (user) => {
             credentials: auth ? 'include' : 'omit',
             headers: {
                 'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                'X-Xsrf-Token': xsrf
+                'X-XSRF-TOKEN': xsrf
             },
         });
         users.value.content = users.value.content.filter(u => u.id !== user.id);

@@ -64,7 +64,7 @@ const deleteAccount = () => {
             credentials: auth ? 'include' : 'omit',
             headers: {
                 'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                'X-Xsrf-Token': xsrf
+                'X-XSRF-TOKEN': xsrf
             }
         }).then(() => {
             navigateTo('/account/logout')
