@@ -64,6 +64,7 @@ export default defineNuxtConfig({
           API_BASE_URL: process.env.API_BASE_URL,
           TRANSCRIPT_BUCKET_URL: process.env.TRANSCRIPT_BUCKET_URL,
           CURRENCY_SYMBOL: process.env.CURRENCY_SYMBOL,
+          COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
       }
   },
 
