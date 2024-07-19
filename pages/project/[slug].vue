@@ -27,7 +27,7 @@
                     </div>
                     <div v-if="selectedTab === 'play'">
                         <DsEmulator :game-name="meta.name" :game-core="meta.properties?.emulator_core ?? 'desmume2015'"
-                            :game-url="`/emulator-js/roms/${meta.properties?.emulator_rom}`" />
+                            :game-url="`/emulator-js/roms/${project.slug}`" />
                     </div>
                 </Tabs>
             </LazyContentDoc>
