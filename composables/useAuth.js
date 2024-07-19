@@ -15,6 +15,7 @@ export const useAuth = () => {
         auth.value = useState('auth').value;
         xsrf.value = useState('xsrf').value;
     }
+    console.log(auth.value, xsrf.value);
 
     return { auth: auth.value, xsrf: xsrf.value };
 }
