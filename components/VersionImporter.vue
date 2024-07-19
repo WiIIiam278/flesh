@@ -114,7 +114,7 @@ const sendImportRequest = async () => {
             credentials: auth ? 'include' : 'omit',
             headers: {
                 'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                'X-XSRF-TOKEN': xsrf
+                'X-Xsrf-Token': xsrf
             },
             body: JSON.stringify(getRequestBody())
         });

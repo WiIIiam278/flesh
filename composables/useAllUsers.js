@@ -13,7 +13,7 @@ export const useAllUsers = async (pageNo, pageSize, nameFilter) => {
         params: searchParams,
         headers: {
             'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-            'X-XSRF-TOKEN': xsrf
+            'X-Xsrf-Token': xsrf
         },
     });
 

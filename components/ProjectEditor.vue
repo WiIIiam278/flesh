@@ -271,7 +271,7 @@ const saveProject = async () => {
             credentials: auth ? 'include' : 'omit',
             headers: {
                 'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                'X-XSRF-TOKEN': xsrf
+                'X-Xsrf-Token': xsrf
             },
             body: JSON.stringify(editing.value)
         });
@@ -296,7 +296,7 @@ const deleteProject = async () => {
                 credentials: auth ? 'include' : 'omit',
                 headers: {
                     'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                    'X-XSRF-TOKEN': xsrf
+                    'X-Xsrf-Token': xsrf
                 }
             });
         } catch (err) {
