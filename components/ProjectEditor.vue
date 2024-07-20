@@ -225,6 +225,7 @@ const getDefaultProject = ((slug) => `
     "listDownloads": true,
     "hidden": false,
     "sortWeight": 1,
+    "releaseChannels": [],
     "icons": {
       "SVG": "${slug}.svg",
       "PNG": "${slug}.png"
