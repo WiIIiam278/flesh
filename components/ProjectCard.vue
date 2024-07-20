@@ -30,8 +30,8 @@
                         {{$t('link-docs')}}
                     </ButtonLink>
                     <ButtonLink v-if="meta.github && !(meta.listDownloads && meta.documentation)" icon="fa6-brands:github" :link="meta.github"></ButtonLink>
-                    <ButtonLink v-if="!(meta.listDownloads && meta.documentation)" v-for="link in meta.links.slice(0, 3)" 
-                        :link="link.url" :icon="useLinkIcon(link)"></ButtonLink>
+                    <ButtonLink v-if="!(meta.listDownloads && meta.documentation)" v-for="link in meta.links.slice(0, (meta.listDownloads || meta.documentation) ? 2 : 3)" 
+                        :key="link.url" :link="link.url" :icon="useLinkIcon(link)"></ButtonLink>
                 </div>
             </div>
             <div class="stats" v-if="stats">
