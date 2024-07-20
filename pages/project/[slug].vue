@@ -26,7 +26,7 @@
                         <DownloadsMenu :project="project" />
                     </div>
                     <div v-if="selectedTab === 'play'">
-                        <DsEmulator :game-name="meta.name" :game-core="meta.properties?.emulator_core ?? 'desmume2015'"
+                        <DsEmulator :game-name="meta.name" :game-core="useProjectProperty(project, 'emulator_core') ?? 'desmume2015'"
                             :game-url="`/emulator-js/roms/${project.slug}`" />
                     </div>
                 </Tabs>
@@ -61,7 +61,7 @@ selectedTab.value = 'about';
 if (meta?.listDownloads) {
     tabs.push({ id: 'download', name: t('tab-download') }); 
 }
-if (meta?.properties?.emulator_rom) {
+if (useProjectProperty(project.value, 'emulator_rom')) {
     tabs.unshift({ id: 'play', name: t('tab-play') });
     selectedTab.value = 'play';
 }

@@ -40,7 +40,7 @@
                     {{$t('project-price-sterling', {'price': meta.suggestedRetailPrice.toFixed(2)})}}
                 </div>
             </div>
-            <div class="stat" v-if="meta.license?.length">
+            <div class="stat" v-if="meta.license?.length && meta.license !== 'All Rights Reserved'">
                 <div class="stat-descriptor">{{ $t('project-license') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:scale-balanced">
