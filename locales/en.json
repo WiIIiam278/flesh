@@ -70,6 +70,8 @@
     "delete-account-confirm": "Are you sure you want to delete your account? This will delete your account data and disassociate your Discord account from William278.net. Logging in again will create new account data.",
     "user-avatar-alt-text": "{name}'s user avatar",
     "user-role-admin": "Admin",
+    "user-role-staff": "Staff",
+    "user-role-user": "User",
     "your-account": "Your Account",
     "your-purchases": "Your Purchases",
     "your-support-tickets": "Your Support Tickets",

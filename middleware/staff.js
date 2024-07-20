@@ -3,7 +3,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (!user.value) {
         return navigateTo(`${useRuntimeConfig().public.API_BASE_URL}/login`, { external: true })
     }
-    if (!user.value.admin) {
+    if (!useIsUserRole(user.value, 'staff')) {
         return navigateTo('/account');
     }
 })

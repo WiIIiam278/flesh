@@ -17,32 +17,39 @@
                     <th class="email">Email</th>
                     <th class="role">Role</th>
                     <th class="purchases">Purchases</th>
-                    <th class="actions">Actions</th>
+                    <th class="actions" v-if="useIsUserRole(user, 'admin')">Actions</th>
                 </tr>
             </thead>
             <tbody v-if="users.value">
-                <tr v-for="user in users.value.content" :key="user.id">
+                <tr v-for="item in users.value.content" :key="item.id">
                     <td class="avatar">
-                        <img :src="user.avatar" alt="User avatar" />
+                        <img :src="item.avatar" alt="User avatar" />
                     </td>
-                    <td><code>{{ user.id }}</code></td>
-                    <td>{{ new Date(user.createdAt).toLocaleString() }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td :class="user.admin ? 'admin-role' : ''">{{ user.admin ? 'Admin' : 'User' }}</td>
+                    <td><code>{{ item.id }}</code></td>
+                    <td>{{ new Date(item.createdAt).toLocaleString() }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ `${item.email[0]}•••••@${item.email.split('@')[1]}` }}</td>
+                    <td :class="`role-editor ${item.role?.toLowerCase()}-role`">
+                        <select v-if="useIsUserRole(user, 'admin') && item.id !== user.id" v-model="item.role" @change="updateUserRole(item)">
+                            <option v-for="role in ['user', 'staff', 'admin']" :class="`${role}-role`" :value="role.toUpperCase()">
+                                {{ $t(`user-role-${role.toLowerCase()}`) }}
+                            </option>
+                        </select>
+                        <span v-else>{{ $t(`user-role-${item.role.toLowerCase()}`) }}</span>
+                    </td>
                     <td>
                         <div class="purchased-products" v-for="project in restrictedProjects" :key="project.slug">
-                            <label :for="`${user.id}-project-${project.slug}`">
-                                <span v-if="user.purchases.includes(project.slug)">{{ project.metadata.name }}</span>
+                            <label :for="`${item.id}-project-${project.slug}`">
+                                <span v-if="item.purchases.includes(project.slug)">{{ project.metadata.name }}</span>
                                 <span v-else  class="unchecked">{{ project.metadata.name }}</span>
                             </label>
-                            <input type="checkbox" :id="`${user.id}-project-${project.slug}`" :checked="user.purchases.includes(project.slug)"
-                                @change="updateUserProjects(user, project.slug)" />
+                            <input :disabled="!useIsUserRole(user, item.role)" type="checkbox" :id="`${item.id}-project-${project.slug}`" 
+                                :checked="item.purchases.includes(project.slug)" @change="updateUserProjects(item, project.slug)" />
                         </div>
                         <div class="no-purchased-products" v-if="!restrictedProjects.length">No products can be purchased</div>
                     </td>
-                    <td>
-                        <button class="delete" :disabled="user.admin" @click="deleteUser(user)">Delete</button>
+                    <td v-if="useIsUserRole(user, 'admin')">
+                        <button class="delete" v-if="item.id !== user.id" @click="deleteUser(item)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -52,12 +59,20 @@
 </template>
 
 <script setup>
+const { t } = useI18n();
+
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const pageNumber = ref(1);
 const itemsPerPage = ref(15);
 const users = ref(null);
 const searchText = ref('');
 
+const { user } = defineProps({
+    user: {
+        type: Object,
+        required: true
+    }
+});
 const { auth, xsrf } = useAuth();
 const restrictedProjects = await useRestrictedProjects();
 
@@ -68,17 +83,17 @@ const updateUsers = (async (page, perPage) => {
 });
 await updateUsers(pageNumber.value, itemsPerPage.value);
 
-const updateUserProjects = async (user, projectId) => {
-    user.purchases = user.purchases.includes(projectId) ? user.purchases.filter(p => p !== projectId) : [...user.purchases, projectId];
+const updateUserProjects = async (toUpdate, projectId) => {
+    toUpdate.purchases = toUpdate.purchases.includes(projectId) ? toUpdate.purchases.filter(p => p !== projectId) : [...toUpdate.purchases, projectId];
     try {
-        await $fetch(`${BASE_URL}/v1/users/${user.id}/purchases`, {
+        await $fetch(`${BASE_URL}/v1/users/${toUpdate.id}/purchases`, {
             method: 'PUT',
             credentials: auth ? 'include' : 'omit',
             headers: {
                 'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
                 'X-XSRF-TOKEN': xsrf
             },
-            body: JSON.stringify(user.purchases)
+            body: JSON.stringify(toUpdate.purchases)
         });
     } catch (err) {
         alert('Failed to update user\'s products: ' + err);
@@ -86,13 +101,30 @@ const updateUserProjects = async (user, projectId) => {
     }
 };
 
-const deleteUser = async (user) => {
-    if (user.admin) {
-        alert('You cannot delete an admin account');
+const updateUserRole = async (toUpdate) => {
+    try {
+        await $fetch(`${BASE_URL}/v1/users/${toUpdate.id}/role`, {
+            method: 'PUT',
+            credentials: auth ? 'include' : 'omit',
+            headers: {
+                'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
+                'X-XSRF-TOKEN': xsrf
+            },
+            body: toUpdate.role.toUpperCase()
+        });
+    } catch (err) {
+        alert('Failed to update user\'s role: ' + err);
         return;
     }
-    if (confirm(`Are you sure you want to delete ${user.name}\'s account?`)) {
-        await $fetch(`${BASE_URL}/v1/users/${user.id}`, {
+};
+
+const deleteUser = async (toDelete) => {
+    if (useIsUserRole(toDelete, 'admin')) {
+        alert('You cannot delete an admin account ' + JSON.stringify(toDelete));
+        return;
+    }
+    if (confirm(`Are you sure you want to delete ${toDelete.name}\'s account?`)) {
+        await $fetch(`${BASE_URL}/v1/users/${toDelete.id}`, {
             method: 'DELETE',
             credentials: auth ? 'include' : 'omit',
             headers: {
@@ -100,7 +132,7 @@ const deleteUser = async (user) => {
                 'X-XSRF-TOKEN': xsrf
             },
         });
-        users.value.content = users.value.content.filter(u => u.id !== user.id);
+        users.value.content = users.value.content.filter(u => u.id !== toDelete.id);
     }
 };
 </script>
@@ -120,8 +152,20 @@ const deleteUser = async (user) => {
     border-radius: 100%;
 }
 
-.admin-role {
+.role-editor select {
+    width: min-content;
+}
+
+.user-role, .user-role select {
+    color: white;
+}
+
+.admin-role, .admin-role select {
     color: var(--red);
+}
+
+.staff-role, .staff-role select {
+    color: var(--accent);
 }
 
 .role {
@@ -133,9 +177,10 @@ const deleteUser = async (user) => {
 }
 
 .purchased-products {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    /* grid */
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
 }
 
 .purchased-products label {

@@ -36,7 +36,7 @@
             <h3 v-if="releaseChannels.length" class="channel-picker">
                 <span>Browse All</span>
                 <select :disabled="releaseChannels.length <= 1" v-model="selectedChannel" @change="updateVersions(pageNumber, itemsPerPage)">
-                    <option v-for="channel in releaseChannels" :key="channel" :value="channel">{{ capitalize(channel) }}</option>
+                    <option v-for="channel in releaseChannels" :key="channel" :value="channel">{{ useCapitalized(channel) }}</option>
                 </select>
                 <span>Versions</span>
             </h3>
@@ -46,7 +46,7 @@
                     <label v-for="(_, group) in getDistGroups()" :for="`dist-group-${group}`" :key="groupName"
                         :class="`dist-group ${selectedDistGroup === group ? 'selected' : ''}`">
                         <img class="icon" :src="`/images/platforms/${group}.png`" onerror="this.style.display='none'" />
-                        <span class="name">{{ capitalize(group) }}</span>
+                        <span class="name">{{ useCapitalized(group) }}</span>
                         <input type="radio" :id="`dist-group-${group}`" name="dist-group" :value="group" 
                             @change="updateDistSelection" v-model="selectedDistGroup" />
                     </label>
@@ -88,7 +88,6 @@
 const DEFAULT_CHANNEL = 'release';
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 
-const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 B';
     const k = 1024;
@@ -98,7 +97,7 @@ const formatFileSize = (bytes) => {
 };
 const downloadUrl = (release, channel, dist) => `${BASE_URL}/v1/projects/${project.slug}/channels/${channel}/versions/${release.name}/distributions/${dist.name}`;
 const getChangelog = (release, short = false) => useDiscordMarkdown(!short ? release.changelog : release.changelog.split('\n')[0]);
-const ownsProject = () => !project.restricted || user.value && (user.value.admin || user.value.purchases.some(p => p === project.slug));
+const ownsProject = () => !project.restricted || user.value && (useIsUserRole(user.value, 'admin') || user.value.purchases.some(p => p === project.slug));
 
 const { project } = defineProps({
     project: {
@@ -342,7 +341,7 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 40vw;
-    max-height: 3rem;
+    max-height: 1.5rem;
 }
 
 .versions .version:hover {

@@ -14,7 +14,7 @@
                                 <VersionImporter />
                             </div>
                             <div v-if="activeTab === 'users'">
-                                <UsersTable />
+                                <UsersTable :user="user" />
                             </div>
                         </Tabs>
                     </div>
@@ -25,16 +25,20 @@
 </template>
 
 <script setup>
-const tabs = [
-    { id: 'projects', name: 'Projects' },
-    { id: 'versions', name: 'Versions' },
-    { id: 'users', name: 'Users' },
-]
+const user = await useUser();
+const tabs = [];
+if (useIsUserRole(user.value, 'staff')) {
+    tabs.unshift({ id: 'users', name: 'Users' })
+}
+if (useIsUserRole(user.value, 'admin')) {
+    tabs.unshift({ id: 'versions', name: 'Versions' })
+    tabs.unshift({ id: 'projects', name: 'Projects' })
+}
 const activeTab = defineModel('activeTab')
 activeTab.value = 'projects'
 
 definePageMeta({
-    middleware: ['admin']
+    middleware: ['staff']
 })
 </script>
 

@@ -16,14 +16,14 @@
                                         <div class="user-details">
                                             <div class="name-role">
                                                 <span class="name">{{ user.name }}</span>
-                                                <Pill class="shadow" v-if="user.admin">{{ $t('user-role-admin') }}</Pill>
+                                                <Pill class="shadow" v-if="useIsUserRole(user, 'staff')">{{ $t(`user-role-${user.role.toLowerCase()}`) }}</Pill>
                                             </div>
                                             <div class="email" v-if="user.email">{{ user.email }}</div>
                                         </div>
                                     </div>
                                     <div class="management-buttons">
                                         <ButtonLink href="/account/logout" class="shadow" hollow icon="fa6-solid:person-running">{{ t('link-log-out') }}</ButtonLink>
-                                        <ButtonLink v-if="user.admin" href="/account/admin" class="shadow" hollow icon="fa6-solid:gear">{{ t('admin-panel') }}</ButtonLink>
+                                        <ButtonLink v-if="useIsUserRole(user, 'staff')" href="/account/admin" class="shadow" hollow icon="fa6-solid:gear">{{ t('admin-panel') }}</ButtonLink>
                                         <ButtonLink @click="deleteAccount()" class="shadow" hollow color="red" icon="fa6-solid:trash-can">{{ t('delete-account') }}</ButtonLink>
                                     </div>
                                 </div>
