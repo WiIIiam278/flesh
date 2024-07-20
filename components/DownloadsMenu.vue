@@ -3,7 +3,7 @@
         <div v-if="user" class="upsell-error">
             <IconifiedText icon="fa6-solid:lock"><h3>You don't own this project!</h3></IconifiedText>
             <p>
-                <span>Please purchase the project and verify your purchase on our </span>
+                <span>Please purchase a project license and verify your purchase on our </span>
                 <a href="https://discord.gg/tVYhJfyDWG" target="_blank">Discord Server</a>
                 <span> by opening a ticket.</span>
             </p>
@@ -13,7 +13,7 @@
             <ButtonLink :href="`${useRuntimeConfig().public.API_BASE_URL}/login`" icon="fa6-solid:key" hollow>{{ $t('link-log-in') }}</ButtonLink>
         </div>
     </div>
-    <div v-else class="downloads-menu">
+    <div v-else-if="releaseChannels.length" class="downloads-menu">
         <div class="latest-release" v-if="latestRelease">
             <div class="download-buttons">
                 <a class="button" :href="downloadUrl(latestRelease, DEFAULT_CHANNEL, download.distribution)" v-for="download of latestRelease.downloads">
@@ -22,7 +22,7 @@
                         <div class="name">{{ download.distribution.description }}</div>
                         <div class="file">
                             <span class="file">{{ download.name }}</span>
-                            <span class="size-hash">{{ formatFileSize(download.fileSize) }}</span>
+                            <span class="size-hash">{{ formatFileSize(download.fileSize) }} Download</span>
                         </div>
                     </div>
                 </a>
@@ -33,15 +33,15 @@
             </div>
         </div>
         <div class="other-releases">
-            <h3 class="channel-picker">
+            <h3 v-if="releaseChannels.length" class="channel-picker">
                 <span>Browse All</span>
-                <select v-model="selectedChannel" @change="updateVersions(pageNumber, itemsPerPage)">
+                <select :disabled="releaseChannels.length <= 1" v-model="selectedChannel" @change="updateVersions(pageNumber, itemsPerPage)">
                     <option v-for="channel in releaseChannels" :key="channel" :value="channel">{{ capitalize(channel) }}</option>
                 </select>
                 <span>Versions</span>
             </h3>
             <div class="version-options">
-                <div class="option dist-group-picker">
+                <div v-if="getDistGroups().length > 1" class="option dist-group-picker">
                     <label for="dist-group-select">Filter:</label>
                     <label v-for="(_, group) in getDistGroups()" :for="`dist-group-${group}`" :key="groupName"
                         :class="`dist-group ${selectedDistGroup === group ? 'selected' : ''}`">
@@ -76,6 +76,10 @@
             </div>
         </div>
     </div>
+    <div v-else class="upsell-error">
+        <IconifiedText icon="fa6-solid:circle-info"><h3>There are no downloads available for this project.</h3></IconifiedText>
+        <p>Please try again later!</p>
+    </div>
 </template>
 
 <script setup>
@@ -92,7 +96,7 @@ const formatFileSize = (bytes) => {
 };
 const downloadUrl = (release, channel, dist) => `${BASE_URL}/v1/projects/${project.slug}/channels/${channel}/versions/${release.name}/distributions/${dist.name}`;
 const getChangelog = (release, short = false) => useDiscordMarkdown(!short ? release.changelog : release.changelog.split('\n')[0]);
-const ownsProject = () => user.value && (user.value.admin || user.value.purchases.some(p => p === project.slug));
+const ownsProject = () => !project.restricted || user.value && (user.value.admin || user.value.purchases.some(p => p === project.slug));
 
 const { project } = defineProps({
     project: {
@@ -174,6 +178,7 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
 .latest-release .download-buttons {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1rem;
     width: 40%;
 }
