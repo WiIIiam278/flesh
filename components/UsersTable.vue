@@ -165,4 +165,8 @@ const deleteUser = async (user) => {
     align-items: center;
     gap: 0.5rem;
 }
+
+.users-table table tr {
+    background-color: transparent;
+}
 </style>
