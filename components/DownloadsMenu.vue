@@ -65,7 +65,9 @@
                             <a class="download-button" :href="downloadUrl(version, selectedChannel, selectedDist)">
                                 <IconifiedText icon="fa6-solid:download">{{ version.name }}</IconifiedText>
                             </a>
-                            <article class="download-changelog" v-html="getChangelog(version, true)" />
+                            <div class="download-changelog">
+                                <article v-html="getChangelog(version, true)" />
+                            </div>
                         </div>
                         <div class="download-date">
                             {{ new Date(version.timestamp).toLocaleDateString() }}
@@ -340,6 +342,7 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 40vw;
+    max-height: 3rem;
 }
 
 .versions .version:hover {
