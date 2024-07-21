@@ -29,7 +29,7 @@
             </div>
             <div class="changelog">
                 <h2 class="release-name">{{ project.metadata.name }} {{ latestRelease.name }} ({{ new Date(latestRelease.timestamp).toLocaleDateString() }})</h2>
-                <article v-html="getChangelog(latestRelease)" />
+                <MDC :value="getChangelog(latestRelease)" tag="article" />
             </div>
         </div>
         <div class="other-releases">
@@ -66,7 +66,7 @@
                                 <IconifiedText icon="fa6-solid:download">{{ version.name }}</IconifiedText>
                             </a>
                             <div class="download-changelog">
-                                <article v-html="getChangelog(version, true)" />
+                                <MDC :value="getChangelog(version, true)" tag="article" />
                             </div>
                         </div>
                         <div class="download-date">
@@ -96,7 +96,7 @@ const formatFileSize = (bytes) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 };
 const downloadUrl = (release, channel, dist) => `${BASE_URL}/v1/projects/${project.slug}/channels/${channel}/versions/${release.name}/distributions/${dist.name}`;
-const getChangelog = (release, short = false) => useDiscordMarkdown(!short ? release.changelog : release.changelog.split('\n')[0]);
+const getChangelog = (release, short = false) => !short ? release.changelog : release.changelog.split('\n')[0];
 const ownsProject = () => !project.restricted || user.value && (useIsUserRole(user.value, 'admin') || user.value.purchases.some(p => p === project.slug));
 
 const { project } = defineProps({

@@ -1,36 +1,36 @@
 <template>
     <div>
         <NuxtLayout v-if="project" name="project">
-            <LazyContentDoc v-slot="{ doc }" :head="false">
-                <Head>
-                    <Title>{{ $t('project-title', {'project': meta.name, 'tagline': meta.tagline})}}</Title>
-                    <Meta name="og:description" :content="`${t('project-title', {'project': meta.name, 'tagline': meta.tagline})}`" />
-                    <Meta name="twitter:description" :content="`${t('project-title', {'project': meta.name, 'tagline': meta.tagline})}`" />
-                    <Meta name="og:title" :content="`${meta.name} &mdash; ${t('index-title')}`" />
-                    <Meta name="twitter:title" :content="`${meta.name} &mdash; ${t('index-title')}`" />
-                    <Meta v-if="meta.icons['PNG']" name="og:image" :content="`/images/icons/${meta.icons['PNG']}`" />
-                    <Meta v-if="meta.icons['PNG']" name="twitter:image" :content="`/images/icons/${meta.icons['PNG']}`" />
-                </Head>
-                <div v-if="meta.archived" class="archived">
-                    <Icon class="icon" name="fa6-solid:box-archive" />
-                    <span class="text">
-                        {{ $t('project-archived-header', {'project': meta.name}) }}
-                        <span class=grayed>{{$t('project-archived-details')}}</span>
-                    </span>
+            <template #default>
+                <div>
+                    <Head>
+                        <Title>{{ $t('project-title', {'project': meta.name, 'tagline': meta.tagline})}}</Title>
+                        <Meta name="og:description" :content="`${t('project-title', {'project': meta.name, 'tagline': meta.tagline})}`" />
+                        <Meta name="twitter:description" :content="`${t('project-title', {'project': meta.name, 'tagline': meta.tagline})}`" />
+                        <Meta name="og:title" :content="`${meta.name} &ndash; ${t('index-title')}`" />
+                        <Meta name="twitter:title" :content="`${meta.name} &ndash; ${t('index-title')}`" />
+                        <Meta v-if="meta.icons['PNG']" name="og:image" :content="`/images/icons/${meta.icons['PNG']}`" />
+                        <Meta v-if="meta.icons['PNG']" name="twitter:image" :content="`/images/icons/${meta.icons['PNG']}`" />
+                    </Head>
+                    <div v-if="meta.archived" class="archived">
+                        <Icon class="icon" name="fa6-solid:box-archive" />
+                        <span class="text">
+                            {{ $t('project-archived-header', {'project': meta.name}) }}
+                            <span class=grayed>{{$t('project-archived-details')}}</span>
+                        </span>
+                    </div>
+                    <Tabs :tabs="tabs" v-model:selected="selectedTab">
+                        <MDC v-if="selectedTab === 'about'" :value="readme" tag="article" />
+                        <div v-if="selectedTab === 'download'">
+                            <DownloadsMenu :project="project" />
+                        </div>
+                        <div v-if="selectedTab === 'play'">
+                            <DsEmulator :game-name="meta.name" :game-core="useProjectProperty(project, 'emulator_core') ?? 'desmume2015'"
+                                :game-url="`/emulator-js/roms/${project.slug}`" />
+                        </div>
+                    </Tabs>
                 </div>
-                <Tabs :tabs="tabs" v-model:selected="selectedTab">
-                    <article v-if="selectedTab === 'about'">
-                        <ContentRenderer :value="doc" />
-                    </article>
-                    <div v-if="selectedTab === 'download'">
-                        <DownloadsMenu :project="project" />
-                    </div>
-                    <div v-if="selectedTab === 'play'">
-                        <DsEmulator :game-name="meta.name" :game-core="useProjectProperty(project, 'emulator_core') ?? 'desmume2015'"
-                            :game-url="`/emulator-js/roms/${project.slug}`" />
-                    </div>
-                </Tabs>
-            </LazyContentDoc>
+            </template>
             <template #sidebar>
                 <ProjectSidebar :project="project" />
             </template>
@@ -53,6 +53,17 @@ const { t } = useI18n()
 const { params } = useRoute()
 const project = await useProject(params.slug.toLowerCase());
 const { metadata: meta } = project.value || {};
+const readme = computed(() => {
+    let body = meta.readmeBody;
+    if (!body) return body;
+
+    // Replace relative links and images with GitHub links
+    const rawGithub = meta.github.replace('github.com', 'raw.githubusercontent.com');
+    body = body.replace(/\]\((?!http)([^)]+)\)/g, `](${meta.github}/master/$1)`);
+    body = body.replace(/!\[(.*?)\]\((?!http)([^)]+)\)/g, `![$1](${rawGithub}/master/$2)`);
+    body = body.replace(/<img([^>]+)src="(?!http)([^"]+)"([^>]*)>/g, `<img$1src="${rawGithub}/master/$2"$3>`);
+    return body;
+})
 
 // Setup tabs
 const tabs = [{ id: 'about', name: t('tab-about') }];

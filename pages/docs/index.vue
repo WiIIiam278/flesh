@@ -5,8 +5,8 @@
 
             <Head>
                 <Title>{{ $t('link-docs') }}</Title>
-                <Meta name="og:title" :content="`${t('link-docs')} &mdash; ${t('index-title')}}`" />
-                <Meta name="twitter:title" :content="`${t('link-docs')} &mdash; ${t('index-title')}}`" />
+                <Meta name="og:title" :content="`${t('link-docs')} &ndash; ${t('index-title')}}`" />
+                <Meta name="twitter:title" :content="`${t('link-docs')} &ndash; ${t('index-title')}}`" />
             </Head>
             <article>
                 <LazyContentDoc :path="`/docs/home/${locale}`"  />

@@ -97,8 +97,6 @@ export default defineNuxtConfig({
   hooks: {
       'build:before': () => {
           require('./hooks/prepareEmulators').prepareEmulators()
-          require('./hooks/prepareReadmes').prepareReadmes()
-          require('./hooks/prepareDocs').prepareDocs()
       }
   },
 
