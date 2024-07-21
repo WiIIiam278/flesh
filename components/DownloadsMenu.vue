@@ -41,7 +41,7 @@
                 <span>Versions</span>
             </h3>
             <div class="version-options">
-                <div v-if="getDistGroups().length > 1" class="option dist-group-picker">
+                <div v-if="Object.keys(getDistGroups()).length > 1" class="option dist-group-picker">
                     <label for="dist-group-select">Filter:</label>
                     <label v-for="(_, group) in getDistGroups()" :for="`dist-group-${group}`" :key="groupName"
                         :class="`dist-group ${selectedDistGroup === group ? 'selected' : ''}`">
