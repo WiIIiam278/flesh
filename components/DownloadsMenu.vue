@@ -29,7 +29,7 @@
             </div>
             <div class="changelog">
                 <h2 class="release-name">{{ project.metadata.name }} {{ latestRelease.name }} ({{ new Date(latestRelease.timestamp).toLocaleDateString() }})</h2>
-                <MDC :value="getChangelog(latestRelease)" tag="article" />
+                <MDC :value="getChangelog(latestRelease)" tag="article" unwrap="p" />
             </div>
         </div>
         <div class="other-releases">
@@ -66,7 +66,7 @@
                                 <IconifiedText icon="fa6-solid:download">{{ version.name }}</IconifiedText>
                             </a>
                             <div class="download-changelog">
-                                <MDC :value="getChangelog(version, true)" tag="article" />
+                                <MDC :value="getChangelog(version, true)" tag="article" unwrap="p" />
                             </div>
                         </div>
                         <div class="download-date">
