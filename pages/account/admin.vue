@@ -10,7 +10,10 @@
                             <div v-if="activeTab === 'projects'">
                                 <ProjectEditor />
                             </div>
-                            <div v-if="activeTab === 'versions'">
+                            <div v-if="activeTab === 'upload'">
+                                <VersionUploader />
+                            </div>
+                            <div v-if="activeTab === 'import'">
                                 <VersionImporter />
                             </div>
                             <div v-if="activeTab === 'users'">
@@ -25,13 +28,15 @@
 </template>
 
 <script setup>
+const uploading = ref(true);
 const user = await useUser();
 const tabs = [];
 if (useIsUserRole(user.value, 'staff')) {
     tabs.unshift({ id: 'users', name: 'Users' })
 }
 if (useIsUserRole(user.value, 'admin')) {
-    tabs.unshift({ id: 'versions', name: 'Versions' })
+    tabs.unshift({ id: 'import', name: 'Import' })
+    tabs.unshift({ id: 'upload', name: 'Upload' })
     tabs.unshift({ id: 'projects', name: 'Projects' })
 }
 const activeTab = defineModel('activeTab')
