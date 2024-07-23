@@ -4,9 +4,9 @@
             <label>Page:</label>
             <button @click="() => {pageNumber--; $emit('update', pageNumber, itemsPerPage)}" :disabled="pageNumber === 1">Previous</button>
             <input class="page-input" v-model="pageNumber" @change="$emit('update', pageNumber, itemsPerPage)" type="number" 
-                min="1" :max="Math.ceil(data.numberOfElements / itemsPerPage)" />
-            <label>/ {{ data.totalPages }}</label>
-            <button @click="() => {pageNumber++; $emit('update', pageNumber, itemsPerPage)}" :disabled="pageNumber >= data.totalPages">Next</button>
+                min="1" :max="data.page.totalPages" />
+            <label>/ {{ data.page.totalPages }}</label>
+            <button @click="() => {pageNumber++; $emit('update', pageNumber, itemsPerPage)}" :disabled="pageNumber >= data.page.totalPages">Next</button>
         </div>
         <div class="button-row">
             <label>Per page:</label>

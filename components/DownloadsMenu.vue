@@ -95,6 +95,26 @@ const formatFileSize = (bytes) => {
 const downloadUrl = (release, channel, dist) => `${BASE_URL}/v1/projects/${project.slug}/channels/${channel}/versions/${release.name}/distributions/${dist.name}`;
 const getChangelog = (release, short = false) => !short ? release.changelog : release.changelog.split('\n')[0];
 const canDownload = () => !project.restricted || user.value && (useIsUserRole(user.value, 'staff') || user.value.purchases.some(p => p === project.slug));
+const sortByDistName = (a, b) => {
+    if (a.name === b.name) {
+        return 0;
+    }
+    if (a.name.includes('-') && b.name.includes('-')) {
+        const aParts = a.name.split('-');
+        const bParts = b.name.split('-');
+        for (let i = 0; i < Math.min(aParts.length, bParts.length); i++) {
+            if (aParts[i] === bParts[i]) {
+                continue;
+            }
+            if (aParts[i] < bParts[i]) {
+                return 1;
+            }
+            return -1;
+        }
+        return aParts.length - bParts.length;
+    }
+    return a.name < b.name ? 1 : -1;
+};
 
 const { project } = defineProps({
     project: {
@@ -132,6 +152,7 @@ const getDistGroups = (() => {
             updateDistSelection();
         }
         grouped[dist.groupName].push(dist);
+        grouped[dist.groupName].sort((a, b) => sortByDistName(a, b));
     }
     return grouped;
 });
@@ -227,6 +248,7 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
 .button .details {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .details .name {
@@ -237,7 +259,7 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
 .details .file {
     color: var(--light-gray);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     display: flex;
     flex-direction: column;
 }
@@ -357,5 +379,25 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
     background-color: var(--gray);
     color: var(--accent);
     cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+    .latest-release .download-buttons {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 725px) {
+    .latest-release {
+        flex-direction: column;
+    }
+
+    .latest-release .download-buttons {
+        width: 100%;
+    }
+
+    .latest-release .changelog {
+        width: 100%;
+    }
 }
 </style>
