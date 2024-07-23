@@ -57,8 +57,7 @@ const { project } = defineProps({
         required: true
     }
 })
-const { metadata: meta } = project;
-const stats = await useProjectStats(project.slug);
+const { metadata: meta, stats } = project;
 </script>
 
 <style scoped>

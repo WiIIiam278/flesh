@@ -79,8 +79,7 @@ const { project } = defineProps({
         required: true
     }
 })
-const { metadata: meta } = project;
-const stats = await useProjectStats(project.slug);
+const { metadata: meta, stats } = project;
 
 let galleryIndex = 0;
 const galleryClick = () => {
