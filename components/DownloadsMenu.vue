@@ -1,15 +1,11 @@
 <template>
     <div v-if="!canDownload()" class="upsell">
         <div v-if="user" class="upsell-error">
-            <IconifiedText icon="fa6-solid:lock"><h3>You don't own this project!</h3></IconifiedText>
-            <p>
-                <span>Please purchase a project license and verify your purchase on our </span>
-                <a href="https://discord.gg/tVYhJfyDWG" target="_blank">Discord Server</a>
-                <span> by opening a ticket.</span>
-            </p>
+            <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-license-required') }}</h3></IconifiedText>
+            <p>{{ $t('download-license-required-copy') }}</p>
         </div>
         <div v-else  class="upsell-error">
-            <IconifiedText icon="fa6-solid:lock"><h3>Please log in to access this project's downloads.</h3></IconifiedText>
+            <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-login-required') }}</h3></IconifiedText>
             <ButtonLink :href="`${useRuntimeConfig().public.API_BASE_URL}/login`" icon="fa6-solid:key" hollow>{{ $t('link-log-in') }}</ButtonLink>
         </div>
     </div>
@@ -22,7 +18,7 @@
                         <div class="name">{{ download.distribution.description }}</div>
                         <div class="file">
                             <span class="file">{{ download.name }}</span>
-                            <span class="size-hash">{{ formatFileSize(download.fileSize) }} Download</span>
+                            <span class="size-hash">{{ $t('download-file-size', {'size': formatFileSize(download.fileSize)}) }}</span>
                         </div>
                     </div>
                 </a>
@@ -34,15 +30,15 @@
         </div>
         <div class="other-releases">
             <h3 v-if="releaseChannels.length" class="channel-picker">
-                <span>Browse All</span>
+                <span>{{ $t('download-browse-all') }}</span>
                 <select :disabled="releaseChannels.length <= 1" v-model="selectedChannel" @change="updateVersions(pageNumber, itemsPerPage)">
                     <option v-for="channel in releaseChannels" :key="channel" :value="channel">{{ useCapitalized(channel) }}</option>
                 </select>
-                <span>Versions</span>
+                <span>{{ $t('download-versions') }}</span>
             </h3>
             <div class="version-options">
                 <div v-if="Object.keys(getDistGroups()).length > 1" class="option dist-group-picker">
-                    <label for="dist-group-select">Filter:</label>
+                    <label for="dist-group-select">{{ $t('download-filter-label') }}</label>
                     <label v-for="(_, group) in getDistGroups()" :for="`dist-group-${group}`" :key="groupName"
                         :class="`dist-group ${selectedDistGroup === group ? 'selected' : ''}`">
                         <img class="icon" :src="`/images/platforms/${group}.png`" onerror="this.style.display='none'" />
@@ -52,7 +48,7 @@
                     </label>
                 </div>
                 <div class="dist-picker" v-if="selectedDistGroup && getDistGroups()[selectedDistGroup].length > 1">
-                    <label for="dist-select">Version:</label>
+                    <label for="dist-select">{{ $t('download-version-label') }}</label>
                     <select v-model="selectedDist" @change="updateVersions(pageNumber, itemsPerPage)">
                         <option v-for="dist in getDistGroups()[selectedDistGroup]" :key="dist.name" :value="dist">{{ dist.description }}</option>
                     </select>
@@ -79,14 +75,15 @@
         </div>
     </div>
     <div v-else class="upsell-error">
-        <IconifiedText icon="fa6-solid:circle-info"><h3>There are no downloads available for this project.</h3></IconifiedText>
-        <p>Please try again later!</p>
+        <IconifiedText icon="fa6-solid:circle-info"><h3>{{ $t('download-no-versions') }}</h3></IconifiedText>
+        <p>{{ $t('download-no-versions-copy') }}</p>
     </div>
 </template>
 
 <script setup>
 const DEFAULT_CHANNEL = 'release';
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
+const { t } = useI18n();
 
 const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 B';
