@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!ownsProject()" class="upsell">
+    <div v-if="!canDownload()" class="upsell">
         <div v-if="user" class="upsell-error">
             <IconifiedText icon="fa6-solid:lock"><h3>You don't own this project!</h3></IconifiedText>
             <p>
@@ -97,7 +97,7 @@ const formatFileSize = (bytes) => {
 };
 const downloadUrl = (release, channel, dist) => `${BASE_URL}/v1/projects/${project.slug}/channels/${channel}/versions/${release.name}/distributions/${dist.name}`;
 const getChangelog = (release, short = false) => !short ? release.changelog : release.changelog.split('\n')[0];
-const ownsProject = () => !project.restricted || user.value && (useIsUserRole(user.value, 'admin') || user.value.purchases.some(p => p === project.slug));
+const canDownload = () => !project.restricted || user.value && (useIsUserRole(user.value, 'staff') || user.value.purchases.some(p => p === project.slug));
 
 const { project } = defineProps({
     project: {
