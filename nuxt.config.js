@@ -60,7 +60,11 @@ export default defineNuxtConfig({
   // Runtime components
   runtimeConfig: {
       public: {
-          GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim()
+          GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),
+          API_BASE_URL: process.env.API_BASE_URL,
+          TRANSCRIPT_BUCKET_URL: process.env.TRANSCRIPT_BUCKET_URL,
+          CURRENCY_SYMBOL: process.env.CURRENCY_SYMBOL,
+          COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
       }
   },
 
@@ -89,12 +93,10 @@ export default defineNuxtConfig({
       defaultLocale: 'en'
   },
 
-  // Fetch neccessary assets / documentation from GitHub
+  // Fetch necessary assets / documentation from GitHub
   hooks: {
       'build:before': () => {
-          require('./hooks/fetch-emulator').getEmulator()
-          require('./hooks/fetch-readmes').getContent()
-          require('./hooks/fetch-documentation').pullDocumentation()
+          require('./hooks/prepareEmulators').prepareEmulators()
       }
   },
 
@@ -102,5 +104,7 @@ export default defineNuxtConfig({
     timeline: {
       enabled: true
     }
-  }
+  },
+
+  compatibilityDate: '2024-07-09'
 })

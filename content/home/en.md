@@ -21,15 +21,6 @@ Welcome! &mdash; This site contains information and documentation for my various
 
 ::button-link
 ---
-link: '/docs'
-icon: 'fa6-solid:book'
-hollow: true
----
-Docs
-::
-
-::button-link
----
 link: 'https://discord.gg/tVYhJfyDWG'
 icon: 'fa6-brands:discord'
 hollow: true

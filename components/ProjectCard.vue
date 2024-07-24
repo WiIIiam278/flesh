@@ -1,65 +1,48 @@
 <template>
-    <div v-if="project.id" class="project-card">
+    <div v-if="project.slug && meta" class="project-card">
         <div class="header">
-            <NuxtLink class="image hover-image" v-if="project.icon" :to="'/project/' + project.id">
-                <object v-if="project.icon.svg" :data="'/images/icons/' + project.icon.svg" type="image/svg+xml" />
-                <img v-else-if="project.icon.png" :src="'/images/icons/' + project.icon.png" />
+            <NuxtLink class="image hover-image" v-if="meta.icons" :to="`/project/${project.slug}`">
+                <object v-if="meta.icons['SVG']" :data="`/images/icons/${meta.icons['SVG']}`" type="image/svg+xml" />
+                <img v-else-if="meta.icons['PNG']" :src="`/images/icons/${meta.icons['PNG']}`" />
             </NuxtLink>
             <div class="details">
-                <NuxtLink :to="'/project/' + project.id">
-                    <h3 class="name">{{ project.name ? project.name : project.id }}</h3>
+                <NuxtLink :to="`/project/${project.slug}`">
+                    <h3 class="name">{{ meta.name ? meta.name : project.slug }}</h3>
                 </NuxtLink>
                 <div class="pills">
-                    <TagPill v-for="tag in project.tags.slice(0, 3)" :tag="tag" :key="tag" />
+                    <TagPill v-for="tag in meta.tags.slice(0, 3)" :tag="tag" :key="tag" />
                 </div>
             </div>
         </div>
         <div class="body">
             <div class="description">
-                <div class="tagline" v-if="project.tagline">
-                    <IconifiedText class="discontinued" v-if="project.discontinued" icon="fa6-solid:box-archive">
+                <div class="tagline" v-if="meta.tagline">
+                    <IconifiedText class="archived" v-if="meta.archived" icon="fa6-solid:box-archive">
                         {{$t('project-archived')}}
                     </IconifiedText>
-                    <p>{{ project.tagline }}</p>
+                    <p>{{ meta.tagline }}</p>
                 </div>
                 <div class="buttons">
-                    <ButtonLink v-if="project.documentation" :link="'/docs/' + project.id" icon="fa6-solid:book" hollow>
+                    <ButtonLink v-if="meta.listDownloads" :link="`/project/${project.slug}#download`" icon="fa6-solid:download" hollow>
+                        {{$t('link-download')}}
+                    </ButtonLink>
+                    <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
                         {{$t('link-docs')}}
                     </ButtonLink>
-                    <ButtonLink v-for="link in project.links" :link="link.link" hollow>{{ link.text }}</ButtonLink>
-                    <ButtonLink v-if="project.repository" :link="project.repository" icon="fa6-brands:github">
-                    </ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.itch" :link="project.ids.itch"
-                        icon="fa6-brands:itch-io"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.universaldb" :link="project.ids.universaldb"
-                        icon="fa6-solid:down-long"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.spigot"
-                        :link="'https://spigotmc.org/resources/' + project.ids.spigot" icon="fa6-solid:faucet">
-                    </ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.polymart"
-                        :link="'https://polymart.org/resource/' + project.ids.polymart" icon="fa6-solid:p"></ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.modrinth"
-                        :link="'https://modrinth.com/plugin/' + project.ids.modrinth" icon="fa6-solid:wrench">
-                    </ButtonLink>
-                    <ButtonLink v-if="project.ids && project.ids.builtbybit"
-                        :link="'https://builtbybit.com/resources/' + project.ids.builtbybit" icon="fa6-solid:cube">
-                    </ButtonLink>
+                    <ButtonLink v-if="meta.github && !(meta.listDownloads && meta.documentation)" icon="fa6-brands:github" :link="meta.github"></ButtonLink>
+                    <ButtonLink v-if="!(meta.listDownloads && meta.documentation)" v-for="link in meta.links.slice(0, (meta.listDownloads || meta.documentation) ? 2 : 3)" 
+                        :key="link.url" :link="link.url" :icon="useLinkIcon(link)"></ButtonLink>
                 </div>
             </div>
             <div class="stats" v-if="stats">
-                <div class="stat" v-if="stats.total_downloads">
+                <div class="stat" v-if="stats.downloadCount">
                     <IconifiedText icon="fa6-solid:download">
-                        {{ stats.total_downloads >= 1000 ? (stats.total_downloads / 1000).toFixed(1) + 'k' : stats.total_downloads }}
+                        {{ stats.downloadCount >= 1000 ? (stats.downloadCount / 1000).toFixed(1) + 'k' : stats.downloadCount }}
                     </IconifiedText>
                 </div>
-                <div class="stat" v-if="stats.average_rating">
+                <div class="stat" v-if="stats.averageRating">
                     <IconifiedText icon="fa6-solid:star">
-                        {{ stats.average_rating.toFixed(1) }}
-                    </IconifiedText>
-                </div>
-                <div class="stat" v-if="stats.latest_version">
-                    <IconifiedText icon="fa6-solid:code-branch">
-                        {{ stats.latest_version }}
+                        {{ parseFloat(stats.averageRating).toFixed(1) }}
                     </IconifiedText>
                 </div>
             </div>
@@ -68,20 +51,13 @@
 </template>
 
 <script setup>
-import TagPill from './TagPill.vue';
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
-
 const { project } = defineProps({
     project: {
         type: Object,
         required: true
     }
 })
-
-// Expost stats as a fetch to /api/stats/:id
-let {data} = await useFetch(`/api/stats/${project.id}`)
-const stats = data;
+const { metadata: meta, stats } = project;
 </script>
 
 <style scoped>
@@ -107,8 +83,10 @@ const stats = data;
 }
 
 .details {
+    display: flex;
     justify-self: flex-end;
     margin-right: auto;
+    flex-direction: column;
 }
 
 .image {
@@ -133,11 +111,6 @@ const stats = data;
     border-radius: 0.5rem;
 }
 
-.details {
-    display: flex;
-    flex-direction: column;
-}
-
 .name {
     margin: 0;
 }
@@ -148,6 +121,7 @@ const stats = data;
     -webkit-flex-wrap: wrap;
     margin: 0.4rem -0.2rem;
     font-size: 0.9rem;
+    align-items: center;
 }
 
 .description {
@@ -155,7 +129,7 @@ const stats = data;
     flex-direction: column;
 }
 
-.tagline .discontinued {
+.tagline .archived {
     margin-bottom: 0.75rem;
     font-size: 0.9rem;
     color: var(--light-gray)
@@ -222,6 +196,7 @@ const stats = data;
 
     .details {
         margin-right: 0;
+        align-items: center;
     }
 
     .buttons {

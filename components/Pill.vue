@@ -1,5 +1,5 @@
 <template>
-    <span :class="'pill ' + color">
+    <span :class="`pill ${color}`">
         <slot />
     </span>
 </template>
@@ -22,15 +22,12 @@
 }
 </style>
 
-<script>
-export default {
-    name: 'Pill',
-    props: {
-        color: {
-            type: String,
-            required: false,
-            default: 'light-gray'
-        }
+<script setup>
+const { color} = defineProps({
+    color: {
+        type: String,
+        required: false,
+        default: 'light-gray'
     }
-}
+})
 </script>

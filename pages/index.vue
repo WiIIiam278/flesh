@@ -6,7 +6,7 @@
                     <ProjectGrid />
                 </div>
                 <div id="right-column">
-                    <ContentDoc :head="false" :path="`/home/${locale}`" />
+                    <LazyContentDoc :head="false" :path="`/home/${locale}`" />
                 </div>
             </div>
         </NuxtLayout>
@@ -15,7 +15,6 @@
 
 <script setup>
 const { locale, t } = useI18n()
-const localePath = useLocalePath()
 
 definePageMeta({
     title: computed(() => t('index-title')),

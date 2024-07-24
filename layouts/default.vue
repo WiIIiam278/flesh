@@ -16,18 +16,11 @@
     min-height: 100vh;
 }
 
-#page {
+#page-content {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    max-width: 1100px;
-}
-
-#page-content {
-    margin: 0 auto;
-    max-width: 1100px;
-    padding: 0 2rem;
+    width: 100%;
 }
 </style>

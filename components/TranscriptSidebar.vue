@@ -96,5 +96,6 @@ const getParticipant = (id) => {
     display: flex;
     flex-direction: row;
     margin: 1.25rem 0;
+    gap: 0.35rem;
 }
 </style>

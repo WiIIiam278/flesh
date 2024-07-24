@@ -10,11 +10,6 @@
                         <AlgoliaDocSearch :translations="{'button': {'buttonText': t('search-button'), 'buttonAriaLabel': t('search-button')}}" />
                     </li>
                     <li>
-                        <NuxtLink to="/">
-                            <IconifiedText icon="fa6-solid:house">{{ $t('link-home') }}</IconifiedText>
-                        </NuxtLink>
-                    </li>
-                    <li>
                         <NuxtLink to="/docs">
                             <IconifiedText icon="fa6-solid:book">{{ $t('link-docs') }}</IconifiedText>
                         </NuxtLink>
@@ -24,6 +19,17 @@
                             <IconifiedText icon="fa6-brands:discord">{{ $t('link-support') }}</IconifiedText>
                         </a>
                     </li>
+                    <li v-if="user">
+                        <NuxtLink class="account-link" to="/account">
+                            <img v-if="user?.avatar" class="shadow" :src="user.avatar" :alt="`${user.name} Discord avatar`" />
+                            <span>{{ $t('link-account') }}</span>
+                        </NuxtLink>
+                    </li>
+                    <li v-else>
+                        <a :href="`${useRuntimeConfig().public.API_BASE_URL}/login`">
+                            <IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -31,8 +37,8 @@
 </template>
 
 <script setup>
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
+const user = await useUser()
+const { t } = useI18n()
 </script>
 
 <style scoped>
@@ -79,6 +85,19 @@ nav #links ul {
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+.account-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.account-link img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
 }
 
 /* Less than 600px */

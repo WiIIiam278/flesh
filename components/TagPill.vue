@@ -1,12 +1,11 @@
 <template>
     <Pill :class="`${isSelected ? 'selected' : ''} ${isClickable ? 'clickable' : ''}`" v-on:click="onSelected" >
-        {{ getName(tag) }}
+        {{ tag }}
     </Pill>
 </template>
 
 <script setup>
 import Pill from './Pill.vue'
-import tags from '/assets/data/tags.json'
 
 const { tag, showIcon, isClickable, isSelected } = defineProps({
     tag: {
@@ -30,8 +29,6 @@ const onSelected = () => {
         emit('selected', tag);
     }
 }
-
-const getName = (tag) => tags[tag] ? tags[tag].name : tag;
 </script>
 
 <style scoped>

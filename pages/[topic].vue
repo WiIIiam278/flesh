@@ -1,15 +1,13 @@
 <template>
     <div>
         <NuxtLayout>
-            <ContentDoc>
+            <LazyContentDoc>
                 <template v-slot="{ doc }">
                     <ContentRenderer :value="doc">
-                        <div>
+                        <article class="page-content">
                             <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
-                            <article>
-                                <ContentRendererMarkdown :value="doc" />
-                            </article>
-                        </div>
+                            <ContentRendererMarkdown :value="doc" />
+                        </article>
                     </ContentRenderer>
                 </template>
                 <template #not-found>
@@ -22,7 +20,7 @@
                         </PathLine>
                     </ErrorPage>
                 </template>
-            </ContentDoc>
+            </LazyContentDoc>
         </NuxtLayout>
     </div>
 </template>
@@ -31,6 +29,13 @@
 import InvalidPage from '../components/InvalidPage.vue';
 import PathLine from '../components/content/PathLine.vue';
 
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
+const { t } = useI18n()
 </script>
+
+<style scoped>
+.page-content {
+    margin-top: 1rem;
+    max-width: 95vw;
+    width: 1100px;
+}
+</style>
