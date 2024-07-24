@@ -6,7 +6,7 @@ import { execSync } from 'node:child_process'
 // Get filtered projects
 const getProjects = async () => await fetch(`${process.env.API_BASE_URL}/v1/projects`)
     .then(res => res.json())
-    .then(projects => projects.filter(project => project.metadata?.properties?.emulator));
+    .then(projects => projects.filter(project => project.metadata?.properties?.emulator_rom));
 
 const getEmulatorJs = () => {
     const emulatorPath = `https://github.com/EmulatorJS/EmulatorJS.git`;
