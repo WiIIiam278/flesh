@@ -1,7 +1,7 @@
 <template>
     <article class="users-table">
         <div v-if="users.value" class="search-options">
-            <b>Displaying {{ users.value.numberOfElements }} user record(s)</b>
+            <b>Displaying {{ users.value.page.totalElements }} user record(s)</b>
             <form class="search-box" @submit="(e) => { e.preventDefault(); updateUsers(pageNumber.value, itemsPerPage.value); }">
                 <input type="text" v-model="searchText" placeholder="Search by username" />
                 <button type="submit">Search</button>
