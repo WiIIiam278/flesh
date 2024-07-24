@@ -6,7 +6,7 @@ import { execSync } from 'node:child_process'
 // Get filtered projects
 const getProjects = async () => await fetch(`${process.env.API_BASE_URL}/v1/projects`)
     .then(res => res.json())
-    .then(projects => projects.filter(project => project.metadata?.properties?.emulator_rom));
+    .then(projects => projects.filter(project => project.metadata?.properties?.find(prop => prop?.key === 'emulator_rom')));
 
 const getEmulatorJs = () => {
     const emulatorPath = `https://github.com/EmulatorJS/EmulatorJS.git`;
@@ -34,7 +34,7 @@ const getEmulatorJs = () => {
 
 const downloadRom = (project) => {
     // Download project.emulator.rom_url and put it in /emulator-js/roms/
-    const romUrl = project.metadata.properties?.emulator_rom;
+    const romUrl = project.metadata.properties.find(prop => prop.key === 'emulator_rom')?.value;
     if (!romUrl) {
         console.log(`No ROM found for ${project.name}, skipping...`);
         return;
