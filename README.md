@@ -4,6 +4,8 @@
 Source for the frontend for William278.net, written in Vue.js / Nuxt (v3). All Rights Reserved
 Please get in touch if you wish to use this frame for your own personal website.
 
+See also: [bones](https://github.com/WiIIiam278/bones), the corresponding backend service.
+
 ## Translations
 Check the [translations page](/content/translate.md) for information about how you can help translate this site!
 
