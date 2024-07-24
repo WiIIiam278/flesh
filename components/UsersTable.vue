@@ -48,7 +48,7 @@
                         </div>
                         <div class="no-purchased-products" v-if="!restrictedProjects.length">No products can be purchased</div>
                     </td>
-                    <td v-if="useIsUserRole(user, 'admin')">
+                    <td v-if="useIsUserRole(user, item.role)">
                         <button class="delete" v-if="item.id !== user.id" @click="deleteUser(item)">Delete</button>
                     </td>
                 </tr>
@@ -119,8 +119,8 @@ const updateUserRole = async (toUpdate) => {
 };
 
 const deleteUser = async (toDelete) => {
-    if (useIsUserRole(toDelete, 'admin')) {
-        alert('You cannot delete an admin account ' + JSON.stringify(toDelete));
+    if (useIsUserRole(toDelete, user.role)) {
+        alert('You do not have permission to delete this account');
         return;
     }
     if (confirm(`Are you sure you want to delete ${toDelete.name}\'s account?`)) {
