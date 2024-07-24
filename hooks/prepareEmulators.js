@@ -36,11 +36,11 @@ const downloadRom = (project) => {
     // Download project.emulator.rom_url and put it in /emulator-js/roms/
     const romUrl = project.metadata.properties.find(prop => prop.key === 'emulator_rom')?.value;
     if (!romUrl) {
-        console.log(`No ROM found for ${project.name}, skipping...`);
+        console.log(`No ROM found for ${project.slug}, skipping...`);
         return;
     }
     const romPath = `./public/emulator-js/roms`;
-    console.log(`Downloading ${project.name} ROM...`);
+    console.log(`Downloading ${project.slug} ROM...`);
     
     // If the project path does not exist, make the directory
     if (!fs.existsSync(romPath + '/')) {
@@ -56,7 +56,7 @@ const downloadRom = (project) => {
             if (!fs.existsSync(romDirectory + '/')) {
                 fs.mkdirSync(romDirectory + '/', { recursive: true });
             }
-            fs.writeFileSync(`${romDirectory}/${project.id}`, Buffer.from(buffer));
+            fs.writeFileSync(`${romDirectory}/${project.slug}`, Buffer.from(buffer));
         });
 }
 
