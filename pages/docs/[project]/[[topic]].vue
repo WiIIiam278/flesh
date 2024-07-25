@@ -14,10 +14,6 @@
                 </Head>
                 <Overbar>
                     <Breadcrumbs :crumbs="breadcrumbs" />
-                    <span class="translate-edit">
-                        <ButtonLink hollow icon="fa6-solid:pencil" :link="`${meta.repository}/tree/master/docs`">{{ $t('docs-edit-button') }}</ButtonLink>
-                        <ButtonLink hollow icon="fa6-solid:language" link="/translate">{{ $t('docs-translate-button') }}</ButtonLink>
-                    </span>
                 </Overbar>
                 <article>
                     <h1 v-if="params.topic">{{ title }}</h1>
@@ -72,11 +68,3 @@ if (params.topic) {
     breadcrumbs.push({ name: meta.name, link: `/docs/${project.value.slug}` });
 }
 </script>
-
-<style scoped>
-.translate-edit {
-    display: flex;
-    gap: 0.35rem;
-    margin: 0.5rem 0;
-}
-</style>
