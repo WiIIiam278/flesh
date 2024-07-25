@@ -1,7 +1,10 @@
-# [![William278.net Banner](public/images/banner.png)](https://github.com/WiIIiam278/William278.net)
-[![Discord](https://img.shields.io/discord/818135932103557162.svg?label=&logo=discord&logoColor=fff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/tVYhJfyDWG)
+# Flesh
+#### Frontend Vue App for William278.net
 
-Source for [my website](https://william278.net), built in Vue.js using Nuxt 3. If you'd like to use this as a base for your site, it should be OK, but get in touch with me first!
+Source for the frontend for William278.net, written in Vue.js / Nuxt (v3). All Rights Reserved
+Please get in touch if you wish to use this frame for your own personal website.
+
+See also: [bones](https://github.com/WiIIiam278/bones), the corresponding backend service.
 
 ## Translations
 Check the [translations page](/content/translate.md) for information about how you can help translate this site!
