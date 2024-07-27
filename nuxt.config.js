@@ -65,6 +65,7 @@ export default defineNuxtConfig({
           TRANSCRIPT_BUCKET_URL: process.env.TRANSCRIPT_BUCKET_URL,
           CURRENCY_SYMBOL: process.env.CURRENCY_SYMBOL,
           COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
+          SESSION_EXPIRY_DAYS: process.env.SESSION_EXPIRY_DAYS,
       }
   },
 
