@@ -2,7 +2,7 @@
     <article class="users-table">
         <div v-if="users.value" class="search-options">
             <b>Displaying {{ users.value.page.totalElements }} user record(s)</b>
-            <form class="search-box" @submit="(e) => { e.preventDefault(); updateUsers(pageNumber.value, itemsPerPage.value); }">
+            <form class="search-box" @submit="(e) => { e.preventDefault(); pageNumber = 0; updateUsers(pageNumber.value, itemsPerPage.value); }">
                 <input type="text" v-model="searchText" placeholder="Search by username" />
                 <button type="submit">Search</button>
             </form>
@@ -26,16 +26,16 @@
                         <img :src="item.avatar" alt="User avatar" />
                     </td>
                     <td><code>{{ item.id }}</code></td>
-                    <td>{{ new Date(item.createdAt).toLocaleString() }}</td>
+                    <td>{{ item.createdAt ? new Date(item.createdAt).toLocaleString() : "" }}</td>
                     <td>{{ item.name }}</td>
-                    <td>{{ `${item.email[0]}•••••@${item.email.split('@')[1]}` }}</td>
+                    <td>{{ item.email ? `${item.email[0]}•••••@${item.email.split('@')[1]}` : "" }}</td>
                     <td :class="`role-editor ${item.role?.toLowerCase()}-role`">
                         <select v-if="useIsUserRole(user, 'admin') && item.id !== user.id" v-model="item.role" @change="updateUserRole(item)">
                             <option v-for="role in ['user', 'staff', 'admin']" :class="`${role}-role`" :value="role.toUpperCase()">
                                 {{ $t(`user-role-${role.toLowerCase()}`) }}
                             </option>
                         </select>
-                        <span v-else>{{ $t(`user-role-${item.role.toLowerCase()}`) }}</span>
+                        <span v-else-if="item.role">{{ $t(`user-role-${item.role.toLowerCase()}`) }}</span>
                     </td>
                     <td>
                         <div class="purchased-products" v-for="project in restrictedProjects" :key="project.slug">
@@ -138,8 +138,12 @@ const deleteUser = async (toDelete) => {
 </script>
 
 <style scoped>
-.users-table table th {
+.users-table, .users-table table th {
     width: 100%;
+}
+
+.users-table table tr {
+    background-color: transparent;
 }
 
 .avatar {
@@ -209,9 +213,5 @@ const deleteUser = async (toDelete) => {
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-}
-
-.users-table table tr {
-    background-color: transparent;
 }
 </style>

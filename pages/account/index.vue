@@ -38,7 +38,7 @@
                                 <IconifiedText v-else class="empty-notice" icon="fa6-solid:bag-shopping">{{ $t('no-products-notice') }}</IconifiedText>
                             </div>
                             <div v-if="activeTab === 'your-support-tickets'" class="item-body tickets">
-                                <IconifiedText class="empty-notice" icon="fa6-solid:ticket">{{ $t('no-support-tickets-notice') }}</IconifiedText>
+                                <TicketsTable />
                             </div>
                         </Tabs>
                     </div>

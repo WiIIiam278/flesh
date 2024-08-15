@@ -75,6 +75,17 @@
     "ticket-transcript-creator": "Creator",
     "ticket-transcript-download": "Download",
 
+    "tickets-header-number": "Number",
+    "tickets-header-subject": "Subject",
+    "tickets-header-description": "Description",
+    "tickets-header-status": "Status",
+    "tickets-header-opened-at": "Opened At",
+    "tickets-header-closed-at": "Closed At",
+    "ticket-status-open": "Open",
+    "ticket-status-closed": "Closed",
+    "ticket-status-locked": "Locked",
+    "ticket-subject-other": "Other",
+
     "account-title": "Account",
     "account-description": "Manage your William278.net account details.",
     "delete-account": "Delete Account",
@@ -88,7 +99,7 @@
     "your-support-tickets": "Your Support Tickets",
     "logged-in-with-discord": "Logged in with Discord",
     "no-products-notice": "When you've purchased a product and verified your purchase on Discord, it will appear here.",
-    "no-support-tickets-notice": "The ability to access ticket transcripts from your account page is coming soon!",
+    "no-support-tickets-notice": "When you've opened a support ticket on Discord, it will appear here.",
     "admin-panel": "Admin Panel",
 
     "button-back-to-home": "Back to home",
