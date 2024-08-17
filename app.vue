@@ -246,7 +246,7 @@ details[open] summary {
 
 /* Blockquote */
 blockquote {
-  border-left: 0.25rem solid var(--gray);
+  border-left: 0.25rem solid var(--light-gray);
   padding-left: 0.8rem;
   margin: 0.5rem 0;
 }

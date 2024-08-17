@@ -4,7 +4,7 @@ const validated = (parsed, bucketUrl) => parsed?.startsWith(bucketUrl) ? parsed 
 
 export const useTranscriptUrl = (id) => {
     const BUCKET_URL = useRuntimeConfig().public.TRANSCRIPT_BUCKET_URL;
-    return validated(Buffer.from(useRoute().params.id, 'base64').toString('ascii'), BUCKET_URL);
+    return validated(Buffer.from(id, 'base64').toString('ascii'), BUCKET_URL);
 }
 
 export const useTranscript = async (id) => {

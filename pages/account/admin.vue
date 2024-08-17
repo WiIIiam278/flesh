@@ -19,6 +19,9 @@
                             <div v-if="activeTab === 'users'">
                                 <UsersTable :user="user" />
                             </div>
+                            <div v-if="activeTab === 'tickets'">
+                                <TicketsTable />
+                            </div>
                         </Tabs>
                     </div>
                 </article>
@@ -32,6 +35,7 @@ const uploading = ref(true);
 const user = await useUser();
 const tabs = [];
 if (useIsUserRole(user.value, 'staff')) {
+    tabs.unshift({ id: 'tickets', name: 'Tickets' })
     tabs.unshift({ id: 'users', name: 'Users' })
 }
 if (useIsUserRole(user.value, 'admin')) {

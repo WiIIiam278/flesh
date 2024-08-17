@@ -5,8 +5,7 @@
         </div>
         <div class="profile">
             <div class="name">
-                {{ user.name }}<span class="disambiguator" v-if="parseInt(user.disambiguator) > 0">#{{
-                user.disambiguator }}</span>
+                {{ user.name }}
             </div>
             <Pill v-if="creator" class="creator" color="dark-gray">{{ $t('ticket-transcript-creator') }}</Pill>
         </div>

@@ -19,9 +19,6 @@
                     <span class="name">
                         {{ sender.name }}
                     </span>
-                    <span class="disambiguator" v-if="parseInt(sender.disambiguator > 0)">
-                        #{{ sender.disambiguator }}
-                    </span>
                 </div>
                 <div class="timestamp">
                     {{ getTimestampString(parseInt(messages[0].timestamp)) }}
