@@ -96,7 +96,7 @@ const updateUserProjects = async (toUpdate, projectId) => {
             body: JSON.stringify(toUpdate.purchases)
         });
     } catch (err) {
-        alert('Failed to update user\'s products: ' + err);
+        useAlert('Failed to update user\'s products: ' + err, 'Error');
         return;
     }
 };
@@ -113,27 +113,33 @@ const updateUserRole = async (toUpdate) => {
             body: toUpdate.role.toUpperCase()
         });
     } catch (err) {
-        alert('Failed to update user\'s role: ' + err);
+        useAlert('Failed to update user\'s role: ' + err, 'Error');
         return;
     }
 };
 
 const deleteUser = async (toDelete) => {
     if (useIsUserRole(toDelete, user.role)) {
-        alert('You do not have permission to delete this account');
+        useAlert('You do not have permission to delete this account', 'No permission');
         return;
     }
-    if (confirm(`Are you sure you want to delete ${toDelete.name}\'s account?`)) {
-        await $fetch(`${BASE_URL}/v1/users/${toDelete.id}`, {
-            method: 'DELETE',
-            credentials: auth ? 'include' : 'omit',
-            headers: {
-                'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                'X-XSRF-TOKEN': xsrf
-            },
-        });
-        users.value.content = users.value.content.filter(u => u.id !== toDelete.id);
-    }
+    
+    useConfirm(t('delete-account-confirm-other', {'name': toDelete.name}), t('delete-account'), async (confirm) => {
+        if (!confirm) return;
+        try {
+            await $fetch(`${BASE_URL}/v1/users/${toDelete.id}`, {
+                method: 'DELETE',
+                credentials: auth ? 'include' : 'omit',
+                headers: {
+                    'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
+                    'X-XSRF-TOKEN': xsrf
+                },
+            });
+            users.value.content = users.value.content.filter(u => u.id !== toDelete.id);
+        } catch (err) {
+            useAlert('Failed to delete user: ' + err, 'Error');
+        }
+    });
 };
 </script>
 

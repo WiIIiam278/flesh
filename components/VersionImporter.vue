@@ -118,9 +118,9 @@ const sendImportRequest = async () => {
             },
             body: JSON.stringify(getRequestBody())
         });
-        alert('Import started successfully!');
+        useAlert('Import started successfully!', 'Success');
     } catch (err) {
-        return alert('Failed to import versions: ' + err);
+        useAlert('Failed to import versions: ' + err, 'Error');
         return;
     }
 };

@@ -1,8 +1,13 @@
 <template>
-  <NuxtPage />
+  <div>
+    <Modal v-if="modal?.show" />
+    <NuxtPage />
+  </div>
 </template>
 
 <script setup>
+const modal = useState('modal');
+
 useHead({
   titleTemplate: (titleChunk) => {
     return titleChunk ? `${titleChunk} - William278.net` : 'Open source Minecraft server software & game projects - William278.net';

@@ -131,9 +131,10 @@ const uploadVersion = async () => {
             },
             body: getFormData()
         });
-        alert('Version uploaded successfully!');
+        useAlert('Version uploaded successfully!', 'Success');
     } catch (err) {
-        return alert('Failed to upload version: ' + err);
+        useAlert('Failed to upload version: ' + err, 'Error');
+        return;
     }
     reset();
 };

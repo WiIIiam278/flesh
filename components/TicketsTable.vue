@@ -97,29 +97,29 @@ const openTranscript = async (ticket) => {
         });
         navigateTo(`/transcript/${btoa(transcript)}`, { external: true });
     } catch (err) {
-        alert('Failed to get ticket transcript: ' + err);
+        useAlert('Failed to get ticket transcript: ' + err, 'Error');
         return;
     }
 };
 
 const deleteTicket = async (ticket) => {
-    if (!confirm(`Are you sure you want to delete ticket #${getTicketName(ticket)}?`)) {
-        return;
-    }
-    try {
-        await $fetch(`${BASE_URL}/v1/tickets/${ticket.id}`, {
-            method: 'DELETE',
-            credentials: auth ? 'include' : 'omit',
-            headers: {
-                'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                'X-XSRF-TOKEN': xsrf
-            }
-        });
-        await updateTickets(pageNumber.value, itemsPerPage.value);
-    } catch (err) {
-        alert('Failed to delete ticket: ' + err);
-        return;
-    }
+    useConfirm(t('delete-ticket-confirm', {'number': getTicketName(ticket)}), t('delete-ticket'), async (confirm) => {
+        if (!confirm) return;
+        try {
+            await $fetch(`${BASE_URL}/v1/tickets/${ticket.id}`, {
+                method: 'DELETE',
+                credentials: auth ? 'include' : 'omit',
+                headers: {
+                    'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
+                    'X-XSRF-TOKEN': xsrf
+                }
+            });
+            await updateTickets(pageNumber.value, itemsPerPage.value);
+        } catch (err) {
+            useAlert('Failed to delete ticket: ' + err, 'Error');
+            return;
+        }
+    });
 };
 </script>
 

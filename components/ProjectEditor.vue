@@ -244,13 +244,13 @@ const newProject = () => {
 
     // Ensure the name is valid
     if (!slug.length || slug.length > 63 || !/^[a-z0-9-]+$/.test(slug)) {
-        alert('Invalid project slug! Must be 1-63 characters long and only contain lowercase letters, numbers, and hyphens');
+        useAlert('Slugs must be 1-63 characters long and only contain lowercase letters, numbers, and hyphens', 'Invalid project slug');
         return;
     }
 
     // Ensure the project doesn't already exist
     if (projects.value.find(proj => proj.slug === slug)) {
-        alert('A project with that slug already exists');
+        useAlert('A project with that slug already exists', 'Invalid project slug');
         return;
     }
 
@@ -262,7 +262,7 @@ const newProject = () => {
 
 const saveProject = async () => {
     if (!editing.value) {
-        alert('Cannot save: No project selected');
+        useAlert('Please select a project first.', 'Cannot save project');
         return;
     }
     try {
@@ -279,14 +279,14 @@ const saveProject = async () => {
         saved.value = true;
         setTimeout(() => saved.value = false, 3000);
     } catch (err) {
-        alert('Failed to save project: ' + err);
+        useAlert('Failed to save project: ' + err, 'Error');
         return;
     }
 }
 
 const deleteProject = async () => {
     if (!editing.value) {
-        alert('Cannot delete: No project selected.');
+        useAlert('Please select a project first.', 'Cannot delete project');
         return;
     }
     if (confirm('Are you sure you want to delete this project?')) {
@@ -301,7 +301,7 @@ const deleteProject = async () => {
                 }
             });
         } catch (err) {
-            alert('Failed to delete project: ' + err);
+            useAlert('Failed to delete project: ' + err, 'Error');
             return;
         }
         projects.value = projects.value.filter(proj => proj.slug !== editing.value.slug);

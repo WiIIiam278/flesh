@@ -61,6 +61,10 @@
     "docs-edit-button": "Edit",
     "docs-translate-button": "Translate",
     
+    "button-close": "Close",
+    "button-confirm": "Confirm",
+    "button-cancel": "Cancel",
+
     "search-button": "Search",
 
     "ticket-transcript-title": "Ticket #{ticket} Transcript",
@@ -98,6 +102,9 @@
     "account-description": "Manage your William278.net account details.",
     "delete-account": "Delete Account",
     "delete-account-confirm": "Are you sure you want to delete your account? This will delete your account data and disassociate your Discord account from William278.net. Logging in again will create new account data.",
+    "delete-account-confirm-other": "Are you sure you want to delete {name}'s account? This action is irreversable.",
+    "delete-ticket": "Delete Ticket", 
+    "delete-ticket-confirm": "Are you sure you want to delete Ticket #{number}? This will delete both the ticket information and transcript. This action is irreversable.",
     "user-avatar-alt-text": "{name}'s user avatar",
     "user-role-admin": "Admin",
     "user-role-staff": "Staff",

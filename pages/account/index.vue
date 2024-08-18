@@ -57,19 +57,23 @@ const user = await useUser();
 const restricted = await useRestrictedProjects();
 
 const deleteAccount = () => {
-    if (confirm(t('delete-account-confirm'))) {
-        $fetch(`${BASE_URL}/v1/users/@me`, 
-        { 
-            method: 'DELETE',
-            credentials: auth ? 'include' : 'omit',
-            headers: {
-                'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
-                'X-XSRF-TOKEN': xsrf
-            }
-        }).then(() => {
+    useConfirm(t('delete-account-confirm'), t('delete-account'), async (confirm) => {
+        if (!confirm) return;
+        try {
+            await $fetch(`${BASE_URL}/v1/users/@me`, 
+            { 
+                method: 'DELETE',
+                credentials: auth ? 'include' : 'omit',
+                headers: {
+                    'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
+                    'X-XSRF-TOKEN': xsrf
+                }
+            });
             navigateTo('/account/logout')
-        })
-    }
+        } catch (err) {
+            
+        }
+    })
 }
 
 const tabs = [
