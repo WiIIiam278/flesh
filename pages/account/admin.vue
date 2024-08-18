@@ -17,7 +17,7 @@
                                 <VersionImporter />
                             </div>
                             <div v-if="activeTab === 'users'">
-                                <UsersTable :user="user" />
+                                <UsersTable :user="user" @show-tickets="showTickets" />
                             </div>
                             <div v-if="activeTab === 'tickets'">
                                 <TicketsTable />
@@ -31,7 +31,6 @@
 </template>
 
 <script setup>
-const uploading = ref(true);
 const user = await useUser();
 const tabs = [];
 if (useIsUserRole(user.value, 'staff')) {
@@ -49,6 +48,10 @@ activeTab.value = 'projects'
 definePageMeta({
     middleware: ['staff']
 })
+
+const showTickets = (user) => {
+    navigateTo(`/account/admin?user=${user}#tickets`, { external: true });
+}
 </script>
 
 <style scoped>

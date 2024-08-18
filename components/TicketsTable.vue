@@ -2,6 +2,17 @@
     <article class="tickets-table">
         <div v-if="tickets.value" class="search-options">
             <b>{{ t('tickets-header-record-count', { 'count': tickets.value.page.totalElements }) }}</b>
+            <form class="filter-boxes" @submit="(e) => { e.preventDefault(); pageNumber = 0; updateTickets(pageNumber.value, itemsPerPage.value); }">
+                <select class="ticket-status" v-model="statusFilter">
+                    <option :value="null">{{ t('ticket-status-all') }}</option>
+                    <option value="1" class="open-ticket">{{ t('ticket-status-open') }}</option>
+                    <option value="3" class="locked-ticket">{{ t('ticket-status-locked') }}</option>
+                    <option value="2" class="closed-ticket">{{ t('ticket-status-closed') }}</option>
+                </select>
+                <input v-if="!user" class="client-name" type="text" v-model="userFilter" :placeholder="t('search-by-username')" />
+                <input class="ticket-number" type="number" v-model="idFilter" :placeholder="t('search-by-ticket-number')" />
+                <button type="submit">Search</button>
+            </form>
         </div>
         <table>
             <thead>
@@ -57,11 +68,17 @@
 </template>
 
 <script setup>
+import { useRoute } from 'nuxt/app';
+
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const { t } = useI18n();
 
 const pageNumber = ref(1);
 const itemsPerPage = ref(15);
+const idFilter = ref(null);
+const statusFilter = ref(null);
+const userFilter = ref(useRoute()?.query?.user);
+
 const tickets = ref(null);
 const projects = await useAllProjects();
 
@@ -73,17 +90,24 @@ const { user } = defineProps({
 });
 const { auth, xsrf } = useAuth();
 
+const findUser = (async (username) => {
+    const { value } = await useAllUsers(0, 1, username);
+    if (value?.content) return value.content[0];
+    return null;
+});
+
 const updateTickets = (async (page, perPage) => {
     pageNumber.value = Math.max(1, page || pageNumber.value);
     itemsPerPage.value = Math.max(15, perPage || itemsPerPage.value);
-    tickets.value = user
-        ? await useTickets(user, pageNumber.value - 1, itemsPerPage.value) 
-        : await useAllTickets(pageNumber.value - 1, itemsPerPage.value);
+    const searchUser = (user ? user : (userFilter.value ? await findUser(userFilter.value) : null));
+    tickets.value = searchUser
+        ? await useTickets(searchUser, pageNumber.value - 1, itemsPerPage.value, idFilter.value, statusFilter.value) 
+        : await useAllTickets(pageNumber.value - 1, itemsPerPage.value, idFilter.value, statusFilter.value);
 });
 await updateTickets(pageNumber.value, itemsPerPage.value);
 
 const matchSubject = (subject) => projects.value.find(proj => proj.slug === subject);
-const getTicketUrl = (ticket) => `https://discord.com/channels/${ticket.guild.id}/${ticket.channelId}`;
+const getTicketUrl = (ticket) => `https://discord.com/channels/${ticket.guild?.id ?? '0'}/${ticket.channelId ?? '0'}`;
 const getTicketName = (ticket) => ticket.id.toString().padStart(4, '0');
 
 const openTranscript = async (ticket) => {
@@ -114,11 +138,11 @@ const deleteTicket = async (ticket) => {
                     'X-XSRF-TOKEN': xsrf
                 }
             });
-            await updateTickets(pageNumber.value, itemsPerPage.value);
         } catch (err) {
             useAlert('Failed to delete ticket: ' + err, 'Error');
             return;
         }
+        await updateTickets(pageNumber.value, itemsPerPage.value);
     });
 };
 </script>
@@ -158,19 +182,19 @@ td.number {
     border-radius: 100%;
 }
 
-.status .open-ticket {
+.open-ticket {
     color: var(--accent);
 }
 
-.status .closed-ticket {
+.closed-ticket {
     color: var(--light-gray)
 }
 
-.status .locked-ticket {
+.locked-ticket {
     color: gold !important;
 }
 
-.opened-at, .closed-at {
+table .opened-at, .closed-at {
     width: 10% !important;
 }
 
@@ -178,7 +202,7 @@ td.opened-at, td.closed-at {
     color: var(--light-gray);
 }
 
-.description {
+table .description {
     width: 30% !important;
     max-width: 250px !important;
     overflow: auto;
@@ -190,7 +214,7 @@ td.actions span {
     gap: 0.5rem;
 }
 
-.empty-notice {
+table .empty-notice {
     margin: 2rem 0;
     color: var(--light-gray)
 }
@@ -202,5 +226,16 @@ td.actions span {
     align-items: center;
     justify-items: center;
     margin-bottom: 1rem;
+}
+
+.search-options .filter-boxes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-boxes input, .filter-boxes select {
+    max-width: 150px;
 }
 </style>

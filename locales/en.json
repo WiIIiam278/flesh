@@ -93,10 +93,13 @@
     "ticket-status-open": "Open",
     "ticket-status-closed": "Closed",
     "ticket-status-locked": "Locked",
+    "ticket-status-all": "All tickets",
     "ticket-subject-other": "Other",
     "ticket-action-delete": "Delete",
     "ticket-action-view-transcript": "Transcript",
     "ticket-action-open": "Open",
+    "search-by-username": "Client Name...",
+    "search-by-ticket-number": "Ticket No...",
 
     "account-title": "Account",
     "account-description": "Manage your William278.net account details.",

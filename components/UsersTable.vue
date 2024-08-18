@@ -17,7 +17,7 @@
                     <th class="email">Email</th>
                     <th class="role">Role</th>
                     <th class="purchases">Purchases</th>
-                    <th class="actions" v-if="useIsUserRole(user, 'admin')">Actions</th>
+                    <th class="actions">Actions</th>
                 </tr>
             </thead>
             <tbody v-if="users.value">
@@ -48,8 +48,11 @@
                         </div>
                         <div class="no-purchased-products" v-if="!restrictedProjects.length">No products can be purchased</div>
                     </td>
-                    <td v-if="useIsUserRole(user, item.role)">
-                        <button class="delete" v-if="item.id !== user.id" @click="deleteUser(item)">Delete</button>
+                    <td>
+                        <span class="actions">
+                            <button class="delete" v-if="useIsUserRole(user, item.role) && item.id !== user.id" @click="deleteUser(item)">Delete</button>
+                            <button @click="$emit('show-tickets', item.name)">Tickets</button>
+                        </span>
                     </td>
                 </tr>
             </tbody>
@@ -74,6 +77,7 @@ const { user } = defineProps({
     }
 });
 const { auth, xsrf } = useAuth();
+const emit = defineEmits('show-tickets');
 const restrictedProjects = await useRestrictedProjects();
 
 const updateUsers = (async (page, perPage) => {
@@ -84,7 +88,7 @@ const updateUsers = (async (page, perPage) => {
 await updateUsers(pageNumber.value, itemsPerPage.value);
 
 const updateUserProjects = async (toUpdate, projectId) => {
-    toUpdate.purchases = toUpdate.purchases.includes(projectId) ? toUpdate.purchases.filter(p => p !== projectId) : [...toUpdate.purchases, projectId];
+    toUpdate.purchases = toUpdate.purchases.includes(projectId) ? toUpdate.purchases?.filter(p => p !== projectId) : [...toUpdate.purchases, projectId];
     try {
         await $fetch(`${BASE_URL}/v1/users/${toUpdate.id}/purchases`, {
             method: 'PUT',
@@ -135,10 +139,11 @@ const deleteUser = async (toDelete) => {
                     'X-XSRF-TOKEN': xsrf
                 },
             });
-            users.value.content = users.value.content.filter(u => u.id !== toDelete.id);
         } catch (err) {
             useAlert('Failed to delete user: ' + err, 'Error');
+            return;
         }
+        await updateUsers(pageNumber.value, itemsPerPage.value);
     });
 };
 </script>
@@ -212,6 +217,12 @@ const deleteUser = async (toDelete) => {
     align-items: center;
     justify-items: center;
     margin-bottom: 1rem;
+}
+
+td .actions {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
 }
 
 .search-options .search-box {
