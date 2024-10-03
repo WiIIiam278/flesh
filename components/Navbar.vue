@@ -26,7 +26,7 @@
                         </NuxtLink>
                     </li>
                     <li v-else>
-                        <a :href="`${useRuntimeConfig().public.API_BASE_URL}/login?redirect=${url?.pathname}`">
+                        <a :href="`${useRuntimeConfig().public.API_BASE_URL}/login?redirect=${redirect}`">
                             <IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText>
                         </a>
                     </li>
@@ -40,6 +40,7 @@
 const user = await useUser()
 const { t } = useI18n()
 const url = useRequestURL()
+const redirect = url?.pathname?.length <= 1 ? '/account' : url?.pathname
 </script>
 
 <style scoped>
