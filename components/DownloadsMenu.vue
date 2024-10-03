@@ -1,10 +1,10 @@
 <template>
     <div v-if="!canDownload()" class="upsell">
-        <div v-if="user" class="upsell-error">
+        <div v-if="user" class="error upsell">
             <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-license-required') }}</h3></IconifiedText>
             <p>{{ $t('download-license-required-copy') }}</p>
         </div>
-        <div v-else  class="upsell-error">
+        <div v-else  class="error upsell">
             <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-login-required') }}</h3></IconifiedText>
             <ButtonLink :href="`${useRuntimeConfig().public.API_BASE_URL}/login`" icon="fa6-solid:key" hollow>{{ $t('link-log-in') }}</ButtonLink>
         </div>
@@ -39,7 +39,7 @@
             <div class="version-options">
                 <div v-if="Object.keys(getDistGroups()).length > 1" class="option dist-group-picker">
                     <label for="dist-group-select">{{ $t('download-filter-label') }}</label>
-                    <label v-for="(_, group) in getDistGroups()" :for="`dist-group-${group}`" :key="groupName"
+                    <label v-for="(groupName, group) in getDistGroups()" :for="`dist-group-${group}`" :key="groupName"
                         :class="`dist-group ${selectedDistGroup === group ? 'selected' : ''}`">
                         <img class="icon" :src="`/images/platforms/${group}.png`" onerror="this.style.display='none'" />
                         <span class="name">{{ useCapitalized(group) }}</span>
@@ -52,6 +52,8 @@
                     <select v-model="selectedDist" @change="updateVersions(pageNumber, itemsPerPage)">
                         <option v-for="dist in getDistGroups()[selectedDistGroup]" :key="dist.name" :value="dist">{{ dist.description }}</option>
                     </select>
+                    <Pill v-if="selectedDist?.archived">{{ $t('distribution-archived') }}</Pill>
+                    <Pill v-else-if="selectedDist?.statusLabel">{{ selectedDist.statusLabel }}</Pill>
                 </div>
             </div>
             <div v-if="versions.value" class="version-browser">
@@ -61,7 +63,7 @@
                             <a class="download-button" :href="downloadUrl(version, selectedChannel, selectedDist)">
                                 <IconifiedText icon="fa6-solid:download">{{ version.name }}</IconifiedText>
                             </a>
-                            <div class="download-changelog">
+                            <div class="download-changelog" @click="useAlert(getChangelog(version), `${project.metadata.name} ${version.name}`, null, true)">
                                 <MDC :value="getChangelog(version, true)" tag="article" unwrap="p" />
                             </div>
                         </div>
@@ -72,9 +74,12 @@
                 </div>
                 <Pagination :data="versions.value" v-on:update="(page, perPage) => updateVersions(page, perPage)" />
             </div>
+            <div v-else class="error versions">
+                <IconifiedText icon="fa6-solid:circle-info"><h4>{{ $t('download-distribution-no-versions', {'project': project.metadata.name, 'distribution': selectedDist.description}) }}</h4></IconifiedText>
+            </div>
         </div>
     </div>
-    <div v-else class="upsell-error">
+    <div v-else class="error upsell">
         <IconifiedText icon="fa6-solid:circle-info"><h3>{{ $t('download-no-versions') }}</h3></IconifiedText>
         <p>{{ $t('download-no-versions-copy') }}</p>
     </div>
@@ -83,7 +88,7 @@
 <script setup>
 const DEFAULT_CHANNEL = 'release';
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
-const { t } = useI18n();
+const { t } = useLocalePath();
 
 const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 B';
@@ -95,26 +100,6 @@ const formatFileSize = (bytes) => {
 const downloadUrl = (release, channel, dist) => `${BASE_URL}/v1/projects/${project.slug}/channels/${channel}/versions/${release.name}/distributions/${dist.name}`;
 const getChangelog = (release, short = false) => !short ? release.changelog : release.changelog.split('\n')[0];
 const canDownload = () => !project.restricted || user.value && (useIsUserRole(user.value, 'staff') || user.value.purchases.some(p => p === project.slug));
-const sortByDistName = (a, b) => {
-    if (a.name === b.name) {
-        return 0;
-    }
-    if (a.name.includes('-') && b.name.includes('-')) {
-        const aParts = a.name.split('-');
-        const bParts = b.name.split('-');
-        for (let i = 0; i < Math.min(aParts.length, bParts.length); i++) {
-            if (aParts[i] === bParts[i]) {
-                continue;
-            }
-            if (aParts[i] < bParts[i]) {
-                return 1;
-            }
-            return -1;
-        }
-        return aParts.length - bParts.length;
-    }
-    return a.name < b.name ? 1 : -1;
-};
 
 const { project } = defineProps({
     project: {
@@ -141,6 +126,7 @@ const updateDistSelection = async () => {
 const latestRelease = await useLatestVersion(project.slug, DEFAULT_CHANNEL);
 const distributions = await useDistributions(project.slug);
 const user = await useUser();
+
 const getDistGroups = (() => {
     const grouped = {};
     for (const dist of distributions.value) {
@@ -152,7 +138,7 @@ const getDistGroups = (() => {
             updateDistSelection();
         }
         grouped[dist.groupName].push(dist);
-        grouped[dist.groupName].sort((a, b) => sortByDistName(a, b));
+        grouped[dist.groupName].sort((a, b) => a.sortingWeight ?? 0 > b.sortingWeight ?? 0 ? 1 : -1);
     }
     return grouped;
 });
@@ -176,7 +162,7 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
     margin: 2rem 0;
 }
 
-.upsell-error {
+.error {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -361,6 +347,11 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
     text-overflow: ellipsis;
     max-width: 40vw;
     max-height: 1.5rem;
+    cursor: pointer;
+}
+
+.download-details .download-changelog:hover {
+    filter: brightness(85%);
 }
 
 .versions .version:hover {

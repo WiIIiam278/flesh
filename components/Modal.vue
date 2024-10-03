@@ -1,12 +1,13 @@
 <template>
     <div class="background" @click="close(false)">
-        <div class="container">
+        <div :class="`container ${!markdown ? 'fullsize' : 'small'}`">
             <div class="title" @click="(e) => e.stopPropagation()">
                 <h2 v-if="modal.title">{{ modal.title }}</h2>
                 <Icon class="close-button" @click="close(false)" name="fa6-solid:xmark" />
             </div>
             <div class="content">
-                <p>{{ modal.message }}</p>
+                <p v-if="!modal.markdown">{{ modal.message }}</p>
+                <MDC v-else :value="modal.message" tag="article" />
             </div>
             <div class="buttons">
                 <button @click="close(false)">{{ $t(`button-${modal.type === 'alert' ? 'close' : 'cancel'}`) }}</button>
@@ -52,8 +53,11 @@ const close = (confirm) => {
     max-width: 50vw;
     max-height: 100vh;
     width: 650px;
-    height: 200px;
     z-index: 110;
+}
+
+.container .small {
+    height: 200px;
 }
 
 .container .title {
