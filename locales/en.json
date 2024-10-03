@@ -59,6 +59,9 @@
     "download-version-label": "Version:",
     "distribution-archived": "Archived",
 
+    "docs-home-title": "Project Docs",
+    "docs-home-copy": "Find documentation for the various projects on William278.net, including setup, configuration, customization and developer API usage. Use the search bar to search for specific topics.",
+
     "docs-title": "{project} Docs",
     "docs-edit-button": "Edit",
     "docs-translate-button": "Translate",
