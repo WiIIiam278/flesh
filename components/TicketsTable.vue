@@ -31,8 +31,8 @@
                 <tr v-for="ticket in tickets.value.content" :key="ticket.id">
                     <td class="client" v-if="!user">
                         <span class="avatar-name">
-                            <img :src="ticket.user.avatar" alt="User avatar" />
-                            <span>{{ ticket.user.name }}</span>
+                            <img v-if="ticket.user?.avatar" :src="ticket.user?.avatar" alt="User avatar" onerror="this.style.display='none'" />
+                            <span>{{ ticket.user?.name ?? $t('user-deleted') }}</span>
                         </span>
                     </td>
                     <td class="number">

@@ -23,7 +23,7 @@
             <tbody v-if="users.value">
                 <tr v-for="item in users.value.content" :key="item.id">
                     <td class="avatar">
-                        <img :src="item.avatar" alt="User avatar" />
+                        <img v-if="item.avatar" :src="item.avatar" alt="User avatar" onerror="this.style.display='none'" />
                     </td>
                     <td><code>{{ item.id }}</code></td>
                     <td>{{ item.createdAt ? new Date(item.createdAt).toLocaleString() : "" }}</td>
