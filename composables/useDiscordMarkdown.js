@@ -1,4 +1,4 @@
-import discordMarkdown from '@odiffey/discord-markdown';
+import * as discordMarkdown from '@odiffey/discord-markdown'
 
 const user = (users, id) => sanitize(users.find(user => user.id === id)?.name || id);
 const channel = (channels, id) => sanitize(channels.find(channel => channel.id === id)?.name || id);
