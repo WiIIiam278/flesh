@@ -6,7 +6,7 @@
                 <img v-else-if="meta.icons['PNG']" :src="`/images/icons/${meta.icons['PNG']}`" />
             </NuxtLink>
             <div class="details">
-                <NuxtLink :to="`/project/${project.slug}`">
+                <NuxtLink :to="`/project/${project.slug}#about`">
                     <h3 class="name">{{ meta.name ? meta.name : project.slug }}</h3>
                 </NuxtLink>
                 <div class="pills">

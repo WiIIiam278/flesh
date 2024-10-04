@@ -20,13 +20,25 @@
                     <MDC :value="content" tag="article" />
                 </article>
             </template>
-            <template #sidebar>
-                <h1 id="sidebar-title">
-                    <NuxtLink :to="'/docs/' + project.slug">
+            <template #sidebar class="sidebar">
+                <div class="sidebar-top">
+                    <NuxtLink class="project-title" :to="'/docs/' + project.slug">
                         <IconifiedProject centered :project="project" />
                     </NuxtLink>
-                </h1>
+                    <div class="project-buttons">
+                        <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}#download`" icon="fa6-solid:download" hollow>
+                            {{ $t('link-download') }}
+                        </ButtonLink>
+                        <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" hollow>
+                            {{ $t('project-link-repository') }}
+                        </ButtonLink>
+                    </div>
+                </div>
                 <MDC :value="sidebar" tag="article" />
+                <div class="sidebar-bottom">
+                    <ButtonLink v-for="link in meta.links" 
+                        :key="link.url" :link="link.url" :icon="useLinkIcon(link)"></ButtonLink>
+                </div>
             </template>
         </NuxtLayout>
         <NuxtLayout v-else name="default">
@@ -68,3 +80,30 @@ if (params.topic) {
     breadcrumbs.push({ name: meta.name, link: `/docs/${project.value.slug}` });
 }
 </script>
+
+<style scoped>
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-top .project-title {
+    color: white !important;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.sidebar-top .project-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1.5rem 0 0.25rem 0;
+    gap: 0.5rem;
+}
+</style>

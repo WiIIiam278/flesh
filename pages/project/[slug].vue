@@ -70,7 +70,8 @@ const tabs = [{ id: 'about', name: t('tab-about') }];
 const selectedTab = defineModel('selectedTab')
 selectedTab.value = 'about';
 if (meta?.listDownloads) {
-    tabs.push({ id: 'download', name: t('tab-download') }); 
+    tabs.unshift({ id: 'download', name: t('tab-download') });
+    selectedTab.value = 'download';
 }
 if (useProjectProperty(project.value, 'emulator_rom')) {
     tabs.unshift({ id: 'play', name: t('tab-play') });
