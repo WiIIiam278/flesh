@@ -63,7 +63,7 @@
                             <a class="download-button" :href="downloadUrl(version, selectedChannel, selectedDist)">
                                 <IconifiedText icon="fa6-solid:download">{{ version.name }}</IconifiedText>
                             </a>
-                            <div class="download-changelog" @click="useAlert(getChangelog(version), `${project.metadata.name} ${version.name}`, null, true)">
+                            <div class="download-changelog" @click="useAlert(getChangelog(version), `${project.metadata.name} ${version.name} (${new Date(version.timestamp).toLocaleDateString()})`, null, true)">
                                 <MDC :value="getChangelog(version, true)" tag="article" unwrap="p" />
                             </div>
                         </div>
