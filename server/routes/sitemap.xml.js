@@ -1,36 +1,90 @@
-import { serverQueryContent } from '#content/server'
 import { SitemapStream, streamToPromise } from 'sitemap'
 
-// If the path contains docs/project/ replace it with docs/
-const filterPath = (path) => {
-  // If the path matches a regex of /docs/project/NAME/LANG/TOPIC, replace with /docs/NAME/TOPIC
-  const match = path.match(/\/docs\/project\/([^/]+)\/([^/]+)\/([^/]+)/)
-  if (match) {
-    return `/docs/${match[1]}/${match[3]}`
+const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
+
+const fetchProjects = async () => (await $fetch(`${BASE_URL}/v1/projects`)).filter(p => !p.metadata?.hidden);
+const fetchDocsPages = async (projects) => {
+  const pages = {};
+  for (const p of projects.filter(p => p.metadata?.documentation)) {
+    pages[p.slug] = Object.entries(await $fetch(`${BASE_URL}/v1/projects/${p.slug}/docs`));
   }
-  
-  // If the path ends with /LANG, remove it
-  const langMatch = path.match(/(.+)\/[a-z]{2}$/)
-  if (langMatch) {
-    return langMatch[1]
-  }
-  
-  return path;
+  return pages;
+}
+
+const writeHomepage = (sitemap) => {
+  sitemap.write({
+    url: '/',
+    changefreq: 'daily',
+    priority: 0.9
+  })
+}
+
+const writeSpecialPages = (sitemap) => {
+  sitemap.write({
+    url: '/terms',
+    changefreq: 'monthly',
+    priority: 0.1
+  })
+  sitemap.write({
+    url: '/redis-hosts',
+    changefreq: 'monthly',
+    priority: 0.2
+  })
+}
+
+const writeProjects = (projects, sitemap) => projects.forEach(p => sitemap.write({
+  url: `/project/${p.slug}`,
+  changefreq: 'daily',
+  priority: 0.8
+}));
+
+const writeDocs = (projects, pages, sitemap) => {
+  sitemap.write({
+    url: '/docs',
+    changefreq: 'daily',
+    priority: 0.7
+  })
+  projects.filter(p => p.metadata.documentation).forEach(p => {
+    sitemap.write({
+      url: `/docs/${p.slug}`,
+      changefreq: 'monthly',
+      priority: 0.6
+    })
+    pages[p.slug]?.filter(e => !e[0].startsWith('_') && e[0] !== 'home').forEach(e => {
+      sitemap.write({
+        url: `/docs/${p.slug}/${e[0]}`,
+        changefreq: 'weekly',
+        priority: 0.5
+      })
+    })
+  })
 }
 
 export default defineEventHandler(async (event) => {
-  // Fetch all documents
-  const docs = await serverQueryContent(event).find()
+  // Build sitemap
   const sitemap = new SitemapStream({
-    hostname: 'https://william278.net'
+    hostname: 'https://william278.net',
+    xmlns: {
+      xhtml: true,
+      image: true,
+      video: true,
+      custom: [
+        'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"',
+        'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"',
+      ],
+    }
   })
 
-  for (const doc of docs) {
-    sitemap.write({
-      url: filterPath(doc._path),
-      changefreq: 'monthly'
-    })
-  }
+  // Fetch all documents
+  const projects = await fetchProjects();
+  const docsPages = await fetchDocsPages(projects);
+
+  // Write pages
+  writeHomepage(sitemap);
+  writeProjects(projects, sitemap);
+  writeDocs(projects, docsPages, sitemap);
+  writeSpecialPages(sitemap);
+
   sitemap.end()
 
   return streamToPromise(sitemap)

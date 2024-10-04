@@ -138,7 +138,7 @@ h4+ul {
 /* Horizontal rules */
 hr {
   border: 0;
-  border-top: 0.2rem solid var(--light-gray);
+  border-top: 0.15rem solid var(--gray);
   margin: 1.5rem 0;
 }
 

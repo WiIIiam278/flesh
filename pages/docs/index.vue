@@ -11,12 +11,13 @@
                 <h1>{{ $t('docs-home-title') }}</h1>
                 <p>{{ $t('docs-home-copy') }}</p>
                 <div class="docs-sitemap">
-                    <div class="project-section" v-for="project in projects.filter(p => p.metadata.documentation).sort((a, b) => b.stats?.downloadCount - a.stats?.downloadCount)">
+                    <div class="project-section" v-for="project in projects?.filter(p => p.metadata.documentation).sort((a, b) => b.stats?.downloadCount - a.stats?.downloadCount) ?? []">
+                        <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
                             <IconifiedProject :project="project" />
                         </NuxtLink>
                         <div class="project-links">
-                            <NuxtLink v-for="entry in projectPages[project.slug].filter(e => !e[0].startsWith('_') && e[0] !== 'home')"
+                            <NuxtLink v-for="entry in projectPages[project.slug]?.filter(e => !e[0].startsWith('_') && e[0] !== 'home') ?? []"
                                 :href="`/docs/${project.slug}/${entry[0]}`">
                                 {{ entry[1] }}
                             </NuxtLink>
@@ -41,10 +42,7 @@ const { locale, t } = useI18n()
 const localePath = useLocalePath()
 
 const projects = await useAllProjects();
-const projectPages = {};
-for (const project of projects.value.filter(p => p.metadata.documentation)) {
-    projectPages[project.slug] = await useDocsPageList(project.slug);
-}
+const projectPages = await useDocPageListsForProjects(projects);
 </script>
 
 <style scoped>
@@ -53,9 +51,7 @@ for (const project of projects.value.filter(p => p.metadata.documentation)) {
 }
 
 .project-section {
-    margin-top: 2rem;
-    border-top: 0.15rem solid var(--gray);
-    padding: 1.2rem 0;
+    padding: 0.5rem 0;
 }
 
 .project-title {
