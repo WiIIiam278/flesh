@@ -7,6 +7,9 @@
                     <NuxtLink to="/terms">{{ $t('link-terms') }}</NuxtLink>
                 </li>
                 <li>
+                    <a href="https://status.william278.net/" target="_blank">{{ $t('footer-status') }}</a>
+                </li>
+                <li>
                     <a href="https://buymeacoff.ee/william278" target="_blank">{{ $t('footer-buymeacoffee') }}</a>
                 </li>
                 <li>
@@ -79,7 +82,7 @@ footer {
 }
 
 /* Smaller than 480px */
-@media screen and (max-width: 30em) {
+@media screen and (max-width: 600px) {
     #version {
         display: none;
     }
@@ -88,8 +91,18 @@ footer {
         content: none;
     }
 
-    #navigation li {
-        margin: 0 0.3rem;
+    footer {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    #navigation ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        text-align: center;
     }
 }
 </style>
