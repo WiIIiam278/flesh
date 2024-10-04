@@ -56,8 +56,14 @@ const close = (confirm) => {
     z-index: 110;
 }
 
-.container .small {
+.container.small {
     height: 200px;
+}
+
+.container.fullsize .content {
+    max-height: 65vh;
+    overflow: auto;
+    margin-bottom: 1rem;
 }
 
 .container .title {
@@ -86,5 +92,29 @@ const close = (confirm) => {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
+}
+
+
+/* Mobile user container */
+@media screen and (max-width: 950px) {
+    .background .container {
+        max-width: 75vw;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .container.fullsize .content {
+        max-height: 100%;
+        overflow: auto;
+        margin-bottom: 1rem;
+    }
+
+    .background .container {
+        max-width: 85vw;
+        max-height: 95vh;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
 }
 </style>
