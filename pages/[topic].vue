@@ -1,6 +1,12 @@
 <template>
     <div>
         <NuxtLayout>
+            <Head>
+                <Meta name="og:image" :content="`/images/thumbnails/page/${params.topic}/card.png`" />
+                <Meta name="twitter:image" :content="`/images/thumbnails/page/${params.topic}/card.png`" />
+                <Meta name="twitter:card" content="summary_large_image" />
+                <Meta name="twitter:creator" content="@William27528" />
+            </Head>
             <LazyContentDoc>
                 <template v-slot="{ doc }">
                     <ContentRenderer :value="doc">

@@ -1,6 +1,7 @@
 import { SitemapStream, streamToPromise } from 'sitemap'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
+const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 
 const fetchProjects = async () => (await $fetch(`${BASE_URL}/v1/projects`)).filter(p => !p.metadata?.hidden);
 const fetchDocsPages = async (projects) => {
@@ -63,7 +64,7 @@ const writeDocs = (projects, pages, sitemap) => {
 export default defineEventHandler(async (event) => {
   // Build sitemap
   const sitemap = new SitemapStream({
-    hostname: 'https://william278.net',
+    hostname: FRONTEND_URL,
     xmlns: {
       xhtml: true,
       image: true,

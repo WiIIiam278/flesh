@@ -4,6 +4,10 @@
             <Title>{{ $t('docs-home-title') }}</Title>
             <Meta name="og:title" :content="`${t('link-docs')} &ndash; ${t('index-title')}}`" />
             <Meta name="twitter:title" :content="`${t('link-docs')} &ndash; ${t('index-title')}}`" />
+            <Meta name="og:image" content="/images/thumbnails/page/docs/card.png" />
+            <Meta name="twitter:image" content="/images/thumbnails/page/docs/card.png" />
+            <Meta name="twitter:card" content="summary_large_image" />
+            <Meta name="twitter:creator" content="@William27528" />
         </Head>
         <NuxtLayout>
             <article class="page-content">

@@ -9,8 +9,10 @@
                     <Meta name="description" :content="description" />
                     <Meta name="og:description" :content="description" />
                     <Meta name="twitter:description" :content="description" />
-                    <Meta v-if="meta.icons['PNG']" name="og:image" :content="`/images/icons/${meta.icons['PNG']}`" />
-                    <Meta v-if="meta.icons['PNG']" name="twitter:image" :content="`/images/icons/${meta.icons['PNG']}`" />
+                    <Meta name="og:image" :content="`/images/thumbnails/docs/${project.slug}/${params.topic ?? 'home'}/card.png`" />
+                    <Meta name="twitter:image" :content="`/images/thumbnails/docs/${project.slug}/${params.topic ?? 'home'}/card.png`" />
+                    <Meta name="twitter:card" content="summary_large_image" />
+                    <Meta name="twitter:creator" content="@William27528" />
                 </Head>
                 <Overbar>
                     <Breadcrumbs :crumbs="breadcrumbs" />

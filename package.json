@@ -25,6 +25,7 @@
     "@odiffey/discord-markdown": "^3.1.2",
     "algoliasearch": "^4.22.1",
     "buffer": "^6.0.3",
+    "canvas": "^2.11.2",
     "mineget": "^3.1.1",
     "nuxt-icon": "^0.4.2"
   }

@@ -3,6 +3,10 @@
         <Head>
             <Title>William278.net &ndash; Terms, Conditions, & Privacy Notice</Title>
             <Meta name="description" content="Terms, conditions, and privacy notice for William278.net." />
+            <Meta name="og:image" content="/images/thumbnails/page/Terms%2C%20Conditions%2C%20%26%20Privacy%20Notice/card.png" />
+            <Meta name="twitter:image" content="/images/thumbnails/page/Terms%2C%20Conditions%2C%20%26%20Privacy%20Notice/card.png" />
+            <Meta name="twitter:card" content="summary_large_image" />
+            <Meta name="twitter:creator" content="@William27528" />
         </Head>
         <NuxtLayout>
             <article class="page-content">
