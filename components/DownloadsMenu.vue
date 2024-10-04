@@ -75,7 +75,7 @@
                 <Pagination :data="versions.value" v-on:update="(page, perPage) => updateVersions(page, perPage)" />
             </div>
             <div v-else class="error versions">
-                <IconifiedText icon="fa6-solid:circle-info"><h4>{{ $t('download-distribution-no-versions', {'project': project.metadata.name, 'distribution': selectedDist.description}) }}</h4></IconifiedText>
+                <IconifiedText icon="fa6-solid:circle-info"><h4>{{ $t('download-distribution-no-versions', {'channel': selectedChannel, 'project': project.metadata.name, 'distribution': selectedDist.description}) }}</h4></IconifiedText>
             </div>
         </div>
     </div>
@@ -380,7 +380,7 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
 
 @media screen and (max-width: 725px) {
     .latest-release {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .latest-release .download-buttons {
