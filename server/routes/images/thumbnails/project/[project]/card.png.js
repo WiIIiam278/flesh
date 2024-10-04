@@ -1,4 +1,4 @@
-import { createCanvas, loadImage } from 'canvas'
+import { registerFont, createCanvas, loadImage } from 'canvas'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
@@ -25,7 +25,7 @@ const drawProjectName = (ctx, project) => {
   
   // Dynamically reduce font size if text exceeds maxWidth
   do {
-    ctx.font = `bold ${fontSize}pt Nunito, sans-serif`;
+    ctx.font = `${fontSize}pt NunitoBold, sans-serif`;
     if (ctx.measureText(projectName).width > maxWidth) fontSize -= 5;
   } while (ctx.measureText(projectName).width > maxWidth && fontSize > 30);
 
@@ -84,7 +84,7 @@ const drawStat = async (ctx, number, glyph, x, y) => {
   ctx.drawImage(image, x, y, imageSize, imageSize);
 
   // Set the font and draw the number (30px to the right of the image)
-  ctx.font = 'bold 50pt Nunito, monospace';
+  ctx.font = '50pt NunitoBold, monospace';
   ctx.fillStyle = '#FFFFFF';
   const numberX = x + imageSize + 20;
   ctx.fillText(formattedNumber, numberX, y + imageSize - 15); // Adjusted for baseline alignment
@@ -98,7 +98,8 @@ export default defineEventHandler(async (event) => {
     const project = await fetchProject(getRouterParam(event, 'project'));
     if (!project || project.metadata.hidden) return "Not found";
 
-    // Main function
+    registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
+    registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
     const canvas = createCanvas(1200, 600);
     const ctx = canvas.getContext('2d');
 

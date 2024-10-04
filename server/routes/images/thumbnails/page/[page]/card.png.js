@@ -1,4 +1,4 @@
-import { createCanvas, loadImage } from 'canvas'
+import { registerFont, createCanvas, loadImage } from 'canvas'
 
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 
@@ -21,7 +21,7 @@ const drawPageName = (ctx, name) => {
   
   // Dynamically reduce font size if text exceeds maxWidth
   do {
-    ctx.font = `bold ${fontSize}pt Nunito, sans-serif`;
+    ctx.font = `${fontSize}pt NunitoBold, sans-serif`;
     if (ctx.measureText(name).width > maxWidth) fontSize -= 5;
   } while (ctx.measureText(name).width > maxWidth && fontSize > 30);
 
@@ -69,7 +69,7 @@ const drawSiteName = (ctx, text) => {
   
   // Dynamically reduce font size if text exceeds maxWidth
   do {
-    ctx.font = `bold ${fontSize}pt Nunito, sans-serif`;
+    ctx.font = `${fontSize}pt NunitoBold, sans-serif`;
     if (ctx.measureText(text).width > maxWidth) fontSize -= 5;
   } while (ctx.measureText(text).width > maxWidth && fontSize > 30);
 
@@ -79,6 +79,9 @@ const drawSiteName = (ctx, text) => {
 
 export default defineEventHandler(async (event) => {
     const pageName = decodeURIComponent(await getRouterParam(event, 'page') ?? 'William278.net');
+
+    registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
+    registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
     const canvas = createCanvas(1200, 600);
     const ctx = canvas.getContext('2d');
 

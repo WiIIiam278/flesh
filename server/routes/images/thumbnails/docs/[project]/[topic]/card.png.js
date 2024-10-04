@@ -1,4 +1,4 @@
-import { createCanvas, loadImage } from 'canvas'
+import { registerFont, createCanvas, loadImage } from 'canvas'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
@@ -26,7 +26,7 @@ const drawProjectDocsName = (ctx, project) => {
   
   // Dynamically reduce font size if text exceeds maxWidth
   do {
-    ctx.font = `bold ${fontSize}pt Nunito, sans-serif`;
+    ctx.font = `${fontSize}pt NunitoBold, sans-serif`;
     if (ctx.measureText(projectName).width > maxWidth) fontSize -= 5;
   } while (ctx.measureText(projectName).width > maxWidth && fontSize > 30);
 
@@ -36,7 +36,7 @@ const drawProjectDocsName = (ctx, project) => {
 
 // Draw tagline with word wrapping
 const drawPageTitle = (ctx, title) => {
-  ctx.font = 'bold 80pt Nunito, sans-serif';
+  ctx.font = '80pt NunitoBold, sans-serif';
   ctx.fillStyle = '#FFFFFF';
 
   const maxWidth = 800;
@@ -73,7 +73,8 @@ export default defineEventHandler(async (event) => {
     const { title } = await fetchProjectDocsPage(project.slug, getRouterParam(event, 'topic') ?? 'Home');
     if (!title) return "Not found"
 
-    // Main function
+    registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
+    registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
     const canvas = createCanvas(1200, 600);
     const ctx = canvas.getContext('2d');
 
