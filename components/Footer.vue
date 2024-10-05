@@ -76,12 +76,13 @@ footer {
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 2rem;
-    color: var(--light-gray);
     margin-top: auto;
     justify-content: flex-end;
+    color: var(--light-gray);
+    background: linear-gradient(180deg, var(--background) 0%, var(--dark-gray) 100%);
 }
 
-/* Smaller than 480px */
+/* Smaller than 600px */
 @media screen and (max-width: 600px) {
     #version {
         display: none;
@@ -99,10 +100,12 @@ footer {
     }
 
     #navigation ul {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
+        width: 80vw;
+        display: block;
         text-align: center;
+        columns: 2 !important;
+        -webkit-columns: 2 !important;
+        -moz-columns: 2 !important;
     }
 }
 </style>
