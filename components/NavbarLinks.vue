@@ -1,0 +1,101 @@
+<template>
+    <div id="links">
+        <ul>
+            <li id="search">
+                <AlgoliaDocSearch :translations="{'button': {'buttonText': t('search-button'), 'buttonAriaLabel': t('search-button')}}" />
+            </li>
+            <li>
+                <NuxtLink to="/docs">
+                    <IconifiedText icon="fa6-solid:book">{{ $t('link-docs') }}</IconifiedText>
+                </NuxtLink>
+            </li>
+            <li>
+                <a href="https://discord.gg/tVYhJfyDWG" target="_blank">
+                    <IconifiedText icon="fa6-brands:discord">{{ $t('link-support') }}</IconifiedText>
+                </a>
+            </li>
+            <li v-if="user">
+                <NuxtLink class="account-link" to="/account">
+                    <img v-if="user?.avatar" class="shadow avatar" :src="user.avatar" :alt="`${user.name} Discord avatar`" onerror="this.style.display='none'" />
+                    <span>{{ $t('link-account') }}</span>
+                </NuxtLink>
+            </li>
+            <li v-else>
+                <a :href="`${useRuntimeConfig().public.API_BASE_URL}/login?`">
+                    <IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText>
+                </a>
+            </li>
+        </ul>
+    </div>
+</template>
+
+<script setup>
+const user = await useUser()
+const { t } = useI18n()
+</script>
+
+<style scoped>
+
+#search {
+    all: unset;
+    display: flex;
+    margin-right: 0.75rem;
+}
+
+#links ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap !important;
+}
+
+.account-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.account-link img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 500px) {
+    #links {
+        padding-top: 1.5rem;
+        width: 85vw;
+    }
+
+    #links ul {
+        flex-direction: column-reverse;
+        width: 100%;
+        gap: 1.5rem;
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    #links ul li, #search {
+        width: 100% !important;
+    }
+
+    .account-link {
+        gap: 0.4rem;
+    }
+
+    .account-link .avatar {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    #search {
+        padding-top: 0.6rem;
+    }
+}
+</style>

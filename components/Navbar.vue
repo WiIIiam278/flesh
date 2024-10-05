@@ -1,46 +1,23 @@
 <template>
-    <nav class="shadow">
-        <h1 id="logo">
-            <a href="/">{{ $t('site-name') }}</a>
-        </h1>
-        <div id="navigation">
-            <div id="links">
-                <ul>
-                    <li id="search">
-                        <AlgoliaDocSearch :translations="{'button': {'buttonText': t('search-button'), 'buttonAriaLabel': t('search-button')}}" />
-                    </li>
-                    <li>
-                        <NuxtLink to="/docs">
-                            <IconifiedText icon="fa6-solid:book">{{ $t('link-docs') }}</IconifiedText>
-                        </NuxtLink>
-                    </li>
-                    <li>
-                        <a href="https://discord.gg/tVYhJfyDWG" target="_blank">
-                            <IconifiedText icon="fa6-brands:discord">{{ $t('link-support') }}</IconifiedText>
-                        </a>
-                    </li>
-                    <li v-if="user">
-                        <NuxtLink class="account-link" to="/account">
-                            <img v-if="user?.avatar" class="shadow" :src="user.avatar" :alt="`${user.name} Discord avatar`" onerror="this.style.display='none'" />
-                            <span>{{ $t('link-account') }}</span>
-                        </NuxtLink>
-                    </li>
-                    <li v-else>
-                        <a :href="`${useRuntimeConfig().public.API_BASE_URL}/login?redirect=${redirect}`">
-                            <IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText>
-                        </a>
-                    </li>
-                </ul>
+    <nav :class="`shadow ${hamburgerOpen ? 'mobile' : 'desktop'}`">
+        <div id="menu">
+            <h1 id="logo">
+                <a href="/">{{ $t('site-name') }}</a>
+            </h1>
+            <div id="hamburger" @click="hamburgerOpen = !hamburgerOpen">
+                <Icon v-if="!hamburgerOpen" name="fa6-solid:bars" />
+                <Icon v-else name="fa6-solid:xmark" />
             </div>
+        </div>
+        <div id="navigation">
+            <NavbarLinks />
         </div>
     </nav>
 </template>
 
 <script setup>
-const user = await useUser()
 const { t } = useI18n()
-const url = useRequestURL()
-const redirect = url?.pathname?.length <= 1 ? '/account' : url?.pathname
+const hamburgerOpen = ref(false);
 </script>
 
 <style scoped>
@@ -49,61 +26,42 @@ nav {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2.5rem;
     background-color: var(--gray);
     font-size: 1.2rem;
     font-weight: 500;
+    padding: 0 2rem;
     height: 4rem;
 }
 
+nav #menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 nav #logo {
-    margin: 0;
-    padding: 0;
     font-size: 2rem;
     font-weight: 700;
     color: var(--accent);
+    display: flex;
+    margin: auto 0;
 }
 
 nav #navigation {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     gap: 2rem;
 }
 
-nav #search {
-    all: unset;
-    display: flex;
-    margin-right: 0.75rem;
+nav #hamburger {
+    display: none;
 }
 
-nav #links ul {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.account-link {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.account-link img {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-}
-
-/* Less than 600px */
-@media screen and (max-width: 37.5em) {
+/* Tablet Navbar */
+@media screen and (max-width: 700px) {
     nav {
         flex-direction: column;
         height: 6rem;
@@ -113,21 +71,63 @@ nav #links ul {
 
     nav #logo {
         margin-bottom: 0.2rem;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
 }
 
-/* Less than 340 */
-@media screen and (max-width: 21.25em) {
+
+/* Mobile Hamburger Navbar (500px) */
+@media screen and (max-width: 500px) {
+    nav {
+        height: 4rem;
+        padding-left: 2.25rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    nav #navigation {
+        display: none;
+    }
+
+    nav #hamburger {
+        display: flex;
+        font-size: x-large;
+    }
+
+    nav #hamburger:hover {
+        filter: brightness(85%);
+        cursor: pointer;
+    }
+
     nav #logo {
-        font-size: 1.7rem;
+        justify-content: start;
+        margin: 0;
     }
 
-    nav #navigation {
-        font-size: 0.9rem;
+    nav.mobile {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 85vw;
+        z-index: 100;
     }
 
-    nav #navigation {
-        width: 100%;
+    nav.mobile #menu {
+        height: 4rem;
     }
+
+    nav.mobile #navigation {
+        display: flex;
+        justify-self: start;
+        align-self: start;
+        margin-bottom: auto;
+    }
+
 }
 </style>

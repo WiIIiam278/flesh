@@ -56,10 +56,28 @@ useHead({
   --docsearch-hit-active-color: unset !important;
 }
 
+/* Show DocSearch in hamburger menu  */
+@media (max-width: 500px) {
+  .DocSearch-Button-Placeholder {
+    display: block !important;
+    font-size: 1.3rem !important;
+    margin-left: 0.2rem;
+  }
+
+  #docsearch {
+    width: 100% !important;
+  }
+
+  .DocSearch.DocSearch-Button {
+    height: 2.75rem;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 /* Scrollbar style rules (font, bg color) */
 html {
   color-scheme: dark;
-  margin-right: calc(-1 * (100vw - 100%));
 }
 
 body {
