@@ -6,7 +6,7 @@ This privacy notice tells you what to expect us to do with your personal informa
 
 ### Email
 
-will27528+site-privacy@gmail.com
+privacy@william278.net
 
 ## What information we collect, use, and why
 
