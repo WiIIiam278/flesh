@@ -37,4 +37,4 @@ I regularly update my plugins and projects with new features and bug fixes. To g
 I'm a member of the [Haroohie Translation Club](https://haroohie.club/) &mdash; a fan-translation group working on localising games from the Haruhi Suzumiya series!
 
 ### Contact
-My email address is [will27528+enquiries@gmail.com](mailto:will27528+enquiries@gmail.com), or get in touch over Discord!
+You can reach me at [info@william278.net](mailto:info@william278.net), or get in touch over Discord!
