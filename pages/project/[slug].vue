@@ -14,13 +14,7 @@
                         <Meta name="twitter:card" content="summary_large_image" />
                         <Meta name="twitter:creator" content="@William27528" />
                     </Head>
-                    <div v-if="meta.archived" class="archived">
-                        <Icon class="icon" name="fa6-solid:box-archive" />
-                        <span class="text">
-                            {{ $t('project-archived-header', {'project': meta.name}) }}
-                            <span class=grayed>{{$t('project-archived-details')}}</span>
-                        </span>
-                    </div>
+                    <ArchivalNotice v-if="meta.archived" :name="meta.name" />
                     <Tabs :tabs="tabs" v-model:selected="selectedTab">
                         <MDC v-if="selectedTab === 'about'" :value="readme" tag="article" />
                         <div v-if="selectedTab === 'download'">
@@ -80,20 +74,3 @@ if (useProjectProperty(project.value, 'emulator_rom')) {
     selectedTab.value = 'play';
 }
 </script>
-
-<style scoped>
-.archived {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    color: var(--light-gray);
-    border: 0.2rem solid var(--light-gray);
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.archived .icon {
-    font-size: 2rem;
-    margin-right: 1rem;
-}
-</style>

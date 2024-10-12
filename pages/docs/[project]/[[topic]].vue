@@ -14,6 +14,7 @@
                     <Meta name="twitter:card" content="summary_large_image" />
                     <Meta name="twitter:creator" content="@William27528" />
                 </Head>
+                <ArchivalNotice v-if="meta.archived" :name="meta.name" />
                 <Overbar>
                     <Breadcrumbs :crumbs="breadcrumbs" />
                 </Overbar>
