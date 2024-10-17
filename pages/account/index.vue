@@ -18,12 +18,21 @@
                                                 <span class="name">{{ user.name }}</span>
                                                 <Pill class="shadow" v-if="useIsUserRole(user, 'staff')">{{ $t(`user-role-${user.role.toLowerCase()}`) }}</Pill>
                                             </div>
-                                            <div class="email" v-if="user.email">{{ user.email }}</div>
+                                            <div v-if="user.email" @click="editEmail(user.email)" class="email">
+                                                <a href="#">
+                                                    <span>{{ user.email }}</span>
+                                                    <Icon class="icon" :name="`fa6-solid:${user.emailVerified ? 'check' : 'envelope'}`" />
+                                                </a>
+                                            </div>
+                                            <div v-else>
+                                                <a href="#" @click="editEmail('')">{{ $t('add-an-email-address') }}</a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="management-buttons">
                                         <ButtonLink href="/account/logout" class="shadow" hollow icon="fa6-solid:person-running">{{ t('link-log-out') }}</ButtonLink>
                                         <ButtonLink v-if="useIsUserRole(user, 'staff')" href="/account/admin" class="shadow" hollow icon="fa6-solid:gear">{{ t('admin-panel') }}</ButtonLink>
+                                        <ButtonLink v-if="user.email && !user.emailVerified" @click="editEmail(user.email)" class="shadow" hollow icon="fa6-solid:envelope">{{ t('verify-email') }}</ButtonLink>
                                         <ButtonLink @click="deleteAccount()" class="shadow" hollow color="red" icon="fa6-solid:trash-can">{{ t('delete-account') }}</ButtonLink>
                                     </div>
                                 </div>
@@ -49,12 +58,15 @@
 </template>
 
 <script setup>
-const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
+import { validate } from 'email-validator'
+import { useAlert } from '../../composables/useAlert';
 
+const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const { t } = useI18n()
 const { auth, xsrf } = useAuth();
 const user = await useUser();
 const restricted = await useRestrictedProjects();
+const hasRequestedCode = ref(false)
 
 const deleteAccount = () => {
     useConfirm(t('delete-account-confirm'), t('delete-account'), async (confirm) => {
@@ -72,6 +84,54 @@ const deleteAccount = () => {
             navigateTo('/account/logout')
         } catch (err) {
             
+        }
+    })
+}
+
+const editEmail = (currentEmail) => {
+    if (hasRequestedCode.value) {
+        return verifyEmail(currentEmail);
+    }
+    useInput(t('verify-email-confirm'), t('send-verification-email'), currentEmail, (input) => validate(input), async (confirm, email) => {
+        if (!confirm) return;
+        try {
+            await $fetch(`${BASE_URL}/v1/users/@me/email`, 
+            { 
+                method: 'POST',
+                credentials: auth ? 'include' : 'omit',
+                headers: {
+                    'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
+                    'X-XSRF-TOKEN': xsrf
+                },
+                body: email
+            });
+            hasRequestedCode.value = true;
+            verifyEmail(email);
+        } catch (err) {
+            useAlert($t('email-rate-limited-copy'), $t('email-rate-limited'))
+        }
+    })
+}
+
+const verifyEmail = (email, wrongCode = false) => {
+    if (wrongCode) {
+        hasRequestedCode.value = false
+    }
+    useInput(!wrongCode ? t('verify-email-sent-to', {'email': email}) : t('verify-email-wrong-code'), t('verify-email'), '', (input) => input?.length == 6, async (confirm, code) => {
+        if (!confirm) return;
+        try {
+            await $fetch(`${BASE_URL}/v1/users/${user.value.id}/email/${code}`, 
+            { 
+                method: 'GET',
+                params: {
+                    'redirect': false
+                }
+            });
+            return useAlert(t('email-verified-thank-you'), t('verify-email'), (_) => {
+                navigateTo('/account/logout')
+            })
+        } catch (err) {
+            verifyEmail(email, true)
         }
     })
 }
@@ -121,8 +181,11 @@ definePageMeta({
 
 .profile .management-buttons {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.5rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .item-body {
@@ -219,9 +282,17 @@ definePageMeta({
     gap: 0.5rem;
 }
 
-.user-card .email {
+.user-card .email a {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--light-gray);
+    color: var(--light-gray) !important;
+}
+
+.user-card .email a .icon {
+    color: var(--accent);
+}
+
+.user-card .email span {
+    padding-right: 0.4rem;
 }
 
 .user-card .avatar {

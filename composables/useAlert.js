@@ -4,8 +4,7 @@ export const useAlert = (message, title = null, onClose = null, markdown = false
         type: 'alert',
         message,
         title,
-        markdown: markdown,
-        confirm: false,
+        markdown,
         show: true,
         onClose
     };

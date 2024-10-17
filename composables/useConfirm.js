@@ -4,8 +4,7 @@ export const useConfirm = (message, title = null, onClose = null, markdown = fal
         type: 'confirm',
         message,
         title,
-        markdown: markdown,
-        confirm: false,
+        markdown,
         show: true,
         onClose
     };

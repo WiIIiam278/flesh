@@ -125,6 +125,15 @@
     "no-products-notice": "When you've purchased a product and verified your purchase on Discord, it will appear here.",
     "no-support-tickets-notice": "When you've opened a support ticket on Discord, it will appear here.",
     "admin-panel": "Admin Panel",
+    "verify-email": "Verify Email",
+    "add-an-email-address": "Add an email address",
+    "send-verification-email": "Send verification email",
+    "verify-email-confirm": "Please enter your email address.",
+    "email-rate-limited": "Wait before trying again",
+    "email-rate-limited-copy": "You've already tried to change your email recently. Please wait before requesting a new verification code.",
+    "verify-email-sent-to": "Please check your inbox at {email} for a verification link, or enter the code in the box below.",
+    "verify-email-wrong-code": "Incorrect code. Please check that you entered it correctly, or select cancel and request a new code.",
+    "email-verified-thank-you": "Thank you for verifying your email address! You will now be logged out.",
 
     "button-back-to-home": "Back to home",
 

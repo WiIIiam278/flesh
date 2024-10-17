@@ -1,5 +1,5 @@
 <template>
-    <div class="background" @click="close(false)">
+    <div class="background" @click="() => modal.type !== 'input' ? close(false) : {}">
         <div :class="`container ${!markdown ? 'fullsize' : 'small'}`">
             <div class="title" @click="(e) => e.stopPropagation()">
                 <h2 v-if="modal.title">{{ modal.title }}</h2>
@@ -9,9 +9,12 @@
                 <p v-if="!modal.markdown">{{ modal.message }}</p>
                 <MDC v-else :value="modal.message" tag="article" />
             </div>
+            <div :class="`input ${modal.inputError ? 'error' : ''}`" v-if="modal.type === 'input'">
+                <input @click="modal.inputError = false" type="text" v-model="modal.inputText" :placeholder="modal.title" />
+            </div>
             <div class="buttons">
                 <button @click="close(false)">{{ $t(`button-${modal.type === 'alert' ? 'close' : 'cancel'}`) }}</button>
-                <button :class="modal.type === 'confirm' ? 'delete' : ''" @click="close(true)" v-if="modal.type === 'confirm'">{{ $t('button-confirm') }}</button>
+                <button :class="modal.type === 'confirm' ? 'delete' : ''" @click="close(true, modal.inputText ?? null)" v-if="modal.type === 'confirm' || modal.type === 'input'">{{ $t('button-confirm') }}</button>
             </div>
         </div>
     </div>
@@ -20,12 +23,21 @@
 <script setup>
 const modal = useState('modal');
 
-const close = (confirm) => {
+const close = (confirm, inputText = null) => {
+    // Validate before close
+    if (modal.value.type === 'input' && confirm && !modal.value.inputValidator(inputText)) {
+        modal.value.inputError = true;
+        return;
+    }
+    modal.value.inputError = false;
+
+    // Confirm-close
     if (modal.value.type === 'confirm') {
         modal.value.confirm = confirm;
     }
+
     if (modal.value.onClose) {
-        modal.value.onClose(confirm);
+        modal.value.onClose(confirm, inputText);
     }
     modal.value.show = false;
 }
@@ -66,6 +78,22 @@ const close = (confirm) => {
     margin-bottom: 1rem;
 }
 
+.input {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.input input {
+    width: 60%;
+}
+
+.input.error input {
+    color: var(--red) !important;
+    border-color: var(--red) !important;
+}
+
 .container .title {
     margin-top: -0.2rem;
     display: flex;
@@ -99,6 +127,10 @@ const close = (confirm) => {
 @media screen and (max-width: 950px) {
     .background .container {
         max-width: 75vw;
+    }
+    
+    .input input {
+        width: 100%;
     }
 }
 

@@ -28,7 +28,10 @@
                     <td><code>{{ item.id }}</code></td>
                     <td>{{ item.createdAt ? new Date(item.createdAt).toLocaleString() : "" }}</td>
                     <td>{{ item.name }}</td>
-                    <td>{{ item.email ? `${item.email[0]}•••••@${item.email.split('@')[1]}` : "" }}</td>
+                    <td>
+                        {{ item.email ? `${item.email[0]}•••••@${item.email.split('@')[1]}` : "" }}
+                        <Icon v-if="item.email && item.emailVerified" name="fa6-solid:check" />
+                    </td>
                     <td :class="`role-editor ${item.role?.toLowerCase()}-role`">
                         <select v-if="useIsUserRole(user, 'admin') && item.id !== user.id" v-model="item.role" @change="updateUserRole(item)">
                             <option v-for="role in ['user', 'staff', 'admin']" :class="`${role}-role`" :value="role.toUpperCase()">
