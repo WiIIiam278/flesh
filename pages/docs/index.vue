@@ -15,13 +15,13 @@
                 <h1>{{ $t('docs-home-title') }}</h1>
                 <p>{{ $t('docs-home-copy') }}</p>
                 <div class="docs-sitemap">
-                    <div class="project-section" v-for="project in projects?.filter(p => p.metadata.documentation).sort((a, b) => b.stats?.downloadCount - a.stats?.downloadCount) ?? []">
+                    <div class="project-section" v-for="{project, pages} in docPages">
                         <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
                             <IconifiedProject :project="project" />
                         </NuxtLink>
                         <div class="project-links">
-                            <NuxtLink v-for="entry in projectPages[project.slug]?.filter(e => !e[0].startsWith('_') && e[0] !== 'home') ?? []"
+                            <NuxtLink v-for="entry in pages.filter(e => !e[0].startsWith('_') && e[0] !== 'home') ?? []"
                                 :href="`/docs/${project.slug}/${entry[0]}`">
                                 {{ entry[1] }}
                             </NuxtLink>
@@ -44,9 +44,13 @@
 <script setup>
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
+const docPages = ref([])
 
-const projects = await useAllProjects();
-const projectPages = await useDocPageListsForProjects(projects);
+// Get doc pages
+let projects = await useAllProjects();
+projects.value.filter(p => p.metadata.documentation)
+    .sort((a, b) => b.stats?.downloadCount - a.stats?.downloadCount)
+    .forEach(async (p) => docPages.value.push({ project: p, pages: await useDocsPageList(p.slug) }));
 </script>
 
 <style scoped>
