@@ -42,13 +42,12 @@
 </template>
 
 <script setup>
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
+const { t } = useI18n()
 const docPages = ref([])
 
 // Get doc pages
-let projects = await useAllProjects();
-projects.value.filter(p => p.metadata.documentation)
+const projects = await useAllProjects();
+projects.value?.filter(p => p.metadata.documentation)
     .sort((a, b) => b.stats?.downloadCount - a.stats?.downloadCount)
     .forEach(async (p) => docPages.value.push({ project: p, pages: await useDocsPageList(p.slug) }));
 </script>
