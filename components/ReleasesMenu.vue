@@ -85,7 +85,6 @@ const itemsPerPage = ref(15);
 // Version data
 const updateVersions = (async (page, perPage) => {
     selectedDist.value = distMap[selectedDistGroup.value].map(g => g.name).includes(selectedDist.value.name) ? selectedDist.value : distMap[selectedDistGroup.value][0];
-    // console.log(distMap[selectedDistGroup.value].map(g => g.name))
     pageNumber.value = Math.max(1, page || pageNumber.value);
     itemsPerPage.value = Math.max(15, perPage || itemsPerPage.value);
     versions.value = await useVersions(project.slug, selectedChannel.value, selectedDist.value?.name, pageNumber.value - 1, itemsPerPage.value);
