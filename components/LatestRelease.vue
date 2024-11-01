@@ -75,6 +75,10 @@ const formatFileSize = (bytes) => {
     margin: 0 0 1rem 0;
 }
 
+.changelog:deep(article) {
+    margin: 0;
+}
+
 .download-buttons .button {
     display: flex;
     flex-direction: row;
