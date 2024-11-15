@@ -1,4 +1,4 @@
-# [![William278.net Banner](https://raw.githubusercontent.com/WiIIiam278/flesh/master/images/banner.png)](https://github.com/WiIIiam278/flesh)
+# [![William278.net Banner](https://github.com/WiIIiam278/flesh/blob/master/public/images/banner.png)](https://github.com/WiIIiam278/flesh)
 Welcome! This is the general help centre for William278.net and the HuskHelp discord server. 
 
 ## Articles
