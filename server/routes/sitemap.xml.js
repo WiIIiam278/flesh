@@ -1,3 +1,4 @@
+import { setResponseHeader } from 'h3'
 import { SitemapStream, streamToPromise } from 'sitemap'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
@@ -62,6 +63,9 @@ const writeDocs = (projects, pages, sitemap) => {
 }
 
 export default defineEventHandler(async (event) => {
+  // Set content-type
+  setResponseHeader(event, 'Content-Type', 'application/xml');
+
   // Build sitemap
   const sitemap = new SitemapStream({
     hostname: FRONTEND_URL,
@@ -88,5 +92,5 @@ export default defineEventHandler(async (event) => {
 
   sitemap.end()
 
-  return streamToPromise(sitemap)
+  return streamToPromise(sitemap);
 })

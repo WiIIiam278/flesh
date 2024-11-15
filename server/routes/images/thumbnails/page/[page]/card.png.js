@@ -1,3 +1,4 @@
+import { setResponseHeader } from 'h3'
 import { registerFont, createCanvas, loadImage } from 'canvas'
 
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
@@ -78,25 +79,28 @@ const drawSiteName = (ctx, text) => {
 };
 
 export default defineEventHandler(async (event) => {
-    const pageName = decodeURIComponent(await getRouterParam(event, 'page') ?? 'William278.net');
+  // Set content-type
+  setResponseHeader(event, 'Content-Type', 'image/png');
+  const pageName = decodeURIComponent(await getRouterParam(event, 'page') ?? 'William278.net');
 
-    registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
-    registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
-    const canvas = createCanvas(1200, 600);
-    const ctx = canvas.getContext('2d');
+  // Register fonts
+  registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
+  registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
+  const canvas = createCanvas(1200, 600);
+  const ctx = canvas.getContext('2d');
 
-    // Draw BG
-    drawBackground(ctx, canvas);
+  // Draw BG
+  drawBackground(ctx, canvas);
 
-    // Load and draw the main site image
-    const image = await loadImage(`${FRONTEND_URL}/images/icons/william278.png`);
-    ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
-    
-    // Draw the capitalized page name, tagline, and site name
-    drawPageName(ctx, pageName.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()));
-    drawTagline(ctx, 'Easily-accessible documentation and information site for all of William278\'s Minecraft plugins, projects & games!');
-    drawSiteName(ctx, 'William278.net');
+  // Load and draw the main site image
+  const image = await loadImage(`${FRONTEND_URL}/images/icons/william278.png`);
+  ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
+  
+  // Draw the capitalized page name, tagline, and site name
+  drawPageName(ctx, pageName.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()));
+  drawTagline(ctx, 'Easily-accessible documentation and information site for all of William278\'s Minecraft plugins, projects & games!');
+  drawSiteName(ctx, 'William278.net');
 
-    // Return the image buffer
-    return canvas.toBuffer();
-  });
+  // Return the image buffer
+  return canvas.toBuffer();
+});

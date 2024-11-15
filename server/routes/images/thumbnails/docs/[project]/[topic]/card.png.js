@@ -1,3 +1,4 @@
+import { setResponseHeader } from 'h3'
 import { registerFont, createCanvas, loadImage } from 'canvas'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
@@ -67,30 +68,39 @@ const drawPageTitle = (ctx, title) => {
   });
 }
 
+// 404 not found
+const notFound = (event) => {
+  setResponseStatus(event, 404);
+  return "Not found";
+}
+
 export default defineEventHandler(async (event) => {
-    const project = await fetchProject(getRouterParam(event, 'project'));
-    if (!project || project.metadata.hidden || project.documentation) return "Not found";
-    const { title } = await fetchProjectDocsPage(project.slug, getRouterParam(event, 'topic') ?? 'Home');
-    if (!title) return "Not found"
+  const project = await fetchProject(getRouterParam(event, 'project'));
+  if (!project || project.metadata.hidden || project.documentation) return notFound();
+  const { title } = await fetchProjectDocsPage(project.slug, getRouterParam(event, 'topic') ?? 'Home');
+  if (!title) return notFound();
 
-    registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
-    registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
-    const canvas = createCanvas(1200, 600);
-    const ctx = canvas.getContext('2d');
+  // Set content-type
+  setResponseHeader(event, 'Content-Type', 'image/png');
 
-    drawBackground(ctx, canvas);
+  registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
+  registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
+  const canvas = createCanvas(1200, 600);
+  const ctx = canvas.getContext('2d');
 
-    // Load and draw the image
-    const icon = project.metadata?.icons['PNG'] ?? project.metadata?.icons['SVG']
-    if (icon) {
-      const image = await loadImage(`${FRONTEND_URL}/images/icons/${icon}`);
-      ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
-    }
-    
-    // Draw the project name and tagline
-    drawProjectDocsName(ctx, project);
-    drawPageTitle(ctx, title);
+  drawBackground(ctx, canvas);
 
-    // Return the image buffer
-    return canvas.toBuffer();
-  });
+  // Load and draw the image
+  const icon = project.metadata?.icons['PNG'] ?? project.metadata?.icons['SVG']
+  if (icon) {
+    const image = await loadImage(`${FRONTEND_URL}/images/icons/${icon}`);
+    ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
+  }
+  
+  // Draw the project name and tagline
+  drawProjectDocsName(ctx, project);
+  drawPageTitle(ctx, title);
+
+  // Return the image buffer
+  return canvas.toBuffer();
+});

@@ -1,3 +1,4 @@
+import { setResponseHeader } from 'h3'
 import { registerFont, createCanvas, loadImage } from 'canvas'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
@@ -94,38 +95,47 @@ const drawStat = async (ctx, number, glyph, x, y) => {
   return totalWidth;
 };
 
+// 404 not found
+const notFound = (event) => {
+  setResponseStatus(event, 404);
+  return "Not found";
+}
+
 export default defineEventHandler(async (event) => {
-    const project = await fetchProject(getRouterParam(event, 'project'));
-    if (!project || project.metadata.hidden) return "Not found";
+  // Set content-type
+  setResponseHeader(event, 'Content-Type', 'image/png');
 
-    registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
-    registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
-    const canvas = createCanvas(1200, 600);
-    const ctx = canvas.getContext('2d');
+  const project = await fetchProject(getRouterParam(event, 'project'));
+  if (!project || project.metadata.hidden) return notFound();
 
-    drawBackground(ctx, canvas);
+  registerFont('server/routes/images/thumbnails/font/regular.ttf', { family: 'Nunito' });
+  registerFont('server/routes/images/thumbnails/font/bold.ttf', { family: 'NunitoBold' });
+  const canvas = createCanvas(1200, 600);
+  const ctx = canvas.getContext('2d');
 
-    // Load and draw the image
-    const icon = project.metadata?.icons['PNG'] ?? project.metadata?.icons['SVG']
-    if (icon) {
-      const image = await loadImage(`${FRONTEND_URL}/images/icons/${icon}`);
-      ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
-    }
-    
-    // Draw the project name and tagline
-    drawProjectName(ctx, project);
-    if (project.metadata?.tagline) drawTagline(ctx, project.metadata.tagline);
+  drawBackground(ctx, canvas);
 
-    // Draw project stats
-    if (project.stats) {
-      const PADDING = 55;
-      const Y = 470;
-      let x = 60;
-      if (project.stats?.downloadCount > 0) x += await drawStat(ctx, project.stats.downloadCount, 'download', x, Y) + PADDING
-      if (project.stats?.averageRating > 0) x += await drawStat(ctx, project.stats.averageRating, 'star', x, Y) + PADDING
-      if (project.stats?.interactions > 0) x += await drawStat(ctx, project.stats.interactions, 'heart', x, Y) + PADDING
-    }
+  // Load and draw the image
+  const icon = project.metadata?.icons['PNG'] ?? project.metadata?.icons['SVG']
+  if (icon) {
+    const image = await loadImage(`${FRONTEND_URL}/images/icons/${icon}`);
+    ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
+  }
+  
+  // Draw the project name and tagline
+  drawProjectName(ctx, project);
+  if (project.metadata?.tagline) drawTagline(ctx, project.metadata.tagline);
 
-    // Return the image buffer
-    return canvas.toBuffer();
-  });
+  // Draw project stats
+  if (project.stats) {
+    const PADDING = 55;
+    const Y = 470;
+    let x = 60;
+    if (project.stats?.downloadCount > 0) x += await drawStat(ctx, project.stats.downloadCount, 'download', x, Y) + PADDING
+    if (project.stats?.averageRating > 0) x += await drawStat(ctx, project.stats.averageRating, 'star', x, Y) + PADDING
+    if (project.stats?.interactions > 0) x += await drawStat(ctx, project.stats.interactions, 'heart', x, Y) + PADDING
+  }
+
+  // Return the image buffer
+  return canvas.toBuffer();
+});
