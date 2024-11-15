@@ -1,11 +1,25 @@
 <template>
     <div class="background" @click="() => modal.type !== 'input' ? close(false) : {}">
-        <div :class="`container ${!markdown ? 'fullsize' : 'small'}`">
-            <div class="title" @click="(e) => e.stopPropagation()">
+        <div :class="`container ${!markdown ? 'fullsize' : 'small'}`"  @click="(e) => e.stopPropagation()">
+            <div class="title">
                 <h2 v-if="modal.title">{{ modal.title }}</h2>
                 <Icon class="close-button" @click="close(false)" name="fa6-solid:xmark" />
             </div>
-            <div class="content">
+            <div v-if="modal.type === 'download'" class="downloads">
+                <a class="download-button shadow" v-for="download in modal.data.downloads" :href="useDownloadUrl(modal.data.project, modal.data.channel, modal.data.release, download.distribution)">
+                    <img class="icon" :src="`/images/platforms/${download.distribution.groupName}.png`" onerror="this.style.display='none'" />
+                    <div class="details">
+                        <div class="name">{{ download.distribution.description }}</div>
+                        <div class="file">
+                            <span class="file">{{ download.name }}</span>
+                            <span class="size-hash">
+                                {{ $t('download-file-size', { 'size': useFormattedFileSize(download.fileSize) }) }}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div v-else class="content">
                 <p v-if="!modal.markdown">{{ modal.message }}</p>
                 <MDC v-else :value="modal.message" tag="article" />
             </div>
@@ -72,7 +86,7 @@ const close = (confirm, inputText = null) => {
     height: 200px;
 }
 
-.container.fullsize .content {
+.container.fullsize .content, .container.fullsize .downloads {
     max-height: 65vh;
     overflow: auto;
     margin-bottom: 1rem;
@@ -111,6 +125,51 @@ const close = (confirm, inputText = null) => {
     margin-top: 0.5rem;
 }
 
+.downloads .download-button {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border: 0.15rem solid var(--gray);
+    margin: 1rem auto;
+    max-width: 420px;
+    border-radius: 0.5rem;
+    background-color: var(--gray);
+    color: var(--accent);
+    cursor: pointer;
+}
+
+.downloads .download-button:hover, .version .download-button:hover {
+    background-color: var(--dark-gray);
+    background: linear-gradient(transparent, #00fb9b1e);
+    text-decoration: none;
+}
+
+.downloads .download-button .icon {
+    width: 2rem;
+    max-height: 4rem;
+}
+
+.downloads .download-button .details {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.downloads .details .name {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.downloads .details .file {
+    color: var(--light-gray);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+}
+
 .close-button:hover {
     color: white;
 }
@@ -135,7 +194,7 @@ const close = (confirm, inputText = null) => {
 }
 
 @media screen and (max-width: 550px) {
-    .container.fullsize .content {
+    .container.fullsize .content,  .container.fullsize .downloads {
         max-height: 100%;
         overflow: auto;
         margin-bottom: 1rem;

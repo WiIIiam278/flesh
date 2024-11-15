@@ -22,7 +22,7 @@
 <script setup>
 const DEFAULT_CHANNEL = 'release';
 const user = await useUser();
-const { t } = useLocalePath();
+const { t } = useI18n();
 const { project } = defineProps({
     project: {
         type: Object,

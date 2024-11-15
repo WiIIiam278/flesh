@@ -1,14 +1,26 @@
 <template>
     <div class="latest-release" v-if="release">
         <div class="download-buttons">
-            <a class="button" :href="useDownloadUrl(project, channel, release, download.distribution)" v-for="download of release.downloads">
-                <img class="icon" :src="`/images/platforms/${download.distribution.groupName}.png`" onerror="this.style.display='none'" />
+            <a v-for="group of Object.keys(releaseGroups)" class="button" 
+                :href="releaseGroups[group].length > 1 ? '#' : useDownloadUrl(project, channel, release, releaseGroups[group][0].distribution)"
+                @click="releaseGroups[group].length ? openSelectorModal(group) : {}">
+                <img class="icon" :src="`/images/platforms/${group}.png`" onerror="this.style.display='none'" />
                 <div class="details">
-                    <div class="name">{{ download.distribution.description }}</div>
-                    <div class="file">
-                        <span class="file">{{ download.name }}</span>
+                    <div class="name">{{ releaseGroups[group].length == 1 ? releaseGroups[group][0].distribution.description : useCapitalized(group) }}</div>
+                    <div v-if="releaseGroups[group].length == 1" class="file">
+                        <span class="file">{{ releaseGroups[group][0].name }}</span>
                         <span class="size-hash">
-                            {{ $t('download-file-size', { 'size': formatFileSize(download.fileSize) }) }}
+                            {{ $t('download-file-size', { 'size': useFormattedFileSize(releaseGroups[group][0].fileSize) }) }}
+                        </span>
+                    </div>
+                    <div v-else class="file">
+                        <span>
+                            <span v-for="(download, index) of releaseGroups[group]">
+                                {{ download.distribution.description }}<span v-if="releaseGroups[group].length > index + 1">/</span>
+                            </span>
+                        </span>
+                        <span>
+                            {{ $t('download-click-to-select') }}
                         </span>
                     </div>
                 </div>
@@ -22,6 +34,7 @@
 </template>
 
 <script setup>
+const { t } = useI18n();
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const { project, channel } = defineProps({
     project: {
@@ -34,14 +47,29 @@ const { project, channel } = defineProps({
     }
 })
 
+const releaseGroups = ref({});
 const release = await useLatestVersion(project.slug, channel);
-const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-};
+
+// Create release groups map
+release.value.downloads.forEach(download => {
+    const { distribution } = download;
+    const { groupName } = distribution;
+    
+    if (!releaseGroups.value[groupName]) {
+        return releaseGroups.value[groupName] = [download];
+    }
+    releaseGroups.value[groupName].push(download);
+})
+
+const openSelectorModal = (group) => useDownloadSelector(
+    t('download-select-distribution-version'), 
+    { 
+        project: project,
+        channel: channel,
+        release: release,
+        downloads: releaseGroups.value[group] 
+    }
+);
 </script>
 
 <style scoped>
