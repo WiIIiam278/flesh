@@ -4,8 +4,6 @@ description: 'Learn how you can help translate William278.net into different lan
 locale: 'en'
 ---
 
-# Translate William278.net
-
 Here's how to help translate William278.net (this site) into different languages. The site files are [located on GitHub](https://github.com/WiIIiam278/william278-site). To get started, clone the site 
 * *Example*: `git clone https://github.com/WiIIiam278/william278-site`
 

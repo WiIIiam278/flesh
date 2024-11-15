@@ -1,5 +1,5 @@
-# [![William278.net Banner](https://github.com/WiIIiam278/flesh/blob/master/public/images/banner.png)](https://github.com/WiIIiam278/flesh)
-Welcome! This is the general help centre for William278.net and the HuskHelp discord server. 
+# [![William278.net Banner](/images/banner.png)](https://github.com/WiIIiam278/flesh)
+Welcome! This is the general help centre for William278.net and the [HuskHelp Discord server](https://discord.gg/tVYhJfyDWG). 
 
 ## Articles
 * [[Redis Hosts]] &ndash; A list of Minecraft server hosts and whether they offer Redis.
