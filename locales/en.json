@@ -35,6 +35,8 @@
     "project-downloads": "Downloads",
     "project-latest-version": "Latest version",
     "project-average-rating": "Average rating",
+    "project-online-players": "Online players",
+    "project-online-servers": "Online servers",
     "project-last-updated": "Last updated",
     "project-link-repository": "Repository",
     "project-link-itch": "itch.io",
@@ -43,6 +45,7 @@
     "project-link-polymart": "Polymart",
     "project-link-builtbybit": "BuiltByBit",
     "project-link-curseforge": "CurseForge",
+    "project-link-bstats": "bStats",
     "project-link-hangar": "Hangar",
     "project-link-universaldb": "Universal-DB",
 

@@ -36,11 +36,11 @@
             </div>
             <div class="stats" v-if="stats">
                 <div class="stat" v-if="stats.downloadCount">
-                    <IconifiedText icon="fa6-solid:download">
+                    <IconifiedText :title="$t('project-downloads')" icon="fa6-solid:download">
                         {{ stats.downloadCount >= 1000 ? (stats.downloadCount / 1000).toFixed(1) + 'k' : stats.downloadCount }}
                     </IconifiedText>
                 </div>
-                <div class="stat" v-if="stats.averageRating">
+                <div class="stat" :title="$t('project-average-rating')" v-if="stats.averageRating">
                     <IconifiedText icon="fa6-solid:star">
                         {{ parseFloat(stats.averageRating).toFixed(1) }}
                     </IconifiedText>

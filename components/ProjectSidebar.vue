@@ -60,11 +60,34 @@
                     </IconifiedText>
                 </div>
             </div>
-            <div class="stat" v-if="stats.averageRating">
+            <div class="stat" v-if="stats.averageRating && stats.numberOfRatings">
                 <div class="stat-descriptor">{{ $t('project-average-rating') }}</div>
                 <div class="stat-data">
                     <IconifiedText icon="fa6-solid:star">
                         {{ stats.averageRating.toFixed(1) }}
+                        <span class="sub-data">({{ stats.numberOfRatings }})</span>
+                    </IconifiedText>
+                </div>
+            </div>
+            <div class="stat" v-if="stats.onlinePlayers">
+                <div class="stat-descriptor">{{ $t('project-online-players') }}</div>
+                <div class="stat-data">
+                    <IconifiedText icon="fa6-solid:users">{{ 
+                            stats.onlinePlayers >= 1000
+                                ? (stats.onlinePlayers / 1000).toFixed(1) + 'k' 
+                                : stats.onlinePlayers
+                        }}
+                    </IconifiedText>
+                </div>
+            </div>
+            <div class="stat" v-if="stats.onlineServers">
+                <div class="stat-descriptor">{{ $t('project-online-servers') }}</div>
+                <div class="stat-data">
+                    <IconifiedText icon="fa6-solid:server">{{ 
+                            stats.onlineServers >= 1000
+                                ? (stats.onlineServers / 1000).toFixed(1) + 'k' 
+                                : stats.onlineServers
+                        }}
                     </IconifiedText>
                 </div>
             </div>
@@ -180,6 +203,10 @@ const galleryClick = () => {
     border: 0.175rem solid var(--light-gray);
     border-radius: 0.5rem;
     padding: 0.4rem 0.5rem;
+}
+
+.stat .sub-data {
+    color: var(--light-gray);
 }
 
 .stat .stat-descriptor {

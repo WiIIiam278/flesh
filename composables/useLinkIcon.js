@@ -13,6 +13,7 @@ export const useLinkIcon = (link) => {
         case "polymart": return "fa6-solid:p";
         case "modrinth": return "fa6-solid:wrench";
         case "builtbybit": return "fa6-solid:cube";
+        case "bstats": return "fa6-solid:chart-simple";
         case "universaldb": return "fa6-solid:down-long";
         case "itch": return "fa6-brands:itch-io";
         default: return "fa6-solid:link";
