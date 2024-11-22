@@ -53,7 +53,7 @@ const { auth } = await useAuth();
 
 // Methods
 const getTimestampString = (timestamp) => {
-    const date = new Date(parseInt(timestamp));
+    const date = new Date(parseInt(timestamp * 1000));
     return `${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
 }
 

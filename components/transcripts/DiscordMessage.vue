@@ -133,7 +133,7 @@ const { messages, transcript } = defineProps({
 });
 
 const getUser = (id) => {
-    const member = this.transcript.users.find((member) => member.id === id);
+    const member = transcript.users.find((member) => member.id === id);
     if (member) {
         return member;
     }
@@ -151,7 +151,7 @@ const getTimestampString = (timestamp) => {
 };
 
 const getRole = (id) => {
-    const role = this.transcript.roles.find((role) => role.id === id);
+    const role = transcript.roles.find((role) => role.id === id);
     if (role) {
         return role;
     }
@@ -163,7 +163,7 @@ const getRole = (id) => {
 };
 
 const getChannel = (id) => {
-    const channel = this.transcript.channels.find((channel) => channel.id === id || channel.name === id);
+    const channel = transcript.channels.find((channel) => channel.id === id || channel.name === id);
     if (channel) {
         return channel;
     }
@@ -174,7 +174,7 @@ const getChannel = (id) => {
 };
 
 const getEmoji = (id) => {
-    const emoji = this.transcript.emojis.find((emoji) => emoji.id === id);
+    const emoji = transcript.emojis.find((emoji) => emoji.id === id);
     if (emoji) {
         return emoji;
     }
@@ -186,7 +186,7 @@ const getEmoji = (id) => {
 };
 
 const getAttachment = (id) => {
-    const attachment = this.transcript.attachments.find((attachment) => attachment.id === id);
+    const attachment = transcript.attachments.find((attachment) => attachment.id === id);
     if (attachment) {
         return attachment;
     }
@@ -198,5 +198,5 @@ const getAttachment = (id) => {
     };
 };
 
-const = formatReply(message) => message.split('\n')[0].replace(/([*_~`])/g, '\\$1');
+const formatReply = (message) => message.split('\n')[0].replace(/([*_~`])/g, '\\$1');
 </script>
