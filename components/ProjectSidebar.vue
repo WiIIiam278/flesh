@@ -28,10 +28,8 @@
                 {{ $t('project-link-repository') }}
             </ButtonLink>
         </div>
-        <div class="buttons" v-if="meta.links">
-            <ButtonLink v-for="link in meta.links" :link="link.url" :icon="useLinkIcon(link)" hollow>
-                {{ $t(`project-link-${link.id}`) }}
-            </ButtonLink>
+        <div class="badges" v-if="meta.links">
+            <PlatformBadge class="badge" v-for="link in meta.links" :platform="link.id" :link="link.url" />
         </div>
         <div class="stats">
             <div class="stat" v-if="project.restricted && meta.suggestedRetailPrice">
@@ -188,11 +186,18 @@ const galleryClick = () => {
     flex-wrap: wrap;
 }
 
-.stats {
+.stats, .badges {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.5rem;
     margin: 0.5rem 0;
+}
+
+.badges .badge {
+    cursor: pointer;
+    display: flex;
+    justify-self: center;
+    align-items: center;
 }
 
 .stats .stat {
