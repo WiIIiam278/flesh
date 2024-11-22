@@ -1,13 +1,15 @@
 <template>
     <div class="background" @click="() => modal.type !== 'input' ? close(false) : {}">
-        <div :class="`container ${!markdown ? 'fullsize' : 'small'}`"  @click="(e) => e.stopPropagation()">
+        <div :class="`container ${!markdown ? 'fullsize' : 'small'}`" @click="(e) => e.stopPropagation()">
             <div class="title">
                 <h2 v-if="modal.title">{{ modal.title }}</h2>
                 <Icon class="close-button" @click="close(false)" name="fa6-solid:xmark" />
             </div>
             <div v-if="modal.type === 'download'" class="downloads">
-                <a class="download-button shadow" v-for="download in modal.data.downloads" :href="useDownloadUrl(modal.data.project, modal.data.channel, modal.data.release, download.distribution)">
-                    <img class="icon" :src="`/images/platforms/${download.distribution.groupName}.png`" onerror="this.style.display='none'" />
+                <a class="download-button shadow" v-for="download in modal.data.downloads"
+                    :href="useDownloadUrl(modal.data.project, modal.data.channel, modal.data.release, download.distribution)">
+                    <img class="icon" :src="`/images/platforms/${download.distribution.groupName}.png`"
+                        onerror="this.style.display='none'" />
                     <div class="details">
                         <div class="name">{{ download.distribution.description }}</div>
                         <div class="file">
@@ -24,11 +26,13 @@
                 <MDC v-else :value="modal.message" tag="article" />
             </div>
             <div :class="`input ${modal.inputError ? 'error' : ''}`" v-if="modal.type === 'input'">
-                <input @click="modal.inputError = false" type="text" v-model="modal.inputText" :placeholder="modal.title" />
+                <input @click="modal.inputError = false" type="text" v-model="modal.inputText"
+                    :placeholder="modal.title" />
             </div>
             <div class="buttons">
                 <button @click="close(false)">{{ $t(`button-${modal.type === 'alert' ? 'close' : 'cancel'}`) }}</button>
-                <button :class="modal.type === 'confirm' ? 'delete' : ''" @click="close(true, modal.inputText ?? null)" v-if="modal.type === 'confirm' || modal.type === 'input'">{{ $t('button-confirm') }}</button>
+                <button :class="modal.type === 'confirm' ? 'red' : ''" @click="close(true, modal.inputText ?? null)"
+                    v-if="modal.type === 'confirm' || modal.type === 'input'">{{ $t('button-confirm') }}</button>
             </div>
         </div>
     </div>
@@ -86,7 +90,8 @@ const close = (confirm, inputText = null) => {
     height: 200px;
 }
 
-.container.fullsize .content, .container.fullsize .downloads {
+.container.fullsize .content,
+.container.fullsize .downloads {
     max-height: 65vh;
     overflow: auto;
     margin-bottom: 1rem;
@@ -140,7 +145,8 @@ const close = (confirm, inputText = null) => {
     cursor: pointer;
 }
 
-.downloads .download-button:hover, .version .download-button:hover {
+.downloads .download-button:hover,
+.version .download-button:hover {
     background-color: var(--dark-gray);
     background: linear-gradient(transparent, #00fb9b1e);
     text-decoration: none;
@@ -187,14 +193,16 @@ const close = (confirm, inputText = null) => {
     .background .container {
         max-width: 75vw;
     }
-    
+
     .input input {
         width: 100%;
     }
 }
 
 @media screen and (max-width: 550px) {
-    .container.fullsize .content,  .container.fullsize .downloads {
+
+    .container.fullsize .content,
+    .container.fullsize .downloads {
         max-height: 100%;
         overflow: auto;
         margin-bottom: 1rem;

@@ -12,24 +12,14 @@
                 <img v-else-if="meta.icons['PNG']" :src="`/images/icons/${meta.icons['PNG']}`" />
             </div>
         </div>
-        <div class="gallery" v-if="meta.images" @click="galleryClick()">
-            <div v-for="image in meta.images"
-                :class="'image hover-image ' + (meta.images.indexOf(image) === 0 ? 'shown' : '')" :key="image"
-                :id="'gallery-' + meta.images.indexOf(image)">
-                <img class="shadow" :src="`/images/${image.url}`" :alt="image.description" />
-            </div>
-        </div>
         <div class="tagline">{{ meta.tagline }}</div>
         <div class="buttons" v-if="meta.documentation || meta.github">
-            <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
+            <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" >
                 {{ $t('link-docs') }}
             </ButtonLink>
-            <ButtonLink v-if="meta.github" icon="fa6-brands:github" :link="meta.github" hollow>
+            <ButtonLink v-if="meta.github" icon="fa6-brands:github" :link="meta.github" >
                 {{ $t('project-link-repository') }}
             </ButtonLink>
-        </div>
-        <div class="badges" v-if="meta.links">
-            <PlatformBadge class="badge" v-for="link in meta.links" :platform="link.id" :link="link.url" />
         </div>
         <div class="stats">
             <div class="stat" v-if="project.restricted && meta.suggestedRetailPrice">
@@ -101,16 +91,6 @@ const { project } = defineProps({
     }
 })
 const { metadata: meta, stats } = project;
-
-let galleryIndex = 0;
-const galleryClick = () => {
-    document.getElementById('gallery-' + galleryIndex).classList.remove('shown');
-    galleryIndex++;
-    if (galleryIndex >= project.assets.images.length) {
-        galleryIndex = 0;
-    }
-    document.getElementById('gallery-' + galleryIndex).classList.add('shown');
-}
 </script>
 
 <style scoped>
@@ -124,6 +104,7 @@ const galleryClick = () => {
 .header {
     display: flex;
     flex-direction: row;
+    gap: 1rem;
     justify-content: space-between;
     align-items: center;
 }
@@ -186,18 +167,11 @@ const galleryClick = () => {
     flex-wrap: wrap;
 }
 
-.stats, .badges {
+.stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.5rem;
     margin: 0.5rem 0;
-}
-
-.badges .badge {
-    cursor: pointer;
-    display: flex;
-    justify-self: center;
-    align-items: center;
 }
 
 .stats .stat {
@@ -205,7 +179,7 @@ const galleryClick = () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 0.175rem solid var(--light-gray);
+    border: 0.125rem solid var(--gray);
     border-radius: 0.5rem;
     padding: 0.4rem 0.5rem;
 }

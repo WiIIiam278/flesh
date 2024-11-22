@@ -30,10 +30,10 @@
                                         </div>
                                     </div>
                                     <div class="management-buttons">
-                                        <ButtonLink href="/account/logout" class="shadow" hollow icon="fa6-solid:person-running">{{ t('link-log-out') }}</ButtonLink>
-                                        <ButtonLink v-if="useIsUserRole(user, 'staff')" href="/admin" class="shadow" hollow icon="fa6-solid:gear">{{ t('admin-panel') }}</ButtonLink>
-                                        <ButtonLink v-if="user.email && !user.emailVerified" @click="editEmail(user.email)" class="shadow" hollow icon="fa6-solid:envelope">{{ t('verify-email') }}</ButtonLink>
-                                        <ButtonLink @click="deleteAccount()" class="shadow" hollow color="red" icon="fa6-solid:trash-can">{{ t('delete-account') }}</ButtonLink>
+                                        <ButtonLink v-if="user.email && !user.emailVerified" @click="editEmail(user.email)" class="shadow" type="primary" icon="fa6-solid:envelope">{{ t('verify-email') }}</ButtonLink>
+                                        <ButtonLink v-if="useIsUserRole(user, 'staff')" link="/admin" class="shadow" icon="fa6-solid:gear">{{ t('admin-panel') }}</ButtonLink>
+                                        <ButtonLink link="/account/logout" class="shadow"  icon="fa6-solid:person-running">{{ t('link-log-out') }}</ButtonLink>
+                                        <ButtonLink @click.capture="deleteAccount()" class="shadow"  type="red" icon="fa6-solid:trash-can">{{ t('delete-account') }}</ButtonLink>
                                     </div>
                                 </div>
                             </div>

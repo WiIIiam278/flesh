@@ -66,7 +66,7 @@
                 </div>
                 <div class="list-buttons">
                     <button @click="matchers.push(JSON.parse(getMatchDefault(editing)))" >Add Matcher</button>
-                    <button class="delete" @click="matchers.pop()">Remove Matcher</button>
+                    <button class="red" @click="matchers.pop()">Remove Matcher</button>
                 </div>
             </div>
         </div>

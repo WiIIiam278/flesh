@@ -1,0 +1,81 @@
+<template>
+    <div class="features">
+        <div class="feature" v-if="feature1Title?.length">
+            <div class="icon-container shadow" :style="`background-color: ${iconBackgroundColor1}; background: linear-gradient(180deg, ${iconBackgroundColor1} 0%, ${iconBackgroundColor2} 100%);`">
+                <Icon class="icon" v-if="feature1Icon?.length" :name="feature1Icon" />
+            </div>
+            <h2>{{ feature1Title }}</h2>
+            <span class="body" v-if="feature1Body?.length">{{ feature1Body }}</span>
+        </div>
+        <div class="feature" v-if="feature2Title?.length">
+            <div class="icon-container shadow" :style="`background-color: ${iconBackgroundColor1}; background: linear-gradient(180deg, ${iconBackgroundColor1} 0%, ${iconBackgroundColor2} 100%);`">
+                <Icon class="icon" v-if="feature2Icon?.length" :name="feature2Icon" />
+            </div>
+            <h2>{{ feature2Title }}</h2>
+            <span class="body" v-if="feature2Body?.length">{{ feature2Body }}</span>
+        </div>
+        <div class="feature" v-if="feature3Title?.length">
+            <div class="icon-container shadow" :style="`background-color: ${iconBackgroundColor1}; background: linear-gradient(180deg, ${iconBackgroundColor1} 0%, ${iconBackgroundColor2} 100%);`">
+                <Icon class="icon" v-if="feature3Icon?.length" :name="feature3Icon" />
+            </div>
+            <h2>{{ feature3Title }}</h2>
+            <span class="body" v-if="feature3Body?.length">{{ feature3Body }}</span>
+        </div>
+    </div>
+</template>
+
+<script setup>
+const { 
+    iconBackgroundColor1, iconBackgroundColor2,
+    feature1Title, feature1Icon, feature1Body,
+    feature2Title, feature2Icon, feature2Body,
+    feature3Title, feature3Icon, feature3Body 
+} = defineProps({
+    iconBackgroundColor1: { type: String, default: 'transparent' }, iconBackgroundColor2: { type: String, default: 'transparent' },
+    feature1Title: { type: String }, feature1Icon: { type: String }, feature1Body: { type: String },
+    feature2Title: { type: String }, feature2Icon: { type: String }, feature2Body: { type: String },
+    feature3Title: { type: String }, feature3Icon: { type: String }, feature3Body: { type: String } 
+})
+</script>
+
+<style scoped>
+.features {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 2rem 0;
+    margin-bottom: 3rem;
+}
+
+.features .feature {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.feature h2 {
+    border: none;
+    margin: 0.5rem 0;
+}
+
+.feature .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    width: 4rem;
+    height: 4rem;
+}
+
+.feature .icon-container .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature .body {
+    text-align: center;
+    color: var(--light-gray)
+}
+</style>

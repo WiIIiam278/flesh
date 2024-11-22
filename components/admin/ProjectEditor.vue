@@ -10,10 +10,10 @@
                 </select>
             </div>
             <div class="button-panel">
-                <NuxtLink v-if="editing" :to="`/project/${editing?.slug}#about`">
+                <NuxtLink v-if="editing" :to="`/project/${editing?.slug}`">
                     <IconifiedText icon="fa6-solid:arrow-up-right-from-square">View Project</IconifiedText>
                 </NuxtLink>
-                <button :disabled="!editing" class="delete" @click="deleteProject">Delete</button>
+                <button :disabled="!editing" class="red" @click="deleteProject">Delete</button>
                 <button :disabled="!editing" @click="saveProject">Save</button>
                 <Icon v-if="saved" class="saved-check" name="fa6-solid:check" />
                 <button @click="newProject">Create New&hellip;</button>
@@ -81,7 +81,7 @@
                     <input v-for="(_, index) in editing.metadata.tags" v-model="editing.metadata.tags[index]" type="text" placeholder="Tag" />
                     <div class="list-buttons">
                         <button @click="editing.metadata.tags.push('')">Add Tag</button>
-                        <button class="delete" @click="editing.metadata.tags.pop()">Remove Tag</button>
+                        <button class="red" @click="editing.metadata.tags.pop()">Remove Tag</button>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                     <input v-for="(_, index) in editing.metadata.maintainers" v-model="editing.metadata.maintainers[index]" type="text" placeholder="Maintainer name" />
                     <div class="list-buttons">
                         <button @click="editing.metadata.maintainers.push('')">Add Maintainer</button>
-                        <button class="delete" @click="editing.metadata.maintainers.pop()">Remove Maintainer</button>
+                        <button class="red" @click="editing.metadata.maintainers.pop()">Remove Maintainer</button>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                     </div>
                     <div class="list-buttons">
                         <button @click="editing.metadata.links.push({ id: 'Example', url: 'https://example.com' })">Add Link</button>
-                        <button class="delete" @click="editing.metadata.links.pop()">Remove Link</button>
+                        <button class="red" @click="editing.metadata.links.pop()">Remove Link</button>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,7 @@
                     </div>
                     <div class="list-buttons">
                         <button @click="editing.metadata.images.push({ url: 'https://example.com/image.png', description: 'An example image' })">Add Image</button>
-                        <button class="delete" @click="editing.metadata.images.pop()">Remove Image</button>
+                        <button class="red" @click="editing.metadata.images.pop()">Remove Image</button>
                     </div>
                 </div>
             </div>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="list-buttons">
                         <button @click="editing.metadata.properties.push({ key: 'Foo', value: 'Bar' })">Add Property</button>
-                        <button class="delete" @click="editing.metadata.properties.pop()">Remove Property</button>
+                        <button class="red" @click="editing.metadata.properties.pop()">Remove Property</button>
                     </div>
                 </div>
             </div>
@@ -170,16 +170,6 @@
             <div v-if="editing.restricted">
                 <label for="linkedDiscordRole">Linked Discord Role ID</label>
                 <input v-model="editing.metadata.linkedDiscordRole" type="text" placeholder="Linked Discord Role ID" />
-            </div>
-            <!-- metadata.pullReadmeFromGithub checkbox -->
-            <div>
-                <label for="pullReadmeFromGithub">Pull README from GitHub</label>
-                <input id="pullReadmeFromGithub" v-model="editing.metadata.pullReadmeFromGithub" type="checkbox" />
-            </div>
-            <!-- metadata.readmeBody -->
-            <div class="two-column" v-if="!editing.metadata.pullReadmeFromGithub">
-                <label for="readmeBody">README Body</label>
-                <textarea lines="5" id="readmeBody" v-model="editing.metadata.readmeBody" placeholder="README Body"></textarea>
             </div>
         </div>
     </div>

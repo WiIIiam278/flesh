@@ -10,7 +10,7 @@
                 </select>
             </div>
             <div class="buttons">
-                <button @click="(e) => {e.preventDefault(); reset()}" class="delete">Clear</button>
+                <button @click="(e) => {e.preventDefault(); reset()}" class="red">Clear</button>
                 <button type="submit">Upload Version&hellip;</button>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="buttons">
                     <button @click="(e) => {e.preventDefault(); addDownload()}">Add Download</button>
-                    <button class="delete" @click="(e) => {e.preventDefault(); removeDownload()}">Remove Download</button>
+                    <button class="red" @click="(e) => {e.preventDefault(); removeDownload()}">Remove Download</button>
                 </div>
             </div>
         </div>

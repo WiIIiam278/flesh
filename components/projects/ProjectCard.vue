@@ -6,7 +6,7 @@
                 <img v-else-if="meta.icons['PNG']" :src="`/images/icons/${meta.icons['PNG']}`" />
             </NuxtLink>
             <div class="details">
-                <NuxtLink :to="`/project/${project.slug}#about`">
+                <NuxtLink :to="`/project/${project.slug}`">
                     <h3 class="name">{{ meta.name ? meta.name : project.slug }}</h3>
                 </NuxtLink>
                 <div class="pills">
@@ -23,10 +23,10 @@
                     <p>{{ meta.tagline }}</p>
                 </div>
                 <div class="buttons">
-                    <ButtonLink v-if="meta.listDownloads" :link="`/project/${project.slug}/download`" icon="fa6-solid:download" hollow>
+                    <ButtonLink v-if="meta.listDownloads" :link="`/project/${project.slug}/download`" icon="fa6-solid:download">
                         {{$t('link-download')}}
                     </ButtonLink>
-                    <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
+                    <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book">
                         {{$t('link-docs')}}
                     </ButtonLink>
                     <ButtonLink v-if="meta.github && !(meta.listDownloads && meta.documentation)" icon="fa6-brands:github" :link="meta.github"></ButtonLink>
@@ -62,7 +62,7 @@ const { metadata: meta, stats } = project;
 
 <style scoped>
 .project-card {
-    border: 0.2rem solid var(--light-gray);
+    border: 0.125rem solid var(--light-gray);
     border-radius: 0.5rem;
     min-width: 50%;
     max-width: 100%;

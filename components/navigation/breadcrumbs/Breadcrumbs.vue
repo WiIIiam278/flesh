@@ -7,19 +7,13 @@
     </div>
 </template>
 
-<script>
-import BreadcrumbDivider from './BreadcrumbDivider.vue';
-
-export default {
-    name: "Breadcrumbs",
-    props: {
-        crumbs: {
-            type: Array,
-            required: true
-        }
-    },
-    components: { BreadcrumbDivider }
-}
+<script setup>
+const { crumbs } = defineProps({
+    crumbs: {
+        type: Array,
+        required: true
+    }
+})
 </script>
 
 <style scoped>

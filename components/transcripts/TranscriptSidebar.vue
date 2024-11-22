@@ -29,9 +29,9 @@
     </div>
     <div class="login-reminder" v-if="!auth">{{ t('log-in-to-view-tickets') }}</div>
     <div class="transcript-buttons">
-        <ButtonLink v-if="auth" link="/account#your-support-tickets" icon="fa6-solid:ticket" hollow>{{ t('link-tickets') }}</ButtonLink>
-        <ButtonLink v-else link="/login" icon="fa6-solid:key" hollow>{{ $t('link-log-in') }}</ButtonLink>
-        <ButtonLink :link="url" icon="fa6-solid:download" hollow>{{ $t('ticket-transcript-download') }}</ButtonLink>
+        <ButtonLink v-if="auth" link="/account#your-support-tickets" icon="fa6-solid:ticket" >{{ t('link-tickets') }}</ButtonLink>
+        <ButtonLink v-else link="/login" icon="fa6-solid:key" >{{ $t('link-log-in') }}</ButtonLink>
+        <ButtonLink :link="url" icon="fa6-solid:download" >{{ $t('ticket-transcript-download') }}</ButtonLink>
     </div>
 </template>
 

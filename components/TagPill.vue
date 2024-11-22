@@ -42,6 +42,6 @@ const onSelected = () => {
 }
 
 .selected {
-    border: 0.15rem solid var(--light-gray);
+    border: 0.125rem solid var(--light-gray);
 }
 </style>

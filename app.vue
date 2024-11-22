@@ -56,7 +56,27 @@ useHead({
   --docsearch-hit-active-color: unset !important;
 }
 
-/* Show DocSearch in hamburger menu  */
+/* DocSearch button styles */
+.DocSearch.DocSearch-Button {
+  border-radius: 0.5rem;
+}
+
+.DocSearch-Search-Icon {
+  color: var(--light-gray) !important;
+  margin-right: 0.25rem;
+}
+
+@media (min-width: 800px) {
+  .DocSearch.DocSearch-Button {
+    width: 20vw;
+    max-width: 200px;
+  }
+
+  .DocSearch-Search-Icon {
+    margin-right: 0;
+  }
+}
+
 @media (max-width: 500px) {
   .DocSearch-Button-Placeholder {
     display: block !important;
@@ -279,11 +299,21 @@ button {
   padding: 0.5rem;
   font-size: 1rem;
   font-family: 'Nunito', sans-serif;
-  border: 0.1rem solid var(--gray);
+  border: 0.15rem solid var(--gray);
   border-radius: 0.5rem;
-  background-color: var(--gray);
+  background-color: rgba(255, 255, 255, 0.04);
   color: var(--accent);
   cursor: pointer;
+  width: fit-content;
+}
+
+button.primary {
+  background: var(--dark-gray);
+  background: linear-gradient(transparent, #00fb9b1e);
+}
+
+button.red {
+  color: var(--red);
 }
 
 label {
@@ -297,7 +327,8 @@ input[type="checkbox"] {
   height: 1rem;
 }
 
-input, textarea {
+input,
+textarea {
   padding: 0.5rem;
   font-size: 1rem;
   font-family: 'JetBrains Mono', monospace;
@@ -306,13 +337,29 @@ input, textarea {
   box-sizing: border-box;
 }
 
-input, textarea {
+input,
+textarea {
   padding: 0.5rem;
   font-size: 1rem;
   font-family: 'JetBrains Mono', monospace;
   border: 0.1rem solid var(--gray);
   border-radius: 0.5rem;
   box-sizing: border-box;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  width: 50px !important;
+  height: 50px !important;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
 }
 
 button[disabled] {
@@ -321,11 +368,9 @@ button[disabled] {
   cursor: not-allowed;
 }
 
-button.delete {
-  color: var(--red);
-}
-
-button[disabled]:hover, button[disabled].delete:hover {
+button[disabled]:hover,
+button[disabled]:hover.primary,
+button[disabled].red:hover {
   background-color: var(--dark-gray) !important;
   border-color: var(--gray) !important;
 }
@@ -335,8 +380,12 @@ button:hover {
   border-color: var(--accent);
 }
 
-button.delete:hover {
+button.red:hover {
   border-color: var(--red) !important;
+}
+
+button.primary:hover {
+  background: var(--dark-gray) !important;
 }
 
 select {

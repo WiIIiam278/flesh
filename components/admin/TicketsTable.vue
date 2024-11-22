@@ -52,7 +52,7 @@
                     <td class="closed-at">{{ ticket.closeDate ? new Date(ticket.closeDate).toLocaleString() : "" }}</td>
                     <td class="actions">
                         <span v-if="ticket.status == 2">
-                            <button class="delete" @click="deleteTicket(ticket)">{{ t('ticket-action-delete') }}</button>
+                            <button class="red" @click="deleteTicket(ticket)">{{ t('ticket-action-delete') }}</button>
                             <button @click="openTranscript(ticket)">{{ t('ticket-action-view-transcript') }}</button>
                         </span>
                         <a v-else :href="getTicketUrl(ticket)"><IconifiedText icon="fa6-solid:arrow-up-right-from-square">{{ t('ticket-action-open') }}</IconifiedText></a>

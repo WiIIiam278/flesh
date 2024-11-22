@@ -10,6 +10,9 @@
                             <div v-if="activeTab === 'projects'">
                                 <ProjectEditor />
                             </div>
+                            <div v-if="activeTab === 'pages'">
+                                <ProjectPageEditor />
+                            </div>
                             <div v-if="activeTab === 'upload'">
                                 <VersionUploader />
                             </div>
@@ -40,6 +43,7 @@ if (useIsUserRole(user.value, 'staff')) {
 if (useIsUserRole(user.value, 'admin')) {
     tabs.unshift({ id: 'import', name: 'Import', path: '/admin#import' })
     tabs.unshift({ id: 'upload', name: 'Upload', path: '/admin#upload' })
+    tabs.unshift({ id: 'pages', name: 'Pages', path: '/admin#pages' })
     tabs.unshift({ id: 'projects', name: 'Projects', path: '/admin#projects' })
 }
 const activeTab = defineModel('activeTab')

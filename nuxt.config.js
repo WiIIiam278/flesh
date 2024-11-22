@@ -57,7 +57,20 @@ export default defineNuxtConfig({
       }
   },
 
-  // Runtime components
+  routeRules: {
+    '/project': { redirect: '/' },
+    '/sitemap': { redirect: '/sitemap.xml' },
+    },
+
+  // Components
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
+
+  // Runtime parameters
   runtimeConfig: {
       public: {
           GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),

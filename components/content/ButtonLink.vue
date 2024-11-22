@@ -1,9 +1,9 @@
 <template>
-    <a :href="link ? link : '#'" class="button-link">
-        <div v-if="!$slots.default && icon">
-            <Icon :name="icon" class="button-icon" />
-        </div>
-        <div v-else :class="`button ${hollow ? 'hollow' : 'filled'} ${hollow ? 'hollow' : 'filled'}-color-${color}`">
+    <NuxtLink v-if="!$slots.default && icon" :to="link ?? '#'">
+        <Icon :name="icon" class="button-icon" />
+    </NuxtLink>
+    <NuxtLink v-else :to="link">
+        <button :class="`${type}`">
             <span v-if="icon">
                 <IconifiedText :icon="icon">
                     <ContentSlot :use="$slots.default" unwrap="p" />
@@ -12,79 +12,35 @@
             <span v-else>
                 <ContentSlot :use="$slots.default" unwrap="p" />
             </span>
-        </div>
-    </a>
+        </button>
+    </NuxtLink>
 </template>
 
+<script setup>
+const { link, icon, type } = defineProps({
+    link: {
+        type: String,
+        required: false
+    },
+    icon: {
+        type: String,
+        required: false
+    },
+    type: {
+        type: String,
+        required: false,
+        default: ''
+    }
+});
+</script>
+
 <style scoped>
-.button {
-    display: inline-block;
-    padding: 0.25rem 0.5rem;
-    border-radius: 1rem;
-    text-decoration: none;
-    transition: background-color 0.2s ease-in-out;
+a {
+    text-decoration: none !important;
 }
 
-.button:hover {
-    cursor: pointer;
-}
-
-.filled {
-    color: var(--dark-gray);
-}
-
-.filled-color-accent {
-    border: 0.2rem solid var(--accent);
-    background-color: var(--accent);
-}
-
-.filled-color-red {
-    border: 0.2rem solid var(--red);
-    background-color: var(--red);
-}
-
-.hollow {
-    background-color: none;
-}
-
-.hollow-color-accent {
-    border: 0.2rem solid var(--accent);
-    color: var(--accent);
-}
-
-.hollow-color-red {
-    border: 0.2rem solid var(--red);
-    color: var(--red);
-}
-
-.button-icon {
+a .button-icon {
     margin-top: 0.15rem;
     font-size: 1.6rem;
 }
 </style>
-
-<script>
-export default {
-    name: 'Button',
-    props: {
-        link: {
-            type: String,
-            required: false
-        },
-        icon: {
-            type: String,
-            required: false
-        },
-        hollow: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
-        color: {
-            type: String,
-            required: false,
-            default: 'accent'
-        }
-    }
-}
-</script>

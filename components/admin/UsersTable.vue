@@ -53,7 +53,7 @@
                     </td>
                     <td>
                         <span class="actions">
-                            <button class="delete" v-if="useIsUserRole(user, item.role) && item.id !== user.id" @click="deleteUser(item)">Delete</button>
+                            <button class="red" v-if="useIsUserRole(user, item.role) && item.id !== user.id" @click="deleteUser(item)">Delete</button>
                             <button @click="$emit('show-tickets', item.name)">Tickets</button>
                         </span>
                     </td>

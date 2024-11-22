@@ -6,12 +6,12 @@
         </div>
         <div v-else  class="error upsell">
             <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-login-required') }}</h3></IconifiedText>
-            <ButtonLink :href="`${useRuntimeConfig().public.API_BASE_URL}/login`" icon="fa6-solid:key" hollow>{{ $t('link-log-in') }}</ButtonLink>
+            <ButtonLink :href="`${useRuntimeConfig().public.API_BASE_URL}/login`" icon="fa6-solid:key" >{{ $t('link-log-in') }}</ButtonLink>
         </div>
     </div>
     <div v-else-if="project.releaseChannels.length" class="downloads-menu">
         <LatestRelease :project="project" :channel="DEFAULT_CHANNEL" />
-        <ReleasesMenu :project="project" :defaultChannel="DEFAULT_CHANNEL" />
+        <ReleasesBrowser :project="project" :defaultChannel="DEFAULT_CHANNEL" />
     </div>
     <div v-else class="error upsell">
         <IconifiedText icon="fa6-solid:circle-info"><h3>{{ $t('download-no-versions') }}</h3></IconifiedText>

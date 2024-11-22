@@ -43,21 +43,17 @@
     </div>
 </template>
 
-<script>
-import MessageText from './MessageText.vue';
-export default {
-    props: {
-        embed: {
-            type: Object,
-            required: true
-        },
-        transcript: {
-            type: Object,
-            required: true
-        }
+<script setup>
+const { embed, transcript } = defineProps({
+    embed: {
+        type: Object,
+        required: true
     },
-    components: { MessageText }
-}
+    transcript: {
+        type: Object,
+        required: true
+    }
+})
 </script>
 
 <style scoped>

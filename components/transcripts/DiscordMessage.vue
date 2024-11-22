@@ -120,86 +120,83 @@
 }
 </style>
 
-<script>
-import DiscordEmbed from './DiscordEmbed.vue';
-import MessageAttachment from './MessageAttachment.vue';
+<script setup>
+const { messages, transcript } = defineProps({
+    messages: {
+        type: Array,
+        required: true
+    },
+    transcript: {
+        type: Object,
+        required: true
+    }
+});
 
-export default {
-    props: {
-        messages: {
-            type: Array,
-            required: true
-        },
-        transcript: {
-            type: Object,
-            required: true
-        }
-    },
-    methods: {
-        getUser(id) {
-            const member = this.transcript.users.find((member) => member.id === id);
-            if (member) {
-                return member;
-            }
-            return {
-                id: id,
-                username: "Unknown User",
-                discriminator: "0000",
-                pfp: null
-            };
-        },
-        getTimestampString(timestamp) {
-            const date = new Date(timestamp);
-            return `${date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} at ${date.toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true })}`;
-        },
-        getRole(id) {
-            const role = this.transcript.roles.find((role) => role.id === id);
-            if (role) {
-                return role;
-            }
-            return {
-                id: id,
-                name: "Unknown Role",
-                color: "#000000"
-            };
-        },
-        getChannel(id) {
-            const channel = this.transcript.channels.find((channel) => channel.id === id || channel.name === id);
-            if (channel) {
-                return channel;
-            }
-            return {
-                id: id,
-                name: "Unknown Channel"
-            };
-        },
-        getEmoji(id) {
-            const emoji = this.transcript.emojis.find((emoji) => emoji.id === id);
-            if (emoji) {
-                return emoji;
-            }
-            return {
-                id: id,
-                name: "Unknown Emoji",
-                url: null
-            };
-        },
-        getAttachment(id) {
-            const attachment = this.transcript.attachments.find((attachment) => attachment.id === id);
-            if (attachment) {
-                return attachment;
-            }
-            return {
-                id: id,
-                name: "Unknown Attachment",
-                type: "unknown",
-                url: null
-            };
-        },
-        formatReply(message) {
-            return message.split('\n')[0].replace(/([*_~`])/g, '\\$1');
-        }
-    },
-    components: { DiscordEmbed, MessageAttachment }
-}
+const getUser = (id) => {
+    const member = this.transcript.users.find((member) => member.id === id);
+    if (member) {
+        return member;
+    }
+    return {
+        id: id,
+        username: "Unknown User",
+        discriminator: "0000",
+        pfp: null
+    };
+};
+
+const getTimestampString = (timestamp) => {
+    const date = new Date(timestamp);
+    return `${date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} at ${date.toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true })}`;
+};
+
+const getRole = (id) => {
+    const role = this.transcript.roles.find((role) => role.id === id);
+    if (role) {
+        return role;
+    }
+    return {
+        id: id,
+        name: "Unknown Role",
+        color: "#000000"
+    };
+};
+
+const getChannel = (id) => {
+    const channel = this.transcript.channels.find((channel) => channel.id === id || channel.name === id);
+    if (channel) {
+        return channel;
+    }
+    return {
+        id: id,
+        name: "Unknown Channel"
+    };
+};
+
+const getEmoji = (id) => {
+    const emoji = this.transcript.emojis.find((emoji) => emoji.id === id);
+    if (emoji) {
+        return emoji;
+    }
+    return {
+        id: id,
+        name: "Unknown Emoji",
+        url: null
+    };
+};
+
+const getAttachment = (id) => {
+    const attachment = this.transcript.attachments.find((attachment) => attachment.id === id);
+    if (attachment) {
+        return attachment;
+    }
+    return {
+        id: id,
+        name: "Unknown Attachment",
+        type: "unknown",
+        url: null
+    };
+};
+
+const = formatReply(message) => message.split('\n')[0].replace(/([*_~`])/g, '\\$1');
 </script>

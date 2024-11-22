@@ -37,7 +37,7 @@
 #project-sidebar {
     flex: 1;
     padding: 0 1rem;
-    max-width: 350px;
+    max-width: 325px;
 }
 
 /* Less than 650px */

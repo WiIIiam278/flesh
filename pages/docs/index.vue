@@ -15,10 +15,11 @@
                 <h1>{{ $t('docs-home-title') }}</h1>
                 <p>{{ $t('docs-home-copy') }}</p>
                 <div class="docs-sitemap">
-                    <div class="project-section" v-for="{project, pages} in docPages">
+                    <div class="project-section" v-for="{project, pages} in docPages.sort((a, b) => b.project.stats.downloadCount - a.project.stats.downloadCount)">
                         <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
                             <IconifiedProject :project="project" />
+                            {{ project.stats.downloadCount }}
                         </NuxtLink>
                         <div class="project-links">
                             <NuxtLink v-for="entry in pages.filter(e => !e[0].startsWith('_') && e[0] !== 'home') ?? []"
@@ -27,10 +28,10 @@
                             </NuxtLink>
                         </div>
                         <div class="project-buttons">
-                            <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" hollow>
+                            <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" >
                                 {{ $t('link-download') }}
                             </ButtonLink>
-                            <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" hollow>
+                            <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" >
                                 {{ $t('project-link-repository') }}
                             </ButtonLink>
                         </div>
@@ -48,7 +49,6 @@ const docPages = ref([])
 // Get doc pages
 const projects = await useAllProjects();
 projects.value?.filter(p => p.metadata.documentation)
-    .sort((a, b) => b.stats?.downloadCount - a.stats?.downloadCount)
     .forEach(async (p) => docPages.value.push({ project: p, pages: await useDocsPageList(p.slug) }));
 </script>
 

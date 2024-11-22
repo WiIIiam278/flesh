@@ -15,9 +15,9 @@
                     <Meta name="twitter:creator" content="@William27528" />
                 </Head>
                 <ArchivalNotice v-if="meta.archived" :name="meta.name" />
-                <Overbar>
+                <BreadcrumbsBar>
                     <Breadcrumbs :crumbs="breadcrumbs" />
-                </Overbar>
+                </BreadcrumbsBar>
                 <article>
                     <h1 v-if="params.topic">{{ title }}</h1>
                     <MDC :value="content" tag="article" />
@@ -29,10 +29,10 @@
                         <IconifiedProject centered :project="project" />
                     </NuxtLink>
                     <div class="project-buttons">
-                        <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" hollow>
+                        <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" >
                             {{ $t('link-download') }}
                         </ButtonLink>
-                        <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" hollow>
+                        <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" >
                             {{ $t('project-link-repository') }}
                         </ButtonLink>
                     </div>

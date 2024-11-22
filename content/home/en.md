@@ -23,7 +23,6 @@ Welcome! &mdash; This site contains information and documentation for my various
 ---
 link: 'https://discord.gg/tVYhJfyDWG'
 icon: 'fa6-brands:discord'
-hollow: true
 ---
 Discord
 ::
