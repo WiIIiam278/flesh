@@ -19,7 +19,6 @@
                         <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
                             <IconifiedProject :project="project" />
-                            {{ project.stats.downloadCount }}
                         </NuxtLink>
                         <div class="project-links">
                             <NuxtLink v-for="entry in pages.filter(e => !e[0].startsWith('_') && e[0] !== 'home') ?? []"
