@@ -18,8 +18,11 @@
                 {{ $t('link-docs') }}
             </ButtonLink>
             <ButtonLink v-if="meta.github" icon="fa6-brands:github" :link="meta.github" >
-                {{ $t('project-link-repository') }}
+                {{ $t('project-link-github') }}
             </ButtonLink>
+            <div class="platforms">
+                <ButtonLink v-for="link in meta.links" :link="link.url" :icon="useLinkIcon(link)" />
+            </div>
         </div>
         <div class="stats">
             <div class="stat" v-if="project.restricted && meta.suggestedRetailPrice">
@@ -163,6 +166,14 @@ const { metadata: meta, stats } = project;
 
 .buttons {
     display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.buttons .platforms {
+    display: flex;
+    margin: 0 0.35rem;
     gap: 0.35rem;
     flex-wrap: wrap;
 }

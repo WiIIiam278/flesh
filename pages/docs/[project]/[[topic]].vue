@@ -33,7 +33,7 @@
                             {{ $t('link-download') }}
                         </ButtonLink>
                         <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" >
-                            {{ $t('project-link-repository') }}
+                            {{ $t('project-link-github') }}
                         </ButtonLink>
                     </div>
                 </div>
