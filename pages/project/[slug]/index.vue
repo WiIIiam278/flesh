@@ -15,16 +15,19 @@
                         <Meta name="twitter:creator" content="@William27528" />
                     </Head>
                     <ArchivalNotice v-if="meta.archived" :name="meta.name" />
-                    <Tabs :tabs="tabs" v-model:selected="selectedTab">
-                        <MDC v-if="selectedTab === 'about'" :value="readme" tag="article" />
-                        <div v-if="selectedTab === 'download'">
-                            <DownloadsMenu :project="project" />
-                        </div>
-                        <div v-if="selectedTab === 'play'">
-                            <DsEmulator :game-name="meta.name" :game-core="useProjectProperty(project, 'emulator_core') ?? 'desmume2015'"
-                                :game-url="`/emulator-js/roms/${project.slug}`" />
-                        </div>
-                    </Tabs>
+                    <div class="menu">
+                        <Tabs v-if="tabs.length > 1" :tabs="tabs" v-model:selected="selectedTab" />
+                        <Breadcrumbs v-else :crumbs="[{ name: $t('link-home'), link: '/' }]" />
+                        <NuxtLink class="download-button" v-if="meta?.listDownloads" :href="`/project/${project.slug}/download`">
+                            <Icon name="fa6-solid:download" />
+                            <span>{{ $t('link-download') }}</span>
+                        </NuxtLink>
+                    </div>
+                    <MDC v-if="selectedTab === 'about'" :value="readme" tag="article" />
+                    <div v-if="selectedTab === 'play'">
+                        <DsEmulator :game-name="meta.name" :game-core="useProjectProperty(project, 'emulator_core') ?? 'desmume2015'"
+                            :game-url="`/emulator-js/roms/${project.slug}`" />
+                    </div>
                 </div>
             </template>
             <template #sidebar>
@@ -65,12 +68,39 @@ const readme = computed(() => {
 const tabs = [{ id: 'about', name: t('tab-about') }];
 const selectedTab = defineModel('selectedTab')
 selectedTab.value = 'about';
-if (meta?.listDownloads) {
-    tabs.unshift({ id: 'download', name: t('tab-download') });
-    selectedTab.value = 'download';
-}
 if (useProjectProperty(project.value, 'emulator_rom')) {
     tabs.unshift({ id: 'play', name: t('tab-play') });
     selectedTab.value = 'play';
 }
 </script>
+
+<style scoped>
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.download-button {
+    display: flex;
+    height: min-content;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border: 0.15rem solid var(--gray);
+    border-radius: 0.5rem;
+    background-color: var(--gray);
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    margin-right: 0.5rem;
+    background-color: var(--dark-gray);
+    background: linear-gradient(transparent, #00fb9b1e);
+}
+
+.download-button:hover {
+    background: unset;
+    background-color: var(--background);
+    text-decoration: none;
+}
+</style>

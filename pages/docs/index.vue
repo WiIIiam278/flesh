@@ -27,7 +27,7 @@
                             </NuxtLink>
                         </div>
                         <div class="project-buttons">
-                            <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}#download`" icon="fa6-solid:download" hollow>
+                            <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" hollow>
                                 {{ $t('link-download') }}
                             </ButtonLink>
                             <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" hollow>

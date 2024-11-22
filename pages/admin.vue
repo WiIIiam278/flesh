@@ -3,7 +3,7 @@
         <NuxtLayout>
             <div id="page-content">
                 <article class="admin-page">
-                    <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }, { name: $t('link-account'), link: '/account' }]" />
+                    <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }]" />
                     <h1>Admin Panel</h1>
                     <div>
                         <Tabs :tabs="tabs" v-model:selected="activeTab">
@@ -34,13 +34,13 @@
 const user = await useUser();
 const tabs = [];
 if (useIsUserRole(user.value, 'staff')) {
-    tabs.unshift({ id: 'tickets', name: 'Tickets' })
-    tabs.unshift({ id: 'users', name: 'Users' })
+    tabs.unshift({ id: 'tickets', name: 'Tickets', path: '/admin#tickets' })
+    tabs.unshift({ id: 'users', name: 'Users', path: '/admin#users' })
 }
 if (useIsUserRole(user.value, 'admin')) {
-    tabs.unshift({ id: 'import', name: 'Import' })
-    tabs.unshift({ id: 'upload', name: 'Upload' })
-    tabs.unshift({ id: 'projects', name: 'Projects' })
+    tabs.unshift({ id: 'import', name: 'Import', path: '/admin#import' })
+    tabs.unshift({ id: 'upload', name: 'Upload', path: '/admin#upload' })
+    tabs.unshift({ id: 'projects', name: 'Projects', path: '/admin#projects' })
 }
 const activeTab = defineModel('activeTab')
 activeTab.value = 'projects'
@@ -50,7 +50,7 @@ definePageMeta({
 })
 
 const showTickets = (user) => {
-    navigateTo(`/account/admin?user=${user}#tickets`, { external: true });
+    navigateTo(`/admin?user=${user}#tickets`, { external: true });
 }
 </script>
 

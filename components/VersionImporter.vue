@@ -10,7 +10,7 @@
                 </select>
             </div>
             <div class="picker-buttons">
-                <NuxtLink v-if="editing" :to="`/project/${editing?.slug}#download`">
+                <NuxtLink v-if="editing" :to="`/project/${editing?.slug}/download`">
                     <IconifiedText icon="fa6-solid:arrow-up-right-from-square">View Downloads</IconifiedText>
                 </NuxtLink>
                 <button :disabled="!editing" @click="sendImportRequest">Start Import&hellip;</button>

@@ -14,6 +14,7 @@
     "link-terms": "Terms",
     "link-support": "Support",
     "link-tickets": "Tickets",
+    "link-back": "Back",
 
     "index-title": "William278.net",
     "index-description": "Open source Minecraft server software & game projects.",
@@ -22,10 +23,10 @@
     "index-grid-collapse": "Show less",
 
     "tab-about": "About",
-    "tab-download": "Download",
     "tab-play": "Play",
 
     "project-title": "{project} - {tagline}",
+    "download-project-title": "Download {project} - {tagline}",
     "project-archived": "Archived",
     "project-archived-header": "{project} has been archived.",
     "project-archived-details": "I won't be releasing any more updates for it, and won't be able to answer related support questions; sorry about that!",

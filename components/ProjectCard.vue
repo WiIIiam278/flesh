@@ -23,7 +23,7 @@
                     <p>{{ meta.tagline }}</p>
                 </div>
                 <div class="buttons">
-                    <ButtonLink v-if="meta.listDownloads" :link="`/project/${project.slug}#download`" icon="fa6-solid:download" hollow>
+                    <ButtonLink v-if="meta.listDownloads" :link="`/project/${project.slug}/download`" icon="fa6-solid:download" hollow>
                         {{$t('link-download')}}
                     </ButtonLink>
                     <ButtonLink v-if="meta.documentation" :link="`/docs/${project.slug}`" icon="fa6-solid:book" hollow>
