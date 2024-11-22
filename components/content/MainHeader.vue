@@ -6,10 +6,7 @@
                 <ContentSlot :use="$slots.default" unwrap="p" />
             </p>
         </div>
-        <a id="header-icon" href="https://twitter.com/William27528" target="_blank">
-            <img src="/images/icons/william-head.png" id="head-graphic" class="shadow"
-                alt="William278's player head" />
-        </a>
+        <object data="/images/icons/william278.svg" id="head-graphic" class="shadow" alt="William278.net husk silhouette logo" />
     </div>
 </template>
 
@@ -36,13 +33,12 @@
     font-size: large;
 }
 
-#main-header #header-icon {
+#head-graphic {
     display: flex;
     justify-content: flex-end;
-}
-
-#head-graphic {
     border-radius: 0.5em;
+    width: 64px;
+    height: 64px;
 }
 </style>
 
