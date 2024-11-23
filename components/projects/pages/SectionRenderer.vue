@@ -12,8 +12,7 @@
                 :button2Label="props.button2_label" :button2Icon="props.button2_icon" :button2Url="props.button2_url"
             />
         </PageHeaderWithText>
-        <PageImageWithText v-if="is('image_with_text')" :title="title" :body="body"
-            :imageUrl="props.image_url", :imagePosition="props.image_position">
+        <PageImageWithText v-if="is('image_with_text')" :title="title" :body="body" :imageUrl="props.image_url" :imagePosition="props.image_position">
             <PageButtonPair :centered="false"
                 :button1Label="props.button1_label" :button1Icon="props.button1_icon" :button1Url="props.button1_url" 
                 :button2Label="props.button2_label" :button2Icon="props.button2_icon" :button2Url="props.button2_url"
