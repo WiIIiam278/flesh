@@ -15,29 +15,32 @@
             <div class="step">
                 <Icon class="icon" name="fa6-solid:check" />
                 <h3>Verify your purchase</h3>
-                <p>on the HuskHelp Discord Server.</p>
+                <p>on the <a href="https://discord.gg/tVYhJfyDWG" target="_blank" title="Click to join">HuskHelp Discord Server</a>.</p>
             </div>
             <div class="separator">
                 <Icon name="fa6-solid:chevron-right" />
             </div>
             <div class="step">
                 <Icon class="icon" name="fa6-solid:key" />
-                <h3>Log in here</h3>
+                <h3 v-if="!user">Log in here</h3>
+                <h3 v-else>Log back in here</h3>
                 <p>to access all your downloads.</p>
             </div>
         </div>
         <div class="platforms">
-            <h3>You can purchase {{ meta.name }} on:</h3>
+            <h3>You can buy {{ meta.name }} on:</h3>
             <div class="badges">
                 <PlatformBadge v-for="link of platforms" :platform="link.id" :link="link.url" />
             </div>
-            <div class="login-prompt">Already purchased {{ meta.name }}? <NuxtLink :to="`${useRuntimeConfig().public.API_BASE_URL}/login`"><IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText></NuxtLink></div>
+            <div v-if="!user" class="login-prompt">Already bought {{ meta.name }}? <NuxtLink :to="`${useRuntimeConfig().public.API_BASE_URL}/login`"><IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText></NuxtLink></div>
+            <div v-else class="login-prompt">Already bought {{ meta.name }}? <NuxtLink :to="`/logout`"><IconifiedText icon="fa6-solid:person-running">{{ $t('link-log-out') }}</IconifiedText></NuxtLink> and back in to update your purchases.</div>
         </div>
     </div>
 </template>
 
 <script setup>
 const { t } = useI18n();
+const { user } = useUser();
 const { project } = defineProps({
     project: {
         type: Object,
@@ -97,6 +100,11 @@ const platforms = meta.links.filter(link => ['spigot', 'polymart', 'builtbybit']
     background-color: var(--dark-gray);
     border-radius: 0.5rem;
     border: 0.125rem solid var(--gray)
+}
+
+.step p a {
+    color: var(--light-gray) !important;
+    text-decoration: underline;
 }
 
 .steps .separator {

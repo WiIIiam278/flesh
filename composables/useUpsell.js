@@ -5,7 +5,6 @@ export const useUpsell = (title, project) => {
         escapable: false,
         title,
         project,
-        onClose: () => navigateTo(`/project/${project.slug}`),
         show: true
     };
     return modal;

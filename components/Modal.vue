@@ -27,8 +27,7 @@
                 <MDC v-else :value="modal.message" tag="article" />
             </div>
             <div v-if="modal.type === 'input'" :class="`input ${modal.inputError ? 'error' : ''}`" >
-                <input @click="modal.inputError = false" type="text" v-model="modal.inputText"
-                    :placeholder="modal.title" />
+                <input @click="modal.inputError = false" type="text" v-model="modal.inputText" :placeholder="modal.title" />
             </div>
             <div class="buttons">
                 <button @click="close(false)">{{ $t(`button-${modal.type === 'alert' ? 'close' : 'cancel'}`) }}</button>
@@ -57,6 +56,9 @@ const close = (confirm, inputText = null) => {
 
     if (modal.value.onClose) {
         modal.value.onClose(confirm, inputText);
+    }
+    if (modal.value.type === 'upsell') {
+        navigateTo(`/project/${modal.value.project.slug}`);
     }
     modal.value.show = false;
 }
