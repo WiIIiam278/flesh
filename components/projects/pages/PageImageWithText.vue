@@ -43,16 +43,16 @@ const {
 
 @media screen and (max-width: 800px) {
     .container {
-        flex-direction: column;
+        flex-direction: column !important;
         justify-content: center;
     }
 
     .image {
-        width: unset;
+        width: 100%;
     }
 
     .text {
-        width: unset;
+        width: 100%;
     }
 }
 

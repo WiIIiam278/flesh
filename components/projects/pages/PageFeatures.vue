@@ -53,6 +53,9 @@ const {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+    width: 30%;
 }
 
 .feature h2 {
@@ -77,5 +80,16 @@ const {
 .feature .body {
     text-align: center;
     color: var(--light-gray)
+}
+
+
+@media screen and (max-width: 800px) {
+    .features {
+        flex-direction: column;
+    }
+
+    .features .feature {
+        width: 100%;
+    }
 }
 </style>
