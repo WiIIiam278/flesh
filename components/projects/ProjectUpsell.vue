@@ -69,6 +69,7 @@ const platforms = meta.links.filter(link => ['spigot', 'polymart', 'builtbybit']
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     margin: 0.5rem 0;
     gap: 1rem;
