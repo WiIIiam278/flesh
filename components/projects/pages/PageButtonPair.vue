@@ -26,4 +26,10 @@ const { button1Label, button1Icon, button1Url, button2Label, button2Icon, button
 .button-pair.decentered {
     justify-content: flex-start !important;
 }
+
+@media screen and (max-width: 400px) {
+    .button-pair {
+        flex-direction: column;
+    }
+}
 </style>

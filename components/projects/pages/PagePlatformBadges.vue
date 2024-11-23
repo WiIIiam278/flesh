@@ -22,6 +22,6 @@ const { metadata: meta } = project;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    margin: 3rem 0;
+    margin: 2rem 0;
 }
 </style>

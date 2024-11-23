@@ -1,6 +1,6 @@
 <template>
     <div class="hero shadow" :style="`background-color: ${color1}; background: linear-gradient(180deg, ${color1} 0%, ${color2} 100%);`">
-        <PageHeaderWithText :title="title" :body="body">
+        <PageHeaderWithText class="header" :title="title ?? project.metadata.name" :body="body">
             <slot />
         </PageHeaderWithText>
     </div>
@@ -8,8 +8,9 @@
 
 <script setup>
 const { 
-    title, body, color1, color2
+    project, title, body, color1, color2
 } = defineProps({
+    project: { type: Object, required: true },
     title: { type: String, required: false, default: '' },
     body: { type: String, required: false, default: '' },
     color1: { type: String, required: false, default: 'transparent' },
@@ -24,7 +25,11 @@ const {
     align-items: center;
     justify-content: center;
     border-radius: 0.5rem;
-    height: 15rem;
+    min-height: 13.5rem;
     width: 100%;
+}
+
+.hero .header {
+    margin-top: 1rem;
 }
 </style>

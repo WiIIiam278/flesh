@@ -75,13 +75,13 @@ const {
 .feature .icon-container .icon {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+    padding-top: 0.3rem;
 }
 
 .feature .body {
     text-align: center;
     color: var(--light-gray)
 }
-
 
 @media screen and (max-width: 800px) {
     .features {

@@ -1,6 +1,6 @@
 <template>
     <div class="section">
-        <PageHero v-if="is('hero')" :title="title" :body="body" :color1="props.color1" :color2="props.color2">
+        <PageHero v-if="is('hero')" :title="title" :body="body" :color1="props.color1" :color2="props.color2" :project="project">
             <PageButtonPair
                 :button1Label="props.button1_label" :button1Icon="props.button1_icon" :button1Url="props.button1_url" 
                 :button2Label="props.button2_label" :button2Icon="props.button2_icon" :button2Url="props.button2_url"
