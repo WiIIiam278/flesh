@@ -2,6 +2,7 @@ export const useConfirm = (message, title = null, onClose = null, markdown = fal
     const modal = useState('modal');
     modal.value = {
         type: 'confirm',
+        escapable: true,
         message,
         title,
         markdown,

@@ -1,9 +1,9 @@
 <template>
-    <div class="background" @click="() => modal.type !== 'input' ? close(false) : {}">
+    <div class="background" @click="() => modal.escapable ? close(false) : {}">
         <div :class="`container ${!markdown ? 'fullsize' : 'small'}`" @click="(e) => e.stopPropagation()">
             <div class="title">
                 <h2 v-if="modal.title">{{ modal.title }}</h2>
-                <Icon class="close-button" @click="close(false)" name="fa6-solid:xmark" />
+                <Icon v-if="modal.escapable" class="close-button" @click="close(false)" name="fa6-solid:xmark" />
             </div>
             <div v-if="modal.type === 'download'" class="downloads">
                 <a class="download-button shadow" v-for="download in modal.data.downloads"
@@ -21,11 +21,12 @@
                     </div>
                 </a>
             </div>
+            <ProjectUpsell v-else-if="modal.type === 'upsell'" :project="modal.project" />
             <div v-else class="content">
                 <p v-if="!modal.markdown">{{ modal.message }}</p>
                 <MDC v-else :value="modal.message" tag="article" />
             </div>
-            <div :class="`input ${modal.inputError ? 'error' : ''}`" v-if="modal.type === 'input'">
+            <div v-if="modal.type === 'input'" :class="`input ${modal.inputError ? 'error' : ''}`" >
                 <input @click="modal.inputError = false" type="text" v-model="modal.inputText"
                     :placeholder="modal.title" />
             </div>

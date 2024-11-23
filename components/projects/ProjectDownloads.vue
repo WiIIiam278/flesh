@@ -1,10 +1,10 @@
 <template>
-    <div v-if="!canDownload()" class="upsell">
+    <div v-if="!canDownload" class="upsell">
         <div v-if="user" class="error upsell">
             <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-license-required') }}</h3></IconifiedText>
             <p>{{ $t('download-license-required-copy') }}</p>
         </div>
-        <div v-else  class="error upsell">
+        <div v-else class="error upsell">
             <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-login-required') }}</h3></IconifiedText>
             <ButtonLink :href="`${useRuntimeConfig().public.API_BASE_URL}/login`" icon="fa6-solid:key" >{{ $t('link-log-in') }}</ButtonLink>
         </div>
@@ -30,7 +30,10 @@ const { project } = defineProps({
     }
 });
 
-const canDownload = () => !project.restricted || user.value && (useIsUserRole(user.value, 'staff') || user.value.purchases.some(p => p === project.slug));
+const canDownload = !project.restricted || user.value && (useIsUserRole(user.value, 'staff') || user.value.purchases.some(p => p === project.slug));
+if (!canDownload) {
+    useUpsell(t('download-get-resource-license', {'name': project.metadata.name}), project);
+}
 </script>
 
 <style scoped>

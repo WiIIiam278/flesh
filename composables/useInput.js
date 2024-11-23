@@ -2,6 +2,7 @@ export const useInput = (message, title = "Input", inputText = null, inputValida
     const modal = useState('modal');
     modal.value = {
         type: 'input',
+        escapable: false,
         message,
         title,
         markdown,
