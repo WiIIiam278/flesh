@@ -3,7 +3,7 @@
         <div class="download-buttons">
             <a v-for="group of Object.keys(releaseGroups)" class="button" 
                 :href="releaseGroups[group].length > 1 ? '#' : useDownloadUrl(project, channel, release, releaseGroups[group][0].distribution)"
-                @click="releaseGroups[group].length ? openSelectorModal(group) : {}">
+                @click="releaseGroups[group].length > 1 ? openSelectorModal(group) : {}">
                 <img class="icon" :src="`/images/platforms/${group}.png`" onerror="this.style.display='none'" />
                 <div class="details">
                     <div class="name">{{ releaseGroups[group].length == 1 ? releaseGroups[group][0].distribution.description : useCapitalized(group) }}</div>
