@@ -50,8 +50,6 @@
     "project-link-hangar": "Hangar",
     "project-link-universaldb": "Universal-DB",
 
-    "download-license-required": "You need a license to download this project!",
-    "download-license-required-copy": "Please buy a project license, then verify your purchase on our Discord Server by opening a ticket.",
     "download-get-resource-license": "Buy {name}",
     "download-no-versions": "There are no downloads available for this project.",
     "download-no-versions-copy": "Please check back later for updates.",

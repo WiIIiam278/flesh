@@ -1,19 +1,34 @@
 <template>
-    <div v-if="!canDownload" class="upsell">
-        <div v-if="user" class="error upsell">
-            <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-license-required') }}</h3></IconifiedText>
-            <p>{{ $t('download-license-required-copy') }}</p>
+    <div v-if="!canDownload">
+        <div class="dummy-release">
+            <div class="buttons">
+                <div class="download pulsing" v-for="i in 2"></div>
+            </div>
+            <div class="changelog">
+                <div class="title pulsing"></div>
+                <div class="body pulsing" v-for="i in 6"></div>
+                <div class="end"></div>
+            </div>
         </div>
-        <div v-else class="error upsell">
-            <IconifiedText icon="fa6-solid:lock"><h3>{{ $t('download-login-required') }}</h3></IconifiedText>
-            <ButtonLink :href="`${useRuntimeConfig().public.API_BASE_URL}/login`" icon="fa6-solid:key" >{{ $t('link-log-in') }}</ButtonLink>
+        <div class="dummy-menu">
+            <div class="title pulsing"></div>
+            <hr/>
+            <div class="platforms">
+                <div class="platform pulsing" v-for="i in 2"></div>
+            </div>
+            <div class="releases">
+                <div class="release" v-for="i in 8">
+                    <div class="button pulsing"></div>
+                    <div class="text pulsing"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div v-else-if="project.releaseChannels.length" class="downloads-menu">
         <LatestRelease :project="project" :channel="DEFAULT_CHANNEL" />
         <ReleasesBrowser :project="project" :defaultChannel="DEFAULT_CHANNEL" />
     </div>
-    <div v-else class="error upsell">
+    <div v-else class="error">
         <IconifiedText icon="fa6-solid:circle-info"><h3>{{ $t('download-no-versions') }}</h3></IconifiedText>
         <p>{{ $t('download-no-versions-copy') }}</p>
     </div>
@@ -37,7 +52,7 @@ if (!canDownload) {
 </script>
 
 <style scoped>
-.upsell {
+.error {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -47,13 +62,121 @@ if (!canDownload) {
     margin: 2rem 0;
 }
 
-.error {
+.dummy-release {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.dummy-release .buttons {
+    width: 50%;
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons .download {
+    width: 90%;
+    height: 6rem;
+}
+
+.dummy-release .changelog {
+    width: 50%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    justify-content: center;
-    align-items: center;
+}
+
+.changelog .title {
+    width: 85%;
+    height: 3rem;
+}
+
+.changelog .body {
     width: 100%;
-    margin: 2rem 0;
+    height: 1.6rem;
+}
+
+.dummy-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.dummy-menu .title {
+    height: 2rem;
+    width: 50%;
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 0;
+}
+
+.dummy-menu hr {
+    margin: 1rem 0;
+}
+
+.dummy-menu .platforms {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.platforms .platform {
+    width: 6.5rem;
+    height: 2.5rem;
+}
+
+.releases {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 100%;
+}
+
+.releases .release {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    height: 4rem;
+}
+
+.release .button {
+    width: 8rem;
+    height: 2.5rem;
+}
+
+.release .text {
+    width: 75%;
+    height: 1.75rem;
+}
+
+@keyframes placeholder {
+    0% {
+        background-position: -468px 0
+    }
+    100% {
+        background-position: 468px 0
+    }
+}
+
+.pulsing {
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeholder;
+    animation-timing-function: linear;
+    background: var(--dark-gray);
+    background: linear-gradient(to right, var(--gray) 15%, var(--dark-gray) 45%, var(--gray) 75%);
+    background-size: 1000px 104px;
+    position: relative;
+    overflow: hidden;
+    color: transparent;
+    border-radius: 0.5rem;
 }
 </style>
