@@ -22,7 +22,7 @@
             </div>
             <div class="step">
                 <Icon class="icon" name="fa6-solid:key" />
-                <h3 v-if="!auth">Log in here</h3>
+                <h3 v-if="!user">Log in here</h3>
                 <h3 v-else>Log back in here</h3>
                 <p>to access all your downloads.</p>
             </div>
@@ -32,7 +32,7 @@
             <div class="badges">
                 <PlatformBadge v-for="link of platforms" :platform="link.id" :link="link.url" />
             </div>
-            <div v-if="!auth" class="login-prompt">Already bought {{ meta.name }}? <NuxtLink :to="`${useRuntimeConfig().public.API_BASE_URL}/login`"><IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText></NuxtLink></div>
+            <div v-if="!user" class="login-prompt">Already bought {{ meta.name }}? <NuxtLink :to="`${useRuntimeConfig().public.API_BASE_URL}/login`"><IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText></NuxtLink></div>
             <div v-else class="login-prompt">Already bought {{ meta.name }}? <NuxtLink :to="`/logout`"><IconifiedText icon="fa6-solid:person-running">{{ $t('link-log-out') }}</IconifiedText></NuxtLink> and back in to update your purchases.</div>
         </div>
     </div>
@@ -40,7 +40,7 @@
 
 <script setup>
 const { t } = useI18n();
-const { auth } = useAuth();
+const { user } = await useUser();
 const { project } = defineProps({
     project: {
         type: Object,
