@@ -5,25 +5,31 @@
         </div>
         <div class="steps">
             <div class="step">
-                <Icon class="icon" name="fa6-solid:bag-shopping" />
-                <h3>Buy {{ meta.name }}</h3>
+                <div class="icon-container">
+                    <Icon class="icon" name="fa6-solid:bag-shopping" />
+                    <h3>Buy {{ meta.name }}</h3>
+                </div>
                 <p>from one of the marketplaces below.</p>
             </div>
             <div class="separator">
                 <Icon name="fa6-solid:chevron-right" />
             </div>
             <div class="step">
-                <Icon class="icon" name="fa6-solid:check" />
-                <h3>Verify your purchase</h3>
+                <div class="icon-container">
+                    <Icon class="icon" name="fa6-solid:check" />
+                    <h3>Verify purchase</h3>
+                </div>
                 <p>on the <a href="https://discord.gg/tVYhJfyDWG" target="_blank" title="Click to join">HuskHelp Discord Server</a>.</p>
             </div>
             <div class="separator">
                 <Icon name="fa6-solid:chevron-right" />
             </div>
             <div class="step">
-                <Icon class="icon" name="fa6-solid:key" />
-                <h3 v-if="!user">Log in here</h3>
-                <h3 v-else>Log back in here</h3>
+                <div class="icon-container">
+                    <Icon class="icon" name="fa6-solid:key" />
+                    <h3 v-if="!user">Log in here</h3>
+                    <h3 v-else>Log back in here</h3>
+                </div>
                 <p>to access all your downloads.</p>
             </div>
         </div>
@@ -103,6 +109,14 @@ const platforms = meta.links.filter(link => ['spigot', 'polymart', 'builtbybit']
     border: 0.125rem solid var(--gray)
 }
 
+.step .icon-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .step p a {
     color: var(--light-gray) !important;
     text-decoration: underline;
@@ -128,6 +142,36 @@ const platforms = meta.links.filter(link => ['spigot', 'polymart', 'builtbybit']
 
 .step .icon {
     font-size: 2em;
+}
+
+@media screen and (max-width: 800px) {
+    .upsell {
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .steps {
+        flex-direction: column;
+    }
+
+    .steps .step {
+        width: 75%;
+        margin: 0.5rem auto;
+    }
+
+    .step .icon-container {
+        margin-top: 0.2rem;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .step .icon {
+        font-size: 1.5rem;
+    }
+
+    .steps .separator {
+        transform: rotate(90deg);
+    }
 }
 </style>
 
