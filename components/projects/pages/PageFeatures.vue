@@ -4,22 +4,22 @@
             <div class="icon-container shadow" :style="`background-color: ${iconBackgroundColor1}; background: linear-gradient(180deg, ${iconBackgroundColor1} 0%, ${iconBackgroundColor2} 100%);`">
                 <Icon class="icon" v-if="feature1Icon?.length" :name="feature1Icon" />
             </div>
-            <h2>{{ feature1Title }}</h2>
-            <span class="body" v-if="feature1Body?.length">{{ feature1Body }}</span>
+            <MDC :value="feature1Title" tag="h2" unwrap="p" />
+            <MDC class="body" v-if="feature1Body?.length" :value="feature1Body" tag="div" unwrap="p" />
         </div>
         <div class="feature" v-if="feature2Title?.length">
             <div class="icon-container shadow" :style="`background-color: ${iconBackgroundColor1}; background: linear-gradient(180deg, ${iconBackgroundColor1} 0%, ${iconBackgroundColor2} 100%);`">
                 <Icon class="icon" v-if="feature2Icon?.length" :name="feature2Icon" />
             </div>
-            <h2>{{ feature2Title }}</h2>
-            <span class="body" v-if="feature2Body?.length">{{ feature2Body }}</span>
+            <MDC :value="feature2Title" tag="h2" unwrap="p" />
+            <MDC class="body" v-if="feature2Body?.length" :value="feature2Body" tag="div" unwrap="p" />
         </div>
         <div class="feature" v-if="feature3Title?.length">
             <div class="icon-container shadow" :style="`background-color: ${iconBackgroundColor1}; background: linear-gradient(180deg, ${iconBackgroundColor1} 0%, ${iconBackgroundColor2} 100%);`">
                 <Icon class="icon" v-if="feature3Icon?.length" :name="feature3Icon" />
             </div>
-            <h2>{{ feature3Title }}</h2>
-            <span class="body" v-if="feature3Body?.length">{{ feature3Body }}</span>
+            <MDC :value="feature3Title" tag="h2" unwrap="p" />
+            <MDC class="body" v-if="feature3Body?.length" :value="feature3Body" tag="div" unwrap="p" />
         </div>
     </div>
 </template>
@@ -58,7 +58,7 @@ const {
     width: 30%;
 }
 
-.feature h2 {
+.feature:deep(h2) {
     border: none;
     margin: 0.5rem 0;
 }
@@ -78,7 +78,7 @@ const {
     padding-top: 0.3rem;
 }
 
-.feature .body {
+.feature:deep(.body) {
     text-align: center;
     color: var(--light-gray)
 }

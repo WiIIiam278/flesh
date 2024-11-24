@@ -2,8 +2,8 @@
     <div class="container" :style="`flex-direction: row${imagePosition === 'left' ? '' : '-reverse'};`">
         <img class="image shadow" :src="imageUrl" :alt="title" />
         <div class="text">
-            <h2 v-if="title?.length">{{ title }}</h2>
-            <p v-if="body?.length">{{ body }}</p>
+            <MDC v-if="title?.length" :value="title" tag="h2" unwrap="p" />
+            <MDC v-if="body?.length" :value="body" tag="p" unwrap="p" />
             <slot />
         </div>
     </div>
@@ -31,6 +31,15 @@ const {
     margin: 3rem 0;
 }
 
+.container:deep(h1) {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.container:deep(p) {
+    margin-top: 1rem;
+}
+
 .image {
     height: auto;
     width: 48%;
@@ -54,14 +63,5 @@ const {
     .text {
         width: 100%;
     }
-}
-
-.container h1 {
-    font-size: 2rem;
-    margin: 0;
-}
-
-.container p {
-    margin-top: 1rem;
 }
 </style>

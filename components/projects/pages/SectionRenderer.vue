@@ -30,8 +30,8 @@
         />
         <PagePlatformBadges v-else-if="is('platform_badges')" :project="project" />
         <hr v-else-if="is('horizontal_rule')" />
-        <p v-else-if="is('paragraph')">{{ body }}</p>
-        <h2 v-else-if="is('title')">{{ body }}</h2>
+        <MDC v-else-if="is('paragraph')" :value="body" tag="p" unwrap="p" />
+        <MDC v-else-if="is('title')" :value="title" tag="h1" unwrap="p" />
     </div>
 </template>
 

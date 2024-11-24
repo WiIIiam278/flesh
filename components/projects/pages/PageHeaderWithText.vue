@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <h1 v-if="title?.length">{{ title }}</h1>
-        <p v-if="body?.length">{{ body }}</p>
+        <MDC v-if="title?.length" :value="title" tag="h1" unwrap="p" />
+        <MDC v-if="body?.length" :value="body" tag="p" unwrap="p" />
         <slot />
     </div>
 </template>
@@ -24,7 +24,7 @@ const {
     margin: auto;
 }
 
-.container h1 {
+.container:deep(h1) {
     border: none !important;
     color: var(--white);
     font-size: 2rem;
@@ -32,7 +32,7 @@ const {
     text-align: center;
 }
 
-.container p {
+.container:deep(p) {
     margin-top: 1rem;
     text-align: center;
     max-width: 65%;
