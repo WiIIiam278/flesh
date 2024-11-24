@@ -4,10 +4,10 @@
             :style="{ transform: `translateY(-${slideOffset}%)` }">
             <img :src="slide.img" :alt="slide.text" />
             <div class="caption">
-                <a class="caption-link shadow" :href="slide.link" target="_blank">
+                <NuxtLink class="caption-link shadow" :to="slide.link">
                     {{ slide.text }}
                     <Icon name="fa6-solid:up-right-from-square" />
-                </a>
+                </NuxtLink>
             </div>
         </div>
     </div>

@@ -98,7 +98,11 @@ const SECTION_PRESETS = {
         }
     },
     "platform_badges": {
-        "order": 6
+        "order": 6,
+        "properties": {
+            "badge_range_start": "0",
+            "image_position": "5"
+        }
     },
     "image_with_text": {
         "order": 5,

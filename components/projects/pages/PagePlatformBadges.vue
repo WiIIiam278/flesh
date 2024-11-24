@@ -1,14 +1,26 @@
 <template>
     <div class="badges" v-if="meta.links">
-        <PlatformBadge class="badge" v-for="link in meta.links" :platform="link.id" :link="link.url" />
+        <PlatformBadge class="badge" v-for="link in meta.links.slice(badgeRangeStart, badgeRangeEnd)" 
+            :platform="link.id" :link="link.url"
+        />
     </div>
 </template>
 
 <script setup>
-const { project } = defineProps({
+const { project, badgeRangeStart, badgeRangeEnd } = defineProps({
     project: {
         type: Object,
         required: true
+    },
+    badgeRangeStart: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    badgeRangeEnd: {
+        type: Number,
+        required: false,
+        default: 5
     }
 })
 const { metadata: meta } = project;

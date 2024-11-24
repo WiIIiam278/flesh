@@ -45,7 +45,6 @@
     #project-page {
         flex-direction: column;
         max-width: 85vw;
-        margin: 0 auto;
     }
 
     #project-readme {

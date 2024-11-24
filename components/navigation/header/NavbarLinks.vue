@@ -21,9 +21,9 @@
                 </NuxtLink>
             </li>
             <li v-else>
-                <a :href="`${useRuntimeConfig().public.API_BASE_URL}/login?`">
+                <NuxtLink to="/account/login">
                     <IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText>
-                </a>
+                </NuxtLink>
             </li>
         </ul>
     </div>

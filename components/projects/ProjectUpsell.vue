@@ -38,8 +38,8 @@
             <div class="badges">
                 <PlatformBadge v-for="link of platforms" :platform="link.id" :link="link.url" />
             </div>
-            <div v-if="!user" class="login-prompt">Already bought {{ meta.name }}? <NuxtLink :to="`${useRuntimeConfig().public.API_BASE_URL}/login`"><IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText></NuxtLink></div>
-            <div v-else class="login-prompt">Already bought {{ meta.name }}? <NuxtLink :to="`/logout`"><IconifiedText icon="fa6-solid:person-running">{{ $t('link-log-out') }}</IconifiedText></NuxtLink> and back in to update your purchases.</div>
+            <div v-if="!user" class="login-prompt">Already bought {{ meta.name }}? <NuxtLink to="/account/login"><IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText></NuxtLink></div>
+            <div v-else class="login-prompt">Already bought {{ meta.name }}? <NuxtLink to="/account/login"><IconifiedText icon="fa6-solid:person-running">{{ $t('link-log-in') }}</IconifiedText></NuxtLink> again to refresh your purchases.</div>
         </div>
     </div>
 </template>

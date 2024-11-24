@@ -28,7 +28,9 @@
             :button1Label="props.button1_label" :button1Icon="props.button1_icon" :button1Url="props.button1_url"
             :button2Label="props.button2_label" :button2Icon="props.button2_icon" :button2Url="props.button2_url"
         />
-        <PagePlatformBadges v-else-if="is('platform_badges')" :project="project" />
+        <PagePlatformBadges v-else-if="is('platform_badges')" :project="project" 
+            :badgeRangeStart="parseInt(props?.badge_range_start ?? '0')" :badgeRangeEnd="parseInt(props?.badge_range_end ?? '5')"
+        />
         <hr v-else-if="is('horizontal_rule')" />
         <MDC v-else-if="is('paragraph')" :value="body" tag="p" unwrap="p" />
         <MDC v-else-if="is('title')" :value="title" tag="h1" unwrap="p" />

@@ -1,7 +1,7 @@
 <template>
     <div>
         <NuxtLayout>
-            <h1>Logging out...</h1>
+            <h1>Logging in...</h1>
         </NuxtLayout>
     </div>
 </template>
@@ -10,6 +10,6 @@
 definePageMeta({
     title: computed(() => t('account-title')),
     description: computed(() => t('account-description')),
-    middleware: ['logout']
+    middleware: ['login']
 })
 </script>

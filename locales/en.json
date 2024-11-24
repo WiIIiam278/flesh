@@ -15,6 +15,7 @@
     "link-support": "Support",
     "link-tickets": "Tickets",
     "link-back": "Back",
+    "link-refresh": "Refresh",
 
     "index-title": "William278.net",
     "index-description": "Open source Minecraft server software & game projects.",
@@ -127,7 +128,8 @@
     "your-purchases": "Your Purchases",
     "your-support-tickets": "Your Support Tickets",
     "logged-in-with-discord": "Logged in with Discord",
-    "no-products-notice": "When you've purchased a product and verified your purchase on Discord, it will appear here.",
+    "no-products-notice": "You don't have any products in your library yet.",
+    "refresh-purchases-notice": "Purchased a new resource? Verify your purchase on the HuskHelp Discord and sign in again for it to appear here.",
     "no-support-tickets-notice": "When you've opened a support ticket on Discord, it will appear here.",
     "admin-panel": "Admin Panel",
     "verify-email": "Verify Email",

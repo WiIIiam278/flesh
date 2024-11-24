@@ -43,8 +43,15 @@
                                 <div v-if="user.purchases.length">
                                     <ProjectCard v-for="product in restricted.filter(r => user.purchases.includes(r.slug))" 
                                         :key="product.slug" :project="product" />
+                                    <div class="notice">
+                                        <IconifiedText icon="fa6-solid:box">{{ $t('refresh-purchases-notice') }}</IconifiedText>
+                                        <ButtonLink link="/account/logout" type="primary" icon="fa6-solid:arrows-rotate">{{ $t('link-refresh') }}</ButtonLink>
+                                    </div>
                                 </div>
-                                <IconifiedText v-else class="empty-notice" icon="fa6-solid:bag-shopping">{{ $t('no-products-notice') }}</IconifiedText>
+                                <div v-else class="notice">
+                                    <IconifiedText icon="fa6-solid:bag-shopping">{{ $t('no-products-notice') }} {{ $t('refresh-purchases-notice') }}</IconifiedText>
+                                    <ButtonLink link="/account/logout" type="primary" icon="fa6-solid:arrows-rotate">{{ $t('link-refresh') }}</ButtonLink>
+                                </div>
                             </div>
                             <div v-if="activeTab === 'your-support-tickets'" class="item-body tickets">
                                 <TicketsTable :user="user" />
@@ -305,8 +312,14 @@ definePageMeta({
     cursor: pointer;
 }
 
-.empty-notice {
-    margin: 2rem 0;
+.notice {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5rem auto;
     color: var(--light-gray)
 }
 </style>
