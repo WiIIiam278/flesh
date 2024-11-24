@@ -1,5 +1,5 @@
 <template>
-    <div v-if="project.slug && meta" class="project-card">
+    <div v-if="project.slug && meta" class="project-card shadow">
         <div class="header">
             <NuxtLink class="image hover-image" v-if="meta.icons" :to="`/project/${project.slug}`">
                 <object v-if="meta.icons['SVG']" :data="`/images/icons/${meta.icons['SVG']}`" type="image/svg+xml" />
@@ -62,7 +62,7 @@ const { metadata: meta, stats } = project;
 
 <style scoped>
 .project-card {
-    border: 0.125rem solid var(--light-gray);
+    border: 0.125rem solid var(--gray);
     border-radius: 0.5rem;
     min-width: 50%;
     max-width: 100%;
@@ -72,6 +72,26 @@ const { metadata: meta, stats } = project;
     -webkit-flex-wrap: wrap;
     margin: 0.5rem 0.5rem;
     padding: 0.75rem;
+}
+
+@keyframes hoverGlow {
+	0% {
+        -webkit-box-shadow: inset 0 0 0.25rem transparent;
+        -moz-box-shadow: inset 0 0 0.25rem transparent;
+        box-shadow: inset 0 0 0.25rem transparent;
+	}
+	100% {
+        -webkit-box-shadow: inset 0 0 3rem var(--gray);
+        -moz-box-shadow: inset 0 0 3rem var(--gray);
+        box-shadow: inset 0 0 3rem var(--gray);
+	}
+}
+
+.project-card:hover {
+    -webkit-box-shadow: inset 0 0 0.25rem transparent;
+    -moz-box-shadow: inset 0 0 0.25rem transparent;
+    box-shadow: inset 0 0 0.25rem transparent;
+    animation: hoverGlow 0.5s ease both;
 }
 
 .header {

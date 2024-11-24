@@ -133,6 +133,15 @@ const close = (confirm, inputText = null) => {
     margin-top: 0.5rem;
 }
 
+@keyframes downloadGlow {
+    0% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 15% 15%;
+    }
+}
+
 .downloads .download-button {
     display: flex;
     flex-direction: row;
@@ -140,20 +149,22 @@ const close = (confirm, inputText = null) => {
     align-items: center;
     padding: 1rem;
     border: 0.15rem solid var(--gray);
-    margin: 1rem auto;
-    max-width: 420px;
     border-radius: 0.5rem;
     background-color: var(--gray);
+    margin: 1rem auto;
+    max-width: 420px;
     color: var(--accent);
     cursor: pointer;
 }
 
-.downloads .download-button:hover,
-.version .download-button:hover {
+.downloads .download-button:hover, .version .download-button:hover {
+    text-decoration: none;
     background-color: var(--dark-gray);
     background: linear-gradient(transparent, #00fb9b1e);
-    text-decoration: none;
+    background-size: 200% 200%;
+    animation: downloadGlow 0.5s normal forwards;
 }
+
 
 .downloads .download-button .icon {
     width: 2rem;

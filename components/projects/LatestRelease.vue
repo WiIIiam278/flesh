@@ -107,6 +107,15 @@ const openSelectorModal = (group) => useDownloadSelector(
     margin: 0;
 }
 
+@keyframes downloadGlow {
+    0% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 15% 15%;
+    }
+}
+
 .download-buttons .button {
     display: flex;
     flex-direction: row;
@@ -121,9 +130,11 @@ const openSelectorModal = (group) => useDownloadSelector(
 }
 
 .download-buttons .button:hover, .version .download-button:hover {
+    text-decoration: none;
     background-color: var(--dark-gray);
     background: linear-gradient(transparent, #00fb9b1e);
-    text-decoration: none;
+    background-size: 200% 200%;
+    animation: downloadGlow 0.5s normal forwards;
 }
 
 .button .icon {

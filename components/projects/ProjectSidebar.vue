@@ -175,6 +175,19 @@ const { metadata: meta, stats } = project;
     margin-left: 0.2rem;
 }
 
+@keyframes hoverGlow {
+	0% {
+        -webkit-box-shadow: inset 0 0 0.25rem transparent;
+        -moz-box-shadow: inset 0 0 0.25rem transparent;
+        box-shadow: inset 0 0 0.25rem transparent;
+	}
+	100% {
+        -webkit-box-shadow: inset 0 0 3rem var(--gray);
+        -moz-box-shadow: inset 0 0 3rem var(--gray);
+        box-shadow: inset 0 0 3rem var(--gray);
+	}
+}
+
 .stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -190,6 +203,13 @@ const { metadata: meta, stats } = project;
     border: 0.125rem solid var(--gray);
     border-radius: 0.5rem;
     padding: 0.4rem 0.5rem;
+}
+
+.stats .stat:hover {
+    -webkit-box-shadow: inset 0 0 0.25rem transparent;
+    -moz-box-shadow: inset 0 0 0.25rem transparent;
+    box-shadow: inset 0 0 0.25rem transparent;
+    animation: hoverGlow 0.5s ease both;
 }
 
 .stat .sub-data {

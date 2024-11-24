@@ -92,8 +92,9 @@ const onTagSelected = (tag) => {
 }
 
 .tag-icon {
-    margin-right: 0.3rem;
-    color: var(--light-gray);
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+    color: var(--gray);
 }
 
 #below-grid {
