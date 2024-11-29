@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
-
-<body style="margin:0;padding:0;background-color:black;">
-    <div style="margin:0;padding:0;width:360px;height:540px;max-width:100%;border:0">
-        <div id="game"></div>
-    </div>
+<head>
+    <link rel="preload" href="/node_modules/.cache/nuxt-google-fonts/fonts/Nunito-400-17.woff2" as="font" type="font/woff2" crossorigin />
     <script>
         EJS_player = "#game";
         EJS_core = "nds";
@@ -19,11 +16,86 @@
         if (urlParams.has('gameName')) {
             EJS_gameName = urlParams.get('gameName');
         }
+        if (urlParams.has('coverBg')) {
+            // document.getElementsByClassName('emulator-container')[0].style.backgroundImage = urlParams.get('coverBg');
+        }
         if (urlParams.has('core')) {
             EJS_core = urlParams.get('core');
         }
     </script>
     <script src="/emulator-js/data/loader.js"></script>
+</head>
+<body class="emulator-body">
+    <div class="emulator-container">
+        <div id="game"></div>
+    </div>
 </body>
+
+<style lang="css">
+    .ejs_start_button {
+        bottom: 305px;
+        margin: 0 !important;
+        font-size: 0;
+        padding: 0.5 0.25rem;
+        min-height: 75px;
+        border: 0.15rem solid #333333 !important;
+        border-radius: 0.5rem;
+        background: #191919;
+        background: linear-gradient(#2b2b2b, #00fb9b35);
+        cursor: pointer;
+        box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.2);
+    }
+
+    .ejs_start_button::before {
+        content: '';
+        position: absolute;
+        border-radius: 0.1rem;
+        margin: 21px;
+        border-left: 21px solid #00fb9a;
+        border-top: 14px solid transparent;
+        border-bottom: 14px solid transparent;
+        box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.1);
+    }
+
+    .ejs_start_button:hover {
+        border: 0.15rem solid #00fb9a !important;
+        box-shadow: none !important;
+    }
+
+    .emulator-body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+    }
+
+    .emulator-container {
+        margin: 0;
+        padding: 0;
+        width: 360px;
+        height: 540px;
+        max-width: 100%;
+        border: 0;
+    }
+
+    .ejs_game {
+        image-rendering: crisp-edges;
+        background-image: url('/images/breaking-bad-ds/emulator-cover.png') !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        filter: brightness(80%);
+    }
+
+    .ejs_loading_text {
+        bottom: 250px !important;
+        color: white;
+        background-color: #2b2b2b90;
+        border: 0.15rem solid #333333 !important;
+        width: 70% !important;
+        text-align: center;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+    }
+</style>
 
 </html>

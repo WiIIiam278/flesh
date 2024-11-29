@@ -67,7 +67,6 @@
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const SECTION_PRESETS = {
     "hero": {
-        "order": 8,
         "title": "Project Title",
         "body": "Project tagline, brief description",
         "properties": {
@@ -82,7 +81,6 @@ const SECTION_PRESETS = {
         }
     },
     "features": {
-        "order": 7,
         "properties": {
             "icon_background_color1": "#142B42",
             "icon_background_color2": "#08111B",
@@ -98,14 +96,12 @@ const SECTION_PRESETS = {
         }
     },
     "platform_badges": {
-        "order": 6,
         "properties": {
             "badge_range_start": "0",
-            "image_position": "5"
+            "badge_range_end": "5"
         }
     },
     "image_with_text": {
-        "order": 5,
         "title": "Title",
         "body": "Body text body text body text body text body text",
         "properties": {
@@ -120,7 +116,6 @@ const SECTION_PRESETS = {
         }
     },
     "header_with_text": {
-        "order": 4,
         "title": "Title",
         "body": "Body text body text body text body text body text",
         "properties": {
@@ -133,7 +128,6 @@ const SECTION_PRESETS = {
         }
     },
     "button_pair": {
-        "order": 3,
         "properties": {
             "button1_label": "Button 1",
             "button1_icon": "fa6-solid:star",
@@ -144,15 +138,34 @@ const SECTION_PRESETS = {
         }
     },
     "paragraph": {
-        "order": 2,
         "body": "Body text body text body text body text body text"
     },
     "heading": {
-        "order": 1,
         "title": "Title title title"
     },
+    "youtube": {
+        "properties": {
+            "video_id": "HiiZxOU934E"
+        }
+    },
+    
+    "image_row": {
+        "properties": {
+            "images": "/images/breaking-bad-ds/emulator-cover.png,/images/breaking-bad-ds/emulator-cover.png,/images/breaking-bad-ds/emulator-cover.png"
+        }
+    },
+    "game_player": {
+        "title": "Controls",
+        "body": "How to play",
+        "properties": {
+            "game_platform": "nds",
+            "game_url": "https://github.com/WiIIiam278/breaking-bad-ds/releases/download/1.0.6/breaking-bad-ds.nds",
+            "game_core": "desmume2015",
+            "game_controls": "A:Z,B:X,X:A,Y:S,L:Q,R:E,Start:ENTER,Select:V,DPAD:Arrow Keys,Touch:Mouse",
+            "game_cover_bg": "/images/breaking-bad-ds/emulator-cover.png"
+        }
+    },
     "horizontal_rule": {
-        "order": 0
     }
 }
 
@@ -182,6 +195,7 @@ const getDefaultPage = ((slug) => `
 const addSection = async () => {
     let sect = structuredClone(SECTION_PRESETS[sectionAdder.value]);
     sect.type = sectionAdder.value;
+    sect.order = -page.value.contents.sections.length
     page.value.contents.sections.push(sect);
     await savePage();
 }

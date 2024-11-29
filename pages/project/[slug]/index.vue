@@ -16,17 +16,12 @@
                     </Head>
                     <ArchivalNotice v-if="meta.archived" :name="meta.name" />
                     <BreadcrumbsBar>
-                        <Tabs v-if="tabs.length > 1" :tabs="tabs" v-model:selected="selectedTab" />
-                        <Breadcrumbs v-else :crumbs="[{ name: $t('link-home'), link: '/' }]" />
+                        <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }]" />
                         <ButtonLink v-if="meta?.listDownloads" :link="`/project/${project.slug}/download`" icon="fa6-solid:download" type="primary">
                             {{ $t('link-download') }}
                         </ButtonLink>
                     </BreadcrumbsBar>
-                    <ProjectPage v-if="selectedTab === 'about'" :project="project" />
-                    <div v-if="selectedTab === 'play'">
-                        <DsEmulator :game-name="meta.name" :game-core="useProjectProperty(project, 'emulator_core') ?? 'desmume2015'"
-                            :game-url="`/emulator-js/roms/${project.slug}`" />
-                    </div>
+                    <ProjectPage :project="project" />
                 </div>
             </template>
             <template #sidebar>
@@ -51,13 +46,4 @@ const { t } = useI18n()
 const { params } = useRoute()
 const project = await useProject(params.slug.toLowerCase());
 const { metadata: meta } = project.value || {};
-
-// Setup tabs
-const tabs = [{ id: 'about', name: t('tab-about') }];
-const selectedTab = defineModel('selectedTab')
-selectedTab.value = 'about';
-if (useProjectProperty(project.value, 'emulator_rom')) {
-    tabs.unshift({ id: 'play', name: t('tab-play') });
-    selectedTab.value = 'play';
-}
 </script>
