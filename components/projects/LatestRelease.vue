@@ -27,7 +27,7 @@
             </a>
         </div>
         <div class="changelog">
-            <h2 class="release-name">{{ project.metadata.name }} {{ release.name }} ({{ new Date(release.timestamp).toLocaleDateString() }})</h2>
+            <h2 class="release-name">{{ project.metadata.name }} {{ release.name }} ({{ useTimeFormat(release.timestamp) }})</h2>
             <MDC :value="release.changelog" tag="article" unwrap="p" />
         </div>
     </div>

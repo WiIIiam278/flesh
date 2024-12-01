@@ -24,11 +24,14 @@
 </template>
 
 <script setup>
-const projects = await useAllProjects();
 const expanded = ref(false);
 const selectedTags = ref([]);
     
-const { shown } = defineProps({
+const { projects, shown, featuredTags } = defineProps({
+    projects: {
+        type: Array,
+        required: true
+    },
     shown: {
         type: Number,
         default: 6
@@ -42,10 +45,10 @@ const { shown } = defineProps({
 
 const filtered = computed(() => {
     let filtered;
-    if (projects.value && selectedTags.value.length) {
-        filtered = projects.value.filter(p => !p.metadata?.tags || selectedTags.value.every(tag => p.metadata.tags.includes(tag)));
+    if (projects && selectedTags.value.length) {
+        filtered = projects.filter(p => !p.metadata?.tags || selectedTags.value.every(tag => p.metadata.tags.includes(tag)));
     } else {
-        filtered = projects.value || [];
+        filtered = projects || [];
     }
     return filtered.sort((a, b) => (a.metadata?.sortWeight || 0) - (b.metadata?.sortWeight || 0));
 });
@@ -94,7 +97,7 @@ const onTagSelected = (tag) => {
 .tag-icon {
     font-size: 1.25rem;
     margin-right: 0.5rem;
-    color: var(--gray);
+    color: var(--light-gray);
 }
 
 #below-grid {

@@ -10,3 +10,7 @@ We ask that all users conduct themselves in a proper manner on our Discord serve
 6. Please contact a staff member before advertising anything on the server (this includes links to other Discord servers).
 7. You understand that we can only provide support within the terms & conditions outlined on this page.
 8. Be nice and have fun!
+
+<div class="footer">
+    <p>Last updated: February 16th, 2024</p>
+</div>

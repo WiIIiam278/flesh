@@ -47,7 +47,7 @@
         <NuxtLayout v-else name="default">
             <ErrorPage>
                 {{ $t('error-page-not-found') }}&nbsp;
-                <PathLine>
+                <BreadcrumbLine>
                     <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
                     <BreadcrumbDivider />
                     <NuxtLink to="/docs/">{{ $t('link-docs') }}</NuxtLink>
@@ -56,7 +56,7 @@
                     <InvalidPage v-else :name="$route.params.project" />
                     <BreadcrumbDivider v-if="$route.params.topic" />
                     <InvalidPage v-if="$route.params.topic" :name="$route.params.topic" />
-                </PathLine>
+                </BreadcrumbLine>
             </ErrorPage>
         </NuxtLayout>
     </div>

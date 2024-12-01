@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <div id="copyright">{{ $t('footer-copyright', { 'year': currentYear }) }}</div>
+        <div id="copyright">{{ $t('footer-copyright', { 'year': new Date().getFullYear() }) }}</div>
         <div id="navigation">
             <ul>
                 <li>
@@ -32,11 +32,8 @@
 </template>
 
 <script setup>
+const { t } = useI18n()
 const config = useRuntimeConfig()
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
-
-const currentYear = new Date().getFullYear();
 const gitHead = config.public.GIT_HASH;
 </script>
 

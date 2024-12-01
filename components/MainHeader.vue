@@ -2,11 +2,9 @@
     <div class="main-header">
         <div class="header-text">
             <h1>{{ title }}</h1>
-            <p class="tagline">
-                <ContentSlot :use="$slots.default" unwrap="p" />
-            </p>
+            <p v-if="tagline" class="tagline">{{ tagline }}</p>
         </div>
-        <object data="/images/icons/william278.svg" class="head-graphic shadow" alt="William278.net husk silhouette logo" />
+        <object v-if="icon" :data="icon" class="head-graphic shadow" alt="Logo" />
     </div>
 </template>
 
@@ -43,10 +41,18 @@
 </style>
 
 <script setup>
-const { title } = defineProps({
+const { title, tagline, icon } = defineProps({
     title: {
         type: String,
         required: true
+    },
+    tagline: {
+        type: String,
+        required: false,
+    },
+    icon: {
+        type: String,
+        required: false
     }
 })
 </script>

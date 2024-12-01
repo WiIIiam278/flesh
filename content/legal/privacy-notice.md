@@ -6,7 +6,7 @@ This privacy notice tells you what to expect us to do with your personal informa
 
 ### Email
 
-privacy@william278.net
+[privacy@william278.net](mailto:privacy@william278.net)
 
 ## What information we collect, use, and why
 
@@ -14,9 +14,10 @@ We collect or use the following information to **provide services and goods, inc
 
 * Purchase or account history
   * List of products you have purchased
+  * The purchase amount, transaction ID, and timestamp
 * Account information
   * Your Discord username
-  * Your Discord account ID 
+  * Your Discord account ID
   * Your Discord email address
 * Records of meetings and decisions
   * Ticket transcripts
@@ -25,7 +26,7 @@ We collect or use the following information for **the operation of customer acco
 
 * Account information, including registration details
   * Your Discord username
-  * Your Discord account ID 
+  * Your Discord account ID
   * Your Discord email address
 
 ## Lawful bases
@@ -81,3 +82,7 @@ SK9 5AF
 
 * Helpline number: 0303 123 1113
 * Website: [https://www.ico.org.uk/make-a-complaint](https://ico.org.uk/make-a-complaint/ "Make a complaint")
+
+<div class="footer">
+    <p>Last updated: December 1st, 2024</p>
+</div>

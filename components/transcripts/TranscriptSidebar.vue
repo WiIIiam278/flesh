@@ -2,18 +2,21 @@
     <h2>{{ $t('ticket-transcript-header') }}</h2>
     <div class="pills">
         <Pill color="dark-gray">
-            <IconifiedText icon="fa6-solid:tag">{{ data.ticket.project ? data.ticket.project : 'Unknown' }}
+            <IconifiedText icon="fa6-solid:tag">
+                {{ data.ticket.project ? data.ticket.project : 'Unknown' }}
             </IconifiedText>
         </Pill>
         <Pill color="dark-gray">
             <IconifiedText icon="fa6-solid:hashtag">ticket-{{ data.ticket.id }}</IconifiedText>
         </Pill>
         <Pill color="dark-gray">
-            <IconifiedText icon="fa6-solid:ticket">{{ getTimestampString(data.ticket.open_timestamp) }}
+            <IconifiedText icon="fa6-solid:ticket">
+                {{ useTimeFormat(parseInt(data.ticket.open_timestamp * 1000), true) }}
             </IconifiedText>
         </Pill>
         <Pill color="dark-gray">
-            <IconifiedText icon="fa6-solid:lock">{{ getTimestampString(data.ticket.close_timestamp) }}
+            <IconifiedText icon="fa6-solid:lock">
+                {{ useTimeFormat(parseInt(data.ticket.open_timestamp * 1000), true) }}
             </IconifiedText>
         </Pill>
     </div>
@@ -36,6 +39,8 @@
 </template>
 
 <script setup>
+import { useTimeFormat } from '../../composables/useTimeFormat';
+
 const { locale, t } = useI18n()
 const localePath = useLocalePath()
 
@@ -50,12 +55,6 @@ const { data } = defineProps({
     }
 });
 const { auth } = await useAuth();
-
-// Methods
-const getTimestampString = (timestamp) => {
-    const date = new Date(parseInt(timestamp * 1000));
-    return `${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
-}
 
 const getParticipant = (id) => {
     if (data.users) {

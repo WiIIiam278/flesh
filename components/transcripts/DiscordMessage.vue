@@ -21,7 +21,7 @@
                     </span>
                 </div>
                 <div class="timestamp">
-                    {{ getTimestampString(parseInt(messages[0].timestamp)) }}
+                    {{ useTimeFormat(parseInt(messages[0].timestamp), true) }}
                 </div>
             </div>
             <div class="message-text" v-for="message in messages">
@@ -143,11 +143,6 @@ const getUser = (id) => {
         discriminator: "0000",
         pfp: null
     };
-};
-
-const getTimestampString = (timestamp) => {
-    const date = new Date(timestamp);
-    return `${date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} at ${date.toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true })}`;
 };
 
 const getRole = (id) => {

@@ -22,3 +22,7 @@ Please note that we are unable to provide support with the following topics for 
 - Support for legacy or discontinued projects. We encourage staying up-to-date!
 - Support for fixing issues caused by running a cracked (offline mode) server
 - Support for issues caused by running my stuff on unsupported platforms (sorry, but stuff _can_ break if you run Arclight!)
+
+<div class="footer">
+    <p>Last updated: July 12th, 2024</p>
+</div>

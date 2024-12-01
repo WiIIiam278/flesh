@@ -26,7 +26,7 @@
                         <img v-if="item.avatar" :src="item.avatar" alt="User avatar" onerror="this.style.display='none'" />
                     </td>
                     <td><code>{{ item.id }}</code></td>
-                    <td>{{ item.createdAt ? new Date(item.createdAt).toLocaleString() : "" }}</td>
+                    <td>{{ item.createdAt ? useTimeFormat(item.createdAt) : "" }}</td>
                     <td>{{ item.name }}</td>
                     <td>
                         {{ item.email ? `${item.email[0]}•••••@${item.email.split('@')[1]}` : "" }}

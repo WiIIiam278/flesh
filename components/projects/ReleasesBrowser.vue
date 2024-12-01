@@ -31,7 +31,7 @@
         <div v-if="versions.value?.content?.length" class="version-browser">
             <table class="versions">
                 <tr class="version" v-for="version in versions.value.content"
-                    @click="useAlert(getChangelog(version), `${project.metadata.name} ${version.name} (${new Date(version.timestamp).toLocaleDateString()})`, null, true)">
+                    @click="useAlert(getChangelog(version), `${project.metadata.name} ${version.name} (${useTimeFormat(version.timestamp, true)})`, null, true)">
                     <td @click.stop class="button-area">
                         <a class="download-button" :href="useDownloadUrl(project, selectedChannel, version, selectedDist)">
                             <IconifiedText icon="fa6-solid:download">{{ version.name }}</IconifiedText>

@@ -1,11 +1,11 @@
 <template>
     <div class="messages">
         <SystemMessage>
-            {{ $t('ticket-transcript-opened', {'timestamp': getTimestampString(data.ticket.open_timestamp)}) }}
+            {{ $t('ticket-transcript-opened', {'timestamp': useTimeFormat(parseInt(data.ticket.open_timestamp) * 1000)}) }}
         </SystemMessage>
         <DiscordMessage v-for="messages in getMessageBlocks(data.messages)" :transcript="data" :messages="messages" />
         <SystemMessage icon="fa6-solid:lock">
-            {{ $t('ticket-transcript-closed', {'timestamp': getTimestampString(data.ticket.close_timestamp)}) }}
+            {{ $t('ticket-transcript-closed', {'timestamp': useTimeFormat(parseInt(data.ticket.close_timestamp) * 1000)}) }}
         </SystemMessage>
     </div>
 </template>
@@ -20,12 +20,6 @@ const { data } = defineProps({
         required: true
     }
 });
-
-// Formatting methods
-const getTimestampString = (timestamp) => {
-    const date = new Date(parseInt(timestamp) * 1000);
-    return `${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
-};
 
 const getMessageBlocks = (messages) => {
     const blocks = [];

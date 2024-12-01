@@ -16,12 +16,23 @@
     "link-tickets": "Tickets",
     "link-back": "Back",
     "link-refresh": "Refresh",
+    "link-contact": "Contact",
+    "link-posts": "Posts",
+    "link-more-posts": "More posts",
 
     "index-title": "William278.net",
-    "index-description": "Open source Minecraft server software & game projects.",
+    "index-tagline": "Open source Minecraft server software & game projects.",
+    "index-intro": "Welcome! &mdash; This site contains information and documentation for my various Minecraft plugins and game projects. I hope you can find what you need here, but if you have a question, feel free to reach out over Discord!",
     "index-grid-header": "Projects",
     "index-grid-expand": "Show more",
     "index-grid-collapse": "Show less",
+    "index-posts-header": "Latest posts",
+    
+    "contact-modal-body": "Need to get in touch? Here's how you can!<br/><ul><li>For support with my Minecraft projects/plugins/mods: [Join the HuskHelp Discord](https://discord.gg/tVYhJfyDWG)</li><li>For questions about the privacy policy/GDPR, email: privacy@william278.net</li><li>For other non-product support related enquiries, email: info@william278.net</li></ul>",
+    "contact-modal-title": "Contact me",
+
+    "post-category-changelogs": "Changelog",
+    "post-category-news": "News",
 
     "tab-about": "About",
     "tab-play": "Play",

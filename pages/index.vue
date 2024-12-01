@@ -2,17 +2,29 @@
     <div>
         <NuxtLayout>
             <Head>
+                <Title>{{ $t('index-title') }}</Title>
+                <Meta name="description" :content="t('index-intro')" />
                 <Meta name="og:image" content="/images/thumbnails/page/home/card.png" />
+                <Meta name="twitter:description" :content="t('index-intro')" />
                 <Meta name="twitter:image" content="/images/thumbnails/page/home/card.png" />
                 <Meta name="twitter:card" content="summary_large_image" />
                 <Meta name="twitter:creator" content="@William27528" />
             </Head>
             <div id="page-content">
                 <div id="left-column">
-                    <ProjectGrid />
+                    <ProjectCardsGrid :projects="projects" />
                 </div>
                 <div id="right-column">
-                    <LazyContentDoc :head="false" :path="`/home/${locale}`" />
+                    <MainHeader :title="t('index-title')" :tagline="t('index-tagline')" icon="/images/icons/william278.svg" />
+                    <ProjectShowcaseGallery :projects="projects" />
+                    <MDC :value="t('index-intro')" />
+                    <div class="intro-buttons">
+                        <ButtonLink v-if="!user" icon="fa6-solid:key" type="primary" to="/account/login">{{ $t('link-log-in') }}</ButtonLink>
+                        <ButtonLink v-else icon="fa6-solid:user" type="primary" to="/account">{{ $t('link-account') }}</ButtonLink>
+                        <ButtonLink icon="fa6-brands:discord">{{ $t('link-support') }}</ButtonLink>
+                        <ButtonLink icon="fa6-solid:at" @click="useContactInfo(t)">{{ $t('link-contact') }}</ButtonLink>
+                    </div>
+                    <PostsStack />
                 </div>
             </div>
         </NuxtLayout>
@@ -20,13 +32,13 @@
 </template>
 
 <script setup>
-const { locale, t } = useI18n()
+const { t } = useI18n()
+const user = await useUser();
+const projects = await useAllProjects();
 
 definePageMeta({
-    title: computed(() => t('index-title')),
-    description: computed(() => t('index-description')),
     layout: 'home'
-})
+});
 </script>
 
 <style scoped>
@@ -49,6 +61,12 @@ definePageMeta({
 #right-column {
     flex: 1;
     padding: 0 1rem;
+}
+
+.intro-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
 }
 
 /* Less than 725px */

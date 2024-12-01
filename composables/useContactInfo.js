@@ -1,0 +1,1 @@
+export const useContactInfo = (t) => useAlert(t('contact-modal-body'), t('contact-modal-title'), null, true);

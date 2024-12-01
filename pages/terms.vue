@@ -15,9 +15,6 @@
                 <Tabs class="tabs" :tabs="tabs" v-model:selected="selectedTab">
                     <LazyContentDoc :head="false" :path="`/legal/${selectedTab}`" />
                 </Tabs>
-                <div class="footer">
-                    <p>Last updated: July 12th, 2024</p>
-                </div>
             </article>
         </NuxtLayout>
     </div>

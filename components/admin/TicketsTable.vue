@@ -48,8 +48,8 @@
                         <IconifiedText class="closed-ticket" icon="fa6-solid:lock" v-else-if="ticket.status == 2">{{ t('ticket-status-closed') }}</IconifiedText>
                         <a :href="getTicketUrl(ticket)" v-if="ticket.status == 3"><IconifiedText class="locked-ticket" icon="fa6-solid:pause">{{ t('ticket-status-locked') }}</IconifiedText></a>
                     </td>
-                    <td class="opened-at">{{ ticket.openDate ? new Date(ticket.openDate).toLocaleString() : "" }}</td>
-                    <td class="closed-at">{{ ticket.closeDate ? new Date(ticket.closeDate).toLocaleString() : "" }}</td>
+                    <td class="opened-at">{{ ticket.openDate ? useTimeFormat(ticket.openDate, true) : "" }}</td>
+                    <td class="closed-at">{{ ticket.closeDate ? useTimeFormat(ticket.closeDate, true) : "" }}</td>
                     <td class="actions">
                         <span v-if="ticket.status == 2">
                             <button class="red" @click="deleteTicket(ticket)">{{ t('ticket-action-delete') }}</button>
