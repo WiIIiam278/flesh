@@ -17,7 +17,7 @@
                     <ArchivalNotice v-if="meta.archived" :name="meta.name" />
                     <BreadcrumbsBar>
                         <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }, { name: meta.name, link: `/project/${project.slug}` }]" />
-                        <ButtonLink type="red" :link="`/project/${project.slug}/`">{{ $t('link-back') }}</ButtonLink>
+                        <ButtonLink  icon="fa6-solid:chevron-left" type="red" :link="`/project/${project.slug}/`">{{ $t('link-back') }}</ButtonLink>
                     </BreadcrumbsBar>
                     <ProjectDownloads :project="project" />
                 </div>

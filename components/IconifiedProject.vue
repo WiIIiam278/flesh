@@ -1,11 +1,11 @@
 <template>
     <span :class="`iconified-project ${centered ? 'centered' : ''}`">
-        <span v-if="project.metadata.icons" class="icon">
-            <object v-if="project.metadata.icons['SVG']" :data="`/images/icons/${project.metadata.icons['SVG']}`" type="image/svg+xml" />
-            <img v-else-if="project.metadata.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
+        <span v-if="meta.icons" class="icon">
+            <object v-if="meta.icons['SVG']" :data="`/images/icons/${meta.icons['SVG']}`" type="image/svg+xml" />
+            <img v-else-if="meta.icons['PNG']" :src="`/images/icons/${meta.icons['PNG']}`" />
         </span>
         <span class="name">
-            {{ project.metadata.name ? project.metadata.name : project.slug }}
+            {{ meta.name ? meta.name : project.slug }}
         </span>
     </span>
 </template>
@@ -44,7 +44,7 @@
 </style>
 
 <script setup>
-defineProps({
+const { project, centered } = defineProps({
     project: {
         type: Object,
         required: true
@@ -55,4 +55,5 @@ defineProps({
         required: false
     }
 })
+const { metadata: meta } = project;
 </script>

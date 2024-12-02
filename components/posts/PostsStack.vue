@@ -3,7 +3,7 @@
         <hr />
         <h2>{{ $t('index-posts-header') }}</h2>
         <div class="posts">
-            <PostCard v-for="post of posts.content" type="card" :post="post" />
+            <PostPreview v-for="post of posts.content" type="mini" :post="post" />
         </div>
         <ButtonLink icon="fa6-solid:newspaper" to="/posts">{{ $t('link-more-posts') }}</ButtonLink>
     </div>
@@ -17,6 +17,7 @@ const { count } = defineProps({
         default: 2
     }
 })
+
 const posts = await useAllPosts(0, count);
 </script>
 

@@ -31,15 +31,10 @@ selectedTab.value = 'terms-and-conditions'
 </script>
 
 <style scoped>
-.footer {
-    margin-top: 2rem;
-    font-size: small;
-}
-
 .page-content {
     margin-top: 1rem;
     max-width: 95vw;
-    width: 1100px;
+    width: 1000px;
 }
 
 .page-content h1 {

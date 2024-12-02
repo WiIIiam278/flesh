@@ -29,7 +29,7 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
     color: var(--white);
 }
 
-.post.card {
+.post.mini {
     display: flex;
     flex-direction: column;
 }
@@ -70,7 +70,14 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
     margin: 0.5rem 0;
     overflow: hidden;
     text-overflow: elipsis;
+}
+
+.post.mini:deep(.contents) {
     max-height: 3em;
+}
+
+.post.stack:deep(.contents) {
+    max-height: 11em;
 }
 
 .post:deep(.contents p) {
