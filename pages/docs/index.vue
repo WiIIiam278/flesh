@@ -14,7 +14,7 @@
                 <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
                 <h1>{{ $t('docs-home-title') }}</h1>
                 <p>{{ $t('docs-home-copy') }}</p>
-                <div class="docs-sitemap">
+                <div class="docs-sitemap" v-if="docPages?.length">
                     <div class="project-section" v-for="{project, pages} in docPages.sort((a, b) => b.project.stats.downloadCount - a.project.stats.downloadCount)">
                         <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
@@ -33,6 +33,18 @@
                             <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" >
                                 {{ $t('project-link-github') }}
                             </ButtonLink>
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="dummy docs-sitemap">
+                    <div class="project-section" v-for="i in 2">
+                        <hr/>
+                        <div class="project-title pulsing"></div>
+                        <div class="project-links">
+                            <div class="link pulsing" v-for="i in 14"></div>
+                        </div>
+                        <div class="project-buttons">
+                            <div class="button pulsing" v-for="i in 2"></div>
                         </div>
                     </div>
                 </div>
@@ -95,6 +107,25 @@ projects.value?.filter(p => p.metadata.documentation)
     margin-top: 0;
 }
 
+/* Dummy version */
+.dummy .project-section .project-title {
+    width: 180px;
+    height: 1.6rem;
+}
+
+.dummy .project-section .project-links {
+    margin-top: 2.25rem;
+}
+
+.dummy .project-section .project-links .link {
+    width: 200px;
+    height: 1.4rem;
+}
+
+.dummy .project-section .project-buttons .button {
+    width: 120px;
+    height: 2.75rem;
+}
 
 /* Mobile columns */
 @media screen and (max-width: 875px) {

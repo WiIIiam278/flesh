@@ -1,5 +1,5 @@
 <template>
-    <div class="gallery shadow" @mouseover="hovering = true" @mouseleave="hovering = false">
+    <div v-if="projects?.length" class="gallery shadow" @mouseover="hovering = true" @mouseleave="hovering = false">
         <div v-for="(slide, index) in slides" class="gallery-item" :key="index"
             :style="`transform: translateY(-${slideOffset}%); z-index: ${index + 1};`">
             <img :src="slide.img" :alt="slide.alt" @click="navigateTo(slide.link)" />
@@ -12,6 +12,7 @@
                 :class="`pip ${slide === index ? 'selected' : ''}`"></div>
         </div>
     </div>
+    <div v-else class="gallery pulsing"></div>
 </template>
 
 <script setup>
@@ -31,7 +32,7 @@ const { projects, speed } = defineProps({
 const hovering = ref(false);
 const slide = ref(0);
 const slideOffset = computed(() => slide.value * 100)
-const slides = projects
+const slides = (projects ?? [])
     .filter((proj) => useProjectProperty(proj, 'showcase_image'))
     .map((proj) => {
         return { 

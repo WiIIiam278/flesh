@@ -155,28 +155,4 @@ if (!canDownload) {
     width: 75%;
     height: 1.75rem;
 }
-
-@keyframes placeholder {
-    0% {
-        background-position: -468px 0
-    }
-    100% {
-        background-position: 468px 0
-    }
-}
-
-.pulsing {
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: placeholder;
-    animation-timing-function: linear;
-    background: var(--dark-gray);
-    background: linear-gradient(to right, var(--gray) 15%, var(--dark-gray) 45%, var(--gray) 75%);
-    background-size: 1000px 104px;
-    position: relative;
-    overflow: hidden;
-    color: transparent;
-    border-radius: 0.5rem;
-}
 </style>
