@@ -40,14 +40,14 @@
                 </BreadcrumbsBar>
                 <div v-if="expanded.indexOf(index) > -1">
                     <input v-if="page.contents.sections[index].title?.length" placeholder="Title" v-model="page.contents.sections[index].title" />
-                    <textarea v-if="page.contents.sections[index].body?.length" placeholder="Body" v-model="page.contents.sections[index].body"></textarea>
+                    <TiptapEditor class="tiptap body" v-if="page.contents.sections[index].body?.length" placeholder="Body" v-model="page.contents.sections[index].body" />
                     <div class="properties" v-if="page.contents.sections[index].properties && Object.entries(page.contents.sections[index].properties).length" v-for="pair of Object.entries(page.contents.sections[index].properties)">
                         <label>{{ useCapitalized(pair[0].replaceAll("_", " ")) }}</label>
                         <div class="property-input paired-input" v-if="pair[0].indexOf('color') > -1">
                             <span>Choose color: </span>
                             <input type="color" v-model="page.contents.sections[index].properties[pair[0]]">
                         </div>
-                        <textarea class="property-input" v-else-if="pair[0].indexOf('body') > -1" v-model="page.contents.sections[index].properties[pair[0]]"></textarea>
+                        <TiptapEditor class="tiptap property-input" v-else-if="pair[0].indexOf('body') > -1" v-model="page.contents.sections[index].properties[pair[0]]" />
                         <input v-else class="property-input" v-model="page.contents.sections[index].properties[pair[0]]">
                     </div>
                 </div>
@@ -351,9 +351,13 @@ const deletePage = async () => {
     width: 12rem;
 }
 
-.section input, .section textarea {
+.section input, .section .tiptap {
     width: 100%;
     margin: 0.5rem 0;
+}
+
+.tiptap.body {
+    margin-bottom: 1rem;
 }
 
 .properties {

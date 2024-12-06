@@ -31,7 +31,7 @@
             </div>
             <div class="input-row changelog">
                 <label for="changelog">Changelog:</label>
-                <textarea rows="6" id="changelog" v-model="version.changelog"></textarea>
+                <TiptapEditor rows="6" id="changelog" v-model="version.changelog" />
             </div>
             <label for="download-dist-name">Files:</label>
             <div class="input-row downloads">
@@ -66,7 +66,6 @@
 <script setup>
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const { auth, xsrf } = useAuth();
-const getFormFormattedDate = (date) => new Date(date.getTime() + new Date().getTimezoneOffset() * -60 * 1000).toISOString().slice(0, 19)
 const getNewDownload = () => ({
     distribution: {
         name: 'paper',
@@ -81,7 +80,7 @@ const getNewDownload = () => ({
 
 const project = ref(null);
 const channel = ref('release');
-const timestamp = ref(getFormFormattedDate(new Date()));
+const timestamp = defineModel('timestamp');
 const version = ref({
     name: '1.0',
     changelog: 'Initial release v1.0',
@@ -148,8 +147,9 @@ const reset = () => {
         downloadCount: 0
     };
     files.value = [];
-    timestamp.value = getFormFormattedDate(new Date());
+    timestamp.value = null;
 }
+reset();
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   // Modules
-  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n'],
+  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n', 'nuxt-tiptap-editor'],
 
   // Fonts
   googleFonts: {
@@ -115,9 +115,18 @@ export default defineNuxtConfig({
       }
   },
 
+  // Tiptap editor components
+  tiptap: {
+    prefix: 'Tiptap'
+  },
+
+  // Dev tools
   devtools: {
     timeline: {
-      enabled: true
+      enabled: true,
+      lowlight: {
+        theme: 'github-dark',
+      },
     }
   },
 

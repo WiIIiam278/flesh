@@ -48,9 +48,9 @@
                     </div>
                 </div>
                 <MDC v-if="!editing" class="body" :value="post.body.length ? post.body : '<br/>'" />
-                <textarea class="body" v-model="post.body" :placeholder="t('post-body')" v-else></textarea>
+                <TiptapEditor class="body" v-model="post.body" :placeholder="t('post-body')" v-else></TiptapEditor>
                 <Notice title="Warning" type="warning" v-if="editing && post.versionUpdate">{{ $t('post-version-update-edit-warning') }}</Notice>
-                <div class="buttons">
+                <div class="buttons" v-if="!editing">
                     <ButtonLink icon="fa6-solid:chevron-left" :to="`/posts`">{{ $t('link-more-posts') }}</ButtonLink>
                     <ButtonLink v-if="post.versionUpdate && post.associatedProject" icon="fa6-solid:download" type="primary" :to="`/project/${post.associatedProject.slug}/download`">{{ $t('link-download') }}</ButtonLink>
                 </div>
@@ -63,6 +63,8 @@
 </template>
 
 <script setup>
+import TiptapEditor from '../../components/admin/TiptapEditor.vue';
+
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);

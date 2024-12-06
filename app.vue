@@ -237,7 +237,7 @@ table th,
 table td {
   text-align: left;
   padding: 0.5rem;
-  border: 0.1rem solid var(--light-gray);
+  border: 0.15rem solid var(--light-gray);
 }
 
 table th {
@@ -333,7 +333,7 @@ textarea {
   padding: 0.5rem;
   font-size: 1rem;
   font-family: 'JetBrains Mono', monospace;
-  border: 0.1rem solid var(--gray);
+  border: 0.15rem solid var(--gray);
   border-radius: 0.5rem;
   box-sizing: border-box;
 }
@@ -343,7 +343,7 @@ textarea {
   padding: 0.5rem;
   font-size: 1rem;
   font-family: 'JetBrains Mono', monospace;
-  border: 0.1rem solid var(--gray);
+  border: 0.15rem solid var(--gray);
   background-color: var(--dark-gray);
   border-radius: 0.5rem;
   box-sizing: border-box;
@@ -404,7 +404,7 @@ select {
   padding: 0.3rem 0.4rem;
   font-size: 1rem;
   font-family: 'Nunito', sans-serif;
-  border: 0.1rem solid var(--gray);
+  border: 0.15rem solid var(--gray);
   border-radius: 0.5rem;
   box-sizing: border-box;
 }

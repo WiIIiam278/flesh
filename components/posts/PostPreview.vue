@@ -44,10 +44,6 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
     flex-direction: column;
 }
 
-/* .post.stack {
-
-} */
-
 .post .title-row {
     display: flex;
     flex-direction: row;
@@ -64,6 +60,10 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
 
 .title-row .title {
     gap: 0.5rem;
+}
+
+.title .pill {
+    color: var(--white) !important;
 }
 
 .title .pill, .title .post-title {
