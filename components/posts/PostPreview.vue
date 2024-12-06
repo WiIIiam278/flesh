@@ -1,11 +1,11 @@
 <template>
-    <NuxtLink :to="`/posts/${post.slug}`" :class="`post ${type}`">
+    <div :class="`post ${type}`">
         <div class="title-row">
             <Pill v-if="post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
-            <h3 class="title">{{ post.title }}</h3>
+            <NuxtLink :to="`/posts/${post.slug}`"><h3 class="title">{{ post.title }}</h3></NuxtLink>
         </div>
         <MDC class="contents" :value="contents" />
-    </NuxtLink>
+    </div>
 </template>
 
 <script setup>
@@ -34,9 +34,9 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
     flex-direction: column;
 }
 
-.post.stack {
+/* .post.stack {
 
-}
+} */
 
 .post .title-row {
     display: flex;
@@ -53,10 +53,6 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
 
 .post .title-row .title {
     color: var(--accent);
-}
-
-.post .title-row .title:hover {
-    text-decoration: underline !important;
 }
 
 .post .body {

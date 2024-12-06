@@ -66,7 +66,6 @@
 
 <script setup>
 import { validate } from 'email-validator'
-import { useAlert } from '../../composables/useAlert';
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const { t } = useI18n()
