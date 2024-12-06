@@ -1,8 +1,13 @@
 <template>
     <div :class="`post ${type}`">
         <div class="title-row">
-            <Pill v-if="post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
-            <NuxtLink :to="`/posts/${post.slug}`"><h3 class="title">{{ post.title }}</h3></NuxtLink>
+            <div class="title">
+                <Pill v-if="post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
+                <NuxtLink :to="`/posts/${post.slug}`"><h3 class="post-title">{{ post.title }}</h3></NuxtLink>
+            </div>
+            <NuxtLink v-if="post.associatedProject" class="project" :to="`/project/${post.associatedProject.slug}`">
+                <IconifiedProject :project="post.associatedProject" />
+            </NuxtLink>
         </div>
         <MDC class="contents" :value="contents" />
     </div>
@@ -41,13 +46,22 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
 .post .title-row {
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    justify-content: space-between;
     line-height: 1.15rem;
-    align-items: center;
     margin-bottom: 0.35rem;
 }
 
-.title-row .pill, .title-row .title {
+.title-row .title, .title-row .project {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.title-row .title {
+    gap: 0.5rem;
+}
+
+.title .pill, .title .post-title {
     margin: 0;
 }
 

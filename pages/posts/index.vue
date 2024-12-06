@@ -1,7 +1,7 @@
 <template>
     <div>
         <Head>
-            <Title>William278.net &ndash; Posts</Title>
+            <Title>William278.net &ndash; {{ $t('posts-title') }}</Title>
             <Meta name="description" content="Latest news and update posts from William278.net." />
             <Meta name="og:image" content="/images/thumbnails/page/Posts/card.png" />
             <Meta name="twitter:image" content="/images/thumbnails/page/Posts/card.png" />
@@ -14,10 +14,11 @@
                     <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }]" />
                     <ButtonLink v-if="canEdit" type="primary" icon="fa6-solid:plus" @click="createPost()">{{ $t('post-action-new') }}</ButtonLink>
                 </BreadcrumbsBar>
-                <h1>Posts</h1>
-                <div class="posts">
+                <h1>{{ $t('posts-title') }}</h1>
+                <div v-if="posts.value?.content?.length" class="posts">
                     <PostPreview v-for="post of posts.value.content" type="stack" :post="post" />
                 </div>
+                <IconifiedText v-else class="error" icon="fa6-solid:info">{{ $t('posts-none') }}</IconifiedText>
                 <Pagination v-if="posts.value" :data="posts.value" v-on:update="(page, perPage) => updatePosts(page, perPage)" />
             </article>
         </NuxtLayout>
@@ -27,7 +28,7 @@
 <script setup>
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
-const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-\.[a-z0-9]+)*$/);
+const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 
 const pageNumber = ref(1);
 const itemsPerPage = ref(15);
@@ -93,5 +94,13 @@ const putPost = async (slug, title) => {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+    width: 100%;
+    color: var(--light-gray);
 }
 </style>

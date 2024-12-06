@@ -31,8 +31,11 @@
     "contact-modal-body": "Need to get in touch? Here's how you can!<br/><ul><li>For support with my Minecraft projects/plugins/mods: [Join the HuskHelp Discord](https://discord.gg/tVYhJfyDWG)</li><li>For questions about the privacy policy/GDPR, email: privacy@william278.net</li><li>For other non-product support related enquiries, email: info@william278.net</li></ul>",
     "contact-modal-title": "Contact me",
 
+    "posts-title": "Posts",
+    "posts-none": "No posts yet...",
     "post-category-changelogs": "Changelog",
     "post-category-news": "News",
+    "post-category-promotions": "Promotion",
     "post-action-edit": "Edit",
     "post-action-save": "Save",
     "post-action-delete": "Delete",
@@ -44,6 +47,7 @@
     "post-category": "Post category",
     "post-enter-slug": "Enter a new URL slug for this post, to follow: {url}/posts/(slug)",
     "post-delete-confirm": "Are you sure you want to delete this post? This action cannot be undone.",
+    "post-no-associated-project": "(General)",
 
     "tab-about": "About",
     "tab-play": "Play",

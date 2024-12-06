@@ -143,6 +143,12 @@ const SECTION_PRESETS = {
     "heading": {
         "title": "Title title title"
     },
+    "latest_posts": {
+        "title": "What's new?",
+        "properties": {
+            "number_of_posts": "3"
+        }
+    },
     "youtube": {
         "properties": {
             "video_id": "HiiZxOU934E"

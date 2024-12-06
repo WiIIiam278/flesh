@@ -1,7 +1,7 @@
 <template>
     <div>
         <Head>
-            <Title>William278.net &ndash; Posts &ndash; {{ post.title }}</Title>
+            <Title>William278.net &ndash; {{ $t('posts-title') }} &ndash; {{ post.title }}</Title>
             <Meta name="description" content="Latest news and update posts from William278.net." />
             <Meta name="og:image" content="/images/thumbnails/page/Post/card.png" /> <!-- todo -->
             <Meta name="twitter:image" content="/images/thumbnails/page/Post/card.png" /> <!-- todo -->
@@ -19,18 +19,25 @@
                         <ButtonLink v-if="editing" type="red" icon="fa6-solid:trash" @click="deletePost()">{{ $t('post-action-delete') }}</ButtonLink>
                     </div>
                 </BreadcrumbsBar>
-                <h1 v-if="!editing || post.versionUpdate">{{ post.title }}</h1>
+                <h1 v-if="!editing || post.isVersionUpdate">{{ post.title }}</h1>
                 <input class="title-editor" v-else v-model="post.title" :placeholder="t('post-title')">
                 <div class="details">
                     <div class="time-n-tag row">
-                        <NuxtLink v-if="associated" class="project" :to="`/project/${associated.slug}`">
-                            <IconifiedProject :project="associated" />
+                        <NuxtLink v-if="!editing && post.associatedProject" class="project" :to="`/project/${post.associatedProject.slug}`">
+                            <IconifiedProject :project="post.associatedProject" />
                         </NuxtLink>
+                         <IconifiedText v-else-if="editing" icon="fa6-solid:box" class="project">
+                            <select v-model="associated" :placeholder="t('post-category')">
+                                <option :value="null">{{ $t('post-no-associated-project') }}</option>
+                                <option v-for="project of allProjects" :value="project.slug">{{ project.metadata.name }}</option>
+                            </select>
+                        </IconifiedText>
                         <IconifiedText icon="fa6-solid:tag" class="time">
                             <span v-if="!editing">{{ $t(`post-category-${post.category}`) }}</span>
                             <select v-else v-model="post.category" :placeholder="t('post-category')">
                                 <option value="changelogs">{{ $t('post-category-changelogs') }}</option>
                                 <option value="news">{{ $t('post-category-news') }}</option>
+                                <option value="promotions">{{ $t('post-category-promotions') }}</option>
                             </select>
                         </IconifiedText>
                         <IconifiedText icon="fa6-solid:calendar" class="time">{{ useTimeFormat(post.timestamp, true) }}</IconifiedText>
@@ -40,11 +47,11 @@
                         <span>{{ post.authorName ? useCapitalized(post.authorName) : 'Staff' }}</span>
                     </div>
                 </div>
-                <MDC v-if="!editing || post.versionUpdate" class="body" :value="post.body.length ? post.body : '<br/>'" />
+                <MDC v-if="!editing || post.isVersionUpdate" class="body" :value="post.body.length ? post.body : '<br/>'" />
                 <textarea class="body" v-model="post.body" :placeholder="t('post-body')" v-else></textarea>
                 <div class="buttons">
                     <ButtonLink icon="fa6-solid:chevron-left" :to="`/posts`">{{ $t('link-more-posts') }}</ButtonLink>
-                    <ButtonLink v-if="post.versionUpdate && associated" icon="fa6-solid:download" type="primary" :to="`/project/${associated.slug}/download`">{{ $t('link-download') }}</ButtonLink>
+                    <ButtonLink v-if="post.isVersionUpdate && post.associatedProject" icon="fa6-solid:download" type="primary" :to="`/project/${post.associatedProject.slug}/download`">{{ $t('link-download') }}</ButtonLink>
                 </div>
             </article>
         </NuxtLayout>
@@ -57,17 +64,20 @@
 <script setup>
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
-const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-\.[a-z0-9]+)*$/);
+const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 
 const { t } = useI18n()
 const { auth, xsrf } = useAuth();
+const { slug } = useRoute()?.params;
 
 const user = await useUser();
 const canEdit = user.value ? useIsUserRole(user.value, 'admin') : false;
+const allProjects = canEdit ? await useAllProjects() : null;
 
-const { slug } = useRoute()?.params;
 const post = await usePost(slug);
-const associated = post.value.associatedProject ? await useProject(post.value.associatedProject) : null;
+const associated = defineModel('associated');
+associated.value = post?.value?.associatedProject?.slug ?? null;
+
 const editing = ref(false);
 const slugChanged = ref(false);
 
@@ -95,6 +105,7 @@ const editSlug = async () => {
 }
 
 const putPost = async () => {
+    post.value.associatedProject = associated.value ? await useProject(associated.value) : null;
     post.value = await $fetch(`${BASE_URL}/v1/posts/${slug}`, 
     { 
         method: 'PUT',
@@ -187,6 +198,10 @@ textarea.body {
 
 .time select {
     width: 120px;
+}
+
+.project select {
+    width: 200px;
 }
 
 .buttons {

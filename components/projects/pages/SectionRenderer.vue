@@ -31,6 +31,8 @@
         <PagePlatformBadges v-else-if="is('platform_badges')" :project="project" 
             :badgeRangeStart="parseInt(props?.badge_range_start ?? '0')" :badgeRangeEnd="parseInt(props?.badge_range_end ?? '5')"
         />
+        <PagePosts v-else-if="is('latest_posts')" :project="project" :title="title" :count="parseInt(props?.number_of_posts ?? '3')"
+        />
         <GamePlayer v-else-if="is('game_player')" :project="project"
             :title="title" :body="body" :props="props">
             <PageButtonPair :centered="false" v-if="props.button1_label || props.button2_label"

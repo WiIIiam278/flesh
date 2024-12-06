@@ -1,24 +1,29 @@
 <template>
     <div class="container">
-        <hr />
-        <h2>{{ $t('index-posts-header') }}</h2>
-        <div class="posts">
+        <hr v-if="!project" />
+        <h2 v-if="!project">{{ $t('index-posts-header') }}</h2>
+        <div class="posts" v-if="posts?.content?.length">
             <PostPreview v-for="post of posts.content" type="mini" :post="post" />
         </div>
+        <IconifiedText class="error" icon="fa6-solid:info" v-else>{{ $t('posts-none') }}</IconifiedText>
         <ButtonLink icon="fa6-solid:newspaper" to="/posts">{{ $t('link-more-posts') }}</ButtonLink>
     </div>
 </template>
 
 <script setup>
-const { count } = defineProps({
+const { count, project } = defineProps({
     count: {
         type: Number,
         required: false,
         default: 2
+    },
+    project: {
+        type: Object,
+        required: false
     }
 })
 
-const posts = await useAllPosts(0, count);
+const posts = project ? await useAllProjectPosts(project.slug, 0, count) : await useAllPosts(0, count);
 </script>
 
 <style scoped>
@@ -36,5 +41,14 @@ const posts = await useAllPosts(0, count);
     flex-direction: column;
     gap: 1rem;
     margin: 0.5rem 0;
+    width: 100%;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+    width: 100%;
+    color: var(--light-gray);
 }
 </style>
