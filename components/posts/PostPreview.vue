@@ -5,7 +5,7 @@
                 <Pill v-if="post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
                 <NuxtLink :to="`/posts/${post.slug}`"><h3 class="post-title">{{ post.title }}</h3></NuxtLink>
             </div>
-            <NuxtLink v-if="post.associatedProject" class="project" :to="`/project/${post.associatedProject.slug}`">
+            <NuxtLink v-if="post.associatedProject && displayProject" class="project" :to="`/project/${post.associatedProject.slug}`">
                 <IconifiedProject :project="post.associatedProject" />
             </NuxtLink>
         </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-const { post, type } = defineProps({
+const { post, type, displayProject } = defineProps({
     post: {
         type: Object,
         required: true
@@ -23,6 +23,11 @@ const { post, type } = defineProps({
         type: String,
         required: false,
         default: 'card'
+    },
+    displayProject: {
+        type: Boolean,
+        required: false,
+        default: true
     }
 })
 const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &ndash; </span>${post.body.split('\n')[0]}`;

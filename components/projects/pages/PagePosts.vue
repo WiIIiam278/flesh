@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <MDC class="title" v-if="title?.length" :value="title" tag="h1" unwrap="p" />
-        <PostsStack class="posts" :count="count" :project="project" />
+        <PostsStack class="posts" :count="count" :project="project" :displayProjects="false" />
     </div>
 </template>
 

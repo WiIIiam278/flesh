@@ -3,7 +3,7 @@
         <hr v-if="!project" />
         <h2 v-if="!project">{{ $t('index-posts-header') }}</h2>
         <div class="posts" v-if="posts?.content?.length">
-            <PostPreview v-for="post of posts.content" type="mini" :post="post" />
+            <PostPreview v-for="post of posts.content" type="mini" :post="post" :displayProject="displayProjects" />
         </div>
         <IconifiedText class="error" icon="fa6-solid:info" v-else>{{ $t('posts-none') }}</IconifiedText>
         <ButtonLink icon="fa6-solid:newspaper" to="/posts">{{ $t('link-more-posts') }}</ButtonLink>
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-const { count, project } = defineProps({
+const { count, project, displayProjects } = defineProps({
     count: {
         type: Number,
         required: false,
@@ -20,6 +20,11 @@ const { count, project } = defineProps({
     project: {
         type: Object,
         required: false
+    },
+    displayProjects: {
+        type: Boolean,
+        required: false,
+        default: true
     }
 })
 

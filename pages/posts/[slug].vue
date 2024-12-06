@@ -19,7 +19,7 @@
                         <ButtonLink v-if="editing" type="red" icon="fa6-solid:trash" @click="deletePost()">{{ $t('post-action-delete') }}</ButtonLink>
                     </div>
                 </BreadcrumbsBar>
-                <h1 v-if="!editing || post.isVersionUpdate">{{ post.title }}</h1>
+                <h1 v-if="!editing">{{ post.title }}</h1>
                 <input class="title-editor" v-else v-model="post.title" :placeholder="t('post-title')">
                 <div class="details">
                     <div class="time-n-tag row">
@@ -47,11 +47,12 @@
                         <span>{{ post.authorName ? useCapitalized(post.authorName) : 'Staff' }}</span>
                     </div>
                 </div>
-                <MDC v-if="!editing || post.isVersionUpdate" class="body" :value="post.body.length ? post.body : '<br/>'" />
+                <MDC v-if="!editing" class="body" :value="post.body.length ? post.body : '<br/>'" />
                 <textarea class="body" v-model="post.body" :placeholder="t('post-body')" v-else></textarea>
+                <Notice title="Warning" type="warning" v-if="editing && post.versionUpdate">{{ $t('post-version-update-edit-warning') }}</Notice>
                 <div class="buttons">
                     <ButtonLink icon="fa6-solid:chevron-left" :to="`/posts`">{{ $t('link-more-posts') }}</ButtonLink>
-                    <ButtonLink v-if="post.isVersionUpdate && post.associatedProject" icon="fa6-solid:download" type="primary" :to="`/project/${post.associatedProject.slug}/download`">{{ $t('link-download') }}</ButtonLink>
+                    <ButtonLink v-if="post.versionUpdate && post.associatedProject" icon="fa6-solid:download" type="primary" :to="`/project/${post.associatedProject.slug}/download`">{{ $t('link-download') }}</ButtonLink>
                 </div>
             </article>
         </NuxtLayout>
@@ -65,23 +66,21 @@
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+const validateSlug = (slug) => SLUG_REGEX.test(slug);
 
 const { t } = useI18n()
 const { auth, xsrf } = useAuth();
 const { slug } = useRoute()?.params;
 
-const user = await useUser();
-const canEdit = user.value ? useIsUserRole(user.value, 'admin') : false;
-const allProjects = canEdit ? await useAllProjects() : null;
-
-const post = await usePost(slug);
 const associated = defineModel('associated');
-associated.value = post?.value?.associatedProject?.slug ?? null;
-
 const editing = ref(false);
 const slugChanged = ref(false);
 
-const validateSlug = (slug) => SLUG_REGEX.test(slug);
+const user = await useUser();
+const post = await usePost(slug);
+associated.value = post?.value?.associatedProject?.slug ?? null;
+const canEdit = user.value ? useIsUserRole(user.value, 'admin') : false;
+const allProjects = canEdit ? await useAllProjects() : null;
 
 const savePost = async () => {
     if (editing.value) {
@@ -163,6 +162,10 @@ const deletePost = async () => {
     display: flex;
     justify-content: space-between;
     color: var(--light-gray)
+}
+
+.warning {
+    color: gold;
 }
 
 .controls {
