@@ -44,6 +44,7 @@
     "post-action-new": "New Post",
     "post-body": "Post body...",
     "post-title": "Post title...",
+    "post-image-url": "Image URL (optional)",
     "post-category": "Post category",
     "post-enter-slug": "Enter a new URL slug for this post, to follow: {url}/posts/(slug)",
     "post-delete-confirm": "Are you sure you want to delete this post? This action cannot be undone.",

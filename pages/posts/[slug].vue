@@ -3,8 +3,8 @@
         <Head>
             <Title>William278.net &ndash; {{ $t('posts-title') }} &ndash; {{ post.title }}</Title>
             <Meta name="description" content="Latest news and update posts from William278.net." />
-            <Meta name="og:image" content="/images/thumbnails/page/Post/card.png" /> <!-- todo -->
-            <Meta name="twitter:image" content="/images/thumbnails/page/Post/card.png" /> <!-- todo -->
+            <Meta name="og:image" :content="post.imageUrl ? post.imageUrl : `/images/thumbnails/posts/${urlSafeTitle}/card.png`" />
+            <Meta name="twitter:image" :content="post.imageUrl ? post.imageUrl : `/images/thumbnails/posts/${urlSafeTitle}/card.png`" />
             <Meta name="twitter:card" content="summary_large_image" />
             <Meta name="twitter:creator" content="@William27528" />
         </Head>
@@ -22,7 +22,7 @@
                 <h1 v-if="!editing">{{ post.title }}</h1>
                 <input class="title-editor" v-else v-model="post.title" :placeholder="t('post-title')">
                 <div class="details">
-                    <div class="time-n-tag row">
+                    <div class="tags row">
                         <NuxtLink v-if="!editing && post.associatedProject" class="project" :to="`/project/${post.associatedProject.slug}`">
                             <IconifiedProject :project="post.associatedProject" />
                         </NuxtLink>
@@ -40,13 +40,17 @@
                                 <option value="promotions">{{ $t('post-category-promotions') }}</option>
                             </select>
                         </IconifiedText>
-                        <IconifiedText icon="fa6-solid:calendar" class="time">{{ useTimeFormat(post.timestamp, true) }}</IconifiedText>
+                        <IconifiedText v-if="editing" icon="fa6-solid:image" class="image">
+                            <input v-model="post.imageUrl" :placeholder="$t('post-image-url')" />
+                        </IconifiedText>
+                        <IconifiedText v-else icon="fa6-solid:calendar" class="time">{{ useTimeFormat(post.timestamp, true) }}</IconifiedText>
                     </div>
                     <div class="author row">
                         <img :src="post.authorAvatar ?? '/images/icons/william278.svg'" />
                         <span>{{ post.authorName ? useCapitalized(post.authorName) : 'Staff' }}</span>
                     </div>
                 </div>
+                <img v-if="post.imageUrl" class="post-image shadow" :src="post.imageUrl" :alt="post.title" />
                 <MDC v-if="!editing" class="body" :value="post.body.length ? post.body : '<br/>'" />
                 <TiptapEditor class="body" v-model="post.body" :placeholder="t('post-body')" v-else></TiptapEditor>
                 <Notice title="Warning" type="warning" v-if="editing && post.versionUpdate">{{ $t('post-version-update-edit-warning') }}</Notice>
@@ -83,6 +87,7 @@ const post = await usePost(slug);
 associated.value = post?.value?.associatedProject?.slug ?? null;
 const canEdit = user.value ? useIsUserRole(user.value, 'admin') : false;
 const allProjects = canEdit ? await useAllProjects() : null;
+const urlSafeTitle = encodeURIComponent(post.title);
 
 const savePost = async () => {
     if (editing.value) {
@@ -182,17 +187,33 @@ const deletePost = async () => {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    justify-content: start;
+    flex-wrap:  wrap;
 }
 
-.details .time-n-tag {
-    gap: 1.25rem !important;
+.details .tags {
+    gap: 1rem !important;
+}
+
+.tags .image input {
+    max-width: 450px;
+    width: 65vw;
+    min-width: 120px;
 }
 
 .row img {
     width: 32px;
     border-radius: 50%;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin: 1rem 0.5rem 0 0;
+    background-color: var(--dark-gray);
 }
 
 textarea.body {

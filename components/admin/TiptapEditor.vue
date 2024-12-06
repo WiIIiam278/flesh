@@ -74,7 +74,7 @@
                 <Icon name="fa6-solid:ruler-horizontal" />
             </button>
             <button @click="editor.chain().focus().setHardBreak().run()">
-                <Icon name="fa6-solid:quote-left" />
+                <Icon class=carraige-return name="fa6-solid:arrow-turn-down" />
             </button>
             <button
                 @click="editor.chain().focus().undo().run()"
@@ -145,11 +145,20 @@ onBeforeUnmount(() => {
 .buttons {
     display: flex;
     padding: 0.75rem;
-    gap: 0.25rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
     border: 0.15rem solid var(--gray);
     background-color: var(--dark-gray);
     border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    height: 45px;
+    min-width: 45px;
 }
 
 .content {
@@ -166,5 +175,9 @@ onBeforeUnmount(() => {
     float: left;
     height: 0;
     pointer-events: none;
+}
+
+.carraige-return {
+    rotate: 90deg;
 }
 </style>

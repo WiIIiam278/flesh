@@ -1,15 +1,20 @@
 <template>
-    <div :class="`post ${type}`">
-        <div class="title-row">
-            <div class="title">
-                <Pill v-if="post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
-                <NuxtLink :to="`/posts/${post.slug}`"><h3 class="post-title">{{ post.title }}</h3></NuxtLink>
+    <div class="container">
+        <div :class="`post ${type}`">
+            <div class="title-row">
+                <div class="title">
+                    <Pill v-if="post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
+                    <NuxtLink :title="post.title" :to="`/posts/${post.slug}`"><h3 class="post-title">{{ post.title }}</h3></NuxtLink>
+                </div>
+                <NuxtLink v-if="post.associatedProject && displayProject && !post.imageUrl" class="project" :title="post.associatedProject.name" :to="`/project/${post.associatedProject.slug}`">
+                    <IconifiedProject :project="post.associatedProject" />
+                </NuxtLink>
             </div>
-            <NuxtLink v-if="post.associatedProject && displayProject" class="project" :to="`/project/${post.associatedProject.slug}`">
-                <IconifiedProject :project="post.associatedProject" />
-            </NuxtLink>
+            <MDC class="contents" :value="contents" />
         </div>
-        <MDC class="contents" :value="contents" />
+        <NuxtLink class="thumbnail" v-if="post.imageUrl" :title="post.title" :to="`/posts/${post.slug}`">
+            <img class="shadow" :src="post.imageUrl" :alt="post.title" />
+        </NuxtLink>
     </div>
 </template>
 
@@ -34,9 +39,24 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
 </script>
 
 <style scoped>
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 0.5rem;
+}
+
 .post {
     text-decoration: none !important;
     color: var(--white);
+    width: 100%;
 }
 
 .post.mini {
@@ -44,7 +64,7 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
     flex-direction: column;
 }
 
-.post .title-row {
+.title-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
