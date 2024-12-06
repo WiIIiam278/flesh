@@ -1,6 +1,7 @@
 <template>
   <div>
     <Modal v-if="modal?.show" />
+    <NuxtLoadingIndicator color="#00fb9a" />
     <NuxtPage />
   </div>
 </template>
@@ -343,6 +344,7 @@ textarea {
   font-size: 1rem;
   font-family: 'JetBrains Mono', monospace;
   border: 0.1rem solid var(--gray);
+  background-color: var(--dark-gray);
   border-radius: 0.5rem;
   box-sizing: border-box;
 }
@@ -389,6 +391,14 @@ button.primary:hover {
 }
 
 select {
+  /* Cross-browser compat styling */
+  background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHBvbHlnb24gY2xhc3M9ImNscy0yIiBwb2ludHM9IjEuNDEgNC42NyAyLjQ4IDMuMTggMy41NCA0LjY3IDEuNDEgNC42NyIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIzLjU0IDUuMzMgMi40OCA2LjgyIDEuNDEgNS4zMyAzLjU0IDUuMzMiLz48L3N2Zz4=) no-repeat 97% 60%;
+  background-size: 1.2rem;
+  -moz-appearance: none; 
+  -webkit-appearance: none; 
+  appearance: none;
+  background-color: var(--dark-gray);
+
   width: 250px;
   max-width: 100%;
   padding: 0.3rem 0.4rem;

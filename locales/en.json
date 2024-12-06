@@ -37,11 +37,12 @@
     "post-action-save": "Save",
     "post-action-delete": "Delete",
     "post-action-edit-slug": "Edit Slug",
+    "post-action-enter-title": "Enter a title for this pot",
     "post-action-new": "New Post",
     "post-body": "Post body",
     "post-title": "Post title",
     "post-category": "Post category",
-    "post-enter-slug": "Enter a URL slug for this post, to follow: {url}/posts/(slug)",
+    "post-enter-slug": "Enter a new URL slug for this post, to follow: {url}/posts/(slug)",
     "post-delete-confirm": "Are you sure you want to delete this post? This action cannot be undone.",
 
     "tab-about": "About",

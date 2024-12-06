@@ -27,7 +27,7 @@
 <script setup>
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
-const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:.-[a-z0-9]+)*$/);
+const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-\.[a-z0-9]+)*$/);
 
 const pageNumber = ref(1);
 const itemsPerPage = ref(15);
@@ -50,15 +50,16 @@ await updatePosts(pageNumber.value, itemsPerPage.value);
 const validateSlug = (slug) => SLUG_REGEX.test(slug);
 
 const createPost = async () => {
-    useInput(t('post-enter-slug'), t('post-action-new', { 'url': FRONTEND_URL }),
-            '', (input) => validateSlug(input), async (confirm, slug) => {
+    useInput(t('post-action-enter-title'), t('post-action-new', { 'url': FRONTEND_URL }),
+            '', (input) => validateSlug(input.replaceAll(' ', '-').toLowerCase()), async (confirm, title) => {
         if (!confirm) return;
-        await putPost(slug);
+        let slug = title.replaceAll(' ', '-').toLowerCase();
+        await putPost(slug, title);
         navigateTo(`/posts/${slug}`);
     })
 }
 
-const putPost = async (slug) => {
+const putPost = async (slug, title) => {
     await $fetch(`${BASE_URL}/v1/posts/${slug}`, 
     { 
         method: 'PUT',
@@ -69,7 +70,7 @@ const putPost = async (slug) => {
         },
         body: JSON.stringify({
             slug: slug,
-            title: useCapitalized(slug.replaceAll('-', ' ')),
+            title: title,
             body: 'Lorem ipsum',
             category: 'news'
         })

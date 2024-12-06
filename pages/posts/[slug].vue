@@ -57,7 +57,7 @@
 <script setup>
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
-const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:.-[a-z0-9]+)*$/);
+const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-\.[a-z0-9]+)*$/);
 
 const { t } = useI18n()
 const { auth, xsrf } = useAuth();
