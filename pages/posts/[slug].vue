@@ -160,7 +160,6 @@ const deletePost = async () => {
     justify-content: end;
     width: 100%;
     gap: 0.5rem;
-    margin: 0.5rem 0;
 }
 
 .row {

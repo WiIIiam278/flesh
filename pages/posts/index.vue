@@ -50,7 +50,7 @@ await updatePosts(pageNumber.value, itemsPerPage.value);
 const validateSlug = (slug) => SLUG_REGEX.test(slug);
 
 const createPost = async () => {
-    useInput(t('post-enter-slug'), t('post-action-edit-slug', { 'url': FRONTEND_URL }),
+    useInput(t('post-enter-slug'), t('post-action-new', { 'url': FRONTEND_URL }),
             '', (input) => validateSlug(input), async (confirm, slug) => {
         if (!confirm) return;
         await putPost(slug);
