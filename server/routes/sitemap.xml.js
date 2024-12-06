@@ -12,6 +12,15 @@ const fetchDocsPages = async (projects) => {
   }
   return pages;
 }
+const fetchPosts = async () => {
+  const { totalPages } = (await $fetch(`${BASE_URL}/v1/posts`)).page;
+  const pages = [];
+  for (let p = 0; p < totalPages; p++) {
+    Array.prototype.push.apply(pages, (await $fetch(`${BASE_URL}/v1/posts?page=${p}`)).content);
+  }
+  console.log(pages);
+  return pages;
+};
 
 const writeHomepage = (sitemap) => {
   sitemap.write({
@@ -26,11 +35,6 @@ const writeSpecialPages = (sitemap) => {
     url: '/terms',
     changefreq: 'monthly',
     priority: 0.1
-  })
-  sitemap.write({
-    url: '/redis-hosts',
-    changefreq: 'monthly',
-    priority: 0.2
   })
 }
 
@@ -62,6 +66,21 @@ const writeDocs = (projects, pages, sitemap) => {
   })
 }
 
+const writePosts = (posts, sitemap) => {
+  sitemap.write({
+    url: '/posts',
+    changefreq: 'daily',
+    priority: 0.8
+  })
+  posts.forEach(p => {
+    sitemap.write({
+      url: `/posts/${p.slug}`,
+      changefreq: 'monthly',
+      priority: 0.7
+    })
+  })
+}
+
 export default defineEventHandler(async (event) => {
   // Set content-type
   setResponseHeader(event, 'Content-Type', 'application/xml');
@@ -83,11 +102,13 @@ export default defineEventHandler(async (event) => {
   // Fetch all documents
   const projects = await fetchProjects();
   const docsPages = await fetchDocsPages(projects);
+  const posts = await fetchPosts();
 
   // Write pages
   writeHomepage(sitemap);
   writeProjects(projects, sitemap);
   writeDocs(projects, docsPages, sitemap);
+  writePosts(posts, sitemap);
   writeSpecialPages(sitemap);
 
   sitemap.end()

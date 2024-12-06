@@ -2,6 +2,7 @@ import RSS from 'rss'
 import ufs from 'url-file-size'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
+const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const fetchPosts = async (page) => (await $fetch(`${BASE_URL}/v1/posts`, { params: { page: page } }));
 
 export default defineEventHandler(async (event) => {
@@ -24,26 +25,26 @@ export default defineEventHandler(async (event) => {
     const feed = new RSS({
         title: 'William278.net Posts',
         language: 'en',
-        site_url: 'https://william278.net/',
-        feed_url: 'https://william278.net/rss.xml',
-        image_url: 'https://william278.net/images/icons/william278.png',
+        site_url: `${FRONTEND_URL}/`,
+        feed_url: `${FRONTEND_URL}/rss.xml`,
+        image_url: `${FRONTEND_URL}/images/icons/william278.png`,
         custom_elements: [
             { 'link': {
                 _attr: {
                     'rel': 'self',
-                    'href': `https://william278.net/rss.xml?page=${currentPage}`
+                    'href': `${FRONTEND_URL}/rss.xml?page=${currentPage}`
                 }
             }},
             { 'link': {
                 _attr: {
                     'rel': 'first',
-                    'href': `https://william278.net/rss.xml?page=1`
+                    'href': `${FRONTEND_URL}/rss.xml?page=1`
                 }
             }},
             { 'link': {
                 _attr: {
                     'rel': 'last',
-                    'href': `https://william278.net/rss.xml?page=${totalPages}`
+                    'href': `${FRONTEND_URL}/rss.xml?page=${totalPages}`
                 }
             }}
         ]
@@ -54,7 +55,7 @@ export default defineEventHandler(async (event) => {
         feed.custom_elements.push({ 'link': {
             _attr: {
                 'rel': 'next',
-                'href': `https://william278.net/rss.xml?page=${currentPage + 1}`
+                'href': `${FRONTEND_URL}/rss.xml?page=${currentPage + 1}`
             }
         }});
     }
@@ -62,26 +63,37 @@ export default defineEventHandler(async (event) => {
         feed.custom_elements.push({ 'link': {
             _attr: {
                 'rel': 'previous',
-                'href': `https://william278.net/rss.xml?page=${currentPage - 1}`
+                'href': `${FRONTEND_URL}/rss.xml?page=${currentPage - 1}`
             }
         }});
     }
 
     for (const post of content) {
-        feed.item({
+        const item = {
             title: post.title ?? '-',
-            url: `https://william278.net/posts/${post.slug}`,
+            url: `${FRONTEND_URL}/posts/${post.slug}`,
             date: new Date(post.timestamp),
             description: post.body?.split('\n')[0] ?? '-'
-            // enclosure: {
-            //     url: `https://william278.net/images/${post.image}`,
-            //     type: 'image/png',
-            //     size: await ufs(`https://william278.net/images/${post.image}`)
-            // }
-        })
+        };
+        if (post.imageUrl) {
+            // Get image URL
+            let url = (post.imageUrl[0] === '/') ?  `${FRONTEND_URL}${post.imageUrl}` : post.imageUrl;
+            item.enclosure = {
+                url: url,
+                type: 'image/png',
+            }
+
+            // Get image size
+            try {
+                item.enclosure.size = await ufs(url)
+            } catch (err) {
+                console.log('Error getting image file size for RSS feed: ' + err)
+            } 
+        }
+        feed.item(item)
     }
 
     const feedString = feed.xml({ indent: true });
-    res.setHeader('content-type', 'application/rss+xml');
+    // res.setHeader('content-type', 'application/rss+xml');
     res.end(feedString);
 })
