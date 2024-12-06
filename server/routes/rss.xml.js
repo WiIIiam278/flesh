@@ -94,6 +94,6 @@ export default defineEventHandler(async (event) => {
     }
 
     const feedString = feed.xml({ indent: true });
-    // res.setHeader('content-type', 'application/rss+xml');
+    res.setHeader('content-type', 'application/rss+xml');
     res.end(feedString);
 })
