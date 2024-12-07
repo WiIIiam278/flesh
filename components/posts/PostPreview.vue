@@ -88,6 +88,7 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
 
 .title .pill, .title .post-title {
     margin: 0;
+    line-height: 1.15;
 }
 
 .post .title-row .title {

@@ -24,7 +24,7 @@
                         <ButtonLink icon="fa6-brands:discord" to="https://discord.gg/tVYhJfyDWG" target="_blank">{{ $t('link-support') }}</ButtonLink>
                         <ButtonLink icon="fa6-solid:at" @click="useContactInfo($t)">{{ $t('link-contact') }}</ButtonLink>
                     </div>
-                    <PostsStack />
+                    <PostsStack class="posts" />
                 </div>
             </div>
         </NuxtLayout>
@@ -67,6 +67,11 @@ definePageMeta({
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.posts {
+    margin-bottom: 1rem;
 }
 
 /* Less than 725px */
@@ -78,6 +83,7 @@ definePageMeta({
     }
 
     #left-column {
+        margin-top: 0.5rem;
         max-width: 100%;
         width: 100%;
         padding: 0;
@@ -87,6 +93,8 @@ definePageMeta({
         max-width: 100%;
         width: 100%;
         padding: 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 0.15rem solid var(--gray);
     }
 }
 </style>

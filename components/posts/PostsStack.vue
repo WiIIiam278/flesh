@@ -33,11 +33,12 @@ const posts = project ? await useAllProjectPosts(project.slug, 0, count) : await
 
 <style scoped>
 .container hr {
-    margin: 1.5rem 0 0.75rem 0;
+    margin: 1rem 0 0rem 0;
 }
 
 .container h2 {
-    margin: 0 0 0.75rem 0;
+    margin: 0;
+    padding: 0;
     border: none;
 }
 
