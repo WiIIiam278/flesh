@@ -111,7 +111,7 @@ await updateVersions(pageNumber.value, itemsPerPage.value);
 
 .channel-picker select,
 .dist-picker select {
-    width: 100px;
+    width: 200px;
     font-weight: bold;
     margin: 0 0.7rem;
 }

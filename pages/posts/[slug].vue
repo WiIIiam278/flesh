@@ -67,8 +67,6 @@
 </template>
 
 <script setup>
-import TiptapEditor from '../../components/admin/TiptapEditor.vue';
-
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
@@ -188,6 +186,10 @@ const deletePost = async () => {
     align-items: center;
     justify-content: start;
     flex-wrap:  wrap;
+}
+
+.author {
+    gap: 0.5rem;
 }
 
 .details .tags {
