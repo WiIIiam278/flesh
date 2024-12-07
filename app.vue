@@ -2,7 +2,7 @@
   <div>
     <Modal v-if="modal?.show" />
     <NuxtLoadingIndicator color="#00fb9a" />
-    <NuxtPage />
+    <NuxtPage :class="modal?.show ? 'locked' : ''" />
   </div>
 </template>
 
@@ -55,6 +55,11 @@ useHead({
   --docsearch-text-color: var(--white) !important;
   --docsearch-container-background: rgba(40, 40, 40, 0.85) !important;
   --docsearch-hit-active-color: unset !important;
+}
+
+/* Lock scrolling */
+:root:has(.lock-scrolling) {
+  overflow: hidden;
 }
 
 /* DocSearch button styles */

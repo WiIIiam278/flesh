@@ -1,6 +1,6 @@
 <template>
-    <div class="background" @click="() => modal.escapable ? close(false) : {}">
-        <div :class="`container ${!markdown ? 'fullsize' : 'small'}`" @click="(e) => e.stopPropagation()">
+    <div class="background lock-scrolling" @click="() => modal.escapable ? close(false) : {}">
+        <div class="container" @click="(e) => e.stopPropagation()">
             <div class="title">
                 <h2 v-if="modal.title">{{ modal.title }}</h2>
                 <Icon v-if="modal.escapable" class="close-button" @click="close(false)" name="fa6-solid:xmark" />
@@ -69,11 +69,11 @@ const close = (confirm, inputText = null) => {
     display: flex;
     position: fixed;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
     width: 100vw;
     height: 100vh;
     z-index: 100;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
 }
 
 .background .container {
@@ -83,18 +83,14 @@ const close = (confirm, inputText = null) => {
     flex-direction: column;
     background-color: var(--background);
     border-radius: 0.5rem;
-    max-width: 50vw;
+    max-width: 100vw;
     max-height: 100vh;
     width: 650px;
     z-index: 110;
 }
 
-.container.small {
-    height: 200px;
-}
-
-.container.fullsize .content,
-.container.fullsize .downloads {
+.container .content,
+.container .downloads {
     max-height: 65vh;
     overflow: auto;
     margin-bottom: 1rem;
@@ -195,7 +191,7 @@ const close = (confirm, inputText = null) => {
 }
 
 .buttons {
-    margin: auto auto 0 auto;
+    margin: 1rem auto 0 auto;
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
@@ -213,21 +209,28 @@ const close = (confirm, inputText = null) => {
     }
 }
 
-@media screen and (max-width: 550px) {
-
-    .container.fullsize .content,
-    .container.fullsize .downloads {
-        max-height: 100%;
-        overflow: auto;
-        margin-bottom: 1rem;
-    }
-
-    .background .container {
-        max-width: 85vw;
-        max-height: 95vh;
+@media screen and (max-width: 600px) {
+    .background {
+        max-width: 100vw;
+        max-height: 100vh;
         width: 100%;
         height: 100%;
         overflow: auto;
+        padding: 0;
+        margin: 0;
+        background-color: var(--background);
+        backdrop-filter: none;
+    }
+
+    .background .container {
+        max-height: unset;
+        max-width: unset;
+        background-color: unset !important;
+    }
+
+    .container .content,
+    .container .downloads {
+        max-height: 100%;
     }
 }
 </style>

@@ -144,9 +144,8 @@ const platforms = meta.links.filter(link => ['spigot', 'polymart', 'builtbybit']
     font-size: 2em;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 700px) {
     .upsell {
-        max-height: 70vh;
         overflow-y: auto;
     }
 

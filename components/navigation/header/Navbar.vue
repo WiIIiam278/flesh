@@ -1,8 +1,8 @@
 <template>
-    <nav :class="`shadow ${hamburgerOpen ? 'mobile' : 'desktop'}`">
+    <nav :class="`shadow ${hamburgerOpen ? 'mobile lock-scrolling' : 'desktop'}`">
         <div id="menu">
             <h1 id="logo">
-                <a href="/">{{ $t('site-name') }}</a>
+                <NuxtLink to="/">{{ $t('site-name') }}</NuxtLink>
             </h1>
             <div id="hamburger" @click="hamburgerOpen = !hamburgerOpen">
                 <Icon v-if="!hamburgerOpen" name="fa6-solid:bars" />
@@ -61,7 +61,7 @@ nav #hamburger {
 }
 
 /* Tablet Navbar */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 860px) {
     nav {
         flex-direction: column;
         height: 6rem;
@@ -79,7 +79,7 @@ nav #hamburger {
 }
 
 
-/* Mobile Hamburger Navbar (500px) */
+/* Mobile Hamburger Navbar */
 @media screen and (max-width: 500px) {
     nav {
         height: 4rem;
@@ -114,7 +114,7 @@ nav #hamburger {
         display: flex;
         flex-direction: column;
         height: 100vh;
-        width: 85vw;
+        width: 86.3vw;
         z-index: 100;
     }
 

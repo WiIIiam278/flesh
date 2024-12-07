@@ -1,38 +1,36 @@
 <template>
     <li class="mapping">
-        <ControlGlyph v-if="button && buttonId" :id="buttonId" :name="button" />
-        <div v-else>{{ button }}</div>:
-        <ControlGlyph v-if="keybind && keyId" :id="keyId" :name="keybind" />
-        <div v-else>&nbsp;{{ keybind }}</div>
+        <ControlGlyph v-if="control && buttonGlyph" :id="buttonGlyph" :name="control" />
+        <div v-else>{{ control }}</div>:
+        <ControlGlyph v-if="control && keyGlyph" :id="keyGlyph" :name="mapping" />
+        <div v-else>&nbsp;{{ mapping }}</div>
     </li>
 </template>
 
 <script setup>  
-import ControlGlyph from './ControlGlyph.vue';
-
-const { button, keybind } = defineProps({
-    button: String,
-    keybind: String
-});
-
-const buttonId = computed(() => {
-    switch (button) {
-        case 'Start':
-        case 'Select':
-        case 'Touch':
-            return null;
-        default:
-            return `button-${button.toLowerCase()}.png`;
+const { control, mapping } = defineProps({
+    control: {
+        type: String,
+        required: true
+    },
+    mapping: {
+        type: String,
+        required: true
     }
 });
 
-const keyId = computed(() => {
-    switch (keybind) {
-        case 'Arrow Keys':
-            return null;
-        default:
-            return `key-${keybind.toLowerCase()}.png`;
+const buttonGlyph = computed(() => {
+    if (control.indexOf('!') === 0) {
+        return `button-${control.substring(1).toLowerCase()}.png`;
     }
+    return null;
+});
+
+const keyGlyph = computed(() => {
+    if (mapping.indexOf('!') === 0) {
+        return `key-${mapping.substring(1).toLowerCase()}.png`;
+    }
+    return null;
 });
 </script>
 

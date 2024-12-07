@@ -12,7 +12,7 @@
                                 <div class="user-container shadow">
                                     <span>{{$t('logged-in-with-discord')}}</span>
                                     <div class="user-card">
-                                        <img class="avatar shadow" :src="user.avatar" :alt="t('user-avatar-alt-text', {'name': user.name})" />
+                                        <img class="avatar shadow" :src="user.avatar" :alt="t('user-avatar-alt-text', {'name': user.name})" onerror="this.src='/images/icons/william278.png'" />
                                         <div class="user-details">
                                             <div class="name-role">
                                                 <span class="name">{{ user.name }}</span>
@@ -41,8 +41,23 @@
                         <Tabs class="tabs grid-item" :tabs="tabs" v-model:selected="activeTab">
                             <div v-if="activeTab === 'your-purchases'" class="item-body library">
                                 <div v-if="user.purchases.length">
-                                    <ProjectCard v-for="product in restricted.filter(r => user.purchases.includes(r.slug))" 
-                                        :key="product.slug" :project="product" />
+                                    <div class="purchases-grid">
+                                        <div v-for="project in restricted.filter(r => user.purchases.includes(r.slug))" class="purchase">
+                                            <NuxtLink :to="`/project/${project.slug}`" class="cover shadow">
+                                                <img class="logo" v-if="project.metadata.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
+                                            </NuxtLink>
+                                            <div class="details">
+                                                <h2>{{ project.metadata.name }}</h2>
+                                                <p>{{ project.metadata.tagline }}</p>
+                                                <div class="buttons">
+                                                    <ButtonLink v-if="project.metadata.listDownloads" icon="fa6-solid:download" type="primary" :to="`/project/${project.slug}/download`">{{ $t('link-download') }}</ButtonLink>
+                                                    <ButtonLink icon="fa6-solid:info" :to="`/project/${project.slug}`">{{ $t('link-about') }}</ButtonLink>
+                                                    <ButtonLink v-if="project.metadata.documentation" icon="fa6-solid:book" :to="`/docs/${project.slug}`">{{ $t('link-docs') }}</ButtonLink>
+                                                    <ButtonLink icon="fa6-brands:discord" to="https://discord.gg/tVYhJfyDWG">{{ $t('link-support') }}</ButtonLink>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="notice">
                                         <IconifiedText icon="fa6-solid:box">{{ $t('refresh-purchases-notice') }}</IconifiedText>
                                         <ButtonLink link="/account/logout" type="primary" icon="fa6-solid:arrows-rotate">{{ $t('link-refresh') }}</ButtonLink>
@@ -244,6 +259,61 @@ definePageMeta({
     background-image: url('/images/icons/promo-grid.png');
     background-size: 125px;
     animation: slide 60s linear infinite;
+}
+
+.purchases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.purchases-grid .purchase {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.purchase .cover {
+    width: 100%;
+    max-width: 10rem;
+    min-width: 5rem;
+    aspect-ratio: 10 / 14;
+    border-radius: 0.5rem;
+    background: linear-gradient(180deg, #142B42 0%, #08111B 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover .logo {
+    min-width: 50px;
+    width: 85px;
+    aspect-ratio: 1;
+}
+
+.details h2 {
+    font-size: larger;
+    margin: 0;
+}
+
+.details p {
+    color: var(--light-gray);
+}
+
+.details .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Tablet purchases grid */
+@media screen and (max-width: 850px) {
+    .purchases-grid {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 /* Mobile user container */

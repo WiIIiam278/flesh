@@ -10,9 +10,14 @@
                 </NuxtLink>
             </li>
             <li>
-                <a href="https://discord.gg/tVYhJfyDWG" target="_blank">
+                <NuxtLink to="https://discord.gg/tVYhJfyDWG" target="_blank">
                     <IconifiedText icon="fa6-brands:discord">{{ $t('link-support') }}</IconifiedText>
-                </a>
+                </NuxtLink>
+            </li>
+            <li v-if="user && useIsUserRole(user, 'staff')">
+                <NuxtLink to="/admin">
+                    <IconifiedText icon="fa6-solid:gear">{{ $t('link-admin') }}</IconifiedText>
+                </NuxtLink>
             </li>
             <li v-if="user">
                 <NuxtLink class="account-link" to="/account">

@@ -9,7 +9,7 @@
             <div v-if="controls?.length" class="controls">
                 <div class="label">Controls</div>
                 <div class="grid">
-                    <ControlMapping v-for="control of controls" :button="control.key" :keybind="control.bind" />
+                    <ControlMapping v-for="control of controls" :control="control.key" :mapping="control.bind" />
                 </div>
             </div>
         </div>

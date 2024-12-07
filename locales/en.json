@@ -8,6 +8,7 @@
     "link-docs": "Docs",
     "link-download": "Download",
     "link-account": "Account",
+    "link-admin": "Admin",
     "link-log-in": "Log in",
     "link-log-out": "Log out",
     "link-transcript": "Transcript",
@@ -19,6 +20,7 @@
     "link-contact": "Contact",
     "link-posts": "Posts",
     "link-more-posts": "More posts",
+    "link-about": "About",
 
     "index-title": "William278.net",
     "index-tagline": "Open source Minecraft server software & game projects.",
@@ -28,7 +30,7 @@
     "index-grid-collapse": "Show less",
     "index-posts-header": "Latest posts",
     
-    "contact-modal-body": "Need to get in touch? Here's how you can!<br/><ul><li>For support with my Minecraft projects/plugins/mods: [Join the HuskHelp Discord](https://discord.gg/tVYhJfyDWG)</li><li>For questions about the privacy policy/GDPR, email: privacy@william278.net</li><li>For other non-product support related enquiries, email: info@william278.net</li></ul>",
+    "contact-modal-body": "Need to get in touch? Here's how you can!\n\n* For support with my Minecraft projects/plugins/mods: [Join the HuskHelp Discord](https://discord.gg/tVYhJfyDWG)\n* For questions about the privacy policy/GDPR, email: privacy&#64;william278.net\n* For other non-product support related enquiries, email: info&#64;william278.net\n",
     "contact-modal-title": "Contact me",
 
     "posts-title": "Posts",
@@ -50,9 +52,6 @@
     "post-delete-confirm": "Are you sure you want to delete this post? This action cannot be undone.",
     "post-no-associated-project": "(General)",
     "post-version-update-edit-warning": "You are editing a version update post. Saving this post will clear the changelog binding and the download button will no longer appear below the post.",
-
-    "tab-about": "About",
-    "tab-play": "Play",
 
     "project-title": "{project} - {tagline}",
     "download-project-title": "Download {project} - {tagline}",

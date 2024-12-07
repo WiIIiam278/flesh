@@ -21,8 +21,8 @@
                     <div class="intro-buttons">
                         <ButtonLink v-if="!user" icon="fa6-solid:key" type="primary" to="/account/login">{{ $t('link-log-in') }}</ButtonLink>
                         <ButtonLink v-else icon="fa6-solid:user" type="primary" to="/account">{{ $t('link-account') }}</ButtonLink>
-                        <ButtonLink icon="fa6-brands:discord">{{ $t('link-support') }}</ButtonLink>
-                        <ButtonLink icon="fa6-solid:at" @click="useContactInfo(t)">{{ $t('link-contact') }}</ButtonLink>
+                        <ButtonLink icon="fa6-brands:discord" to="https://discord.gg/tVYhJfyDWG" target="_blank">{{ $t('link-support') }}</ButtonLink>
+                        <ButtonLink icon="fa6-solid:at" @click="useContactInfo($t)">{{ $t('link-contact') }}</ButtonLink>
                     </div>
                     <PostsStack />
                 </div>

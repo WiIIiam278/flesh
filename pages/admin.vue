@@ -4,7 +4,7 @@
             <div id="page-content">
                 <article class="admin-page">
                     <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }]" />
-                    <h1>Admin Panel</h1>
+                    <h1>{{ $t('admin-panel') }}</h1>
                     <div>
                         <Tabs :tabs="tabs" v-model:selected="activeTab">
                             <div v-if="activeTab === 'projects'">
