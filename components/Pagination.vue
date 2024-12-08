@@ -41,7 +41,7 @@ const emit = defineEmits(['update']);
 }
 
 .pagination-buttons .page-input {
-    width: min-content;
+    width: 80px;
     margin: 0 0.5rem;
 }
 
