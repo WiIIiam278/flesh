@@ -75,20 +75,22 @@ export default defineEventHandler(async (event) => {
             date: new Date(post.timestamp),
             description: post.body?.split('\n')[0] ?? '-'
         };
-        if (post.imageUrl) {
-            // Get image URL
-            let url = (post.imageUrl[0] === '/') ?  `${FRONTEND_URL}${post.imageUrl}` : post.imageUrl;
-            item.enclosure = {
-                url: url,
-                type: 'image/png',
-            }
 
-            // Get image size
-            try {
-                item.enclosure.size = await ufs(url)
-            } catch (err) {
-                console.log('Error getting image file size for RSS feed: ' + err)
-            } 
+        // Get image URL
+        let url = post.imageUrl 
+            ? (post.imageUrl[0] === '/') ?  `${FRONTEND_URL}${post.imageUrl}` : post.imageUrl
+            : `${FRONTEND_URL}/images/thumbnails/posts/${post.slug}/card.png`;
+
+        item.enclosure = {
+            url: url,
+            type: 'image/png',
+        }
+
+        // Get image size
+        try {
+            item.enclosure.size = await ufs(url)
+        } catch (err) {
+            console.log('Error getting image file size for RSS feed: ' + err)
         }
         feed.item(item)
     }

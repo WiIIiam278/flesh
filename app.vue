@@ -235,14 +235,14 @@ table {
   border-spacing: 0;
   width: 100%;
   margin: 0.5rem 0;
-  border-color: var(--light-gray);
+  border-color: var(--gray);
 }
 
 table th,
 table td {
   text-align: left;
   padding: 0.5rem;
-  border: 0.15rem solid var(--light-gray);
+  border: 0.15rem solid var(--gray);
 }
 
 table th {
@@ -261,7 +261,7 @@ table th[align="right"] {
 }
 
 table tr:nth-child(even) {
-  background-color: var(--gray);
+  background-color: var(--dark-gray);
 }
 
 code {

@@ -68,6 +68,7 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    container-type: inline-size;
     line-height: 1.15rem;
     margin-bottom: 0.35rem;
 }
@@ -122,5 +123,11 @@ const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &nda
 
 .post:deep(.contents .date) {
     color: var(--light-gray);
+}
+
+@container (width < 450px) {
+    .title-row .project {
+        display: none;
+    }
 }
 </style>

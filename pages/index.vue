@@ -36,6 +36,12 @@ const { t } = useI18n()
 const user = await useUser();
 const projects = await useAllProjects();
 
+// Show contact info if requested
+const { query } = useRoute();
+if (query['show_contact']) {
+    useContactInfo(t);
+}
+
 definePageMeta({
     layout: 'home'
 });

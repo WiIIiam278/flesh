@@ -60,7 +60,11 @@ export default defineNuxtConfig({
   routeRules: {
     '/project': { redirect: '/' },
     '/sitemap': { redirect: '/sitemap.xml' },
-    },
+    '/rss': { redirect: '/rss.xml' },
+    '/feed': { redirect: '/rss.xml' },
+    '/feed.xml': { redirect: '/rss.xml' },
+    '/contact': { redirect: '/?show_contact=1' },
+  },
 
   // Components
   components: [

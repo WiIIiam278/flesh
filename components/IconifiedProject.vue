@@ -30,12 +30,12 @@
 
 .iconified-project .icon object {
     width: 1.2em;
-    height: 1.2em;
+    aspect-ratio: 1;
 }
 
 .iconified-project .icon img {
     width: 1.2em;
-    height: 1.2em;
+    aspect-ratio: 1;
 }
 
 .iconified-project .name {
