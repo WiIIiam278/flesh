@@ -9,7 +9,7 @@
         <Navbar />
         <div>
             <ErrorPage :code="error.statusCode.toString()">
-                {{ error.message }}
+                {{ message }}
             </ErrorPage>
         </div>
         <Footer />
@@ -25,9 +25,14 @@
 </style>
 
 <script setup>
-defineProps({
-    error: Object
+const { t } = useI18n()
+const { error } = defineProps({
+    error: {
+        type: Object,
+        required: true
+    }
 })
+const message = JSON.parse(error?.data ?? '{}')?.error ?? error.message;
 
 definePageMeta({
     layout: 'default'
@@ -35,7 +40,7 @@ definePageMeta({
 
 useHead({
     titleTemplate: (titleChunk) => {
-        return `Error`;
+        return `${t('site-name')} - Error ${error.statusCode}`;
     },
     meta: [
         {

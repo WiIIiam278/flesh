@@ -1,26 +1,27 @@
 <template>
     <div class="error-page">
         <h1>{{ $t('error-page-title', { 'code': code }) }}</h1>
-        <p>
+        <div class="content">
             <slot />
-        </p>
-        <NuxtLink to="/">
-            <IconifiedText icon="fa6-solid:arrow-left">{{ $t('button-back-to-home') }}</IconifiedText>
-        </NuxtLink>
+        </div>
+        <ButtonLink @click="clearError({ redirect: backLink })" to="#" type="red" icon="fa6-solid:chevron-left">{{ $t('link-back') }}</ButtonLink>
     </div>
 </template>
 
 <script setup>
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
-
-const { code } = defineProps({
+const { t } = useI18n();
+const { code, backLink } = defineProps({
     code: {
         type: String,
         required: false,
         default: '404'
+    },
+    backLink: {
+        type: String,
+        required: false,
+        default: '/'
     }
-})
+});
 </script>
 
 <style scoped>
@@ -32,8 +33,14 @@ const { code } = defineProps({
     margin: 1.5rem 0;
 }
 
-.error-page p {
-    margin: 1rem;
+.error-page .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 </style>

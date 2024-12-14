@@ -218,7 +218,7 @@ const sendImportRequest = async () => {
     flex-direction: column;
     width: min-content;
     padding: 0.5rem;
-    border: 0.2rem solid var(--light-gray);
+    border: 0.175rem solid var(--gray);
     border-radius: 0.5rem;
     gap: 0.75rem;
 }

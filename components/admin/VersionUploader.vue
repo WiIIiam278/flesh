@@ -225,7 +225,7 @@ reset();
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    border: 0.2rem solid var(--light-gray);
+    border: 0.175rem solid var(--gray);
     border-radius: 0.5rem;
     padding: 1rem;
 }

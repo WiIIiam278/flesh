@@ -73,7 +73,7 @@ const putPost = async (slug, title) => {
             slug: slug,
             title: title,
             body: 'Lorem ipsum',
-            category: 'news'
+            category: 'blog'
         })
     });
 }

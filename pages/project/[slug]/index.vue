@@ -30,12 +30,12 @@
         </NuxtLayout>
         <NuxtLayout v-else name="default">
             <ErrorPage code="404">
-                {{ $t('error-page-not-found') }}&nbsp;
                 <BreadcrumbLine>
                     <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
                     <BreadcrumbDivider />
-                    <InvalidPage :name="$route.params.slug" />
+                    <InvalidPage :name="useRoute().params.slug" />
                 </BreadcrumbLine>
+                <div>{{ $t('error-project-not-found') }}</div>
             </ErrorPage>
         </NuxtLayout>
     </div>

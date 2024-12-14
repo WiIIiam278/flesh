@@ -45,18 +45,27 @@
             </template>
         </NuxtLayout>
         <NuxtLayout v-else name="default">
-            <ErrorPage>
-                {{ $t('error-page-not-found') }}&nbsp;
+            <ErrorPage v-if="!project || !meta?.documentation" code="404" back-link="/docs">
                 <BreadcrumbLine>
                     <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
                     <BreadcrumbDivider />
-                    <NuxtLink to="/docs/">{{ $t('link-docs') }}</NuxtLink>
+                    <NuxtLink to="/docs">{{ $t('link-docs') }}</NuxtLink>
                     <BreadcrumbDivider />
-                    <NuxtLink v-if="project" :to="'/docs/' + project.slug.toLowerCase()">{{ meta.name }}</NuxtLink>
-                    <InvalidPage v-else :name="$route.params.project" />
-                    <BreadcrumbDivider v-if="$route.params.topic" />
-                    <InvalidPage v-if="$route.params.topic" :name="$route.params.topic" />
+                    <InvalidPage v-if="useRoute().params.project" :name="useRoute().params.project" />
                 </BreadcrumbLine>
+                <div>{{ $t('error-project-not-found') }}</div>
+            </ErrorPage>
+            <ErrorPage v-else code="404" :back-link="`/docs/${useRoute().params.project}`">
+                <BreadcrumbLine>
+                    <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
+                    <BreadcrumbDivider />
+                    <NuxtLink to="/docs">{{ $t('link-docs') }}</NuxtLink>
+                    <BreadcrumbDivider />
+                    <NuxtLink :to="`/docs/${project.slug}`">{{ meta.name }}</NuxtLink>
+                    <BreadcrumbDivider />
+                    <InvalidPage v-if="useRoute().params.topic" :name="useRoute().params.topic" />
+                </BreadcrumbLine>
+                <div>{{ $t('error-page-not-found') }}</div>
             </ErrorPage>
         </NuxtLayout>
     </div>
@@ -65,15 +74,23 @@
 <script setup>
 const { locale, t } = useI18n()
 const { params } = useRoute()
-const { content: sidebar } = await useDocsPage(params.project.toLowerCase(), '_sidebar');
+
+// Get project
 const project = await useProject(params.project.toLowerCase());
+
+// Get sidebar and content
 const { metadata: meta } = project.value || {};
-const { title, content } = await useDocsPage(params.project.toLowerCase(), params.topic ? params.topic.toLowerCase() : 'home', locale);
+const { content: sidebar } = project.value ? await useDocsPage(params.project.toLowerCase(), '_sidebar') : '';
+const { title, content } = project.value ? await useDocsPage(params.project.toLowerCase(), params.topic ? params.topic.toLowerCase() : 'home', locale) : { title: '', content: '' };
+
 const description = computed(() => {
+    if (!content) return '';
+
     let desc = content.replace(/<[^>]+>/g, '');
     if (desc.includes('\n')) {
         desc = desc.split('\n')[0];
     }
+    
     return desc.length > 128 ? `${desc.slice(0, 128)}...` : desc;
 });
 

@@ -31,7 +31,7 @@ const { projects, speed } = defineProps({
 const hovering = ref(false);
 const slide = ref(0);
 const slideOffset = computed(() => slide.value * 100)
-const slides = (projects ?? [])
+const slides = computed(() => (projects ?? [])
     .filter((proj) => useProjectProperty(proj, 'showcase_image'))
     .map((proj) => {
         return { 
@@ -40,7 +40,7 @@ const slides = (projects ?? [])
             name: proj.metadata.name,
             alt: useProjectProperty(proj, 'showcase_alt_text') ?? proj.metadata.tagline
         }
-    });
+    }));
 
 // Slide switching beahviour
 const nextSlide = () => slide.value < slides.length - 1 ? (slide.value++) : (slide.value = 0);

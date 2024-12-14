@@ -38,6 +38,7 @@
     "post-category-changelogs": "Changelog",
     "post-category-news": "News",
     "post-category-promotions": "Promotion",
+    "post-category-blog": "Blog",
     "post-action-edit": "Edit",
     "post-action-save": "Save",
     "post-action-delete": "Delete",
@@ -169,8 +170,6 @@
     "verify-email-wrong-code": "Incorrect code. Please check that you entered it correctly, or select cancel and request a new code.",
     "email-verified-thank-you": "Thank you for verifying your email address! You will now be logged out.",
 
-    "button-back-to-home": "Back to home",
-
     "footer-copyright": "© William278, {year}",
     "footer-buymeacoffee": "BuyMeACoffee",
     "footer-twitter-x": "Twitter/X",
@@ -179,7 +178,9 @@
     "footer-status": "Status",
 
     "error-page-title": "Error {code}",
+    "error-project-not-found": "Project not found.",
     "error-page-not-found": "Page not found.",
+    "error-post-not-found": "Post not found.",
     "error-transcript-not-found": "That transcript could not be found, or the link has expired.",
     "error-transcript-bad-id": "Invalid transcript ID.",
     "error-transcript-forbidden": "Forbidden transcript channel."

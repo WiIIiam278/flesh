@@ -1,14 +1,14 @@
 <template>
     <div>
-        <Head>
-            <Title>William278.net &ndash; {{ $t('posts-title') }} &ndash; {{ post.title }}</Title>
-            <Meta name="description" content="Latest news and update posts from William278.net." />
-            <Meta name="og:image" :content="post.imageUrl ? post.imageUrl : `/images/thumbnails/posts/${slug}/card.png`" />
-            <Meta name="twitter:image" :content="post.imageUrl ? post.imageUrl : `/images/thumbnails/posts/${slug}/card.png`" />
-            <Meta name="twitter:card" content="summary_large_image" />
-            <Meta name="twitter:creator" content="@William27528" />
-        </Head>
         <NuxtLayout v-if="post">
+            <Head>
+                <Title>William278.net &ndash; {{ $t('posts-title') }} &ndash; {{ post.title }}</Title>
+                <Meta name="description" content="Latest news and update posts from William278.net." />
+                <Meta name="og:image" :content="post.imageUrl ? post.imageUrl : `/images/thumbnails/posts/${slug}/card.png`" />
+                <Meta name="twitter:image" :content="post.imageUrl ? post.imageUrl : `/images/thumbnails/posts/${slug}/card.png`" />
+                <Meta name="twitter:card" content="summary_large_image" />
+                <Meta name="twitter:creator" content="@William27528" />
+            </Head>
             <article class="page-content">
                 <BreadcrumbsBar>
                     <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }, { name: $t('link-posts'), link: '/posts' }]" />
@@ -36,6 +36,7 @@
                             <span v-if="!editing">{{ $t(`post-category-${post.category}`) }}</span>
                             <select v-else v-model="post.category" :placeholder="t('post-category')">
                                 <option value="changelogs">{{ $t('post-category-changelogs') }}</option>
+                                <option value="blog">{{ $t('post-category-blog') }}</option>
                                 <option value="news">{{ $t('post-category-news') }}</option>
                                 <option value="promotions">{{ $t('post-category-promotions') }}</option>
                             </select>
@@ -61,7 +62,16 @@
             </article>
         </NuxtLayout>
         <NuxtLayout v-else name="default">
-            <ErrorPage :code="404">{{ $t('error-transcript-not-found') }}</ErrorPage>
+            <ErrorPage code="404" back-link="/posts">
+                <BreadcrumbLine>
+                    <NuxtLink to="/">{{ $t('link-home') }}</NuxtLink>
+                    <BreadcrumbDivider />
+                    <NuxtLink to="/posts">{{ $t('link-posts') }}</NuxtLink>
+                    <BreadcrumbDivider />
+                    <InvalidPage :name="useRoute().params.slug" />
+                </BreadcrumbLine>
+                <div>{{ $t('error-post-not-found') }}</div>
+            </ErrorPage>
         </NuxtLayout>
     </div>
 </template>

@@ -1,9 +1,12 @@
 export const useDocsPage = async (project, page = 'home') => {
     const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
     
-    const { slug, title, content } = await $fetch(`${BASE_URL}/v1/projects/${project}/docs/${page}`);
-    
-    return { slug, title, content: parseWikiLinks(parseNotices(content), project) };
+    try {
+        const { slug, title, content } = await $fetch(`${BASE_URL}/v1/projects/${project}/docs/${page}`);
+        return { slug, title, content: parseWikiLinks(parseNotices(content), project) };
+    } catch {
+        return { slug: page, title: null, content: null };
+    }
 }
 
 const parseNotices = (text) => {
