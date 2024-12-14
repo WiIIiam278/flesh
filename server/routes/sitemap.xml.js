@@ -18,7 +18,6 @@ const fetchPosts = async () => {
   for (let p = 0; p < totalPages; p++) {
     Array.prototype.push.apply(pages, (await $fetch(`${BASE_URL}/v1/posts?page=${p}`)).content);
   }
-  console.log(pages);
   return pages;
 };
 

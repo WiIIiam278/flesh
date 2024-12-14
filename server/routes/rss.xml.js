@@ -90,7 +90,7 @@ export default defineEventHandler(async (event) => {
         try {
             item.enclosure.size = await ufs(url)
         } catch (err) {
-            console.log('Error getting image file size for RSS feed: ' + err)
+            console.warn('Error getting image file size for RSS feed: ' + err)
         }
         feed.item(item)
     }
