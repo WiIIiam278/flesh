@@ -18,7 +18,8 @@
                     <div class="project-section" v-for="{project, pages} in docPages.sort((a, b) => b.project.stats.downloadCount - a.project.stats.downloadCount)">
                         <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
-                            <IconifiedProject :project="project" />
+                            <img v-if="project.metadata?.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
+                            <span>{{ project.metadata.name }}</span>
                         </NuxtLink>
                         <div class="project-links">
                             <NuxtLink v-for="entry in pages.filter(e => !e[0].startsWith('_') && e[0] !== 'home') ?? []"
@@ -73,9 +74,20 @@ projects.value?.filter(p => p.metadata.documentation)
 }
 
 .project-title {
-    font-size: larger;
+    margin-top: 0.25em;
+    font-size: x-large;
     font-weight: bold;
+    line-height: 1.75rem;
     color: white !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.project-title img {
+    width: 1.75rem;
+    aspect-ratio: 1;
 }
 
 .project-links {
