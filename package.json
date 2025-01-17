@@ -26,6 +26,7 @@
     "@nuxtjs/algolia": "^1.10.1",
     "@nuxtjs/i18n": "^8.3.0",
     "@odiffey/discord-markdown": "^3.1.2",
+    "7zip-min": "^1.4.5",
     "algoliasearch": "^4.22.1",
     "buffer": "^6.0.3",
     "canvas": "^2.11.2",
