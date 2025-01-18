@@ -24,7 +24,7 @@ const {
     margin: 1rem auto;
 }
 
-.container .title:deep(h1) {
+.container:deep(h1) {
     border: none !important;
     color: var(--white);
     font-size: 2rem;

@@ -1,9 +1,9 @@
 <template>
-    <div v-if="page" class="page">
+    <article v-if="page" class="page">
         <SectionRenderer v-for="section of page.contents.sections.sort((s1, s2) => s2.order - s1.order)" 
             :project="project" :section="section" 
         />
-    </div>
+    </article>
     <MDC v-else :value="readme" tag="article" />
 </template>
 
