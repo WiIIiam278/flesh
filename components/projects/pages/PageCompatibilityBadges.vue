@@ -1,7 +1,7 @@
 <template>
-    <div class="badges" v-if="meta.links">
-        <PlatformBadge class="badge" v-for="link in meta.links.slice(badgeRangeStart, badgeRangeEnd)" 
-            :platform="link.id" :link="link.url" type="platform"
+    <div class="badges" v-if="meta.compatibleSoftware">
+        <PlatformBadge class="badge" v-for="compatibleSoftware in meta.compatibleSoftware.slice(badgeRangeStart, badgeRangeEnd)" 
+            :platform="compatibleSoftware" type="compatibility"
         />
     </div>
 </template>

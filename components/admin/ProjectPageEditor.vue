@@ -101,6 +101,12 @@ const SECTION_PRESETS = {
             "badge_range_end": "5"
         }
     },
+    "compatibility_badges": {
+        "properties": {
+            "badge_range_start": "0",
+            "badge_range_end": "5"
+        }
+    },
     "image_with_text": {
         "title": "Title",
         "body": "Body text body text body text body text body text",

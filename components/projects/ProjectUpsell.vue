@@ -36,7 +36,7 @@
         <div class="platforms">
             <h3>You can buy {{ meta.name }} on:</h3>
             <div class="badges">
-                <PlatformBadge v-for="link of platforms" :platform="link.id" :link="link.url" />
+                <PlatformBadge v-for="link of platforms" :platform="link.id" :link="link.url" type="platform" />
             </div>
             <div v-if="!user" class="login-prompt">Already bought {{ meta.name }}? <NuxtLink to="/account/login"><IconifiedText icon="fa6-solid:key">{{ $t('link-log-in') }}</IconifiedText></NuxtLink></div>
             <div v-else class="login-prompt">Already bought {{ meta.name }}? <NuxtLink to="/account/login"><IconifiedText icon="fa6-solid:person-running">{{ $t('link-log-in') }}</IconifiedText></NuxtLink> again to refresh your purchases.</div>

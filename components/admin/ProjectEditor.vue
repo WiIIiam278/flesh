@@ -110,6 +110,17 @@
                     </div>
                 </div>
             </div>
+            <!-- compatibleSoftware -->
+            <div>
+                <label for="project-compatible-software">Compatible Software</label>
+                <div class="editor-section" id="project-compatible-software">
+                    <input v-for="(_, index) in editing.metadata.compatibleSoftware" v-model="editing.metadata.compatibleSoftware[index]" type="text" placeholder="Software name" />
+                    <div class="list-buttons">
+                        <button @click="editing.metadata.compatibleSoftware.push('')">Add Software</button>
+                        <button class="red" @click="editing.metadata.compatibleSoftware.pop()">Remove Software</button>
+                    </div>
+                </div>
+            </div>
             <!-- icons -->
             <div>
                 <label for="project-icons">Icons</label>
@@ -207,6 +218,8 @@ const getDefaultProject = ((slug) => `
     ],
     "maintainers": [
       "William278"
+    ],
+    "compatibleSoftware": [
     ],
     "suggestedRetailPrice": "0",
     "linkedDiscordRole": "",
