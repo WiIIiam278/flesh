@@ -130,6 +130,7 @@ ol {
 
 /* Default link styling */
 a {
+  text-underline-offset: 0.16rem;
   text-decoration: none;
   color: var(--accent);
 }
