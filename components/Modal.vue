@@ -94,6 +94,8 @@ const close = (confirm, inputText = null) => {
 
 .container.asset-modal {
     width: 1080px;
+    height: 720px;
+    overflow-y: auto;
 }
 
 .container .content,
