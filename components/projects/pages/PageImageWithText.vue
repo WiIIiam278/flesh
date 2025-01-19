@@ -1,6 +1,6 @@
 <template>
     <div class="container" :style="`flex-direction: row${imagePosition === 'left' ? '' : '-reverse'};`">
-        <img class="image shadow" :src="imageUrl" :alt="title" />
+        <img class="image shadow" :src="`${ASSETS_URL}/${imageUrl}`" :alt="title" />
         <div class="text">
             <MDC v-if="title?.length" :value="title" tag="h2" unwrap="p" />
             <MDC v-if="body?.length" :value="body" tag="p" unwrap="p" />
@@ -10,9 +10,8 @@
 </template>
 
 <script setup>
-const { 
-    title, body, color1, color2, imageUrl, imagePosition
-} = defineProps({
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
+const {  title, body, color1, color2, imageUrl, imagePosition } = defineProps({
     title: { type: String, required: false, default: '' },
     body: { type: String, required: false, default: '' },
     imageUrl: { type: String, required: true },

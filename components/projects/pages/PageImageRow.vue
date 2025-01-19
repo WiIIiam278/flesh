@@ -1,10 +1,11 @@
 <template>
     <div class="row">
-        <img class="shadow" v-for="img in row" :src="img" />
+        <img class="shadow" v-for="img in row" :src="`${ASSETS_URL}/${img}`" />
     </div>
 </template>
 
 <script setup>
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const { images } = defineProps({
     images: {
         type: String,
