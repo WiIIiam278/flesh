@@ -25,6 +25,9 @@
                             <div v-if="activeTab === 'tickets'">
                                 <TicketsTable />
                             </div>
+                            <div v-if="activeTab === 'assets'">
+                                <AssetManager />
+                            </div>
                         </Tabs>
                     </div>
                 </article>
@@ -39,6 +42,7 @@ const tabs = [];
 if (useIsUserRole(user.value, 'staff')) {
     tabs.unshift({ id: 'tickets', name: 'Tickets', path: '/admin#tickets' })
     tabs.unshift({ id: 'users', name: 'Users', path: '/admin#users' })
+    tabs.unshift({ id: 'assets', name: 'Assets', path: '/admin#assets' })
 }
 if (useIsUserRole(user.value, 'admin')) {
     tabs.unshift({ id: 'import', name: 'Import', path: '/admin#import' })

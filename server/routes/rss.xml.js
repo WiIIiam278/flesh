@@ -78,7 +78,7 @@ export default defineEventHandler(async (event) => {
 
         // Get image URL
         let url = post.imageUrl 
-            ? (post.imageUrl[0] === '/') ?  `${FRONTEND_URL}${post.imageUrl}` : post.imageUrl
+            ? (post.imageUrl[0] === '/') ?  `${ASSETS_URL}/${post.imageUrl}` : post.imageUrl
             : `${FRONTEND_URL}/images/thumbnails/posts/${post.slug}/card.png`;
 
         item.enclosure = {

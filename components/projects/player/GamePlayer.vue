@@ -15,7 +15,7 @@
         </div>
         <div class="column player">
             <iframe v-if="game_platform === 'nds'" class="frame shadow"
-                    :src="`/emulator.html?gameUrl=${urlify(`/emulator-js/roms/${project.slug}`)}&gameName=${urlify(name)}&core=${urlify(game_core)}&coverBg=${urlify(game_cover_bg)}`"
+                    :src="`/emulator.html?gameUrl=${urlify(`/emulator-js/roms/${project.slug}`)}&gameName=${urlify(name)}&core=${urlify(game_core)}&coverBg=${urlify(`${ASSETS_URL}/${game_cover_bg}`)}`"
                     width="360px" height="540px" frameBorder="0" scrolling="no"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullscreen allowTransparency>
@@ -29,6 +29,7 @@
 <script setup>
 import ItchPlayer from './ItchPlayer.vue';
 
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const { title, body, props, project } = defineProps({
     title: { type: String, required: false },
     body: { type: String, required: false },

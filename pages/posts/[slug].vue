@@ -22,36 +22,40 @@
                 <h1 v-if="!editing">{{ post.title }}</h1>
                 <input class="title-editor" v-else v-model="post.title" :placeholder="t('post-title')">
                 <div class="details">
-                    <div class="tags row">
-                        <NuxtLink v-if="!editing && post.associatedProject" class="project" :to="`/project/${post.associatedProject.slug}`">
-                            <IconifiedProject :project="post.associatedProject" />
-                        </NuxtLink>
-                         <IconifiedText v-else-if="editing" icon="fa6-solid:box" class="project">
-                            <select v-model="associated" :placeholder="t('post-category')">
-                                <option :value="null">{{ $t('post-no-associated-project') }}</option>
-                                <option v-for="project of allProjects" :value="project.slug">{{ project.metadata.name }}</option>
-                            </select>
-                        </IconifiedText>
-                        <IconifiedText icon="fa6-solid:tag" class="time">
-                            <span v-if="!editing">{{ $t(`post-category-${post.category}`) }}</span>
-                            <select v-else v-model="post.category" :placeholder="t('post-category')">
-                                <option value="changelogs">{{ $t('post-category-changelogs') }}</option>
-                                <option value="blog">{{ $t('post-category-blog') }}</option>
-                                <option value="news">{{ $t('post-category-news') }}</option>
-                                <option value="promotions">{{ $t('post-category-promotions') }}</option>
-                            </select>
-                        </IconifiedText>
+                    <NuxtLink v-if="!editing && post.associatedProject" class="project" :to="`/project/${post.associatedProject.slug}`">
+                        <IconifiedProject :project="post.associatedProject" />
+                    </NuxtLink>
+                        <IconifiedText v-else-if="editing" icon="fa6-solid:box" class="project">
+                        <select v-model="associated" :placeholder="t('post-category')">
+                            <option :value="null">{{ $t('post-no-associated-project') }}</option>
+                            <option v-for="project of allProjects" :value="project.slug">{{ project.metadata.name }}</option>
+                        </select>
+                    </IconifiedText>
+                    <IconifiedText icon="fa6-solid:tag" class="time">
+                        <span v-if="!editing">{{ $t(`post-category-${post.category}`) }}</span>
+                        <select v-else v-model="post.category" :placeholder="t('post-category')">
+                            <option value="changelogs">{{ $t('post-category-changelogs') }}</option>
+                            <option value="blog">{{ $t('post-category-blog') }}</option>
+                            <option value="news">{{ $t('post-category-news') }}</option>
+                            <option value="promotions">{{ $t('post-category-promotions') }}</option>
+                        </select>
+                    </IconifiedText>
+                    <div class="details-right">
                         <IconifiedText v-if="editing" icon="fa6-solid:image" class="image">
-                            <input v-model="post.imageUrl" :placeholder="$t('post-image-url')" />
+                            <span class="image-picker">
+                                <button @click="useAssetInput(t('post-select-image'), t('select-image'), (_, selected) => post.imageUrl = selected)"><Icon name="fa6-solid:pencil" /></button>
+                                <button v-if="post.imageUrl?.length" class="red" @click="post.imageUrl = null"><Icon name="fa6-solid:x" /></button>
+                                <input disabled v-model="post.imageUrl" :placeholder="$t('post-image-tooltip')" />
+                            </span>
                         </IconifiedText>
                         <IconifiedText v-else icon="fa6-solid:calendar" class="time">{{ useTimeFormat(post.timestamp, true) }}</IconifiedText>
-                    </div>
-                    <div class="author row">
-                        <img :src="post.authorAvatar ?? '/images/icons/william278.svg'" />
-                        <span>{{ post.authorName ? useCapitalized(post.authorName) : 'Staff' }}</span>
+                        <div class="author row">
+                            <img :src="post.authorAvatar ?? '/images/icons/william278.svg'" />
+                            <span>{{ post.authorName ? useCapitalized(post.authorName) : 'Staff' }}</span>
+                        </div>
                     </div>
                 </div>
-                <img v-if="post.imageUrl" class="post-image shadow" :src="post.imageUrl" :alt="post.title" />
+                <img v-if="post.imageUrl" class="post-image shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" />
                 <MDC v-if="!editing" class="body" :value="post.body.length ? post.body : '<br/>'" />
                 <TiptapEditor class="body" v-model="post.body" :placeholder="t('post-body')" v-else></TiptapEditor>
                 <Notice title="Warning" type="warning" v-if="editing && post.versionUpdate">{{ $t('post-version-update-edit-warning') }}</Notice>
@@ -77,6 +81,9 @@
 </template>
 
 <script setup>
+import { useAssetInput } from '../../composables/useAssetInput';
+
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const SLUG_REGEX = new RegExp(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
@@ -155,7 +162,7 @@ const deletePost = async () => {
 
 <style scoped>
 .page-content {
-    margin-top: 1rem;
+    margin: 1rem 0;
     max-width: 95vw;
     width: 1000px;
 }
@@ -172,10 +179,14 @@ const deletePost = async () => {
     font-weight: 800;
 }
 
-.details {
+.details, .details-right {
     display: flex;
-    justify-content: space-between;
+    gap: 1rem;
     color: var(--light-gray)
+}
+
+.details-right {
+    margin-left: auto;
 }
 
 .warning {
@@ -198,18 +209,27 @@ const deletePost = async () => {
     flex-wrap:  wrap;
 }
 
-.author {
+.details .author {
     gap: 0.5rem;
 }
 
-.details .tags {
-    gap: 1rem !important;
+.image-picker button {
+    width: 36px;
+    height: 36px;
+    line-height: 0.5rem;
+    margin: 0 0.2rem;
+    font-size: 0.9rem;
 }
 
-.tags .image input {
-    max-width: 450px;
-    width: 65vw;
-    min-width: 120px;
+.details .image input {
+    background-color: transparent;
+    border: none;
+    width: min-content;
+    max-width: min-content;
+    text-overflow: ellipsis;
+    font-family: unset;
+    line-height: 0rem;
+    color: var(--light-gray) !important;
 }
 
 .row img {
@@ -235,6 +255,11 @@ textarea.body {
 
 .time select {
     width: 120px;
+}
+
+.project {
+    display: flex;
+    align-items: center;
 }
 
 .project select {

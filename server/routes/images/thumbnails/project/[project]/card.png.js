@@ -3,6 +3,7 @@ import { registerFont, createCanvas, loadImage } from 'canvas'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 
 const fetchProject = async (slug) => await $fetch(`${BASE_URL}/v1/projects/${slug}`)
 
@@ -118,7 +119,7 @@ export default defineEventHandler(async (event) => {
   // Load and draw the image
   const icon = project.metadata?.icons['PNG'] ?? project.metadata?.icons['SVG']
   if (icon) {
-    const image = await loadImage(`${FRONTEND_URL}/images/icons/${icon}`);
+    const image = await loadImage(`${ASSETS_URL}/${icon}`);
     ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
   }
   

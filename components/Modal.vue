@@ -1,6 +1,6 @@
 <template>
     <div class="background lock-scrolling" @click="() => modal.escapable ? close(false) : {}">
-        <div class="container" @click="(e) => e.stopPropagation()">
+        <div :class="`container ${modal.type}-modal`" @click="(e) => e.stopPropagation()">
             <div class="title">
                 <h2 v-if="modal.title">{{ modal.title }}</h2>
                 <Icon v-if="modal.escapable" class="close-button" @click="close(false)" name="fa6-solid:xmark" />
@@ -26,13 +26,16 @@
                 <p v-if="!modal.markdown">{{ modal.message }}</p>
                 <MDC v-else :value="modal.message" tag="article" />
             </div>
-            <div v-if="modal.type === 'input'" :class="`input ${modal.inputError ? 'error' : ''}`" >
+            <div v-if="modal.type === 'asset'" >
+                <AssetManager pickerMode @select="(chosen) => close(true, chosen?.length ? chosen : null)" />
+            </div>
+            <div v-else-if="modal.type === 'input'" :class="`input ${modal.inputError ? 'error' : ''}`" >
                 <input @click="modal.inputError = false" type="text" v-model="modal.inputText" :placeholder="modal.title" />
             </div>
             <div class="buttons">
                 <button @click="close(false)">{{ $t(`button-${modal.type === 'alert' ? 'close' : 'cancel'}`) }}</button>
                 <button :class="modal.type === 'confirm' ? 'red' : ''" @click="close(true, modal.inputText ?? null)"
-                    v-if="modal.type === 'confirm' || modal.type === 'input'">{{ $t('button-confirm') }}</button>
+                    v-if="modal.type === 'confirm' || modal.type === 'input' || modal.type === 'asset'">{{ $t('button-confirm') }}</button>
             </div>
         </div>
     </div>
@@ -87,6 +90,10 @@ const close = (confirm, inputText = null) => {
     max-height: 100vh;
     width: 650px;
     z-index: 110;
+}
+
+.container.asset-modal {
+    width: 1080px;
 }
 
 .container .content,

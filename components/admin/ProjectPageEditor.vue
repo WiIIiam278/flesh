@@ -47,6 +47,13 @@
                             <span>Choose color: </span>
                             <input type="color" v-model="page.contents.sections[index].properties[pair[0]]">
                         </div>
+                        <div class="property-input" v-if="pair[0].indexOf('image_url') > -1 || pair[0].indexOf('game_cover_bg') > -1">
+                            <img class="icon" v-if="page.contents.sections[index].properties[pair[0]]" :src="`${ASSETS_URL}/${page.contents.sections[index].properties[pair[0]]}`" />
+                            <span class="property-with-button">
+                                <input disabled v-model="page.contents.sections[index].properties[pair[0]]" type="text" placeholder="(None)" />
+                                <button @click="useAssetInput(`Select an image for the page.`, `Select image...`, (_, chosen) => { page.contents.sections[index].properties[pair[0]] = chosen; })">Select</button>
+                            </span>
+                        </div>
                         <TiptapEditor class="tiptap property-input" v-else-if="pair[0].indexOf('body') > -1" v-model="page.contents.sections[index].properties[pair[0]]" />
                         <input v-else class="property-input" v-model="page.contents.sections[index].properties[pair[0]]">
                     </div>
@@ -65,6 +72,7 @@
 
 <script setup>
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const SECTION_PRESETS = {
     "hero": {
         "title": "Project Title",
@@ -174,7 +182,7 @@ const SECTION_PRESETS = {
             "game_url": "https://github.com/WiIIiam278/breaking-bad-ds/releases/download/1.0.6/breaking-bad-ds.nds",
             "game_core": "desmume2015",
             "game_controls": "A:Z,B:X,X:A,Y:S,L:Q,R:E,Start:ENTER,Select:V,DPAD:Arrow Keys,Touch:Mouse",
-            "game_cover_bg": "/images/breaking-bad-ds/emulator-cover.png"
+            "game_cover_bg": "breaking-bad-ds-emulator-cover.png"
         }
     },
     "horizontal_rule": {
@@ -388,6 +396,16 @@ const deletePage = async () => {
     margin: 0.5rem;
     background-color: var(-background);
     width: 100% !important;
+}
+
+.property-input img {
+    max-height: 250px;
+    align-self: center;
+}
+
+.property-input .property-with-button {
+    display: flex;
+    flex-direction: row;
 }
 
 .paired-input {

@@ -13,12 +13,13 @@
             <MDC class="contents" :value="contents" />
         </div>
         <NuxtLink class="thumbnail" v-if="post.imageUrl" :title="post.title" :to="`/posts/${post.slug}`">
-            <img class="shadow" :src="post.imageUrl" :alt="post.title" />
+            <img class="shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" />
         </NuxtLink>
     </div>
 </template>
 
 <script setup>
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const { post, type, displayProject } = defineProps({
     post: {
         type: Object,

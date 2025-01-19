@@ -2,8 +2,8 @@
     <div v-if="project.slug && meta" class="project-card shadow">
         <div class="header">
             <NuxtLink class="image hover-image" v-if="meta.icons" :to="`/project/${project.slug}`">
-                <object v-if="meta.icons['SVG']" :data="`/images/icons/${meta.icons['SVG']}`" type="image/svg+xml" />
-                <img v-else-if="meta.icons['PNG']" :src="`/images/icons/${meta.icons['PNG']}`" />
+                <object v-if="meta.icons['SVG']" :data="`${ASSETS_URL}/${meta.icons['SVG']}`" type="image/svg+xml" />
+                <img v-else-if="meta.icons['PNG']" :src="`${ASSETS_URL}/${meta.icons['PNG']}`" />
             </NuxtLink>
             <div class="details">
                 <NuxtLink :to="`/project/${project.slug}`">
@@ -51,6 +51,7 @@
 </template>
 
 <script setup>
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const { project } = defineProps({
     project: {
         type: Object,

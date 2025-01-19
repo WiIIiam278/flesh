@@ -44,7 +44,7 @@
                                     <div class="purchases-grid">
                                         <div v-for="project in restricted.filter(r => user.purchases.includes(r.slug))" class="purchase">
                                             <NuxtLink :to="`/project/${project.slug}`" class="cover shadow">
-                                                <img class="logo" v-if="project.metadata.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
+                                                <img class="logo" v-if="project.metadata.icons['PNG']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG']}`" />
                                             </NuxtLink>
                                             <div class="details">
                                                 <h2>{{ project.metadata.name }}</h2>
@@ -83,6 +83,8 @@
 import { validate } from 'email-validator'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
+
 const { t } = useI18n()
 const { auth, xsrf } = useAuth();
 const user = await useUser();
@@ -256,6 +258,7 @@ definePageMeta({
     width: 100vw !important;
     position: absolute;
     z-index: -1;
+    /* todo move this? */
     background-image: url('/images/icons/promo-grid.png');
     background-size: 125px;
     animation: slide 60s linear infinite;

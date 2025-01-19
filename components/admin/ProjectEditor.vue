@@ -125,13 +125,14 @@
             <div>
                 <label for="project-icons">Icons</label>
                 <div class="editor-section" id="project-icons">
-                    <div class="icons-map" v-for="format in ALLOWED_IMAGE_TYPES">
-                        <div class="icon-path">
+                    <div class="icons-map">
+                        <div class="icon-path" v-for="format in ALLOWED_IMAGE_TYPES">
                             <label :for="`${format}-icon`">{{ format }} icon</label>
-                            <input :id="`${format}-icon`" v-model="editing.metadata.icons[format]" type="text" placeholder="Icon path" />
-                        </div>
-                        <div>
-                            <img v-if="editing.metadata.icons[format]" :src="`/images/icons/${editing.metadata.icons[format]}`" onerror="this.style.display='none'" />
+                                <img class="icon" v-if="editing.metadata.icons[format]?.length" :src="`${ASSETS_URL}/${editing.metadata.icons[format]}`" />
+                            <span class="image-picker">
+                                <input disabled :id="`${format}-icon`" v-model="editing.metadata.icons[format]" type="text" placeholder="(None)" />
+                                <button @click="useAssetInput(`Please choose a ${format} icon for the project.`, `Select ${format} icon...`, (_, chosen) => editing.metadata.icons[format] = chosen)">Select</button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -141,11 +142,15 @@
                 <label for="project-images">Images</label>
                 <div class="editor-section" id="project-images">
                     <div class="link-map" v-for="(_, index) of editing.metadata.images">
-                        <input v-model="editing.metadata.images[index].url" type="text" placeholder="Image URL" />
-                        <input v-model="editing.metadata.images[index].description" type="text" placeholder="Image Description" />
+                        <textarea v-model="editing.metadata.images[index].description" type="text" placeholder="Image Description"></textarea>
+                        <span class="image-picker">
+                            <img v-if="editing.metadata.images[index].url?.length" :src="`${ASSETS_URL}/${editing.metadata.images[index].url}`" />
+                            <input disabled :id="`${format}-icon`" v-model="editing.metadata.images[index].url" type="text" placeholder="(None)" />
+                            <button @click="useAssetInput('Please choose an image.', 'Select image...', (_, chosen) => editing.metadata.images[index].url = chosen)">Select</button>
+                        </span>
                     </div>
                     <div class="list-buttons">
-                        <button @click="editing.metadata.images.push({ url: 'https://example.com/image.png', description: 'An example image' })">Add Image</button>
+                        <button @click="useAssetInput('Please choose an image.', 'Select image...', (_, chosen) => editing.metadata.images.push({ url: chosen, description: 'Image description...' }))">Add Image</button>
                         <button class="red" @click="editing.metadata.images.pop()">Remove Image</button>
                     </div>
                 </div>
@@ -188,6 +193,7 @@
 
 <script setup>
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const ALLOWED_IMAGE_TYPES = ['PNG', 'SVG'];
 
 const { auth, xsrf } = useAuth();
@@ -241,15 +247,16 @@ const getDefaultProject = ((slug) => `
 }
 `);
 
-const newProject = () => {
-    const slug = prompt('Enter a slug identifier for the new project:');
-    if (!slug) return;
+const newProject = () => useInput(
+    'Enter a slug identifier for the new project (1-64 chars, hyphenated spacing, unique):',
+    'Enter project slug',
+    'example-slug',
+    (slug) => slug?.length >= 1 && slug?.length < 64 && /^[a-z0-9-]+$/.test(slug),
+    createProject
+);
 
-    // Ensure the name is valid
-    if (!slug.length || slug.length > 63 || !/^[a-z0-9-]+$/.test(slug)) {
-        useAlert('Slugs must be 1-63 characters long and only contain lowercase letters, numbers, and hyphens', 'Invalid project slug');
-        return;
-    }
+const createProject = (valid, slug) => {
+    if (!valid || !slug) return;
 
     // Ensure the project doesn't already exist
     if (projects.value.find(proj => proj.slug === slug)) {
@@ -287,12 +294,13 @@ const saveProject = async () => {
     }
 }
 
-const deleteProject = async () => {
+const deleteProject = () => {
     if (!editing.value) {
         useAlert('Please select a project first.', 'Cannot delete project');
         return;
     }
-    if (confirm('Are you sure you want to delete this project?')) {
+    useConfirm('Are you sure you want to delete this project?', 'Delete project', async (conf) => {
+        if (!conf) return;
         try {
             await $fetch(`${BASE_URL}/v1/projects/${editing.value.slug}`, 
             {
@@ -309,7 +317,7 @@ const deleteProject = async () => {
         }
         projects.value = projects.value.filter(proj => proj.slug !== editing.value.slug);
         editing.value = projects.value.length ? projects.value[0] : null;
-    }
+    });
 }
 </script>
 
@@ -346,6 +354,20 @@ const deleteProject = async () => {
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
+}
+
+.image-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.image-picker input {
+    background: none;
+    border: none;
+    color: white;
+    text-align: center;
 }
 
 .button-panel .saved-check {
@@ -388,9 +410,17 @@ const deleteProject = async () => {
 }
 
 .editor-section img {
+    align-self: center;
+    border-radius: 0.5rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+img.icon {
     max-width: 75px;
     max-height: 75px;
-    align-self: center;
 }
 
 .editor-panel .list-buttons {
@@ -409,12 +439,13 @@ const deleteProject = async () => {
 .editor-panel .icons-map {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 }
 
 .icons-map .icon-path {
-    width: 100%;
+    width: 45%;
 }
 
 .editor-panel .price-line {

@@ -114,10 +114,11 @@ const { modelValue, editable, placeholder } = defineProps({
     }
 })
 const emit = defineEmits(['update:modelValue'])
+const lowlight = createLowlight(allLanguages);
 const editor = useEditor({
   content: modelValue,
   editable: editable,
-  extensions: [TiptapStarterKit, TiptapMarkdown, TiptapPlaceholder.configure({ placeholder: placeholder })],
+  extensions: [TiptapStarterKit.configure({ codeBlock: false }), TiptapCodeBlockLowlight.configure({ lowlight }), TiptapMarkdown, TiptapPlaceholder.configure({ placeholder: placeholder })],
   onUpdate: () => {
     emit('update:modelValue', editor.value?.storage.markdown.getMarkdown())
   },

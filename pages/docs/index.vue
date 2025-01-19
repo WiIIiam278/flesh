@@ -18,7 +18,7 @@
                     <div class="project-section" v-for="{project, pages} in docPages.sort((a, b) => b.project.stats.downloadCount - a.project.stats.downloadCount)">
                         <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
-                            <img v-if="project.metadata?.icons['PNG']" :src="`/images/icons/${project.metadata.icons['PNG']}`" />
+                            <img v-if="project.metadata?.icons['PNG']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG']}`" />
                             <span>{{ project.metadata.name }}</span>
                         </NuxtLink>
                         <div class="project-links">
@@ -55,8 +55,10 @@
 </template>
 
 <script setup>
-const { t } = useI18n()
-const docPages = ref([])
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
+
+const { t } = useI18n();
+const docPages = ref([]);
 
 // Get doc pages
 const projects = await useAllProjects();
