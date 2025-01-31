@@ -153,7 +153,7 @@
     "email-address-verified-title": "Email Address Verified",
     "email-address-verified-description": "Thanks for verifying your email address. Please sign in again to refresh your account purchases.",
     "email-address-expired-title": "Email Verification Expired",
-    "email-address-expired-description": "The verification link you used was expired. Please sign in again and re-send the verification email.",
+    "email-address-expired-description": "The verification link you used was invalid or has expired. Please sign in again and re-send the verification email.",
     "delete-account": "Delete Account",
     "delete-account-confirm": "Are you sure you want to delete your account? This will delete your account data and disassociate your Discord account from William278.net. Logging in again will create new account data.",
     "delete-account-confirm-other": "Are you sure you want to delete {name}'s account? This action is irreversable.",
