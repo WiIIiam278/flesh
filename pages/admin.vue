@@ -25,6 +25,9 @@
                             <div v-if="activeTab === 'tickets'">
                                 <TicketsTable />
                             </div>
+                            <div v-if="activeTab === 'transactions'">
+                                <TransactionsTable />
+                            </div>
                             <div v-if="activeTab === 'assets'">
                                 <AssetManager />
                             </div>
@@ -45,6 +48,7 @@ if (useIsUserRole(user.value, 'staff')) {
     tabs.unshift({ id: 'assets', name: 'Assets', path: '/admin#assets' })
 }
 if (useIsUserRole(user.value, 'admin')) {
+    tabs.unshift({ id: 'transactions', name: 'Transactions', path: '/admin#transactions' })
     tabs.unshift({ id: 'import', name: 'Import', path: '/admin#import' })
     tabs.unshift({ id: 'upload', name: 'Upload', path: '/admin#upload' })
     tabs.unshift({ id: 'pages', name: 'Pages', path: '/admin#pages' })
