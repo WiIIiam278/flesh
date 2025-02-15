@@ -194,7 +194,7 @@
 <script setup>
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
-const ALLOWED_IMAGE_TYPES = ['PNG', 'SVG'];
+const ALLOWED_IMAGE_TYPES = ['PNG', 'SVG', 'PNG_TRANSPARENT', 'SVG_TRANSPARENT'];
 
 const { auth, xsrf } = useAuth();
 const projects = await useAllProjects();
