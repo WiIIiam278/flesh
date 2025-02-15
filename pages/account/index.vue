@@ -44,7 +44,8 @@
                                     <div class="purchases-grid">
                                         <div v-for="project in restricted.filter(r => user.purchases.includes(r.slug))" class="purchase">
                                             <NuxtLink :to="`/project/${project.slug}`" class="cover shadow">
-                                                <img class="logo" v-if="project.metadata.icons['PNG']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG']}`" />
+                                                <img class="logo" v-if="project.metadata.icons['PNG_TRANSPARENT']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG_TRANSPARENT']}`" />
+                                                <img class="logo" v-else-if="project.metadata.icons['PNG']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG']}`" />
                                             </NuxtLink>
                                             <div class="details">
                                                 <h2>{{ project.metadata.name }}</h2>
