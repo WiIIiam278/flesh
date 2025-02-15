@@ -1,5 +1,6 @@
 import { setResponseHeader } from 'h3'
 import { registerFont, createCanvas, loadImage } from 'canvas'
+import removeMd from 'remove-markdown'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;

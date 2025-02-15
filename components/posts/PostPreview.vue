@@ -1,20 +1,26 @@
 <template>
     <div class="container">
-        <div :class="`post ${type}`">
-            <div class="title-row">
-                <div class="title">
-                    <Pill v-if="post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
-                    <NuxtLink :title="post.title" :to="`/posts/${post.slug}`"><h3 class="post-title">{{ post.title }}</h3></NuxtLink>
-                </div>
-                <NuxtLink v-if="post.associatedProject && displayProject && !post.imageUrl" class="project" :title="post.associatedProject.name" :to="`/project/${post.associatedProject.slug}`">
-                    <IconifiedProject :project="post.associatedProject" />
-                </NuxtLink>
-            </div>
-            <MDC class="contents" :value="contents" />
-        </div>
-        <NuxtLink class="thumbnail" v-if="post.imageUrl" :title="post.title" :to="`/posts/${post.slug}`">
-            <img class="shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" />
+        <NuxtLink class="thumbnail" :title="post.title" :to="`/posts/${post.slug}`">
+            <img v-if="post.imageUrl" class="shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" />
+            <img v-else class="shadow" :src="`/images/thumbnails/posts/${post.slug}/thumb.png`" :alt="post.title" />
         </NuxtLink>
+        <div class="post">
+            <div class="title-row">
+                <NuxtLink class="name" :title="post.title" :to="`/posts/${post.slug}`"><h3 class="post-title">{{ post.title }}</h3></NuxtLink>
+                <div class="details">
+                    <div class="time-project">
+                        <IconifiedText icon="fa6-solid:calendar">{{ useTimeFormat(post.timestamp) }}</IconifiedText>
+                        <NuxtLink v-if="post.associatedProject && displayProject && !post.imageUrl" class="project" :title="post.associatedProject.name" :to="`/project/${post.associatedProject.slug}`">
+                            <IconifiedProject :project="post.associatedProject" />
+                        </NuxtLink>
+                    </div>
+                    <IconifiedText class="tags" icon="fa6-solid:tag">
+                        <Pill v-if="post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
+                    </IconifiedText>
+                </div>
+            </div>
+            <MDC class="contents" :value="post.body.split('\n')[0]" />
+        </div>
     </div>
 </template>
 
@@ -25,110 +31,69 @@ const { post, type, displayProject } = defineProps({
         type: Object,
         required: true
     },
-    type: {
-        type: String,
-        required: false,
-        default: 'card'
-    },
     displayProject: {
         type: Boolean,
         required: false,
         default: true
     }
 })
-const contents = `<span class="date">${useTimeFormat(post.timestamp, true)} &ndash; </span>${post.body.split('\n')[0]}`;
 </script>
 
 <style scoped>
+.pill {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
 .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 1rem;
 }
 
-.container img {
+.container .post {
     width: 100%;
-    height: auto;
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 0.5rem;
-}
-
-.post {
-    text-decoration: none !important;
-    color: var(--white);
-    width: 100%;
-}
-
-.post.mini {
-    display: flex;
-    flex-direction: column;
 }
 
 .title-row {
+    flex-direction: column;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    container-type: inline-size;
-    line-height: 1.15rem;
-    margin-bottom: 0.35rem;
+    gap: 0.1rem;
 }
 
-.title-row .title, .title-row .project {
+.title-row .name:deep(h3) {
+    padding: 0;
+    margin: 0;
+}
+
+.title-row .details, .time-project {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 0.75rem;
+    color: var(--light-gray)
 }
 
-.title-row .title {
-    gap: 0.5rem;
+.title-row .details {
+    justify-content: space-between;
 }
 
-.title .pill {
-    color: var(--white) !important;
+.tags .pill {
+    color: white;
 }
 
-.title .pill, .title .post-title {
-    margin: 0;
-    line-height: 1.15;
-}
-
-.post .title-row .title {
-    color: var(--accent);
-}
-
-.post .body {
+.thumbnail {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
-.post:deep(.contents) {
-    padding: 0;
-    margin: 0.5rem 0;
-    overflow: hidden;
-    text-overflow: elipsis;
-}
-
-.post.mini:deep(.contents) {
-    max-height: 3em;
-}
-
-.post.stack:deep(.contents) {
-    max-height: 11em;
-}
-
-.post:deep(.contents p) {
-    margin: 0;
-}
-
-.post:deep(.contents .date) {
-    color: var(--light-gray);
-}
-
-@container (width < 450px) {
-    .title-row .project {
-        display: none;
-    }
+.thumbnail img {
+    max-width: 225px;
+    max-height: 150px;
+    width: 225px;
+    aspect-ratio: 3 / 4;
+    object-fit: fill;
+    border-radius: 0.5rem;
 }
 </style>

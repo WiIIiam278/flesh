@@ -16,7 +16,7 @@
                 </BreadcrumbsBar>
                 <h1>{{ $t('posts-title') }}</h1>
                 <div v-if="posts.value?.content?.length" class="posts">
-                    <PostPreview v-for="post of posts.value.content" type="stack" :post="post" />
+                    <PostPreview v-for="post of posts.value.content" :post="post" />
                 </div>
                 <IconifiedText v-else class="error" icon="fa6-solid:info">{{ $t('posts-none') }}</IconifiedText>
                 <Pagination v-if="posts.value" :data="posts.value" v-on:update="(page, perPage) => updatePosts(page, perPage)" />

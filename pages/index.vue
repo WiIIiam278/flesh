@@ -24,7 +24,7 @@
                         <ButtonLink icon="fa6-brands:discord" to="https://discord.gg/tVYhJfyDWG" target="_blank">{{ $t('link-support') }}</ButtonLink>
                         <ButtonLink icon="fa6-solid:at" @click="useContactInfo($t)">{{ $t('link-contact') }}</ButtonLink>
                     </div>
-                    <PostsStack class="posts" />
+                    <PostsStack class="posts" :count="1" />
                 </div>
             </div>
         </NuxtLayout>

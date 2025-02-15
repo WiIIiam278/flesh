@@ -1,8 +1,10 @@
 import { setResponseHeader } from 'h3'
 import { registerFont, createCanvas, loadImage } from 'canvas'
+import removeMd from 'remove-markdown'
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 
 const fetchPost = async (slug) => await $fetch(`${BASE_URL}/v1/posts/${slug}`)
 
@@ -20,31 +22,55 @@ const drawBackground = (ctx, canvas) => {
 
 // Draw the project name
 const drawPageName = (ctx, name) => {
-  const maxWidth = 800;
-  let fontSize = 90;
-  
-  // Dynamically reduce font size if text exceeds maxWidth
-  do {
-    ctx.font = `${fontSize}pt NunitoBold, sans-serif`;
-    if (ctx.measureText(name).width > maxWidth) fontSize -= 5;
-  } while (ctx.measureText(name).width > maxWidth && fontSize > 30);
-
+  ctx.font = '50pt NunitoBold, sans-serif';
   ctx.fillStyle = '#FFFFFF';
-  ctx.fillText(name, 60, 140);
+
+  const maxWidth = 800;
+  const maxLines = 3;
+  const lineHeight = 65;
+  const stripped = removeMd(name);
+  const words = stripped.split(' ');
+  let line = '';
+  let lines = [];
+  let y = 120;
+
+  for (let i = 0; i < words.length; i++) {
+    const testLine = line + words[i] + ' ';
+    const testWidth = ctx.measureText(testLine).width;
+
+    if (testWidth > maxWidth && line.length > 0) {
+      lines.push(line.trim());
+      line = words[i] + ' ';
+      if (lines.length === maxLines) break;
+    } else {
+      line = testLine;
+    }
+  }
+
+  if (lines.length < maxLines) lines.push(line.trim());
+
+  let maxHeight = 0;
+  lines.forEach((line, index) => {
+    let height = y + index * lineHeight;
+    ctx.fillText(line, 60, height);
+    maxHeight = maxHeight < height ? height : maxHeight;
+  });
+  return maxHeight;
 };
 
 // Draw tagline with word wrapping
-const drawTagline = (ctx, tagline) => {
+const drawTagline = (ctx, tagline, startingHeight) => {
   ctx.font = '28pt Nunito, sans-serif';
   ctx.fillStyle = '#FFFFFF';
 
   const maxWidth = 800;
   const maxLines = 3;
   const lineHeight = 40;
-  const words = tagline.split(' ');
+  const stripped = removeMd(tagline);
+  const words = stripped.split(' ');
   let line = '';
   let lines = [];
-  let y = 230;
+  let y = startingHeight + 70;
 
   for (let i = 0; i < words.length; i++) {
     const testLine = line + words[i] + ' ';
@@ -102,13 +128,20 @@ export default defineEventHandler(async (event) => {
   // Draw BG
   drawBackground(ctx, canvas);
 
-  // Load and draw the main site image
-  const image = await loadImage(`${FRONTEND_URL}/images/icons/william278.png`);
-  ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
+  // Load and draw the project or site image
+  const project = post.associatedProject;
+  const icon = project?.metadata?.icons['PNG'] ?? project?.metadata?.icons['SVG']
+  if (icon) {
+    const image = await loadImage(`${ASSETS_URL}/${icon}`);
+    ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
+  } else {
+    const image = await loadImage(`${FRONTEND_URL}/images/icons/william278.png`);
+    ctx.drawImage(image, canvas.width - 250 - 50, 50, 250, 250);
+  }
   
   // Draw the capitalized page name, tagline, and site name
-  drawPageName(ctx, post.title.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()));
-  drawTagline(ctx, post.body.split('\n')[0]);
+  let height = drawPageName(ctx, post.title.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()));
+  drawTagline(ctx, post.body.split('\n')[0], height);
   drawSiteName(ctx, 'William278.net');
 
   // Return the image buffer

@@ -31,8 +31,8 @@
                             <option v-for="project of allProjects" :value="project.slug">{{ project.metadata.name }}</option>
                         </select>
                     </IconifiedText>
-                    <IconifiedText icon="fa6-solid:tag" class="time">
-                        <span v-if="!editing">{{ $t(`post-category-${post.category}`) }}</span>
+                    <IconifiedText icon="fa6-solid:tag" class="category">
+                        <Pill v-if="!editing && post.category?.length" class="pill">{{ $t(`post-category-${post.category}`) }}</Pill>
                         <select v-else v-model="post.category" :placeholder="t('post-category')">
                             <option value="changelogs">{{ $t('post-category-changelogs') }}</option>
                             <option value="blog">{{ $t('post-category-blog') }}</option>
@@ -251,6 +251,11 @@ textarea.body {
     width: 100%;
     min-height: 40vh;
     margin: 0.5rem 0;
+}
+
+.category .pill {
+    color: white;
+    font-size: 0.9rem;
 }
 
 .time select {
