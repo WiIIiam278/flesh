@@ -37,7 +37,8 @@
                         </ButtonLink>
                     </div>
                 </div>
-                <MDC :value="sidebar" tag="article" />
+                <DocsNavigation v-if="navigation?.length" :navigation="navigation" />
+                <MDC v-else-if="sidebar" :value="sidebar" tag="article" />
                 <div class="sidebar-bottom">
                     <ButtonLink v-for="link in meta.links" 
                         :key="link.url" :link="link.url" :icon="useLinkIcon(link)"></ButtonLink>
@@ -80,7 +81,8 @@ const project = await useProject(params.project.toLowerCase());
 
 // Get sidebar and content
 const { metadata: meta } = project.value || {};
-const { content: sidebar } = project.value ? await useDocsPage(params.project.toLowerCase(), '_sidebar') : '';
+const { documentationNav: navigation } = meta || {};
+const { content: sidebar } = !navigation?.length && project.value ? await useDocsPage(params.project.toLowerCase(), '_sidebar') : '';
 const { title, content } = project.value ? await useDocsPage(params.project.toLowerCase(), params.topic ? params.topic.toLowerCase() : 'home', locale) : { title: '', content: '' };
 
 const description = computed(() => {

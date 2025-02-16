@@ -9,7 +9,7 @@ const fetchPost = async (slug) => await $fetch(`${BASE_URL}/v1/posts/${slug}`)
 
 // Add background and gradient
 const drawBackground = (ctx, canvas) => {
-  ctx.fillStyle = '#131313';
+  ctx.fillStyle = '#08111B';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const gradient = ctx.createLinearGradient(0, 0, 0, 150);

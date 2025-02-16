@@ -64,6 +64,11 @@
                 <label for="project-documentation">Has Documentation</label>
                 <input id="project-documentation" v-model="editing.metadata.documentation" type="checkbox" />
             </div>
+            <!-- documentation navigation editor -->
+            <div v-if="editing.metadata.documentation" class="two-column">
+                <label for="docs-nav">Documentation Navigation</label>
+                <DocsNavigationEditor id="docs-nav" v-model="editing.metadata.documentationNav" /> 
+            </div>
             <!-- hidden checkbox -->
             <div>
                 <label for="project-hidden">Is Hidden</label>
@@ -231,6 +236,7 @@ const getDefaultProject = ((slug) => `
     "linkedDiscordRole": "",
     "archived": false,
     "documentation": true,
+    "documentationNav": [],
     "listDownloads": true,
     "hidden": false,
     "sortWeight": 1,
