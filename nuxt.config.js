@@ -77,7 +77,9 @@ export default defineNuxtConfig({
   // Runtime parameters
   runtimeConfig: {
       public: {
+          GIT_URL: process.env.GIT_URL,
           GIT_HASH: require('child_process').execSync('git rev-parse --short HEAD').toString().trim(),
+          GIT_BRANCH: require('child_process').execSync('git branch --show-current').toString().trim(),
           API_BASE_URL: process.env.API_BASE_URL,
           FRONTEND_BASE_URL: process.env.FRONTEND_BASE_URL,
           ASSETS_BASE_URL: process.env.ASSETS_BASE_URL,

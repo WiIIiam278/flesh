@@ -10,9 +10,10 @@
                 <div class="content">
                     <slot />
                 </div>
-                <Footer />
+                <Footer class="desktop-footer" />
             </div>
         </div>
+        <Footer class="mobile-footer" />
     </div>
 </template>
 
@@ -48,6 +49,11 @@
     min-height: calc(100% - 70px);
 }
 
+.content:deep(img) {
+    width: 750px;
+    max-width: 50vw;
+}
+
 .docs .sidebar {
     flex: 1;
     max-width: 300px;
@@ -57,23 +63,54 @@
     overflow-y: auto;
 }
 
+.desktop-footer {
+    display: flex;
+}
+
+.mobile-footer {
+    display: none;
+}
+
 /* Less than 850px */
 @media screen and (max-width: 850px) {
     .page .docs {
         flex-direction: column-reverse;
-        max-width: 95vw;
+        max-height: unset;
+        overflow: auto;
         gap: 0.5rem;
     }
 
-    .docs .content {
+    .docs .body {
         max-width: 100%;
-        width: 100%;
+        width: 100% !important;
         padding: 0;
+    }
+
+    .body .content {
+        max-width: unset;
+    }
+
+    .content:deep(article) {
+        max-width: unset;
+    }
+
+    .content:deep(img) {
+        width: unset;
+        max-width: 100%;
     }
 
     .docs .sidebar {
         max-width: 100%;
         width: 100%;
+        padding: 1rem 0;
+    }
+
+    .desktop-footer {
+        display: none;
+    }
+
+    .mobile-footer {
+        display: flex;
     }
 }
 </style>

@@ -18,7 +18,7 @@
                 <BreadcrumbsBar>
                     <Breadcrumbs :crumbs="breadcrumbs" />
                 </BreadcrumbsBar>
-                <article>
+                <article class="documentation">
                     <h1 v-if="params.topic">{{ title }}</h1>
                     <MDC :value="content" tag="article" />
                 </article>
