@@ -23,11 +23,11 @@
                 </li>
             </ul>
         </div>
-        <span id="version">
+        <div id="version">
             <a href="https://github.com/WiIIiam278/william278-site" target="_blank">
-                <IconifiedText icon="fa6-solid:code-branch">{{ gitHead }}</IconifiedText>
+                <IconifiedText icon="fa6-solid:code-branch">{{ gitHead }}@master</IconifiedText>
             </a>
-        </span>
+        </div>
     </footer>
 </template>
 
@@ -38,13 +38,6 @@ const gitHead = config.public.GIT_HASH;
 </script>
 
 <style scoped>
-#version {
-    position: absolute;
-    right: 1em;
-    margin: 0.5em;
-    font-size: smaller;
-}
-
 #version a {
     color: var(--light-gray) !important;
 }
@@ -69,12 +62,11 @@ const gitHead = config.public.GIT_HASH;
 
 footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 2rem;
     margin-top: auto;
-    justify-content: flex-end;
     color: var(--light-gray);
     background: linear-gradient(180deg, var(--background) 0%, var(--dark-gray) 100%);
 }

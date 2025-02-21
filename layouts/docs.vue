@@ -1,68 +1,79 @@
 <!-- A project doc page -->
 <template>
-    <div id="page-body">
+    <div class="page">
         <Navbar />
-        <div id="docs-page">
-            <div id="docs-sidebar" class="shadow sidebar">
+        <div class="docs">
+            <aside class="sidebar">
                 <slot name="sidebar" />
-            </div>
-            <div id="docs-content">
-                <slot />
+            </aside>
+            <div class="body">
+                <div class="content">
+                    <slot />
+                </div>
+                <Footer />
             </div>
         </div>
-        <Footer />
     </div>
 </template>
 
 <style scoped>
-#page-body {
+.page {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    height: 100% !important;
+    width: 100%;
 }
 
-#docs-page {
-    margin: 1rem auto;
-    max-width: 1400px;
+.page .docs {
+    max-height: 100%;
+    width: 100%;
     display: flex;
+    justify-content: center;
+    height: 100%;
+    max-height: 92vh;
+    overflow: hidden;
 }
 
-#docs-content {
+.docs .body {
     flex: 1;
-    padding: 0 2rem;
-    max-width: 65vw;
-    width: 95vw;
+    max-width: 1280px;
+    width: calc(80% - 2rem);
+    overflow-y: scroll;
 }
 
-#docs-sidebar {
+.body .content {
+    padding: 1rem 2rem;
+    /* Account for height of footer */
+    min-height: calc(100% - 70px);
+}
+
+.docs .sidebar {
     flex: 1;
+    max-width: 300px;
+    width: calc(20% - 2rem);
+    background-color: var(--dark-gray);
     padding: 1rem;
-    max-width: 250px;
-    width: 20vw;
-    background-color: var(--gray);
-    border-radius: 0.5rem;
-    height: fit-content;
+    overflow-y: auto;
 }
 
 /* Less than 850px */
 @media screen and (max-width: 850px) {
-    #docs-page {
+    .page .docs {
         flex-direction: column-reverse;
         max-width: 95vw;
         gap: 0.5rem;
     }
 
-    #docs-content {
+    .docs .content {
         max-width: 100%;
         width: 100%;
         padding: 0;
     }
 
-    #docs-sidebar {
+    .docs .sidebar {
         max-width: 100%;
         width: 100%;
-        padding: 1rem;
-        box-sizing: border-box;
     }
 }
 </style>

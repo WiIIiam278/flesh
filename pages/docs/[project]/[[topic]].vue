@@ -23,26 +23,8 @@
                     <MDC :value="content" tag="article" />
                 </article>
             </template>
-            <template #sidebar class="sidebar">
-                <div class="sidebar-top">
-                    <NuxtLink class="project-title" :to="'/docs/' + project.slug">
-                        <IconifiedProject centered :project="project" />
-                    </NuxtLink>
-                    <div class="project-buttons">
-                        <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" >
-                            {{ $t('link-download') }}
-                        </ButtonLink>
-                        <ButtonLink v-if="project.metadata.github" :href="project.metadata.github" icon="fa6-brands:github" >
-                            {{ $t('project-link-github') }}
-                        </ButtonLink>
-                    </div>
-                </div>
-                <DocsNavigation v-if="navigation?.length" :navigation="navigation" />
-                <MDC v-else-if="sidebar" :value="sidebar" tag="article" />
-                <div class="sidebar-bottom">
-                    <ButtonLink v-for="link in meta.links" 
-                        :key="link.url" :link="link.url" :icon="useLinkIcon(link)"></ButtonLink>
-                </div>
+            <template #sidebar>
+                <DocsSidebar :project="project" />
             </template>
         </NuxtLayout>
         <NuxtLayout v-else name="default">
@@ -81,8 +63,6 @@ const project = await useProject(params.project.toLowerCase());
 
 // Get sidebar and content
 const { metadata: meta } = project.value || {};
-const { documentationNav: navigation } = meta || {};
-const { content: sidebar } = !navigation?.length && project.value ? await useDocsPage(params.project.toLowerCase(), '_sidebar') : '';
 const { title, content } = project.value ? await useDocsPage(params.project.toLowerCase(), params.topic ? params.topic.toLowerCase() : 'home', locale) : { title: '', content: '' };
 
 const description = computed(() => {
@@ -102,30 +82,3 @@ if (params.topic) {
     breadcrumbs.push({ name: meta.name, link: `/docs/${project.value.slug}` });
 }
 </script>
-
-<style scoped>
-.sidebar-top {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.sidebar-top .project-title {
-    color: white !important;
-    font-size: x-large;
-    font-weight: bold;
-}
-
-.sidebar-top .project-buttons {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.sidebar-bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 1.5rem 0 0.25rem 0;
-    gap: 0.5rem;
-}
-</style>
