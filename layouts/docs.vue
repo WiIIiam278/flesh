@@ -21,8 +21,8 @@
 .page {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    height: 100% !important;
+    background-color: var(--dark-gray);
+    height: 100vh;
     width: 100%;
 }
 
@@ -32,26 +32,27 @@
     display: flex;
     justify-content: center;
     height: 100%;
-    max-height: 92vh;
+    max-height: calc(100vh - 64px);
     overflow: hidden;
 }
 
 .docs .body {
     flex: 1;
-    max-width: 1280px;
+    background-color: var(--background);
+    max-width: 1200px;
     width: calc(80% - 2rem);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .body .content {
     padding: 1rem 2rem;
+    padding-bottom: 0;
     /* Account for height of footer */
-    min-height: calc(100% - 70px);
+    min-height: calc(100% - 71px);
 }
 
 .content:deep(img) {
-    width: 750px;
-    max-width: 50vw;
+    max-width: 65%;
 }
 
 .docs .sidebar {
@@ -73,6 +74,10 @@
 
 /* Less than 850px */
 @media screen and (max-width: 850px) {
+    .page {
+        height: 100%;
+    }
+
     .page .docs {
         flex-direction: column-reverse;
         max-height: unset;

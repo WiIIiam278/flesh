@@ -34,7 +34,7 @@ selectedTab.value = 'terms-and-conditions'
 .page-content {
     margin-top: 1rem;
     max-width: 95vw;
-    width: 1000px;
+    width: 1100px;
 }
 
 .page-content h1 {

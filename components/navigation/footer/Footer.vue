@@ -74,6 +74,7 @@ const gitBranch = config.public.GIT_BRANCH;
 
 .footer-container {
     container: footer-container / inline-size;
+    margin-top: auto;
 }
 
 footer {
@@ -83,7 +84,6 @@ footer {
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
-    margin-top: auto;
     color: var(--light-gray);
     background: linear-gradient(180deg, var(--background) 0%, var(--dark-gray) 100%);
 }

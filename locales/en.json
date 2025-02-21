@@ -105,6 +105,7 @@
     "docs-home-copy": "Find documentation for the various projects on William278.net, including setup, configuration, customization and developer API usage. Use the search bar to search for specific topics.",
 
     "docs-title": "{project} Docs",
+    "docs-intro": "Welcome to the documentation area for {project}: {tagline}.",
     "docs-edit-button": "Edit",
     "docs-translate-button": "Translate",
     

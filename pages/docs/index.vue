@@ -21,12 +21,13 @@
                             <img v-if="project.metadata?.icons['PNG']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG']}`" />
                             <span>{{ project.metadata.name }}</span>
                         </NuxtLink>
-                        <div class="project-links">
+                        <div class="project-links" v-if="!project.metadata?.documentationNav?.length">
                             <NuxtLink v-for="entry in pages.filter(e => !e[0].startsWith('_') && e[0] !== 'home') ?? []"
                                 :href="`/docs/${project.slug}/${entry[0]}`">
                                 {{ entry[1] }}
                             </NuxtLink>
                         </div>
+                        <DocsNavigationMini class="project-navigation" v-else :project="project" />
                         <div class="project-buttons">
                             <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" >
                                 {{ $t('link-download') }}
@@ -98,6 +99,10 @@ projects.value?.filter(p => p.metadata.documentation)
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 0.35rem;
+}
+
+.project-navigation {
+    margin: 1rem 0;
 }
 
 .project-buttons {

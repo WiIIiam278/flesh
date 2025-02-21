@@ -19,12 +19,15 @@
                     <Breadcrumbs :crumbs="breadcrumbs" />
                 </BreadcrumbsBar>
                 <article class="documentation">
-                    <h1 v-if="params.topic">{{ title }}</h1>
-                    <MDC :value="content" tag="article" />
+                    <div v-if="params.topic">
+                        <h1 v-if="params.topic">{{ title }}</h1>
+                        <MDC :value="content" tag="article" />
+                    </div>
+                    <DocsNavigationHome v-else :project="project" />
                 </article>
             </template>
             <template #sidebar>
-                <DocsSidebar :project="project" />
+                <DocsSidebar :project="project" :currentPage="params.topic" />
             </template>
         </NuxtLayout>
         <NuxtLayout v-else name="default">
