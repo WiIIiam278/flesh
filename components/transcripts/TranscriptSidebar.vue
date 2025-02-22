@@ -1,48 +1,48 @@
 <template>
-    <h2>{{ $t('ticket-transcript-header') }}</h2>
-    <div class="pills">
-        <Pill>
-            <IconifiedText icon="fa6-solid:tag">
-                {{ data.ticket.project ? data.ticket.project : 'Unknown' }}
-            </IconifiedText>
-        </Pill>
-        <Pill>
-            <IconifiedText icon="fa6-solid:hashtag">ticket-{{ data.ticket.id }}</IconifiedText>
-        </Pill>
-        <Pill>
-            <IconifiedText icon="fa6-solid:ticket">
-                {{ useTimeFormat(parseInt(data.ticket.open_timestamp * 1000), true) }}
-            </IconifiedText>
-        </Pill>
-        <Pill>
-            <IconifiedText icon="fa6-solid:lock">
-                {{ useTimeFormat(parseInt(data.ticket.open_timestamp * 1000), true) }}
-            </IconifiedText>
-        </Pill>
-    </div>
-    <h3>{{ $t('ticket-transcript-topic') }}</h3>
-    <div class="topic">
-        {{ data.ticket.topic }}
-    </div>
-    <h3>{{ $t('ticket-transcript-participants') }}</h3>
-    <div class="participants">
-        <div v-for="participant of data.ticket.participants">
-            <TranscriptParticipant :user="getParticipant(participant)" :creator="participant === data.ticket.creator" />
+    <div>
+        <h1>{{ $t('ticket-transcript-header') }}</h1>
+        <div class="pills">
+            <Pill>
+                <IconifiedText icon="fa6-solid:tag">
+                    {{ data.ticket.project ? data.ticket.project : 'Unknown' }}
+                </IconifiedText>
+            </Pill>
+            <Pill>
+                <IconifiedText icon="fa6-solid:hashtag">ticket-{{ data.ticket.id }}</IconifiedText>
+            </Pill>
+            <Pill>
+                <IconifiedText icon="fa6-solid:ticket">
+                    {{ useTimeFormat(parseInt(data.ticket.open_timestamp * 1000), true) }}
+                </IconifiedText>
+            </Pill>
+            <Pill>
+                <IconifiedText icon="fa6-solid:lock">
+                    {{ useTimeFormat(parseInt(data.ticket.open_timestamp * 1000), true) }}
+                </IconifiedText>
+            </Pill>
         </div>
-    </div>
-    <div class="login-reminder" v-if="!auth">{{ t('log-in-to-view-tickets') }}</div>
-    <div class="transcript-buttons">
-        <ButtonLink v-if="auth" link="/account#your-support-tickets" icon="fa6-solid:ticket" >{{ t('link-tickets') }}</ButtonLink>
-        <ButtonLink v-else link="/account/login" icon="fa6-solid:key" >{{ $t('link-log-in') }}</ButtonLink>
-        <ButtonLink :link="url" icon="fa6-solid:download" >{{ $t('ticket-transcript-download') }}</ButtonLink>
+        <h2>{{ $t('ticket-transcript-topic') }}</h2>
+        <div class="topic">
+            {{ data.ticket.topic }}
+        </div>
+        <h2>{{ $t('ticket-transcript-participants') }}</h2>
+        <div class="participants">
+            <div v-for="participant of data.ticket.participants">
+                <TranscriptParticipant :user="getParticipant(participant)" :creator="participant === data.ticket.creator" />
+            </div>
+        </div>
+        <div class="login-reminder" v-if="!auth">{{ t('log-in-to-view-tickets') }}</div>
+        <div class="transcript-buttons">
+            <ButtonLink v-if="auth" link="/account#your-support-tickets" icon="fa6-solid:ticket" >{{ t('link-tickets') }}</ButtonLink>
+            <ButtonLink v-else link="/account/login" icon="fa6-solid:key" >{{ $t('link-log-in') }}</ButtonLink>
+            <ButtonLink :link="url" icon="fa6-solid:download" >{{ $t('ticket-transcript-download') }}</ButtonLink>
+        </div>
     </div>
 </template>
 
 <script setup>
-import { useTimeFormat } from '../../composables/useTimeFormat';
-
-const { locale, t } = useI18n()
-const localePath = useLocalePath()
+const { t } = useI18n()
+const { auth } = await useAuth();
 
 const { data } = defineProps({
     data: {
@@ -54,7 +54,6 @@ const { data } = defineProps({
         required: true
     }
 });
-const { auth } = await useAuth();
 
 const getParticipant = (id) => {
     if (data.users) {
@@ -87,8 +86,16 @@ const getParticipant = (id) => {
     margin: 0;
 }
 
-h3 {
-    margin-bottom: 0.5rem;;
+h1 {
+    border: none;
+    text-align: center;
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
 }
 
 .topic {
