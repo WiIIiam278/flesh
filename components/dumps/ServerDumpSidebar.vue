@@ -1,0 +1,164 @@
+<template>
+    <div>
+        <h1>{{ $t('dump-viewer-title') }}</h1>
+        <div class="plugin">
+            <div class="section-header">{{ $t('dump-header-plugin') }}</div>
+            <div class="avatar">
+                <object v-if="meta.icons['SVG']" :data="`${ASSETS_URL}/${meta.icons['SVG']}`" type="image/svg+xml" />
+                <img v-else-if="meta.icons['PNG']" :src="`${ASSETS_URL}/${meta.icons['PNG']}`" />
+                <div class="info">
+                    <IconifiedText icon="fa6-solid:tag"><NuxtLink :to="`/project/${project.slug}`">{{ meta.name }}</NuxtLink></IconifiedText>
+                    <IconifiedText icon="fa6-solid:code-branch"><span class="value">v{{ data.project.version }}</span></IconifiedText>
+                </div>
+            </div>
+            <div class="info">
+                <IconifiedText icon="garden:platform-26">
+                    <span class="label">{{ $t('dump-server-type') }}</span><span class="value">{{ data.server.serverJarType }}</span>
+                </IconifiedText>
+                <IconifiedText icon="fa6-solid:code-branch">
+                    <span class="label">{{ $t('dump-server-jar-version') }}</span><span class="value">{{ data.server.serverJarVersion }}</span>
+                </IconifiedText>
+                <IconifiedText icon="fa6-solid:cube">
+                    <span class="label">{{ $t('dump-server-mc-version') }}</span><span class="value">{{ data.server.minecraftVersion.split('-')[0] }}</span>
+                </IconifiedText>
+                <IconifiedText icon="octicon:globe-16">
+                    <span class="label">{{ $t('dump-server-online-mode') }}</span><span class="value"><Icon :name="`fa6-solid:${data.server.onlineMode ? 'check' : 'x'}`" />&nbsp;{{ data.server.onlineMode }}</span>
+                </IconifiedText>
+                <IconifiedText icon="mdi:proxy">
+                    <span class="label">{{ $t('dump-server-proxy-state') }}</span><span class="value">{{ useCapitalized(data.server.proxyState) }}</span>
+                </IconifiedText>
+                <IconifiedText icon="fa6-brands:java">
+                    <span class="label">{{ $t('dump-server-java-version') }}</span><span class="value">{{ data.environment.javaVersion }}</span>
+                </IconifiedText>
+                <IconifiedText icon="lucide:server">
+                    <span class="label">{{ $t('dump-server-os') }}</span><span class="value">{{ data.environment.osName }}</span>
+                </IconifiedText>
+                <IconifiedText icon="ic:baseline-history">
+                    <span class="label">{{ $t('dump-server-uptime') }}</span><span class="value">{{ f(data.environment.uptime / 1000 / 60) }}m {{ f(data.environment.uptime / 1000 % 60) }}s</span>
+                </IconifiedText>
+                <IconifiedText icon="ri:ram-fill">
+                    <span class="label">{{ $t('dump-server-memory') }}</span><span class="value">
+                        {{ f(data.environment.freeMemory / 1048576) }} / {{ f(data.environment.allocatedMemory / 1048576) }} MB
+                    </span>
+                </IconifiedText>
+            </div>
+        </div>
+        <div class="navigator">
+            <div class="section-header noborder">{{ $t('dump-header-navigator') }}</div>
+            <div class="links">
+                <ServerDumpSidebarLink @select="$emit('select', 'overview')" :selected="selected === 'overview'" :title="t('dump-overview')" icon="fa6-solid:circle-info" />
+                <ServerDumpSidebarLink v-if="data.latestLog" @select="$emit('select', 'latest.log')" :selected="selected === 'latest.log'" :title="t('dump-server-log')" icon="fa6-solid:file-lines" />
+                <ServerDumpSidebarLink v-for="file in data.files" @select="$emit('select', file.fileName)" :selected="selected === file.fileName" :title="file.fileLabel" icon="fa6-solid:file-code" />
+            </div>
+        </div>
+        <div class="meta">
+            <div class="section-header">{{ $t('dump-header-metadata') }}</div>
+            <div class="avatar">
+                <img v-if="data.meta.creator" :alt="data.meta.creator.username" :src="`https://crafthead.net/helm/${data.meta.creator.uuid}/64`" />
+                <div class="info">
+                    <IconifiedText v-if="data.meta.creator" icon="octicon:command-palette-16"><span class="value">{{ data.meta.creator.username }}</span></IconifiedText>
+                    <IconifiedText icon="fa6-solid:clock"><span class="value">{{ useTimeFormat(data.meta.timestamp, true) }}</span></IconifiedText>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <ButtonLink target="_blank" link="https://discord.gg/tVYhJfyDWG" icon="fa6-brands:discord" >{{ t('link-support') }}</ButtonLink>
+            <ButtonLink target="_blank" :link="`${DUMPS_URL}/${id}`" icon="tabler:json" >{{ $t('dump-view-raw') }}</ButtonLink>
+        </div>
+    </div>
+</template>
+
+<script setup>
+const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
+const DUMPS_URL = useRuntimeConfig().public.DUMPS_BYTEBIN_URL;
+const { t } = useI18n()
+
+const { data, project, id, selected } = defineProps({
+    data: {
+        type: Object,
+        required: true
+    },
+    project: {
+        type: Object,
+        required: false
+    },
+    id: {
+        type: String,
+        required: true
+    },
+    selected: {
+        type: String,
+        required: false
+    }
+});
+const { metadata: meta } = project;
+const emit = defineEmits(['select'])
+
+const f = (num) => num.toFixed(0);
+</script>
+
+<style scoped>
+h1 {
+    border: none;
+    text-align: center;
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+.section-header {
+    color: var(--light-gray);
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+    border-bottom: 0.125rem solid var(--gray);
+}
+
+.navigator {
+    border-bottom: 0.125rem solid var(--gray);
+}
+
+.section-header.noborder {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.avatar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.avatar img, .avatar object {
+    width: 64px;
+    height: 64px;
+    aspect-ratio: 1;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info .label {
+    margin-right: 0.5rem;
+}
+
+.info .value {
+    color: var(--light-gray)
+}
+
+.buttons {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+</style>

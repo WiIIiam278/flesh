@@ -12,6 +12,7 @@
     "link-log-in": "Log in",
     "link-log-out": "Log out",
     "link-transcript": "Transcript",
+    "link-dump": "Dump",
     "link-terms": "Terms",
     "link-support": "Support",
     "link-tickets": "Tickets",
@@ -129,6 +130,24 @@
     "ticket-transcript-download": "Download",
     "log-in-to-view-tickets": "Log in to view and manage your support tickets.",
 
+    "dump-viewer-title-project": "{project} Status Dump",
+    "dump-viewer-title": "Status Dump Viewer",
+    "dump-header-plugin": "Plugin & Server",
+    "dump-header-navigator": "Browse",
+    "dump-header-metadata": "Dumped by",
+    "dump-view-raw": "View raw",
+    "dump-server-type": "Server Type:",
+    "dump-server-jar-version": "Version:",
+    "dump-server-mc-version": "Minecraft:",
+    "dump-server-online-mode": "Online Mode:",
+    "dump-server-proxy-state": "Proxy Status:",
+    "dump-server-java-version": "Java Version:",
+    "dump-server-os": "Server OS:",
+    "dump-server-uptime": "Uptime:",
+    "dump-server-memory": "Memory:",
+    "dump-overview": "Overview",
+    "dump-server-log": "Server Log",
+
     "tickets-header-record-count": "Displaying {count} ticket record(s):",
     "tickets-header-client": "Client",
     "tickets-header-number": "Number",
@@ -210,5 +229,7 @@
     "error-post-not-found": "Post not found.",
     "error-transcript-not-found": "That transcript could not be found, or the link has expired.",
     "error-transcript-bad-id": "Invalid transcript ID.",
-    "error-transcript-forbidden": "Forbidden transcript channel."
+    "error-transcript-forbidden": "Forbidden transcript channel.",
+    "error-dump-bad-id": "Invalid dump ID.",
+    "error-dump-not-found": "That dump could not be found or the link has expired."
 }

@@ -1,7 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   // Modules
-  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n', 'nuxt-tiptap-editor'],
+  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n', 'nuxt-tiptap-editor', 'nuxt-monaco-editor'],
 
   // Fonts
   googleFonts: {
@@ -83,6 +83,7 @@ export default defineNuxtConfig({
           API_BASE_URL: process.env.API_BASE_URL,
           FRONTEND_BASE_URL: process.env.FRONTEND_BASE_URL,
           ASSETS_BASE_URL: process.env.ASSETS_BASE_URL,
+          DUMPS_BYTEBIN_URL: process.env.DUMPS_BYTEBIN_URL,
           TRANSCRIPT_BUCKET_URL: process.env.TRANSCRIPT_BUCKET_URL,
           CURRENCY_SYMBOL: process.env.CURRENCY_SYMBOL,
           COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
