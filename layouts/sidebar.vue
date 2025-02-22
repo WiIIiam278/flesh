@@ -2,7 +2,7 @@
 <template>
     <div class="page">
         <Navbar />
-        <div class="docs">
+        <div class="page-with-sidebar">
             <aside class="sidebar">
                 <slot name="sidebar" />
             </aside>
@@ -26,7 +26,7 @@
     width: 100%;
 }
 
-.page .docs {
+.page .page-with-sidebar {
     max-height: 100%;
     width: 100%;
     display: flex;
@@ -36,7 +36,7 @@
     overflow: hidden;
 }
 
-.docs .body {
+.page-with-sidebar .body {
     flex: 1;
     background-color: var(--background);
     max-width: 1200px;
@@ -51,11 +51,7 @@
     min-height: calc(100% - 71px);
 }
 
-.content:deep(img) {
-    max-width: 65%;
-}
-
-.docs .sidebar {
+.page-with-sidebar .sidebar {
     flex: 1;
     max-width: 300px;
     width: calc(20% - 2rem);
@@ -78,14 +74,14 @@
         height: 100%;
     }
 
-    .page .docs {
+    .page .page-with-sidebar {
         flex-direction: column-reverse;
         max-height: unset;
         overflow: auto;
         gap: 0.5rem;
     }
 
-    .docs .body {
+    .page-with-sidebar .body {
         max-width: 100%;
         width: 100% !important;
         padding: 0;
@@ -99,12 +95,7 @@
         max-width: unset;
     }
 
-    .content:deep(img) {
-        width: unset;
-        max-width: 100%;
-    }
-
-    .docs .sidebar {
+    .page-with-sidebar .sidebar {
         max-width: 100%;
         width: 100%;
         padding: 1rem 0;

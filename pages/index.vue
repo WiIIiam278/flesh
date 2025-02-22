@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NuxtLayout>
+        <NuxtLayout name="home">
             <Head>
                 <Title>{{ $t('index-title') }}</Title>
                 <Meta name="description" :content="t('index-intro')" />
@@ -41,10 +41,6 @@ const { query } = useRoute();
 if (query['show_contact']) {
     useContactInfo(t);
 }
-
-definePageMeta({
-    layout: 'home'
-});
 </script>
 
 <style scoped>

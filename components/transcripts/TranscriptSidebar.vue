@@ -1,20 +1,20 @@
 <template>
     <h2>{{ $t('ticket-transcript-header') }}</h2>
     <div class="pills">
-        <Pill color="dark-gray">
+        <Pill>
             <IconifiedText icon="fa6-solid:tag">
                 {{ data.ticket.project ? data.ticket.project : 'Unknown' }}
             </IconifiedText>
         </Pill>
-        <Pill color="dark-gray">
+        <Pill>
             <IconifiedText icon="fa6-solid:hashtag">ticket-{{ data.ticket.id }}</IconifiedText>
         </Pill>
-        <Pill color="dark-gray">
+        <Pill>
             <IconifiedText icon="fa6-solid:ticket">
                 {{ useTimeFormat(parseInt(data.ticket.open_timestamp * 1000), true) }}
             </IconifiedText>
         </Pill>
-        <Pill color="dark-gray">
+        <Pill>
             <IconifiedText icon="fa6-solid:lock">
                 {{ useTimeFormat(parseInt(data.ticket.open_timestamp * 1000), true) }}
             </IconifiedText>
@@ -79,11 +79,16 @@ const getParticipant = (id) => {
     flex-direction: row;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem;
+    gap: 0.5rem;
+    margin: 1rem 0;
 }
 
 .pills span {
     margin: 0;
+}
+
+h3 {
+    margin-bottom: 0.5rem;;
 }
 
 .topic {
@@ -100,6 +105,7 @@ const getParticipant = (id) => {
 
 .transcript-buttons {
     display: flex;
+    justify-content: center;
     flex-direction: row;
     margin: 1.25rem 0;
     gap: 0.35rem;

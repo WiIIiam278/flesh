@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NuxtLayout v-if="content" name="docs">
+        <NuxtLayout v-if="content" name="sidebar">
             <template #default>
                 <Head>
                     <Title>{{ title }} &ndash; {{ $t('docs-title', {'project': meta.name}) }} &ndash; {{ $t('index-title') }}</Title>

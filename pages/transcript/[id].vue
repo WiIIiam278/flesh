@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NuxtLayout v-if="data" name="transcript">
+        <NuxtLayout v-if="data" name="sidebar">
             <Head>
                 <Title>{{ $t('ticket-transcript-title', { 'ticket': data.ticket.id }) }}</Title>
                 <Meta name="description" :content="t('ticket-transcript-description')" />

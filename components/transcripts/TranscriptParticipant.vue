@@ -7,7 +7,7 @@
             <div class="name">
                 {{ user.name }}
             </div>
-            <Pill v-if="creator" class="creator" color="dark-gray">{{ $t('ticket-transcript-creator') }}</Pill>
+            <Pill v-if="creator" class="creator">{{ $t('ticket-transcript-creator') }}</Pill>
         </div>
     </div>
 </template>
@@ -57,9 +57,9 @@ const { user, creator } = defineProps({
 }
 
 .profile .creator {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-top: 0.1rem;
-    margin-left: 0.3rem;
+    margin-left: 0;
     align-self: flex-start;
 }
 
