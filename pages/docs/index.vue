@@ -14,20 +14,14 @@
                 <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
                 <h1>{{ $t('docs-home-title') }}</h1>
                 <p>{{ $t('docs-home-copy') }}</p>
-                <div class="docs-sitemap" v-if="docPages?.length">
-                    <div class="project-section" v-for="{project, pages} in docPages.sort((a, b) => b.project.stats.downloadCount - a.project.stats.downloadCount)">
+                <div class="docs-sitemap" v-if="projects.filter(p => p.metadata.documentation)?.length">
+                    <div class="project-section" v-for="project in projects.filter(p => p.metadata.documentation).sort((p1, p2) => p2.stats.downloadCount - p1.stats.downloadCount)">
                         <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
                             <img v-if="project.metadata?.icons['PNG']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG']}`" />
                             <span>{{ project.metadata.name }}</span>
                         </NuxtLink>
-                        <div class="project-links" v-if="!project.metadata?.documentationNav?.length">
-                            <NuxtLink v-for="entry in pages.filter(e => !e[0].startsWith('_') && e[0] !== 'home') ?? []"
-                                :href="`/docs/${project.slug}/${entry[0]}`">
-                                {{ entry[1] }}
-                            </NuxtLink>
-                        </div>
-                        <DocsNavigationMini class="project-navigation" v-else :project="project" />
+                        <DocsNavigationMini class="project-navigation" v-if="project.metadata?.documentationNav?.length" :showHeaders="false" :project="project" />
                         <div class="project-buttons">
                             <ButtonLink v-if="project.metadata.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" >
                                 {{ $t('link-download') }}
@@ -57,14 +51,8 @@
 
 <script setup>
 const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
-
 const { t } = useI18n();
-const docPages = ref([]);
-
-// Get doc pages
 const projects = await useAllProjects();
-projects.value?.filter(p => p.metadata.documentation)
-    .forEach(async (p) => docPages.value.push({ project: p, pages: await useDocsPageList(p.slug) }));
 </script>
 
 <style scoped>

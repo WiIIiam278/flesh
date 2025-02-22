@@ -1,7 +1,7 @@
 <template>
     <div class="mini-navigation">
         <div class="section" v-for="section of navigation">
-            <div class="title">{{ section.name }}</div>
+            <div v-if="showHeaders" class="title">{{ section.name }}</div>
             <div class="links">
                 <div class="link" v-for="link of section.children">
                     <div class="link-section">
@@ -24,6 +24,11 @@ const { project } = defineProps({
     project: {
         type: Object,
         required: true
+    },
+    showHeaders: {
+        type: Boolean,
+        required: false,
+        default: true
     }
 })
 const { metadata: meta } = project;
