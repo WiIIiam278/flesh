@@ -133,6 +133,7 @@
     "dump-viewer-title-project": "{project} Status Dump",
     "dump-viewer-title": "Status Dump Viewer",
     "dump-header-plugin": "Plugin & Server",
+    "dump-server-plugins": "Plugins",
     "dump-header-navigator": "Browse",
     "dump-header-metadata": "Dumped by",
     "dump-view-raw": "View raw",

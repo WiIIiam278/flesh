@@ -47,8 +47,9 @@
             <div class="section-header noborder">{{ $t('dump-header-navigator') }}</div>
             <div class="links">
                 <ServerDumpSidebarLink @select="$emit('select', 'overview')" :selected="selected === 'overview'" :title="t('dump-overview')" icon="fa6-solid:circle-info" />
-                <ServerDumpSidebarLink v-if="data.latestLog" @select="$emit('select', 'latest.log')" :selected="selected === 'latest.log'" :title="t('dump-server-log')" icon="fa6-solid:file-lines" />
+                <ServerDumpSidebarLink v-if="data.plugins" @select="$emit('select', 'plugins')" :selected="selected === 'plugins'" :title="t('dump-server-plugins')" icon="fa6-solid:plug" />
                 <ServerDumpSidebarLink v-for="file in data.files" @select="$emit('select', file.fileName)" :selected="selected === file.fileName" :title="file.fileLabel" icon="fa6-solid:file-code" />
+                <ServerDumpSidebarLink v-if="data.latestLog" @select="$emit('select', 'latest.log')" :selected="selected === 'latest.log'" :title="t('dump-server-log')" icon="fa6-solid:file-lines" />
             </div>
         </div>
         <div class="meta">
@@ -138,6 +139,7 @@ h2 {
     width: 64px;
     height: 64px;
     aspect-ratio: 1;
+    border-radius: 0.5rem;
 }
 
 .info {

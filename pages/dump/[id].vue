@@ -16,13 +16,16 @@
             <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }, { name: t('link-dump'), link: `/dump/${id}` }]" />
             <h1>{{ $t('dump-viewer-title-project', { 'project': project.metadata.name }) }}</h1>
             <div>
-                <div v-if="selected === 'overview'"></div>
+                <div v-if="selected === 'overview'">
+                    {{ dump.status.status }}
+                </div>
+                <div v-else-if="selected === 'plugins'">
+                    {{ dump.plugins }}
+                </div>
                 <ServerDumpFile v-else :contents="config" :lang="getLangFor(selected)" />
             </div>
             <template #sidebar>
-                <div>
-                    <ServerDumpSidebar @select="onSelected" :selected="selected" :data="dump" :project="project" :id="id" />
-                </div>
+                <ServerDumpSidebar @select="onSelected" :selected="selected" :data="dump" :project="project" :id="id" />
             </template>
         </NuxtLayout>
         <NuxtLayout v-else name="default">
@@ -38,7 +41,7 @@ const { t } = useI18n();
 const { id } = useRoute()?.params;
 
 const selected = ref('overview');
-const config = ref('test');
+const config = ref('');
 const dump = await useDump(id);
 const project = await useProject(dump.value.project.id)
 
@@ -46,7 +49,7 @@ const onSelected = (val) => {
     selected.value = val;
     if (val === 'latest.log') {
         config.value = dump.value.latestLog;
-    } else if (val !== 'overview') {
+    } else if (val !== 'overview' && val !== 'plugins') {
         config.value = getContentsFor(val);
     }
 } 
