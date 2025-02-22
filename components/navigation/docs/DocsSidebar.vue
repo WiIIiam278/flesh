@@ -5,7 +5,7 @@
                 <IconifiedProject centered :project="project" />
             </NuxtLink>
             <div class="project-buttons">
-                <ButtonLink v-if="meta.listDownloads" :href="`/project/${project.slug}`" icon="fa6-solid:info" >
+                <ButtonLink :href="`/project/${project.slug}`" icon="fa6-solid:info" >
                     {{ $t('link-about') }}
                 </ButtonLink>
                 <ButtonLink v-if="meta.listDownloads" :href="`/project/${project.slug}/download`" icon="fa6-solid:download" >
@@ -14,7 +14,7 @@
                 <ButtonLink v-if="meta.github" :href="meta.github" icon="fa6-brands:github" />
             </div>
         </div>
-        <DocsNavigation v-if="navigation?.length" :navigation="navigation" :currentPage="currentPage" :project="project" />
+        <DocsNavigationSidebar v-if="navigation?.length" :navigation="navigation" :currentPage="currentPage" :project="project" />
         <DocsContentSidebar v-else-if="sidebar" :sidebar="sidebar" :project="project" />
         <div class="sidebar-bottom">
             <ButtonLink v-for="link in meta.links" 
