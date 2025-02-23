@@ -88,6 +88,7 @@
     }
 
     .body .content {
+        padding: 1rem 1rem;
         max-width: unset;
     }
 
@@ -97,8 +98,9 @@
 
     .page-with-sidebar .sidebar {
         max-width: 100%;
-        width: 100%;
+        width: calc(100% - 2rem);
         padding: 1rem 0;
+        margin: 0 1rem;
     }
 
     .desktop-footer {

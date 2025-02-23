@@ -17,10 +17,10 @@
             <h1>{{ $t('dump-viewer-title-project', { 'project': project.metadata.name }) }}</h1>
             <div>
                 <div v-if="selected === 'overview'">
-                    {{ dump.status.status }}
+                    <ServerDumpStatus :status="dump.status.status" />
                 </div>
                 <div v-else-if="selected === 'plugins'">
-                    {{ dump.plugins }}
+                    <ServerDumpPlugins :plugins="dump.plugins" />
                 </div>
                 <ServerDumpFile v-else :contents="config" :lang="getLangFor(selected)" />
             </div>
@@ -67,3 +67,10 @@ const getLangFor = (selected) => {
     return 'yaml';
 }
 </script>
+
+<style scoped>
+h1 {
+    padding-bottom: 0.25rem;
+    border-bottom: 0.125rem solid var(--gray);
+}
+</style>

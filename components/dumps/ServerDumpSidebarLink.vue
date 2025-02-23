@@ -71,11 +71,7 @@ const emit = defineEmits(['select'])
 
 .selected {
     background-color: var(--gray);
-}
-
-.selected:deep(a) {
     color: var(--white);
-    text-decoration: none !important;
 }
 
 .page-name .icon {
