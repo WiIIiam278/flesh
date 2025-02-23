@@ -132,6 +132,7 @@
 
     "dump-viewer-title-project": "{project} Status Dump",
     "dump-viewer-title": "Status Dump Viewer",
+    "dump-viewer-description": "View a system status dump for a William278.net project.",
     "dump-header-plugin": "Plugin & Server",
     "dump-server-plugins": "Plugins",
     "dump-header-navigator": "Browse",

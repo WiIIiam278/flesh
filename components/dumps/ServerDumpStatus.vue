@@ -1,8 +1,10 @@
 <template>
     <table>
         <thead>
-            <th>{{ $t('dump-status-table-description') }}</th>
-            <th>{{ $t('dump-status-table-value') }}</th>
+            <tr>
+                <th>{{ $t('dump-status-table-description') }}</th>
+                <th>{{ $t('dump-status-table-value') }}</th>
+            </tr>
         </thead>
         <tbody v-for="entry in Object.entries(status)">
             <tr>
@@ -16,7 +18,7 @@
 <script setup>
 const { status } = defineProps({
     status: {
-        type: Array,
+        type: Object,
         required: false
     }
 })

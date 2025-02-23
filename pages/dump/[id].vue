@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NuxtLayout v-if="dump && project && dump.schemaVersion === SUPPORTED_SCHEMA_VERSION" name="sidebar">
+        <NuxtLayout v-if="dump?.project && project && dump.schemaVersion === SUPPORTED_SCHEMA_VERSION" name="sidebar">
             <Head>
                 <Title>{{ $t('dump-viewer-title-project', { 'project': project.metadata.name }) }}</Title>
                 <Meta name="description" :content="t('dump-viewer-description')" />
@@ -43,7 +43,7 @@ const { id } = useRoute()?.params;
 const selected = ref('overview');
 const config = ref('');
 const dump = await useDump(id);
-const project = await useProject(dump.value.project.id)
+const project = dump.value?.project ? await useProject(dump.value.project.id) : null;
 
 const onSelected = (val) => {
     selected.value = val;

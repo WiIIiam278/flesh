@@ -9,9 +9,11 @@
         </div>
         <table>
             <thead>
-                <th colspan="2">{{ $t('dump-plugins-table-name') }}</th>
-                <th>{{ $t('dump-plugins-table-version') }}</th>
-                <th>{{ $t('dump-plugins-table-status') }}</th>
+                <tr>
+                    <th colspan="2">{{ $t('dump-plugins-table-name') }}</th>
+                    <th>{{ $t('dump-plugins-table-version') }}</th>
+                    <th>{{ $t('dump-plugins-table-status') }}</th>
+                </tr>
             </thead>
             <tbody v-for="plugin in plugins.filter(p => p.name.toLowerCase().indexOf(filter.toLowerCase()) > -1)">
                 <tr>
