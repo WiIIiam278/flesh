@@ -1,47 +1,53 @@
 <template>
-    <div class="status-grid">
-        <table v-for="block in status.blocks" class="block">
-            <thead><tr class="label"><th colspan="100%">
-                <IconifiedText class="text" :icon="block.icon">{{ block.label }}</IconifiedText>
-            </th></tr></thead>
-            <tbody>
-                <tr class="content" v-if="block.type === 'LIST'">
-                    <td>
-                        <ul class="list" >
-                            <li v-for="item in block.status">{{ item }}</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr class="map" v-else-if="block.type === 'MAP'" v-for="entry in Object.entries(block.status)">
-                    <td>{{ entry[0] }}</td>
-                    <td class="value">{{ entry[1] }}</td>
-                </tr>
-                <tr class="table" v-else-if="block.type === 'TABLE'">
-                    <td>
-                        <table>
-                            <tr v-for="(row, i) in block.status">
-                                <td v-for="(cell, i) in row">{{ col }}</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr class="chart" v-else-if="block.type === 'CHART'">
-                    <td>
-                        <div class="container" v-if="block.chartType === 'PIE'">
-                            <VChartLight class="renderer" :option="getPieFor(block)" />
-                        </div>
-                        <div class="container" v-else-if="block.chartType === 'BAR'">
-                            <VChartLight class="renderer" :option="getBarFor(block)" />
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div>
+        <div class="status-grid" v-if="status.blocks?.length">
+            <table v-for="block in status.blocks" class="block">
+                <thead><tr class="label"><th colspan="100%">
+                    <IconifiedText class="text" :icon="block.icon">{{ block.label }}</IconifiedText>
+                </th></tr></thead>
+                <tbody>
+                    <tr class="content" v-if="block.type === 'LIST'">
+                        <td>
+                            <ul class="list" >
+                                <li v-for="item in block.status">{{ item }}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="map" v-else-if="block.type === 'MAP'" v-for="entry in Object.entries(block.status)">
+                        <td>{{ entry[0] }}</td>
+                        <td class="value">{{ entry[1] }}</td>
+                    </tr>
+                    <tr class="table" v-else-if="block.type === 'TABLE'">
+                        <td>
+                            <table>
+                                <tr v-for="(row, i) in block.status">
+                                    <td v-for="(cell, i) in row">{{ col }}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="chart" v-else-if="block.type === 'CHART'">
+                        <td>
+                            <div class="container" v-if="block.chartType === 'PIE'">
+                                <VChartLight class="renderer" :option="getPieFor(block)" />
+                            </div>
+                            <div class="container" v-else-if="block.chartType === 'BAR'">
+                                <VChartLight class="renderer" :option="getBarFor(block)" />
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div v-else class="no-status">
+            <IconifiedText icon="fa6-solid:info">{{ $t('dump-no-status-info') }}</IconifiedText>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { provide } from 'vue'
+const { t } = useI18n()
 
 const { status } = defineProps({
     status: {
@@ -165,6 +171,14 @@ table {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.no-status {
+    color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
 }
 
 /* Less than 850px */

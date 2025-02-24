@@ -15,7 +15,7 @@
                     <th>{{ $t('dump-plugins-table-status') }}</th>
                 </tr>
             </thead>
-            <tbody v-for="plugin in plugins.filter(p => (p.name?.toLowerCase() ?? p.id).indexOf(filter.toLowerCase()) > -1)">
+            <tbody v-for="plugin in filterPlugins(plugins)">
                 <tr>
                     <td class="expand-collapse" @click="isExpanded(plugin) ? expanded.splice(expanded.indexOf(plugin.name), 1) : expanded.push(plugin.name)">
                         <Icon :name="`fa6-solid:chevron-${isExpanded(plugin) ? 'down' : 'right'}`" />
@@ -58,6 +58,9 @@ const { plugins } = defineProps({
 const filter = ref('');
 const expanded = ref([])
 const isExpanded = (plugin) => expanded.value.indexOf(plugin.name) > -1;
+const filterPlugins = (plugins) => plugins.filter(p => (p.name?.toLowerCase() ?? p.id)
+        .indexOf(filter.value.toLowerCase()) > -1)
+        .sort((p1, p2) => (p1.labels?.length ?? 0) - (p2.labels?.length ?? 0));
 </script>
 
 <style scoped>

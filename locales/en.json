@@ -158,6 +158,7 @@
     "dump-plugins-count": "{count} plugin(s) loaded.",
     "dump-status-table-description": "Description",
     "dump-status-table-value": "Status",
+    "dump-no-status-info": "No plugin status overview to display.",
 
     "tickets-header-record-count": "Displaying {count} ticket record(s):",
     "tickets-header-client": "Client",
