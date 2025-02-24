@@ -164,7 +164,10 @@ table {
 }
 
 .block .map td.value {
-    color: var(--light-gray)
+    color: var(--light-gray);
+    overflow-wrap: break-word;
+    text-wrap: wrap;
+    max-width: 50px;
 }
 
 .chart .container {
