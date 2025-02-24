@@ -34,7 +34,7 @@
                     <span class="label">{{ $t('dump-server-os') }}</span><span class="value">{{ data.environment.osName }}</span>
                 </IconifiedText>
                 <IconifiedText icon="ic:baseline-history" v-if="data.environment.uptime">
-                    <span class="label">{{ $t('dump-server-uptime') }}</span><span class="value">{{ f(data.environment.uptime / 1000 / 60) }}m {{ f(data.environment.uptime / 1000 % 60) }}s</span>
+                    <span class="label">{{ $t('dump-server-uptime') }}</span><span class="value">{{ formatUptime(data.environment.uptime) }}</span>
                 </IconifiedText>
                 <IconifiedText icon="ri:ram-fill" v-if="data.environment.freeMemory && data.environment.allocatedMemory">
                     <span class="label">{{ $t('dump-server-memory') }}</span><span class="value">
@@ -96,6 +96,21 @@ const { metadata: meta } = project;
 const emit = defineEmits(['select'])
 
 const f = (num) => num.toFixed(0);
+const formatUptime = (millis) => {
+    if (!millis || millis < 1000) {
+        return '0s';
+    }
+    let secs = f(millis / 1000) % 60;
+    let mins = f(millis / 1000 / 60) % 60;
+    let hours = f(millis / 1000 / 60 / 60) % 24;
+    let days = f(millis / 1000 / 60 / 60 / 24);
+    return [
+        days > 0 ? `${days}d` : null, 
+        hours > 0 ? `${hours}h` : null, 
+        mins > 0 ? `${mins}m` : null, 
+        `${secs}s`
+    ].filter(a => a).join(' ');
+}
 const formatMcVersion = (mc) => mc.indexOf('-') > -1 ? mc.split('-')[0] : mc.trim();
 </script>
 
