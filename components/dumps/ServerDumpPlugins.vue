@@ -15,7 +15,7 @@
                     <th>{{ $t('dump-plugins-table-status') }}</th>
                 </tr>
             </thead>
-            <tbody v-for="plugin in plugins.filter(p => p.name.toLowerCase().indexOf(filter.toLowerCase()) > -1)">
+            <tbody v-for="plugin in plugins.filter(p => (p.name?.toLowerCase() ?? p.id).indexOf(filter.toLowerCase()) > -1)">
                 <tr>
                     <td class="expand-collapse" @click="isExpanded(plugin) ? expanded.splice(expanded.indexOf(plugin.name), 1) : expanded.push(plugin.name)">
                         <Icon :name="`fa6-solid:chevron-${isExpanded(plugin) ? 'down' : 'right'}`" />

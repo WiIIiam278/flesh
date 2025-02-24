@@ -32,15 +32,13 @@
             </template>
         </NuxtLayout>
         <NuxtLayout v-else name="default">
-            <ErrorPage v-if="id.length !== 10" :code="400">{{ $t('error-dump-bad-id') }}</ErrorPage>
-            <ErrorPage v-else :code="404">{{ $t('error-dump-not-found') }}</ErrorPage>
+            <ErrorPage v-if="id.length !== 10" code="400">{{ $t('error-dump-bad-id') }}</ErrorPage>
+            <ErrorPage v-else code="404">{{ $t('error-dump-not-found') }}</ErrorPage>
         </NuxtLayout>
     </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-
 const SUPPORTED_SCHEMA_VERSION = 1;
 const { t } = useI18n();
 const { params, hash } = useRoute();

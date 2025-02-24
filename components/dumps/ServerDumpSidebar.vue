@@ -2,8 +2,8 @@
     <div>
         <h1>{{ $t('dump-viewer-title') }}</h1>
         <div class="plugin">
-            <div class="section-header">{{ $t('dump-header-plugin') }}</div>
-            <div class="avatar">
+            <div class="section-header" v-if="meta">{{ $t('dump-header-plugin') }}</div>
+            <div class="avatar" v-if="meta">
                 <object v-if="meta.icons['SVG']" :data="`${ASSETS_URL}/${meta.icons['SVG']}`" type="image/svg+xml" />
                 <img v-else-if="meta.icons['PNG']" :src="`${ASSETS_URL}/${meta.icons['PNG']}`" />
                 <div class="info">
@@ -12,31 +12,31 @@
                 </div>
             </div>
             <div class="info">
-                <IconifiedText icon="garden:platform-26">
+                <IconifiedText icon="garden:platform-26" v-if="data.server.serverJarType">
                     <span class="label">{{ $t('dump-server-type') }}</span><span class="value">{{ data.server.serverJarType }}</span>
                 </IconifiedText>
-                <IconifiedText icon="fa6-solid:code-branch">
+                <IconifiedText icon="fa6-solid:code-branch" v-if="data.server.serverJarVersion">
                     <span class="label">{{ $t('dump-server-jar-version') }}</span><span class="value">{{ data.server.serverJarVersion }}</span>
                 </IconifiedText>
-                <IconifiedText icon="fa6-solid:cube">
-                    <span class="label">{{ $t('dump-server-mc-version') }}</span><span class="value">{{ data.server.minecraftVersion.split('-')[0] }}</span>
+                <IconifiedText icon="fa6-solid:cube" v-if="data.server.minecraftVersion">
+                    <span class="label">{{ $t('dump-server-mc-version') }}</span><span class="value">{{ formatMcVersion(data.server.minecraftVersion) }}</span>
                 </IconifiedText>
-                <IconifiedText icon="octicon:globe-16">
+                <IconifiedText icon="octicon:globe-16" v-if="data.server.onlineMode !== undefined">
                     <span class="label">{{ $t('dump-server-online-mode') }}</span><span class="value"><Icon :name="`fa6-solid:${data.server.onlineMode ? 'check' : 'x'}`" />&nbsp;{{ data.server.onlineMode }}</span>
                 </IconifiedText>
-                <IconifiedText icon="mdi:proxy">
+                <IconifiedText icon="mdi:proxy" v-if="data.server.proxyState">
                     <span class="label">{{ $t('dump-server-proxy-state') }}</span><span class="value">{{ useCapitalized(data.server.proxyState) }}</span>
                 </IconifiedText>
-                <IconifiedText icon="fa6-brands:java">
+                <IconifiedText icon="fa6-brands:java" v-if="data.environment.javaVersion">
                     <span class="label">{{ $t('dump-server-java-version') }}</span><span class="value">{{ data.environment.javaVersion }}</span>
                 </IconifiedText>
-                <IconifiedText icon="lucide:server">
+                <IconifiedText icon="lucide:server" v-if="data.environment.osName">
                     <span class="label">{{ $t('dump-server-os') }}</span><span class="value">{{ data.environment.osName }}</span>
                 </IconifiedText>
-                <IconifiedText icon="ic:baseline-history">
+                <IconifiedText icon="ic:baseline-history" v-if="data.environment.uptime">
                     <span class="label">{{ $t('dump-server-uptime') }}</span><span class="value">{{ f(data.environment.uptime / 1000 / 60) }}m {{ f(data.environment.uptime / 1000 % 60) }}s</span>
                 </IconifiedText>
-                <IconifiedText icon="ri:ram-fill">
+                <IconifiedText icon="ri:ram-fill" v-if="data.environment.freeMemory && data.environment.allocatedMemory">
                     <span class="label">{{ $t('dump-server-memory') }}</span><span class="value">
                         {{ f(data.environment.freeMemory / 1048576) }} / {{ f(data.environment.allocatedMemory / 1048576) }} MB
                     </span>
@@ -52,10 +52,10 @@
                 <ServerDumpSidebarLink v-if="data.latestLog" @select="$emit('select', 'latest.log')" :selected="selected === 'latest.log'" :title="t('dump-server-log')" icon="fa6-solid:file-lines" />
             </div>
         </div>
-        <div class="meta">
+        <div class="meta" v-if="data.meta">
             <div class="section-header">{{ $t('dump-header-metadata') }}</div>
             <div class="avatar">
-                <img v-if="data.meta.creator" :alt="data.meta.creator.username" :src="`https://crafthead.net/helm/${data.meta.creator.uuid}/64`" />
+                <img v-if="data.meta.creator" :alt="data.meta.creator.username" :src="`https://crafthead.net/helm/${data.meta.creator.uuid}/64`" onerror="this.style.display = 'none'" />
                 <div class="info">
                     <IconifiedText v-if="data.meta.creator" icon="octicon:command-palette-16"><span class="value">{{ data.meta.creator.username }}</span></IconifiedText>
                     <IconifiedText icon="fa6-solid:clock"><span class="value">{{ useTimeFormat(data.meta.timestamp, true) }}</span></IconifiedText>
@@ -96,6 +96,7 @@ const { metadata: meta } = project;
 const emit = defineEmits(['select'])
 
 const f = (num) => num.toFixed(0);
+const formatMcVersion = (mc) => mc.indexOf('-') > -1 ? mc.split('-')[0] : mc.trim();
 </script>
 
 <style scoped>
