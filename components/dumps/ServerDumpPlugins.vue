@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="plugins">
         <div class="above-bar">
             <div class="search-box">
                 <Icon name="lets-icons:search" />
@@ -37,8 +37,8 @@
                                     <span class="description-text">&ndash; {{ label.description }}</span>
                                 </IconifiedText>
                             </div>
-                            <IconifiedText icon="fluent:text-description-16-filled">{{ plugin.description }}</IconifiedText>
-                            <IconifiedText icon="material-symbols:person-rounded">{{ plugin.authors.join(", ") }}</IconifiedText>
+                            <IconifiedText v-if="plugin.description?.length" icon="fluent:text-description-16-filled">{{ plugin.description }}</IconifiedText>
+                            <IconifiedText v-if="plugin.authors?.length" icon="material-symbols:person-rounded">{{ plugin.authors.join(", ") }}</IconifiedText>
                         </div>
                     </td>
                 </tr>
@@ -64,6 +64,10 @@ const filterPlugins = (plugins) => plugins.filter(p => (p.name?.toLowerCase() ??
 </script>
 
 <style scoped>
+.plugins {
+    margin-bottom: 1rem;
+}
+
 .expand-collapse {
     width: 10px;
     font-size: 1.15rem;
