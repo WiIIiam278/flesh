@@ -52,14 +52,17 @@ const dump = await useDump(id);
 const project = dump.value?.project ? await useProject(dump.value.project.id) : null;
 
 // Change tabs
-const onSelected = (val) => {
-    selected.value = val;
-    navigateTo(`#${val}`);
+const updateConfig = (val) => {
     if (val === 'latest.log') {
         config.value = dump.value.latestLog;
     } else if (val !== 'overview' && val !== 'plugins') {
         config.value = getContentsFor(val);
     }
+}
+const onSelected = (val) => {
+    selected.value = val;
+    navigateTo(`#${val}`);
+    updateConfig(val);
 }
 
 // Get config file contents & lang
@@ -88,7 +91,11 @@ const getDisplayFor = (val) => {
     return `– ${val}`
 }
 
-onMounted(() => selected.value = hash?.length ? hash.substring(1).toLowerCase() : 'overview');
+// Load page based on anchor hash
+onMounted(() => {
+    selected.value = hash?.length ? hash.substring(1).toLowerCase() : 'overview';
+    updateConfig(selected.value);
+});
 </script>
 
 <style scoped>

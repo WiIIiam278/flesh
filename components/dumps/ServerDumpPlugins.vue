@@ -17,8 +17,8 @@
             </thead>
             <tbody v-for="plugin in plugins.filter(p => p.name.toLowerCase().indexOf(filter.toLowerCase()) > -1)">
                 <tr>
-                    <td class="expand-collapse">
-                        <Icon :name="`fa6-solid:chevron-${isExpanded(plugin) ? 'down' : 'right'}`" @click="isExpanded(plugin) ? expanded.splice(expanded.indexOf(plugin.name), 1) : expanded.push(plugin.name)" />
+                    <td class="expand-collapse" @click="isExpanded(plugin) ? expanded.splice(expanded.indexOf(plugin.name), 1) : expanded.push(plugin.name)">
+                        <Icon :name="`fa6-solid:chevron-${isExpanded(plugin) ? 'down' : 'right'}`" />
                     </td>
                     <td class="name">{{ plugin.name }}</td>
                     <td class="version">v{{ plugin.version }}</td>
@@ -30,8 +30,16 @@
                 </tr>
                 <tr v-if="isExpanded(plugin)">
                     <td colspan="4" class="details">
-                        <IconifiedText icon="fluent:text-description-16-filled">{{ plugin.description }}</IconifiedText>
-                        <IconifiedText icon="material-symbols:person-rounded">{{ plugin.authors.join(", ") }}</IconifiedText>
+                        <div class="container">
+                            <div class="label-description" :style="`border-color: ${label.color}; color: ${label.color};`" v-for="label in plugin.labels">
+                                <IconifiedText icon="fa6-solid:circle-info">
+                                    <span>{{ label.name }}:</span>&nbsp;
+                                    <span class="description-text">{{ label.description }}</span>
+                                </IconifiedText>
+                            </div>
+                            <IconifiedText icon="fluent:text-description-16-filled">{{ plugin.description }}</IconifiedText>
+                            <IconifiedText icon="material-symbols:person-rounded">{{ plugin.authors.join(", ") }}</IconifiedText>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -77,8 +85,20 @@ table {
     margin-top: 1rem;
 }
 
-.details {
-    color: var(--light-gray)
+.details .container {
+    display: flex;
+    flex-direction: column;
+    color: var(--light-gray);
+    gap: 0.25rem;
+}
+
+.container .label-description {
+    border-left: 0.175rem solid;
+    padding-left: 0.75rem;
+}
+
+.label-description .description-text {
+    color: var(--light-gray) !important;
 }
 
 .search {
