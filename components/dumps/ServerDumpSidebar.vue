@@ -46,10 +46,14 @@
         <div class="navigator">
             <div class="section-header noborder">{{ $t('dump-header-navigator') }}</div>
             <div class="links">
-                <ServerDumpSidebarLink @select="$emit('select', 'overview')" :selected="selected === 'overview'" :title="t('dump-overview')" icon="fa6-solid:circle-info" />
-                <ServerDumpSidebarLink v-if="data.plugins" @select="$emit('select', 'plugins')" :selected="selected === 'plugins'" :title="t('dump-server-plugins')" icon="fa6-solid:plug" />
-                <ServerDumpSidebarLink v-for="file in data.files" @select="$emit('select', file.fileName)" :selected="selected === file.fileName" :title="file.fileLabel" icon="fa6-solid:file-code" />
-                <ServerDumpSidebarLink v-if="data.latestLog" @select="$emit('select', 'latest.log')" :selected="selected === 'latest.log'" :title="t('dump-server-log')" icon="fa6-solid:file-lines" />
+                <ServerDumpSidebarLink @select="$emit('select', 'overview')"
+                    :selected="selected === 'overview'" :title="t('dump-overview')" icon="fa6-solid:circle-info" />
+                <ServerDumpSidebarLink v-if="data.plugins" @select="$emit('select', 'plugins')"
+                    :selected="selected === 'plugins'" :title="t('dump-server-plugins')" icon="fa6-solid:plug" />
+                <ServerDumpSidebarLink v-for="file in data.files" @select="$emit('select', file.fileName)"
+                    :selected="selected === file.fileName" :title="file.fileLabel" :icon="getFileIcon(file)" />
+                <ServerDumpSidebarLink v-if="data.latestLog" @select="$emit('select', 'latest.log')"
+                    :selected="selected === 'latest.log'" :title="t('dump-server-log')" icon="mdi:file-text" />
             </div>
         </div>
         <div class="meta" v-if="data.meta">
@@ -112,6 +116,15 @@ const formatUptime = (millis) => {
     ].filter(a => a).join(' ');
 }
 const formatMcVersion = (mc) => mc.indexOf('-') > -1 ? mc.split('-')[0] : mc.trim();
+const getFileIcon = (file) => {
+    if (file?.fileIcon) {
+        return file.fileIcon;
+    }
+    if (file?.type === 'DATABASE_FILE') {
+        return 'mdi:file-table';
+    }
+    return 'mdi:file-code';
+}
 </script>
 
 <style scoped>

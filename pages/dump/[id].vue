@@ -68,6 +68,11 @@ const getContentsFor = (selected) => dump.value.files.find(f => f.fileName === s
 const getLangFor = (selected) => {
     if (selected === 'latest.log') {
         return 'log';
+    }
+    
+    let lang = dump.value.files.find(f => f.fileName === selected)?.fileLang;
+    if (lang) {
+        return lang;
     } else if (selected.endsWith('.json')) {
         return 'json';
     } else if (selected.endsWith('.toml')) {
