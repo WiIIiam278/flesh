@@ -33,8 +33,8 @@
                         <div class="container">
                             <div class="label-description" :style="`border-color: ${label.color}; color: ${label.color};`" v-for="label in plugin.labels">
                                 <IconifiedText icon="fa6-solid:circle-info">
-                                    <span>{{ label.name }}:</span>&nbsp;
-                                    <span class="description-text">{{ label.description }}</span>
+                                    <span>{{ label.name }}</span>&nbsp;
+                                    <span class="description-text">&ndash; {{ label.description }}</span>
                                 </IconifiedText>
                             </div>
                             <IconifiedText icon="fluent:text-description-16-filled">{{ plugin.description }}</IconifiedText>
@@ -60,7 +60,7 @@ const expanded = ref([])
 const isExpanded = (plugin) => expanded.value.indexOf(plugin.name) > -1;
 const filterPlugins = (plugins) => plugins.filter(p => (p.name?.toLowerCase() ?? p.id)
         .indexOf(filter.value.toLowerCase()) > -1)
-        .sort((p1, p2) => (p1.labels?.length ?? 0) - (p2.labels?.length ?? 0));
+        .sort((p1, p2) => (p2.labels?.length ?? 0) - (p1.labels?.length ?? 0));
 </script>
 
 <style scoped>
