@@ -1,7 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   // Modules
-  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n', 'nuxt-tiptap-editor', 'nuxt-monaco-editor'],
+  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n', 'nuxt-tiptap-editor', 'nuxt-monaco-editor', 'nuxt-echarts'],
 
   // Fonts
   googleFonts: {
@@ -89,6 +89,21 @@ export default defineNuxtConfig({
           COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
           SESSION_EXPIRY_DAYS: process.env.SESSION_EXPIRY_DAYS,
       }
+  },
+
+  // ECharts
+  echarts: {
+    ssr: true,
+    renderer: ['canvas'],
+    charts: ['BarChart', 'MapChart'],
+    components: [
+        'DatasetComponent',
+        'GridComponent',
+        'TooltipComponent',
+        'ToolboxComponent',
+        'GeoComponent',
+        'VisualMapComponent',
+    ],
   },
 
   // Build config

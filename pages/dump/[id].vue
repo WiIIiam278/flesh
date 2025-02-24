@@ -14,15 +14,18 @@
                 <Meta name="twitter:creator" content="@William27528" />
             </Head>
             <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }, { name: t('link-dump'), link: `/dump/${id}` }]" />
-            <h1>{{ $t('dump-viewer-title-project', { 'project': project.metadata.name }) }}</h1>
-            <div>
+            <h1>{{ $t('dump-viewer-title-project', { 'project': project.metadata.name }) }} {{ getDisplayFor(selected) }}</h1>
+            <div v-if="selected">
                 <div v-if="selected === 'overview'">
-                    <ServerDumpStatus :status="dump.status.status" />
+                    <ServerDumpStatus :status="dump.status" />
                 </div>
                 <div v-else-if="selected === 'plugins'">
                     <ServerDumpPlugins :plugins="dump.plugins" />
                 </div>
                 <ServerDumpFile v-else :contents="config" :lang="getLangFor(selected)" />
+            </div>
+            <div v-else class="placeholder">
+                <div v-for="i in 3" class="pulsing"></div>
             </div>
             <template #sidebar>
                 <ServerDumpSidebar @select="onSelected" :selected="selected" :data="dump" :project="project" :id="id" />
@@ -36,23 +39,30 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+
 const SUPPORTED_SCHEMA_VERSION = 1;
 const { t } = useI18n();
-const { id } = useRoute()?.params;
+const { params, hash } = useRoute();
+const { id } = params; 
 
-const selected = ref('overview');
+const selected = ref(null);
 const config = ref('');
 const dump = await useDump(id);
 const project = dump.value?.project ? await useProject(dump.value.project.id) : null;
 
+// Change tabs
 const onSelected = (val) => {
     selected.value = val;
+    navigateTo(`#${val}`);
     if (val === 'latest.log') {
         config.value = dump.value.latestLog;
     } else if (val !== 'overview' && val !== 'plugins') {
         config.value = getContentsFor(val);
     }
-} 
+}
+
+// Get config file contents & lang
 const getContentsFor = (selected) => dump.value.files.find(f => f.fileName === selected).fileContents;
 const getLangFor = (selected) => {
     if (selected === 'latest.log') {
@@ -66,11 +76,37 @@ const getLangFor = (selected) => {
     }
     return 'yaml';
 }
+
+// Get display text
+const getDisplayFor = (val) => {
+    if (val === null) {
+        return '';
+    }
+    if (['overview', 'plugins'].indexOf(val) > -1) {
+        return `– ${useCapitalized(val)}`;
+    }
+    return `– ${val}`
+}
+
+onMounted(() => selected.value = hash?.length ? hash.substring(1).toLowerCase() : 'overview');
 </script>
 
 <style scoped>
 h1 {
     padding-bottom: 0.25rem;
     border-bottom: 0.125rem solid var(--gray);
+}
+
+.placeholder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 1rem;
+}
+
+.placeholder div {
+    width: calc(50% - 1rem);
+    height: 300px;
 }
 </style>
