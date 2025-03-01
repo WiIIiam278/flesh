@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <NuxtLink class="thumbnail" :title="post.title" :to="`/posts/${post.slug}`">
-            <img v-if="post.imageUrl" class="shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" />
-            <img v-else class="shadow" :src="`/images/thumbnails/posts/${post.slug}/thumb.png`" :alt="post.title" />
+            <NuxtImg v-if="post.imageUrl" class="shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" width="225px" height="150px" />
+            <NuxtImg v-else class="shadow" :src="`${FRONTEND_URL}/images/thumbnails/posts/${post.slug}/thumb.png`" :alt="post.title" width="225px" height="150px" />
         </NuxtLink>
         <div class="post">
             <div class="title-row">
@@ -11,7 +11,7 @@
                     <div class="time-project">
                         <IconifiedText icon="fa6-solid:calendar">{{ useTimeFormat(post.timestamp) }}</IconifiedText>
                         <NuxtLink v-if="post.associatedProject && displayProject && !post.imageUrl" class="project" :title="post.associatedProject.name" :to="`/project/${post.associatedProject.slug}`">
-                            <IconifiedProject :project="post.associatedProject" />
+                            <IconifiedProject :project="post.associatedProject" size="24px" />
                         </NuxtLink>
                     </div>
                     <IconifiedText class="tags" icon="fa6-solid:tag">
@@ -26,6 +26,7 @@
 
 <script setup>
 const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
+const FRONTEND_URL = useRuntimeConfig().public.FRONTEND_BASE_URL;
 const { post, type, displayProject } = defineProps({
     post: {
         type: Object,

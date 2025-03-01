@@ -1,8 +1,8 @@
 <template>
     <div class="attachment">
-        <img class="image-attachment shadow" v-if="getType() === 'Image'" :src="attachment.url"
-            @error="this.target.src = '/images/missing-image.png'" 
-            :alt="t('ticket-transcript-attachment')" />
+        <NuxtImg class="image-attachment shadow" v-if="getType() === 'Image'" :src="attachment.url"
+            sizes="45vw sm:80vw"
+            placeholder="/images/missing-image.png" :alt="t('ticket-transcript-attachment')" />
         <video class="video-attachment shadow" v-else-if="getType() === 'Video'" controls :src="attachment.url"
             :alt="t('ticket-transcript-attachment')" />
         <div class="audio-attachment boxed-attachment shadow" v-else-if="getType() === 'Audio'">
@@ -73,11 +73,15 @@ const text = getType() === 'Text'
 <style scoped>
 .attachment,
 .attachment video,
-.attachment img {
+.attachment .image-attachment {
     max-height: 45vh;
     max-width: 50vw;
     margin: 0.5rem 0;
     border-radius: 0.5rem;
+}
+
+.image-attachment {
+    background-color: var(--background);
 }
 
 .attachment .preview {

@@ -31,7 +31,8 @@
                 <tr v-for="ticket in tickets.value.content" :key="ticket.id">
                     <td class="client" v-if="!user">
                         <span class="avatar-name">
-                            <img v-if="ticket.user?.avatar" :src="ticket.user?.avatar" alt="User avatar" onerror="this.style.display='none'" />
+                            <NuxtImg v-if="ticket.user?.avatar" :src="ticket.user?.avatar" width="64px" height="64px"
+                                alt="User avatar" placeholder="/images/placeholder-avatar.png" />
                             <span>{{ ticket.user?.name ?? $t('user-deleted') }}</span>
                         </span>
                     </td>
@@ -39,7 +40,7 @@
                         <IconifiedText icon="fa6-solid:ticket">#{{ getTicketName(ticket) }}</IconifiedText>
                     </td>
                     <td class="subject">
-                        <IconifiedProject v-if="matchSubject(ticket.subject)" :project="matchSubject(ticket.subject)" />
+                        <IconifiedProject v-if="matchSubject(ticket.subject)" :project="matchSubject(ticket.subject)" size="32px" />
                         <span v-else>{{ t('ticket-subject-other') }}</span>
                     </td>
                     <td class="description">{{ ticket.description }}</td>

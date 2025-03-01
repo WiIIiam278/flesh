@@ -133,7 +133,7 @@
                     <div class="icons-map">
                         <div class="icon-path" v-for="format in ALLOWED_IMAGE_TYPES">
                             <label :for="`${format}-icon`">{{ format }} icon</label>
-                                <img class="icon" v-if="editing.metadata.icons[format]?.length" :src="`${ASSETS_URL}/${editing.metadata.icons[format]}`" />
+                                <NuxtImg class="icon" v-if="editing.metadata.icons[format]?.length" :src="`${ASSETS_URL}/${editing.metadata.icons[format]}`" width="64px" height="64px" />
                             <span class="image-picker">
                                 <input disabled :id="`${format}-icon`" v-model="editing.metadata.icons[format]" type="text" placeholder="(None)" />
                                 <button @click="useAssetInput(`Please choose a ${format} icon for the project.`, `Select ${format} icon...`, (_, chosen) => editing.metadata.icons[format] = chosen)">Select</button>
@@ -149,7 +149,7 @@
                     <div class="link-map" v-for="(_, index) of editing.metadata.images">
                         <textarea v-model="editing.metadata.images[index].description" type="text" placeholder="Image Description"></textarea>
                         <span class="image-picker">
-                            <img v-if="editing.metadata.images[index].url?.length" :src="`${ASSETS_URL}/${editing.metadata.images[index].url}`" />
+                            <NuxtImg v-if="editing.metadata.images[index].url?.length" :src="`${ASSETS_URL}/${editing.metadata.images[index].url}`" />
                             <input disabled :id="`${format}-icon`" v-model="editing.metadata.images[index].url" type="text" placeholder="(None)" />
                             <button @click="useAssetInput('Please choose an image.', 'Select image...', (_, chosen) => editing.metadata.images[index].url = chosen)">Select</button>
                         </span>

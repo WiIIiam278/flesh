@@ -2,7 +2,7 @@
     <div v-if="projects?.length && slides?.length" class="gallery shadow" @mouseover="hovering = true" @mouseleave="hovering = false">
         <div v-for="(slide, index) in slides" class="gallery-item" :key="index"
             :style="`transform: translateY(-${slideOffset}%); z-index: ${index + 1};`">
-            <img :src="slide.img" :alt="slide.alt" @click="navigateTo(slide.link)" />
+            <NuxtImg class="image" sizes="550px sm:300px" :src="slide.img" :alt="slide.alt" @click="navigateTo(slide.link)" />
         </div>
         <div class="button">
             <NuxtLink class="link shadow" :to="slides[slide].link">{{ slides[slide].name }}</NuxtLink>
@@ -63,7 +63,7 @@ if (slides.length > 1) {
     transition: transform 0.5s ease;
 }
 
-.gallery-item img {
+.gallery-item .image {
     width: 100%;
     height: 100vh;
     object-fit: cover;

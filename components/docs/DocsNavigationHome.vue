@@ -2,10 +2,7 @@
     <div>
         <div class="top-banner">
             <div class="project-name">
-                <object v-if="meta.icons['SVG_TRANSPARENT']" :data="`${ASSETS_URL}/${meta.icons['SVG_TRANSPARENT']}`" type="image/svg+xml" />
-                <img v-else-if="meta.icons['PNG_TRANSPARENT']" :src="`${ASSETS_URL}/${meta.icons['PNG_TRANSPARENT']}`" />
-                <object v-else-if="meta.icons['SVG']" :data="`${ASSETS_URL}/${meta.icons['SVG']}`" type="image/svg+xml" />
-                <img v-else-if="meta.icons['PNG']" :src="`${ASSETS_URL}/${meta.icons['PNG']}`" />
+                <ProjectIcon class="icon" :project="project" size="100px" transparent />
                 <h1>{{ $t('docs-title', { project: meta.name }) }}</h1>
             </div>
             <p>{{ $t('docs-intro', { project: meta.name, tagline: meta.tagline }) }}</p>
@@ -40,7 +37,7 @@ const { documentationNav: navigation } = meta || {};
     margin: 0.5rem 0 2rem 0;
 }
 
-.project-name img, .project-name object {
+.project-name .icon {
     width: 100px;
     height: 100px;
     aspect-ratio: 1;

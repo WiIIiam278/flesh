@@ -2,12 +2,12 @@
     <div class="message-block shadow" v-if="sender = getUser(messages[0].sender)">
         <div class="avatar">
             <div class="reply-line" v-if="messages[0].reply_snippet"></div>
-            <img :src="sender.pfp" />
+            <NuxtImg class="image" :src="sender.pfp" width="50px" height="50px" />
         </div>
         <div class="content">
             <div class="reply-content" v-if="messages[0].reply_snippet">
                 <span class="reply-sender" v-if="replyingTo = getUser(messages[0].reply_snippet.sender)">
-                    <img :src="replyingTo.pfp" />
+                    <NuxtImg class="image" :src="replyingTo.pfp" width="32px" height="32px" />
                     @{{ replyingTo.name }}{{ parseInt(replyingTo.disambiguator) > 0 ? `#${replyingTo.disambiguator}` : "" }}
                 </span>
                 <span class="reply-text">
@@ -67,7 +67,7 @@
     margin-right: 0.5rem;
 }
 
-.reply-sender img {
+.reply-sender .image {
     width: 1.15rem;
     height: 1.15rem;
     border-radius: 50%;

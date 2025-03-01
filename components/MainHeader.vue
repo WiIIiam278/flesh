@@ -4,7 +4,7 @@
             <h1>{{ title }}</h1>
             <p v-if="tagline" class="tagline">{{ tagline }}</p>
         </div>
-        <object v-if="icon" :data="icon" class="head-graphic shadow" alt="Logo" />
+        <NuxtImg v-if="icon" :src="icon" width="64px" height="64px" class="head-graphic shadow" alt="Logo" />
     </div>
 </template>
 

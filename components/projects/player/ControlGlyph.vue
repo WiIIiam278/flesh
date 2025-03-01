@@ -1,5 +1,5 @@
 <template>
-    <img :src="`/images/controller/${id}`" :alt="`${name} Glyph`" class="glyph">
+    <NuxtImg :src="`/images/controller/${id}`" width="32px" height="32px" :alt="`${name} Glyph`" class="glyph" />
 </template>
 
 <script setup>

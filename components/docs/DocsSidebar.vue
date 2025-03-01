@@ -2,7 +2,7 @@
     <div>
         <div class="sidebar-top">
             <NuxtLink class="project-title" :to="`/docs/${project.slug}`">
-                <IconifiedProject centered :project="project" />
+                <IconifiedProject centered :project="project" size="48px" />
             </NuxtLink>
             <div class="project-buttons">
                 <ButtonLink :href="`/project/${project.slug}`" icon="fa6-solid:info" >

@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <img class="shadow" v-for="img in row" :src="`${ASSETS_URL}/${img}`" />
+        <NuxtImg class="shadow" v-for="img in row" :src="`${ASSETS_URL}/${img}`" sizes="100% sm:300px md:600px" />
     </div>
 </template>
 

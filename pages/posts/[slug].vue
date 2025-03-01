@@ -23,7 +23,7 @@
                 <input class="title-editor" v-else v-model="post.title" :placeholder="t('post-title')">
                 <div class="details">
                     <NuxtLink v-if="!editing && post.associatedProject" class="project" :to="`/project/${post.associatedProject.slug}`">
-                        <IconifiedProject :project="post.associatedProject" />
+                        <IconifiedProject :project="post.associatedProject" size="24px" />
                     </NuxtLink>
                         <IconifiedText v-else-if="editing" icon="fa6-solid:box" class="project">
                         <select v-model="associated" :placeholder="t('post-category')">
@@ -50,12 +50,12 @@
                         </IconifiedText>
                         <IconifiedText v-else icon="fa6-solid:calendar" class="time">{{ useTimeFormat(post.timestamp, true) }}</IconifiedText>
                         <div class="author row">
-                            <img :src="post.authorAvatar ?? '/images/icons/william278.svg'" />
+                            <NuxtImg :src="post.authorAvatar ?? '/images/icons/william278.svg'" width="32px" height="32px" />
                             <span>{{ post.authorName ? useCapitalized(post.authorName) : 'Staff' }}</span>
                         </div>
                     </div>
                 </div>
-                <img v-if="post.imageUrl" class="post-image shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" />
+                <NuxtImg v-if="post.imageUrl" class="post-image shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" />
                 <MDC v-if="!editing" class="body" :value="post.body.length ? post.body : '<br/>'" />
                 <TiptapEditor class="body" v-model="post.body" :placeholder="t('post-body')" v-else></TiptapEditor>
                 <Notice title="Warning" type="warning" v-if="editing && post.versionUpdate">{{ $t('post-version-update-edit-warning') }}</Notice>

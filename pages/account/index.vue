@@ -12,7 +12,8 @@
                                 <div class="user-container shadow">
                                     <span>{{$t('logged-in-with-discord')}}</span>
                                     <div class="user-card">
-                                        <img class="avatar shadow" :src="user.avatar" :alt="t('user-avatar-alt-text', {'name': user.name})" onerror="this.src='/images/icons/william278.png'" />
+                                        <NuxtImg class="avatar shadow" :src="user.avatar" width="75px" height="75px"
+                                            :alt="t('user-avatar-alt-text', {'name': user.name})" placeholder="/images/placeholder-avatar.png" />
                                         <div class="user-details">
                                             <div class="name-role">
                                                 <span class="name">{{ user.name }}</span>
@@ -44,8 +45,7 @@
                                     <div class="purchases-grid">
                                         <div v-for="project in restricted.filter(r => user.purchases.includes(r.slug))" class="purchase">
                                             <NuxtLink :to="`/project/${project.slug}`" class="cover shadow">
-                                                <img class="logo" v-if="project.metadata.icons['PNG_TRANSPARENT']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG_TRANSPARENT']}`" />
-                                                <img class="logo" v-else-if="project.metadata.icons['PNG']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG']}`" />
+                                                <ProjectIcon :project="project" size="85px" transparent />
                                             </NuxtLink>
                                             <div class="details">
                                                 <h2>{{ project.metadata.name }}</h2>
@@ -82,6 +82,7 @@
 
 <script setup>
 import { validate } from 'email-validator'
+import ProjectIcon from '../../components/ProjectIcon.vue';
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;

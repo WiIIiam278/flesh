@@ -48,7 +48,7 @@
                             <input type="color" v-model="page.contents.sections[index].properties[pair[0]]">
                         </div>
                         <div class="property-input" v-if="pair[0].indexOf('image_url') > -1 || pair[0].indexOf('game_cover_bg') > -1">
-                            <img class="icon" v-if="page.contents.sections[index].properties[pair[0]]" :src="`${ASSETS_URL}/${page.contents.sections[index].properties[pair[0]]}`" />
+                            <NuxtImg class="icon" v-if="page.contents.sections[index].properties[pair[0]]" :src="`${ASSETS_URL}/${page.contents.sections[index].properties[pair[0]]}`" />
                             <span class="property-with-button">
                                 <input disabled v-model="page.contents.sections[index].properties[pair[0]]" type="text" placeholder="(None)" />
                                 <button @click="useAssetInput(`Select an image for the page.`, `Select image...`, (_, chosen) => { page.contents.sections[index].properties[pair[0]] = chosen; })">Select</button>

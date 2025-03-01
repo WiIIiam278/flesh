@@ -21,7 +21,9 @@
             </li>
             <li v-if="user">
                 <NuxtLink class="account-link" to="/account">
-                    <img v-if="user?.avatar" class="shadow avatar" :src="user.avatar" :alt="`${user.name} Discord avatar`" onerror="this.style.display='none'" />
+                    <NuxtImg v-if="user?.avatar" class="shadow avatar" width="32px" height="32px"
+                        placeholder="/images/placeholder-avatar.png"
+                        :src="user.avatar" :alt="`${user.name} Discord avatar`" />
                     <span>{{ $t('link-account') }}</span>
                 </NuxtLink>
             </li>

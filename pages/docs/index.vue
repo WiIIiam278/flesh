@@ -18,7 +18,7 @@
                     <div class="project-section" v-for="project in projects.filter(p => p.metadata.documentation).sort((p1, p2) => p2.stats.downloadCount - p1.stats.downloadCount)">
                         <hr/>
                         <NuxtLink class="project-title" :href="`/docs/${project.slug}`">
-                            <img v-if="project.metadata?.icons['PNG']" :src="`${ASSETS_URL}/${project.metadata.icons['PNG']}`" />
+                            <ProjectIcon :project="project" size="32px" />
                             <span>{{ project.metadata.name }}</span>
                         </NuxtLink>
                         <DocsNavigationMini class="project-navigation" v-if="project.metadata?.documentationNav?.length" :showHeaders="false" :project="project" />
@@ -76,7 +76,7 @@ const projects = await useAllProjects();
     gap: 0.5rem;
 }
 
-.project-title img {
+.project-title .icon {
     width: 1.75rem;
     aspect-ratio: 1;
 }

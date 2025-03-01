@@ -19,7 +19,7 @@
                 <span>{{ $t('upload-in-progress') }}</span>
             </div>
             <div class="asset shadow" v-for="item in assets.value.content" :key="item.id">
-                <img @click="pickAsset(item.name)" :class="pickerMode ? 'cursor' : ''" :src="`${ASSETS_URL}/${item.name}`">
+                <NuxtImg @click="pickAsset(item.name)" :class="pickerMode ? 'cursor' : ''" :src="`${ASSETS_URL}/${item.name}`" />
                 <button class="red" @click="deleteAsset(item.name)"><Icon name="fa6-solid:trash" /></button>
             </div>
         </div>

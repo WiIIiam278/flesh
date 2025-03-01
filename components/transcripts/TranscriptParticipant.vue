@@ -1,7 +1,7 @@
 <template>
     <div class="transcript-participant">
-        <div class="avatar">
-            <img :src="user.pfp" />
+        <div class="avatar" v-if="user.pfp">
+            <NuxtImg :src="user.pfp" width="32px" height="32px" />
         </div>
         <div class="profile">
             <div class="name">

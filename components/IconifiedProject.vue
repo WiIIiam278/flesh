@@ -1,9 +1,6 @@
 <template>
     <span :class="`iconified-project ${centered ? 'centered' : ''}`">
-        <span v-if="meta.icons" class="icon">
-            <object v-if="meta.icons['SVG']" :data="`${ASSETS_URL}/${meta.icons['SVG']}`" type="image/svg+xml" />
-            <img v-else-if="meta.icons['PNG']" :src="`${ASSETS_URL}/${meta.icons['PNG']}`" />
-        </span>
+        <ProjectIcon v-if="meta.icons" class="icon" :project="project" :size="size" />
         <span class="name">
             {{ meta.name ? meta.name : project.slug }}
         </span>
@@ -46,9 +43,7 @@
 </style>
 
 <script setup>
-const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
-
-const { project, centered } = defineProps({
+const { project, centered, size } = defineProps({
     project: {
         type: Object,
         required: true
@@ -57,6 +52,11 @@ const { project, centered } = defineProps({
         type: Boolean,
         default: false,
         required: false
+    },
+    size: {
+        type: String,
+        required: false,
+        default: '32px'
     }
 })
 const { metadata: meta } = project;

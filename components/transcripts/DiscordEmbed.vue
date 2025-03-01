@@ -25,19 +25,22 @@
                     </div>
                 </div>
                 <div v-if="embed.image" class="image">
-                    <img :src="embed.image.url" @error="this.target.src='/images/missing-image.png'" />
+                    <NuxtImg width="550px" height="225px" :src="embed.image.url" placeholder='/images/missing-image.png' />
                 </div>
                 <div v-if="embed.footer" class="footer">
-                    <img v-if="embed.footer.icon_url" :src="embed.footer.icon_url" @error="this.target.src='/images/missing-image.png'" class="icon" />
+                    <NuxtImg v-if="embed.footer.icon_url" :src="embed.footer.icon_url" placeholder='/images/missing-image.png'
+                        width="32px" height="32px" class="icon" />
                     <div v-if="embed.footer.text" class="text">
                         <MessageText :value="embed.footer.text" :transcript="transcript" embed />
                     </div>
                 </div>
             </div>
             <div class="thumbnail-section" v-if="embed.thumbnail">
-                <img v-if="embed.title || embed.description || (embed.fields && embed.fields.length > 0) || embed.image"
-                    :src="embed.thumbnail.url" @error="this.target.src='/images/missing-image.png'" class="thumbnail" />
-                <img v-else :src="embed.thumbnail.url" @error="this.target.src='/images/missing-image.png'" class="image">
+                <NuxtImg v-if="embed.title || embed.description || (embed.fields && embed.fields.length > 0) || embed.image"
+                    :src="embed.thumbnail.url" placeholder='/images/missing-image.png' class="thumbnail"
+                    width="100px" height="100px" />
+                <NuxtImg v-else :src="embed.thumbnail.url" placeholder='/images/missing-image.png' class="image"
+                    width="100px" height="100px" />
             </div>
         </div>
     </div>

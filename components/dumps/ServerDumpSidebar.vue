@@ -4,8 +4,7 @@
         <div class="plugin">
             <div class="section-header" v-if="meta">{{ $t('dump-header-plugin') }}</div>
             <div class="avatar" v-if="meta">
-                <object v-if="meta.icons['SVG']" :data="`${ASSETS_URL}/${meta.icons['SVG']}`" type="image/svg+xml" />
-                <img v-else-if="meta.icons['PNG']" :src="`${ASSETS_URL}/${meta.icons['PNG']}`" />
+                <ProjectIcon class="icon" :project="project" size="64px" />
                 <div class="info">
                     <IconifiedText icon="fa6-solid:tag"><NuxtLink :to="`/project/${project.slug}`">{{ meta.name }}</NuxtLink></IconifiedText>
                     <IconifiedText icon="fa6-solid:code-branch"><span class="value">v{{ data.project.version }}</span></IconifiedText>
@@ -59,7 +58,8 @@
         <div class="meta" v-if="data.meta">
             <div class="section-header">{{ $t('dump-header-metadata') }}</div>
             <div class="avatar">
-                <img v-if="data.meta.creator" :alt="data.meta.creator.username" :src="`https://crafthead.net/helm/${data.meta.creator.uuid}/64`" onerror="this.style.display = 'none'" />
+                <NuxtImg v-if="data.meta.creator" width="64px" height="64px" :alt="data.meta.creator.username"
+                    :src="`https://crafthead.net/helm/${data.meta.creator.uuid}/64`" placeholder="/images/placeholder-mc-avatar.png" />
                 <div class="info">
                     <IconifiedText v-if="data.meta.creator" icon="octicon:command-palette-16"><span class="value">{{ data.meta.creator.username }}</span></IconifiedText>
                     <IconifiedText icon="fa6-solid:clock"><span class="value">{{ useTimeFormat(data.meta.timestamp, true) }}</span></IconifiedText>
@@ -74,7 +74,6 @@
 </template>
 
 <script setup>
-const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const DUMPS_URL = useRuntimeConfig().public.DUMPS_BYTEBIN_URL;
 const { t } = useI18n()
 

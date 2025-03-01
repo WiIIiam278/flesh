@@ -23,7 +23,7 @@
             <tbody v-if="transactions.value">
                 <tr v-for="transaction in transactions.value.content" :key="transaction.id">
                     <td class="timestamp">{{ transaction.timestamp ? useTimeFormat(transaction.timestamp, true) : "" }}</td>
-                    <td class="project"><IconifiedProject v-if="transaction.projectGrantSlug" :project="getProject(transaction.projectGrantSlug)" /></td>
+                    <td class="project"><IconifiedProject v-if="transaction.projectGrantSlug" :project="getProject(transaction.projectGrantSlug)" size="32px" /></td>
                     <td class="processor"><Icon :name="`fa6-brands:${transaction.processor?.toLowerCase()}`" />&nbsp;{{ formatProcessor(transaction.processor) }}</td>
                     <td class="marketplace">{{ transaction.marketplace }}</td>
                     <td class="reference">{{ transaction.transactionReference }}</td>
@@ -31,7 +31,8 @@
                     <td class="amount">{{ transaction.amount }}&nbsp;{{ transaction.currency }}</td>
                     <td class="status">
                         <div class="avatar-name" v-if="transaction.grantedToName?.length">
-                            <img v-if="transaction.grantedToAvatar" :src="transaction?.grantedToAvatar" alt="User avatar" onerror="this.style.display='none'" />
+                            <NuxtImg v-if="transaction.grantedToAvatar" :src="transaction?.grantedToAvatar"
+                                alt="User avatar" placeholder="/images/placeholder-avatar.png" />
                             <span>{{ transaction.grantedToName ?? $t('user-deleted') }}</span>
                         </div>
                         <div :class="text">{{ getStatus(transaction) }}</div>

@@ -8,8 +8,8 @@
             <div v-if="modal.type === 'download'" class="downloads">
                 <a class="download-button shadow" v-for="download in modal.data.downloads"
                     :href="useDownloadUrl(modal.data.project, modal.data.channel, modal.data.release, download.distribution)">
-                    <img class="icon" :src="`/images/platforms/${download.distribution.groupName}.png`"
-                        onerror="this.style.display='none'" />
+                    <NuxtImg class="icon" :src="`/images/platforms/${download.distribution.groupName}.png`"
+                        width="32px" height="32px" onerror="this.style.display='none'" />
                     <div class="details">
                         <div class="name">{{ download.distribution.description }}</div>
                         <div class="file">

@@ -8,8 +8,7 @@
                 </div>
             </div>
             <div class="icon" v-if="meta.icons">
-                <object v-if="meta.icons['SVG']" :data="`${ASSETS_URL}/${meta.icons['SVG']}`" type="image/svg+xml" />
-                <img v-else-if="meta.icons['PNG']" :src="`${ASSETS_URL}/${meta.icons['PNG']}`" />
+                <ProjectIcon :project="project" size="75px" />
             </div>
         </div>
         <div class="tagline">{{ meta.tagline }}</div>

@@ -13,7 +13,7 @@
                 <label for="dist-group-select">{{ $t('download-filter-label') }}</label>
                 <label id="dist-group-select" v-for="group in distGroups" :for="`dist-group-${group}`"
                     :key="group" :class="`dist-group ${selectedDistGroup === group ? 'selected' : ''}`">
-                    <img class="icon" :src="`/images/platforms/${group}.png`" onerror="this.style.display='none'" />
+                    <NuxtImg class="icon" width="48px" height="48px" :src="`/images/platforms/${group}.png`" placeholder="/images/placeholder-avatar.png" />
                     <span class="name">{{ useCapitalized(group) }}</span>
                     <input type="radio" :id="`dist-group-${group}`" name="dist-group" :value="group" v-model="selectedDistGroup"
                         @change="updateVersions(pageNumber, itemsPerPage)" />

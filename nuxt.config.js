@@ -1,7 +1,7 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   // Modules
-  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n', 'nuxt-tiptap-editor', 'nuxt-monaco-editor', 'nuxt-echarts'],
+  modules: ['nuxt-icon', '@nuxt/content', '@nuxtjs/algolia', '@nuxtjs/google-fonts', '@nuxtjs/i18n', 'nuxt-tiptap-editor', 'nuxt-monaco-editor', 'nuxt-echarts', '@nuxt/image'],
 
   // Fonts
   googleFonts: {
@@ -89,6 +89,20 @@ export default defineNuxtConfig({
           COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
           SESSION_EXPIRY_DAYS: process.env.SESSION_EXPIRY_DAYS,
       }
+  },
+
+  // Images
+  image: {
+    domains: [ 
+        process.env.ASSETS_BASE_URL,
+        process.env.FRONTEND_BASE_URL,
+        'repo.william278.net',
+        'haroohie.club',
+        'cdn.discordapp.com',
+        'raw.githubusercontent.com',
+        'img.shields.io',
+        'crafthead.net'
+    ]
   },
 
   // ECharts

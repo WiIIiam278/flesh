@@ -23,7 +23,8 @@
             <tbody v-if="users.value">
                 <tr v-for="item in users.value.content" :key="item.id">
                     <td class="avatar">
-                        <img v-if="item.avatar" :src="item.avatar" alt="User avatar" onerror="this.style.display='none'" />
+                        <NuxtImg v-if="item.avatar" :src="item.avatar" alt="User avatar"
+                            placeholder="/images/placeholder-avatar.png" width="64px" height="64px" />
                     </td>
                     <td><code>{{ item.id }}</code></td>
                     <td>{{ item.createdAt ? useTimeFormat(item.createdAt) : "" }}</td>
