@@ -97,4 +97,26 @@ const { post, type, displayProject } = defineProps({
     object-fit: fill;
     border-radius: 0.5rem;
 }
+
+@media screen and (max-width: 1000px) {
+    .container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .title-row .details {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .time-project {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.5rem;
+    }
+}
 </style>
