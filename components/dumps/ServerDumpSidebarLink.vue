@@ -4,7 +4,7 @@
             <div class="name-link">
                 <div class="page-name">
                     <Icon class="icon" :name="icon" />
-                    <span>{{ title }}</span>
+                    <span class="title">{{ title }}</span>
                 </div>
             </div>
         </div>

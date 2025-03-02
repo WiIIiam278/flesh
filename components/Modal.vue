@@ -27,7 +27,7 @@
                 <MDC v-else :value="modal.message" tag="article" />
             </div>
             <div v-if="modal.type === 'asset'" >
-                <AssetManager pickerMode @select="(chosen) => close(true, chosen?.length ? chosen : null)" />
+                <AssetManager pickerMode :contentTypeFilter="modal.contentTypeFilter" @select="(chosen) => close(true, chosen?.length ? chosen : null)" />
             </div>
             <div v-else-if="modal.type === 'input'" :class="`input ${modal.inputError ? 'error' : ''}`" >
                 <input @click="modal.inputError = false" type="text" v-model="modal.inputText" :placeholder="modal.title" />

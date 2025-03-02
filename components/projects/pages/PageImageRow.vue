@@ -1,7 +1,6 @@
 <template>
     <div class="row">
-        <NuxtImg class="shadow" v-for="img in row" :src="`${ASSETS_URL}/${img}`"
-            :modifiers="{ animated: true }" format="webp" sizes="100% md:600px sm:300px" />
+        <PageAsset class="shadow" :src="img" sizes="100% md:600px sm:300px" />
     </div>
 </template>
 

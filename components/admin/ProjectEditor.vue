@@ -136,7 +136,7 @@
                                 <NuxtImg class="icon" v-if="editing.metadata.icons[format]?.length" :src="`${ASSETS_URL}/${editing.metadata.icons[format]}`" width="64px" height="64px" />
                             <span class="image-picker">
                                 <input disabled :id="`${format}-icon`" v-model="editing.metadata.icons[format]" type="text" placeholder="(None)" />
-                                <button @click="useAssetInput(`Please choose a ${format} icon for the project.`, `Select ${format} icon...`, (_, chosen) => editing.metadata.icons[format] = chosen)">Select</button>
+                                <button @click="useAssetInput(`Please choose a ${format} icon for the project.`, `Select ${format} icon...`, (_, chosen) => editing.metadata.icons[format] = chosen, `image/${format}`)">Select</button>
                             </span>
                         </div>
                     </div>

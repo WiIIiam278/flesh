@@ -18,8 +18,14 @@
                 <Icon class="icon" name="svg-spinners:180-ring" />
                 <span>{{ $t('upload-in-progress') }}</span>
             </div>
-            <div class="asset shadow" v-for="item in assets.value.content" :key="item.id">
-                <NuxtImg @click="pickAsset(item.name)" :class="pickerMode ? 'cursor' : ''" :src="`${ASSETS_URL}/${item.name}`" />
+            <div class="asset" v-for="item in assets.value.content" :key="item.id">
+                <video v-if="item.contentType?.startsWith('video')" @click="pickAsset(item.name)" :class="`image shadow ${pickerMode ? 'cursor' : ''}`"
+                    preload="true" :type="item.contentType" autoplay muted loop playsinline>
+                    <source :src="`${ASSETS_URL}/${item.name}`" :type="item.contentType">
+                </video>
+                <NuxtImg v-else :src="`${ASSETS_URL}/${item.name}`" @click="pickAsset(item.name)" :class="`image shadow ${pickerMode ? 'cursor' : ''}`"
+                    height="232px" fit="cover" />
+                <div class="type">{{ getTypeDisplay(item.contentType) }}</div>
                 <button class="red" @click="deleteAsset(item.name)"><Icon name="fa6-solid:trash" /></button>
             </div>
         </div>
@@ -37,10 +43,15 @@ const { auth, xsrf } = useAuth();
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 
-const { pickerMode } = defineProps({
+const { pickerMode, contentTypeFilter } = defineProps({
     pickerMode: {
         type: Boolean,
         default: false,
+        required: false
+    },
+    contentTypeFilter: {
+        type: String,
+        default: null,
         required: false
     }
 })
@@ -52,10 +63,17 @@ const searchText = ref('');
 const uploading = ref(null);
 const emit = defineEmits(['select']);
 
+const getTypeDisplay = (type) => {
+    if (type.indexOf('/') > -1) {
+        return type.split('/')[1];
+    }
+    return type ?? '???';
+}
+
 const updateAssets = (async (page, perPage) => {
     pageNumber.value = Math.max(1, page || pageNumber.value);
     itemsPerPage.value = Math.max(30, perPage || itemsPerPage.value);
-    assets.value = await useAllAssets(pageNumber.value - 1, itemsPerPage.value, searchText.value);
+    assets.value = await useAllAssets(pageNumber.value - 1, itemsPerPage.value, searchText.value, contentTypeFilter);
 });
 
 await updateAssets(pageNumber.value, itemsPerPage.value);
@@ -166,11 +184,15 @@ const formatAssetName = (name) => {
     font-size: 2rem;
 }
 
-.asset img {
-    height: 230px;
-    width: 100%;
+.asset .image {
     max-width: 500px;
+    min-width: 230px;
     border-radius: 0.5rem;
+    image-rendering: pixelated;
+}
+
+.asset video {
+    max-height: 232px;
 }
 
 .asset {
@@ -185,6 +207,25 @@ const formatAssetName = (name) => {
     height: 45px;
     z-index: 10;
     top: 0;
+    right: 0;
+}
+
+.asset .type {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--light-gray);
+    margin: 0.35rem;
+    background-color: #2b2b2bc0;
+    border: 0.125rem solid var(--gray);
+    border-radius: 0.5rem;
+    min-width: 41.5px;
+    height: 41.5px;
+    z-index: 10;
+    bottom: 5px;
     right: 0;
 }
 

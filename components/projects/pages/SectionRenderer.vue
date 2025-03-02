@@ -52,9 +52,6 @@
 </template>
 
 <script setup>
-import PageImageRow from './PageImageRow.vue';
-import PageYouTubeVideo from './PageYouTubeVideo.vue';
-
 const { project, section } = defineProps({
     project: {
         type: Object,

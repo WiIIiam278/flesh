@@ -1,40 +1,51 @@
 <template>
     <div>
-        <NuxtLayout>
+        <NuxtLayout name="sidebar">
             <div id="page-content">
                 <article class="admin-page">
                     <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }]" />
-                    <h1>{{ $t('admin-panel') }}</h1>
-                    <div>
-                        <Tabs :tabs="tabs" v-model:selected="activeTab">
-                            <div v-if="activeTab === 'projects'">
-                                <ProjectEditor />
-                            </div>
-                            <div v-if="activeTab === 'pages'">
-                                <ProjectPageEditor />
-                            </div>
-                            <div v-if="activeTab === 'upload'">
-                                <VersionUploader />
-                            </div>
-                            <div v-if="activeTab === 'import'">
-                                <VersionImporter />
-                            </div>
-                            <div v-if="activeTab === 'users'">
-                                <UsersTable :user="user" @show-tickets="showTickets" />
-                            </div>
-                            <div v-if="activeTab === 'tickets'">
-                                <TicketsTable />
-                            </div>
-                            <div v-if="activeTab === 'transactions'">
-                                <TransactionsTable />
-                            </div>
-                            <div v-if="activeTab === 'assets'">
-                                <AssetManager />
-                            </div>
-                        </Tabs>
+                    <h1>{{ tabs.find(t => t.id === activeTab)?.name ?? $t('admin-panel') }}</h1>
+                    <div v-if="activeTab === 'projects'">
+                        <ProjectEditor />
+                    </div>
+                    <div v-if="activeTab === 'pages'">
+                        <ProjectPageEditor />
+                    </div>
+                    <div v-if="activeTab === 'upload'">
+                        <VersionUploader />
+                    </div>
+                    <div v-if="activeTab === 'import'">
+                        <VersionImporter />
+                    </div>
+                    <div v-if="activeTab === 'users'">
+                        <UsersTable :user="user" @show-tickets="showTickets" />
+                    </div>
+                    <div v-if="activeTab === 'tickets'">
+                        <TicketsTable />
+                    </div>
+                    <div v-if="activeTab === 'transactions'">
+                        <TransactionsTable />
+                    </div>
+                    <div v-if="activeTab === 'assets'">
+                        <AssetManager />
                     </div>
                 </article>
             </div>
+            <template #sidebar>
+                <div class="sidebar">
+                    <h1>{{ $t('admin-panel') }}</h1>
+                    <div class="links">
+                        <div v-for="tab in tabs" :class="`link link-section ${tab.id === activeTab ? 'selected' : ''}`">
+                            <div class="name-link" @click="activeTab = tab.id">
+                                <div class="page-name">
+                                    <Icon class="icon" :name="tab.icon" />
+                                    <span class="title">{{ tab.name }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </NuxtLayout>
     </div>
 </template>
@@ -43,16 +54,16 @@
 const user = await useUser();
 const tabs = [];
 if (useIsUserRole(user.value, 'staff')) {
-    tabs.unshift({ id: 'tickets', name: 'Tickets', path: '/admin#tickets' })
-    tabs.unshift({ id: 'users', name: 'Users', path: '/admin#users' })
-    tabs.unshift({ id: 'assets', name: 'Assets', path: '/admin#assets' })
+    tabs.unshift({ id: 'tickets', name: 'Tickets', icon: 'fa6-solid:ticket', path: '/admin#tickets' })
+    tabs.unshift({ id: 'users', name: 'Users', icon: 'fa6-solid:user', path: '/admin#users' })
+    tabs.unshift({ id: 'assets', name: 'Assets', icon: 'fa6-solid:image', path: '/admin#assets' })
 }
 if (useIsUserRole(user.value, 'admin')) {
-    tabs.unshift({ id: 'transactions', name: 'Transactions', path: '/admin#transactions' })
-    tabs.unshift({ id: 'import', name: 'Import', path: '/admin#import' })
-    tabs.unshift({ id: 'upload', name: 'Upload', path: '/admin#upload' })
-    tabs.unshift({ id: 'pages', name: 'Pages', path: '/admin#pages' })
-    tabs.unshift({ id: 'projects', name: 'Projects', path: '/admin#projects' })
+    tabs.unshift({ id: 'transactions', name: 'Transactions', icon: 'mdi:coins', path: '/admin#transactions' })
+    tabs.unshift({ id: 'import', name: 'Import', icon: 'mdi:import', path: '/admin#import' })
+    tabs.unshift({ id: 'upload', name: 'Upload', icon: 'mdi:upload', path: '/admin#upload' })
+    tabs.unshift({ id: 'pages', name: 'Pages', icon: 'mdi:globe', path: '/admin#pages' })
+    tabs.unshift({ id: 'projects', name: 'Projects', icon: 'fa6-solid:star', path: '/admin#projects' })
 }
 const activeTab = defineModel('activeTab')
 activeTab.value = 'projects'
@@ -67,12 +78,65 @@ const showTickets = (user) => {
 </script>
 
 <style scoped>
-#page-content {
-    margin-top: 1rem;
+.admin-page {
+    margin-bottom: 2rem;
 }
 
-.admin-page {
-    width: 1200px;
-    max-width: 95vw;
+.sidebar h1 {
+    border: none;
+    text-align: center;
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+}
+
+.sidebar h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+}
+
+.link {
+    border-top: 0.125rem solid var(--gray);
+    color: var(--accent);
+    cursor: pointer;
+}
+
+.link .title {
+    padding: 0.25rem 0;
+}
+
+.link-section {
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link-section:hover {
+    filter: brightness(100%);
+    background-color: var(--gray);
+    transition: ease-in-out 0.1s;
+}
+
+.link-section .name-link {
+    width: 100%
+}
+
+.page-name {
+    padding: 0.7rem 0;
+}
+
+.page-name:hover {
+    text-decoration: underline;
+}
+
+.selected {
+    background-color: var(--gray);
+    color: var(--white);
+}
+
+.page-name .icon {
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
 }
 </style>
