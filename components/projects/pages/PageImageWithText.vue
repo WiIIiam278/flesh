@@ -1,6 +1,7 @@
 <template>
     <div class="container" :style="`flex-direction: row${imagePosition === 'left' ? '' : '-reverse'};`">
-        <NuxtImg class="image shadow" :src="`${ASSETS_URL}/${imageUrl}`" :alt="title" sizes="48% sm:300px md:600px" />
+        <NuxtImg class="image shadow" :src="`${ASSETS_URL}/${imageUrl}`" :alt="title" 
+            :modifiers="{ animated: true }" format="webp" sizes="48% md:600px sm:300px" />
         <div class="text">
             <MDC v-if="title?.length" :value="title" tag="h2" unwrap="p" />
             <MDC v-if="body?.length" :value="body" tag="p" unwrap="p" />
