@@ -1,11 +1,10 @@
 <template>
     <div class="row">
-        <PageAsset class="shadow" :src="img" sizes="100% md:600px sm:300px" />
+        <PageAsset v-for="img in row" class="shadow" :src="img" sizes="100% md:600px sm:300px" />
     </div>
 </template>
 
 <script setup>
-const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 const { images } = defineProps({
     images: {
         type: String,
