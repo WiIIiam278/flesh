@@ -1,11 +1,10 @@
 <template>
     <video v-if="isVideo" preload="true" autoplay muted loop playsinline
         :style="`width: ${width}; height: ${height}`">
-        <source :src="`${ASSETS_URL}/${src}`">
+        <source :src="url">
     </video>
-    <NuxtImg v-else :class="pickerMode ? 'cursor' : ''" :src="`${ASSETS_URL}/${item.name}`"
-        :width="width" :height="height":sizes="sizes" :alt="alt"/>
-                
+    <NuxtImg v-else :class="pickerMode ? 'cursor' : ''" :src="url"
+        :width="width" :height="height" :sizes="sizes" :alt="alt"/>
 </template>
 
 <script setup>
@@ -38,9 +37,9 @@ const { src, alt, width, height, sizes } = defineProps({
 });
 
 const KNOWN_VIDEO_TYPES = ['MP4', 'AVI', 'MOV', 'WMV', 'MKV', 'FLV', 'MPEG', '3GP']
-const isVideo = () => {
-    let srcExt = src.lastIndexOf('.');
-    if (srcExt < 0) return false;
-    return KNOWN_VIDEO_TYPES.indexOf(src.substring(srcExt).toUpperCase()) > 0;
-}
+const URL_PATTERN = new RegExp("^(http|https)://", "i");
+
+const isVideo = KNOWN_VIDEO_TYPES.find(v => src.toLowerCase().endsWith(v.toLowerCase()));
+const isExternal = URL_PATTERN.test(src);
+const url = isExternal ? src : `${ASSETS_URL}/${src}`;
 </script>
