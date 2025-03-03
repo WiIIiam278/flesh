@@ -82,7 +82,6 @@ const colBg = (i) => (colColors?.length && colColors.split(',').length >= i) ? `
 
 table {
     table-layout: fixed;
-    width: 100vw;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -90,7 +89,7 @@ table {
 }
 
 table tr th, table tr td {
-    width: 175px;
+    width: 200px;
     text-align: center;
     padding: 0.55rem 0;
 }
@@ -134,9 +133,6 @@ table tr .blank {
     margin: 1rem 0;
     padding: 0;
     color: var(--light-gray);
-    font-size: 0.8rem;
-    line-height: 1.3;
-    max-width: 600px;
     text-align: center;
 }
 
@@ -147,9 +143,21 @@ table tr .blank {
     text-align: center;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 1000px) {
     table tr th, table tr td {
-        width: 95px;
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    table tr th, table tr td {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    table tr th, table tr td {
+        width: 75px;
     }
 }
 </style>
