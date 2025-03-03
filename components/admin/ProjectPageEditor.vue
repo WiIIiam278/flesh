@@ -168,10 +168,28 @@ const SECTION_PRESETS = {
             "video_id": "HiiZxOU934E"
         }
     },
-    
+    "centred_image": {
+        "properties": {
+            "image": "/breaking-bad-ds-emulator-cover.png",
+            "alt": "Breaking Bad DS emulator cover",
+            "shadow": "true"
+        }
+    },
+    "comparison_table": {
+        "title": "Comparison (first col used as feature name)",
+        "properties": {
+            "features_col": "One,Two,Three,Four,Five",
+            "comparison_cols_headers": "Product 1,Product2",
+            "comparison_cols_headers_images": "husksync.png,",
+            "comparison_cols_shading": "#191919,",
+            "comparison_cols_rows": "y,y|y,y|y,n|y,n|y,n",
+            "icon_map": "y,fa6-solid:check,lime|n,pepicons-pop:no-entry,red",
+            "footnote": "Footnote footnote footnote"
+        }
+    },
     "image_row": {
         "properties": {
-            "images": "/images/breaking-bad-ds/emulator-cover.png,/images/breaking-bad-ds/emulator-cover.png,/images/breaking-bad-ds/emulator-cover.png"
+            "images": "/breaking-bad-ds-emulator-cover.png,/breaking-bad-ds-emulator-cover.png,/breaking-bad-ds-emulator-cover.png"
         }
     },
     "game_player": {

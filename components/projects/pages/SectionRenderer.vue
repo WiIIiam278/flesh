@@ -43,6 +43,8 @@
                     :button2Label="props.button2_label" :button2Icon="props.button2_icon" :button2Url="props.button2_url"
                 />
         </GamePlayer>
+        <PageComparisonTable v-else-if="is('comparison_table')" :props="props" :title="title" />
+        <PageCentredImage v-else-if="is('centred_image')" :image="props.image" :alt="props.alt" :shadow="props.shadow" />
         <PageImageRow v-else-if="is('image_row')" :images="props.images" />
         <PageYouTubeVideo v-else-if="is('youtube')" :videoId="props.video_id" />
         <hr v-else-if="is('horizontal_rule')" />
@@ -52,6 +54,7 @@
 </template>
 
 <script setup>
+
 const { project, section } = defineProps({
     project: {
         type: Object,
