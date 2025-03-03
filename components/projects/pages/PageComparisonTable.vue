@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <MDC v-if="title?.length" :value="title" tag="h2" unwrap="p" />
         <table>
            <thead>
             <tr v-if="headerImages?.length">
@@ -130,10 +131,19 @@ table tr .blank {
 }
 
 .footnote:deep(p) {
-    margin: 0.5rem 0 1rem 0;
+    margin: 1rem 0;
     padding: 0;
     color: var(--light-gray);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    max-width: 600px;
+    text-align: center;
+}
+
+.container:deep(h2) {
+    border: none !important;
+    color: var(--white);
+    margin: 0.75rem 0;
     text-align: center;
 }
 

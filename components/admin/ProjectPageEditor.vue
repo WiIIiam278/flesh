@@ -176,7 +176,7 @@ const SECTION_PRESETS = {
         }
     },
     "comparison_table": {
-        "title": "Comparison (first col used as feature name)",
+        "title": "Comparison Table",
         "properties": {
             "features_col": "One,Two,Three,Four,Five",
             "comparison_cols_headers": "Product 1,Product2",
