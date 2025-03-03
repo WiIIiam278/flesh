@@ -24,6 +24,9 @@
             </tr>
            </tbody>
         </table>
+        <div class="footnote" v-if="footnote?.length">
+            <MDC :value="footnote" tag="p" unwrap="p" />
+        </div>
     </div>
 </template>
 
@@ -73,6 +76,7 @@ const colBg = (i) => (colColors?.length && colColors.split(',').length >= i) ? `
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin: 1rem 0;
 }
 
 table {
@@ -82,7 +86,6 @@ table {
     flex-direction: column;
     box-sizing: border-box;
     align-items: center;
-    margin: 1rem 0;
 }
 
 table tr th, table tr td {
@@ -124,6 +127,14 @@ table tr .feature {
 table tr .blank {
     background-color: transparent;
     border: none;
+}
+
+.footnote:deep(p) {
+    margin: 0.5rem 0 1rem 0;
+    padding: 0;
+    color: var(--light-gray);
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 @media screen and (max-width: 550px) {
