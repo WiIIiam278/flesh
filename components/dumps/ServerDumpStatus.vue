@@ -28,11 +28,16 @@
                     </tr>
                     <tr class="chart" v-else-if="block.type === 'CHART'">
                         <td>
-                            <div class="container" v-if="block.chartType === 'PIE'">
+                            <div class="container" v-if="block.chartType === 'PIE' && block.values?.length">
                                 <VChartLight class="renderer" :option="getPieFor(block)" />
                             </div>
-                            <div class="container" v-else-if="block.chartType === 'BAR'">
+                            <div class="container" v-else-if="block.chartType === 'BAR' && block.values?.length">
                                 <VChartLight class="renderer" :option="getBarFor(block)" />
+                            </div>
+                            <div v-else-if="!block.values?.length">
+                                <div class="no-data">
+                                    <IconifiedText icon="fa6-solid:info">{{ $t('dump-status-no-block-data') }}</IconifiedText>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -67,6 +72,9 @@ const initOptions = computed(() => ({
 provide(INIT_OPTIONS_KEY, initOptions)
 
 const getPieFor = (block) => {
+    if (!block.values) {
+        return null;
+    }
     return {
         title: {
             text: `Total: ${Object.values(block.values).reduce((a, b) => a + b)}`,
@@ -99,6 +107,9 @@ const getPieFor = (block) => {
 }
 
 const getBarFor = (block) => {
+    if (!block.values) {
+        return null;
+    }
     return {
         title: {
             text: `Total: ${Object.values(block.values).reduce((a, b) => a + b)}`,
@@ -182,6 +193,14 @@ table {
     align-items: center;
     justify-content: center;
     height: 70vh;
+}
+
+.no-data {
+    color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
 }
 
 /* Less than 850px */

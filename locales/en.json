@@ -159,6 +159,7 @@
     "dump-status-table-description": "Description",
     "dump-status-table-value": "Status",
     "dump-no-status-info": "No plugin status overview to display.",
+    "dump-status-no-block-data": "No data to display.",
 
     "tickets-header-record-count": "Displaying {count} ticket record(s):",
     "tickets-header-client": "Client",
