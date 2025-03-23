@@ -1,6 +1,15 @@
 <template>
     <div>
         <NuxtLayout>
+            <Head>
+                <Title>{{ t('account-title') }}</Title>
+                <Meta name="description" :content="t('account-description')" />
+                <Meta name="og:image" content="/images/thumbnails/page/home/card.png" />
+                <Meta name="twitter:description" :content="t('account-description')" />
+                <Meta name="twitter:image" content="/images/thumbnails/page/home/card.png" />
+                <Meta name="twitter:card" content="summary_large_image" />
+                <Meta name="twitter:creator" content="@William27528" />
+            </Head>
             <div id="page-content">
                 <article class="account-page">
                     <Breadcrumbs :crumbs="[{ name: t('link-home'), link: '/' }]" />
@@ -81,14 +90,15 @@
 </template>
 
 <script setup>
+const { locale, t } = useI18n();
+const { auth, xsrf } = useAuth();
+
 import { validate } from 'email-validator'
 import ProjectIcon from '../../components/ProjectIcon.vue';
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 
-const { t } = useI18n()
-const { auth, xsrf } = useAuth();
 const user = await useUser();
 const restricted = await useRestrictedProjects();
 const hasRequestedCode = ref(false)
@@ -169,8 +179,6 @@ const activeTab = defineModel('activeTab');
 activeTab.value = 'your-purchases';
 
 definePageMeta({
-    title: computed(() => t('account-title')),
-    description: computed(() => t('account-description')),
     middleware: ['auth']
 })
 </script>

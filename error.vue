@@ -34,10 +34,6 @@ const { error } = defineProps({
 })
 const message = JSON.parse(error?.data ?? '{}')?.error ?? error.message;
 
-definePageMeta({
-    layout: 'default'
-})
-
 useHead({
     titleTemplate: (titleChunk) => {
         return `${t('site-name')} - Error ${error.statusCode}`;

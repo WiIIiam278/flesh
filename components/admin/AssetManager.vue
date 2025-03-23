@@ -34,7 +34,7 @@
             <input type="file" multiple id="asset-upload" @change="(v) => uploadAsset(v.target.files)" />
         </form>
     </div>
-    </template>
+</template>
 
 <script setup>
 const { t } = useI18n();

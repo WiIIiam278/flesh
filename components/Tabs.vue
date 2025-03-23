@@ -1,12 +1,14 @@
 <template>
-    <div class="tabs" v-if="tabs?.length > 1">
-        <div v-for="tab in tabs" :class="`tab ${tab.id === selected ? 'selected' : ''}`" 
-            :key="tab.id" @click="select(tab.id)">
-            {{ tab?.name ?? tab.id }}
+    <div>
+        <div class="tabs" v-if="tabs?.length > 1">
+            <div v-for="tab in tabs" :class="`tab ${tab.id === selected ? 'selected' : ''}`" 
+                :key="tab.id" @click="select(tab.id)">
+                {{ tab?.name ?? tab.id }}
+            </div>
         </div>
-    </div>
-    <div class="tab-content">
-        <slot />
+        <div class="tab-content">
+            <slot />
+        </div>
     </div>
 </template>
 

@@ -1,10 +1,12 @@
 <template>
-    <video v-if="isVideo" preload="true" autoplay muted loop playsinline
+    <div>
+        <video v-if="isVideo" preload="true" autoplay muted loop playsinline
         :style="`width: ${width}; height: ${height}`">
-        <source :src="url">
-    </video>
-    <NuxtImg v-else :class="pickerMode ? 'cursor' : ''" :src="url"
-        :width="width" :height="height" :sizes="sizes" :alt="alt"/>
+            <source :src="url">
+        </video>
+        <NuxtImg v-else :class="pickerMode ? 'cursor' : ''" :src="url"
+            :width="width" :height="height" :sizes="sizes" :alt="alt"/>
+    </div>
 </template>
 
 <script setup>

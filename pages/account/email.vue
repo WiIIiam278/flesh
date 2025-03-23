@@ -19,11 +19,6 @@
 </template>
 
 <script setup>
-definePageMeta({
-    title: computed(() => t('email-address-verified-title')),
-    description: computed(() => t('email-address-verified-description'))
-})
-
 const { status } = useRoute()?.query;
 if (!status || !['verified', 'expired'].includes(status)) {
     await navigateTo('/')

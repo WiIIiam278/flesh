@@ -1,34 +1,36 @@
 <template>
-    <div class="grid-title">
-        <h1>{{ $t('index-grid-header') }}</h1>
-        <div class="filter-tags">
-            <Icon class="tag-icon" name="fa6-solid:tag" />
-            <span class="filters">
-                <template v-for="tag in featuredTags">
-                    <TagPill :tag="tag" isClickable :isSelected="selectedTags.includes(tag)" @selected="onTagSelected" />
-                </template>
-            </span>
-        </div>
-    </div>
-    <div class="projects-grid">
-        <template v-if="filtered?.length" v-for="(project, index) in filtered">
-            <ProjectCard v-if="expanded || index < shown" :index="index" :key="project.slug" :project="project" />
-        </template>
-        <div v-else class="dummy" v-for="i in 6">
-            <div class="title pulsing"></div>
-            <div class="pills">
-                <div class="pill pulsing" v-for="i in 3"></div>
-            </div>
-            <div class="text">
-                <div class="line pulsing" v-for="i in 2"></div>
+    <div>
+        <div class="grid-title">
+            <h1>{{ $t('index-grid-header') }}</h1>
+            <div class="filter-tags">
+                <Icon class="tag-icon" name="fa6-solid:tag" />
+                <span class="filters">
+                    <template v-for="tag in featuredTags">
+                        <TagPill :tag="tag" isClickable :isSelected="selectedTags.includes(tag)" @selected="onTagSelected" />
+                    </template>
+                </span>
             </div>
         </div>
-    </div>
-    <div class="below-grid" v-if="filtered?.length > shown">
-        <a class="grid-size-button" @click="expanded = !expanded">
-            <IconifiedText v-if="expanded" icon="fa6-solid:chevron-up">{{ $t('index-grid-collapse') }}</IconifiedText>
-            <IconifiedText v-else icon="fa6-solid:chevron-down">{{ $t('index-grid-expand') }}</IconifiedText>
-        </a>
+        <div class="projects-grid">
+            <template v-if="filtered?.length" v-for="(project, index) in filtered">
+                <ProjectCard v-if="expanded || index < shown" :index="index" :key="project.slug" :project="project" />
+            </template>
+            <div v-else class="dummy" v-for="i in 6">
+                <div class="title pulsing"></div>
+                <div class="pills">
+                    <div class="pill pulsing" v-for="i in 3"></div>
+                </div>
+                <div class="text">
+                    <div class="line pulsing" v-for="i in 2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="below-grid" v-if="filtered?.length > shown">
+            <a class="grid-size-button" @click="expanded = !expanded">
+                <IconifiedText v-if="expanded" icon="fa6-solid:chevron-up">{{ $t('index-grid-collapse') }}</IconifiedText>
+                <IconifiedText v-else icon="fa6-solid:chevron-down">{{ $t('index-grid-expand') }}</IconifiedText>
+            </a>
+        </div>
     </div>
 </template>
 

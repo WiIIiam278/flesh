@@ -1,5 +1,7 @@
 <template>
-    <NuxtImg v-if="icon?.length" :src="`${ASSETS_URL}/${icon}`" :width="size" :height="size" format="webp" fit="fill" />
+    <div>
+        <NuxtImg v-if="icon?.length" :src="`${ASSETS_URL}/${icon}`" :width="size" :height="size" format="webp" fit="fill" />
+    </div>
 </template>
 
 <script setup>

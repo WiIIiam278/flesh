@@ -30,8 +30,6 @@
 
 <script setup>
 const { locale, t } = useI18n()
-const localePath = useLocalePath()
-
 const { attachment } = defineProps({
     attachment: {
         type: Object,

@@ -1,7 +1,9 @@
 <template>
-    <ErrorPage code="404">
-        {{ $t('error-page-not-found') }}
-    </ErrorPage>
+    <div>
+        <ErrorPage code="404">
+            {{ $t('error-page-not-found') }}
+        </ErrorPage>
+    </div>
 </template>
 
 <script setup>
