@@ -6,11 +6,11 @@
         <button :class="`${type}`">
             <span v-if="icon">
                 <IconifiedText :icon="icon">
-                    <ContentSlot :use="$slots.default" unwrap="p" />
+                    <slot :use="$slots.default" mdc-unwrap="p" />
                 </IconifiedText>
             </span>
             <span v-else>
-                <ContentSlot :use="$slots.default" unwrap="p" />
+                <slot :use="$slots.default" mdc-unwrap="p" />
             </span>
         </button>
     </NuxtLink>

@@ -1,8 +1,7 @@
 <template>
     <div class="attachment">
-        <NuxtImg class="image-attachment shadow" v-if="getType() === 'Image'" :src="attachment.url"
-            sizes="45vw sm:80vw"
-            placeholder="/images/missing-image.png" :alt="t('ticket-transcript-attachment')" />
+        <img class="image-attachment shadow" v-if="getType() === 'Image'" :src="attachment.url" :alt="t('ticket-transcript-attachment')" 
+            onerror="this.src='/images/placeholder-image.png'"/>
         <video class="video-attachment shadow" v-else-if="getType() === 'Video'" controls :src="attachment.url"
             :alt="t('ticket-transcript-attachment')" />
         <div class="audio-attachment boxed-attachment shadow" v-else-if="getType() === 'Audio'">

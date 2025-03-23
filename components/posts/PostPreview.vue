@@ -2,7 +2,8 @@
     <div class="container">
         <NuxtLink class="thumbnail" :title="post.title" :to="`/posts/${post.slug}`">
             <NuxtImg v-if="post.imageUrl" class="shadow" :src="`${ASSETS_URL}/${post.imageUrl}`" :alt="post.title" width="225px" height="150px" />
-            <NuxtImg v-else class="shadow" :src="`${FRONTEND_URL}/images/thumbnails/posts/${post.slug}/thumb.png`" :alt="post.title" width="225px" height="150px" />
+            <NuxtImg v-else class="shadow" :src="`${FRONTEND_URL}/images/thumbnails/posts/${post.slug}/thumb.png`" :alt="post.title"
+                placeholder="/images/placeholder-post-thumb.png" width="225px" height="150px" />
         </NuxtLink>
         <div class="post">
             <div class="title-row">

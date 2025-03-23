@@ -28,13 +28,13 @@
                     </tr>
                     <tr class="chart" v-else-if="block.type === 'CHART'">
                         <td>
-                            <div class="container" v-if="block.chartType === 'PIE' && block.values?.length">
+                            <div class="container" v-if="block.chartType === 'PIE' && block.values && Object.keys(block.values)?.length">
                                 <VChartLight class="renderer" :option="getPieFor(block)" />
                             </div>
-                            <div class="container" v-else-if="block.chartType === 'BAR' && block.values?.length">
+                            <div class="container" v-else-if="block.chartType === 'BAR' && block.values && Object.keys(block.values)?.length">
                                 <VChartLight class="renderer" :option="getBarFor(block)" />
                             </div>
-                            <div v-else-if="!block.values?.length">
+                            <div v-else-if="!block.values || !Object.keys(block.values)?.length">
                                 <div class="no-data">
                                     <IconifiedText icon="fa6-solid:info">{{ $t('dump-status-no-block-data') }}</IconifiedText>
                                 </div>

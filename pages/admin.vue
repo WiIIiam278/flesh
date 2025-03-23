@@ -18,13 +18,13 @@
                         <VersionImporter />
                     </div>
                     <div v-if="activeTab === 'users'">
-                        <UsersTable :user="user" @show-tickets="showTickets" />
+                        <UsersTable :user="user" @show-tickets="showUserTickets" :searchPrefill="searchPrefill" />
                     </div>
                     <div v-if="activeTab === 'tickets'">
-                        <TicketsTable />
+                        <TicketsTable @show-user="showUser" :searchPrefill="searchPrefill" />
                     </div>
                     <div v-if="activeTab === 'transactions'">
-                        <TransactionsTable />
+                        <TransactionsTable @show-user="showUser" />
                     </div>
                     <div v-if="activeTab === 'assets'">
                         <AssetManager />
@@ -36,7 +36,7 @@
                     <h1>{{ $t('admin-panel') }}</h1>
                     <div class="links">
                         <div v-for="tab in tabs" :class="`link link-section ${tab.id === activeTab ? 'selected' : ''}`">
-                            <div class="name-link" @click="activeTab = tab.id">
+                            <div class="name-link" @click="changeTab(tab.id)">
                                 <div class="page-name">
                                     <Icon class="icon" :name="tab.icon" />
                                     <span class="title">{{ tab.name }}</span>
@@ -66,14 +66,26 @@ if (useIsUserRole(user.value, 'admin')) {
     tabs.unshift({ id: 'projects', name: 'Projects', icon: 'fa6-solid:star', path: '/admin#projects' })
 }
 const activeTab = defineModel('activeTab')
+const searchPrefill = defineModel('')
 activeTab.value = 'projects'
 
 definePageMeta({
     middleware: ['staff']
 })
 
-const showTickets = (user) => {
-    navigateTo(`/admin?user=${user}#tickets`, { external: true });
+const changeTab = (tab) => {
+    activeTab.value = tab;
+    searchPrefill.value = '';
+}
+
+const showUserTickets = (user) => {
+    activeTab.value = 'tickets'
+    searchPrefill.value = user;
+}
+
+const showUser = (user) => {
+    activeTab.value = 'users'
+    searchPrefill.value = user;
 }
 </script>
 

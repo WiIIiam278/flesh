@@ -1,5 +1,3 @@
-## Discord Rules
-
 We ask that all users conduct themselves in a proper manner on our Discord server.
 
 1. No links or attachments to any kind of pirated content.

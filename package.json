@@ -28,7 +28,7 @@
     "@docsearch/js": "^3.5.2",
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/algolia": "^1.10.1",
-    "@nuxtjs/i18n": "^8.3.0",
+    "@nuxtjs/i18n": "^9.3.4",
     "@odiffey/discord-markdown": "^3.1.2",
     "7zip-min": "^1.4.5",
     "algoliasearch": "^4.22.1",

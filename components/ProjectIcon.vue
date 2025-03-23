@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <NuxtImg v-if="icon?.length" :src="`${ASSETS_URL}/${icon}`" :width="size" :height="size" format="webp" fit="fill" />
-    </div>
+    <NuxtImg v-if="icon?.length" :src="`${ASSETS_URL}/${icon}`" :width="size" :height="size" format="webp" fit="fill"
+        :placeholder="`/images/placeholder-${transparent ? 'icon-transparent' : 'icon'}.png`" />
 </template>
 
 <script setup>

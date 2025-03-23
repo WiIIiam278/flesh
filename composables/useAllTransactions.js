@@ -1,8 +1,8 @@
-export const useAllTransactions = async (pageNo, pageSize, emailFilter = null) => {
+export const useAllTransactions = async (pageNo, pageSize, emailSearch = null) => {
     const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
     const searchParams = { page: pageNo, size: pageSize };
-    if (emailFilter) {
-        searchParams.emailFilter = emailFilter;
+    if (emailSearch) {
+        searchParams.emailSearch = emailSearch;
     }
 
     const { auth, xsrf } = useAuth();

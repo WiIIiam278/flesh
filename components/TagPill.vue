@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <Pill :class="`${isSelected ? 'selected' : ''} ${isClickable ? 'clickable' : ''}`" v-on:click="onSelected" >
-            {{ tag }}
-        </Pill>
-    </div>
+    <Pill :class="`${isSelected ? 'selected' : ''} ${isClickable ? 'clickable' : ''}`" v-on:click="onSelected" >
+        {{ tag }}
+    </Pill>
 </template>
 
 <script setup>

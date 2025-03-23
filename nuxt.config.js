@@ -58,6 +58,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/terms': { redirect: '/docs/website/terms-and-conditions' },
     '/project': { redirect: '/' },
     '/sitemap': { redirect: '/sitemap.xml' },
     '/rss': { redirect: '/rss.xml' },
@@ -140,7 +141,7 @@ export default defineNuxtConfig({
           redirectOn: 'root',
       },
       locales: [
-          { code: 'en', language: 'en', file: 'locales/en.json', dir: 'ltr' },
+          { code: 'en', language: 'en', file: 'en.json', dir: 'ltr' },
       ],
       defaultLocale: 'en'
   },

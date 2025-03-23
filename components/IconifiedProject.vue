@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: fit-content;
+    width: max-content;
 }
 
 .centered {

@@ -74,15 +74,25 @@ const itemsPerPage = ref(15);
 const users = ref(null);
 const searchText = ref('');
 
-const { user } = defineProps({
+const { user, searchPrefill } = defineProps({
     user: {
         type: Object,
         required: true
+    },
+    searchPrefill: {
+        type: String,
+        required: false,
+        default: ''
     }
 });
 const { auth, xsrf } = useAuth();
 const emit = defineEmits('show-tickets');
 const restrictedProjects = await useRestrictedProjects();
+
+// Prefill user search
+if (searchPrefill?.length) {
+    searchText.value = searchPrefill;
+}
 
 const updateUsers = (async (page, perPage) => {
     pageNumber.value = Math.max(1, page || pageNumber.value);

@@ -30,7 +30,7 @@
             <tbody v-if="tickets.value">
                 <tr v-for="ticket in tickets.value.content" :key="ticket.id">
                     <td class="client" v-if="!user">
-                        <span class="avatar-name">
+                        <span class="avatar-name" @click="$emit('show-user', ticket.user?.name)">
                             <NuxtImg v-if="ticket.user?.avatar" :src="ticket.user?.avatar" width="64px" height="64px"
                                 alt="User avatar" placeholder="/images/placeholder-avatar.png" />
                             <span>{{ ticket.user?.name ?? $t('user-deleted') }}</span>
@@ -40,7 +40,7 @@
                         <IconifiedText icon="fa6-solid:ticket">#{{ getTicketName(ticket) }}</IconifiedText>
                     </td>
                     <td class="subject">
-                        <IconifiedProject v-if="matchSubject(ticket.subject)" :project="matchSubject(ticket.subject)" size="32px" />
+                        <IconifiedProject v-if="matchSubject(ticket.subject)" :project="matchSubject(ticket.subject)" size="24px" />
                         <span v-else>{{ t('ticket-subject-other') }}</span>
                     </td>
                     <td class="description">{{ ticket.description }}</td>
@@ -82,14 +82,25 @@ const userFilter = ref(useRoute()?.query?.user);
 
 const tickets = ref(null);
 const projects = await useAllProjects();
+const emit = defineEmits('show-user');
 
-const { user } = defineProps({
+const { user, searchPrefill } = defineProps({
     user: {
         type: Object,
         required: false
+    },
+    searchPrefill: {
+        type: String,
+        required: false,
+        default: ''
     }
 });
 const { auth, xsrf } = useAuth();
+
+// Prefill user search
+if (searchPrefill?.length) {
+    userFilter.value = searchPrefill;
+}
 
 const findUser = (async (username) => {
     const { value } = await useAllUsers(0, 1, username);
@@ -181,6 +192,11 @@ td.number {
     width: 50px;
     height: 50px;
     border-radius: 100%;
+}
+
+.avatar-name:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .open-ticket {

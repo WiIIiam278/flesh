@@ -191,6 +191,7 @@
     "transactions-header-marketplace": "Marketplace",
     "transactions-header-status": "Status",
     "transaction-status-complete": "Complete",
+    "transaction-status-linked": "Linked",
     "transaction-status-refunded": "Refunded",
     "transaction-status-failed-validation": "Failed",
     "search-by-email": "Email...",

@@ -1,5 +1,3 @@
-## Privacy Notice
-
 This privacy notice tells you what to expect us to do with your personal information.
 
 ## Contact details

@@ -3,7 +3,7 @@
         <div v-if="transactions.value" class="search-options">
             <b>{{ t('transactions-header-record-count', { 'count': transactions.value.page.totalElements }) }}</b>
             <form class="filter-boxes" @submit="(e) => { e.preventDefault(); pageNumber = 0; updateTransactions(pageNumber.value, itemsPerPage.value); }">
-                <input class="email-search" type="text" v-model="emailFilter" :placeholder="t('search-by-email')" />
+                <input class="email-search" type="text" v-model="emailSearch" :placeholder="t('search-by-email')" />
                 <button type="submit">Search</button>
             </form>
         </div>
@@ -23,19 +23,19 @@
             <tbody v-if="transactions.value">
                 <tr v-for="transaction in transactions.value.content" :key="transaction.id">
                     <td class="timestamp">{{ transaction.timestamp ? useTimeFormat(transaction.timestamp, true) : "" }}</td>
-                    <td class="project"><IconifiedProject v-if="transaction.projectGrantSlug" :project="getProject(transaction.projectGrantSlug)" size="32px" /></td>
+                    <td class="project"><IconifiedProject v-if="transaction.projectGrantSlug" :project="getProject(transaction.projectGrantSlug)" size="24px" /></td>
                     <td class="processor"><Icon :name="`fa6-brands:${transaction.processor?.toLowerCase()}`" />&nbsp;{{ formatProcessor(transaction.processor) }}</td>
                     <td class="marketplace">{{ transaction.marketplace }}</td>
                     <td class="reference">{{ transaction.transactionReference }}</td>
                     <td class="email">{{ transaction.email }}</td>
-                    <td class="amount">{{ transaction.amount }}&nbsp;{{ transaction.currency }}</td>
+                    <td class="amount">{{ formatAmount(transaction.currency, transaction.amount) }}</td>
                     <td class="status">
-                        <div class="avatar-name" v-if="transaction.grantedToName?.length">
+                        <div class="text">{{ getStatus(transaction) }}</div>
+                        <div class="avatar-name" v-if="transaction.grantedToName?.length" @click="$emit('show-user', transaction.grantedToName)">
                             <NuxtImg v-if="transaction.grantedToAvatar" :src="transaction?.grantedToAvatar"
                                 alt="User avatar" placeholder="/images/placeholder-avatar.png" />
                             <span>{{ transaction.grantedToName ?? $t('user-deleted') }}</span>
                         </div>
-                        <div :class="text">{{ getStatus(transaction) }}</div>
                     </td>
                 </tr>
             </tbody>
@@ -48,12 +48,14 @@
 </template>
 
 <script setup>
+const CURRENCY_FORMAT = 'en-GB';
 const { t } = useI18n();
 
 const pageNumber = ref(1);
 const itemsPerPage = ref(15);
-const emailFilter = ref('');
+const emailSearch = ref('');
 const transactions = ref(null);
+const emit = defineEmits('show-user');
 
 const projects = await useRestrictedProjects();
 const getProject = (proj) => projects.find(p => p.slug === proj)
@@ -74,11 +76,16 @@ const formatProcessor = (processor) => {
     }
 }
 
+const formatAmount = (currency, amount) =>  new Intl.NumberFormat(CURRENCY_FORMAT, { style: 'currency', currency }).format(amount);
+
 const getStatus = (transaction) => {
     if (transaction.refunded) {
         return t('transaction-status-refunded');
     }
     if (transaction.passedValidation) {
+        if (transaction.grantedToAvatar) {
+            return t('transaction-status-linked');
+        }
         return t('transaction-status-complete');
     }
     return t('transaction-status-failed-validation');
@@ -87,7 +94,7 @@ const getStatus = (transaction) => {
 const updateTransactions = (async (page, perPage) => {
     pageNumber.value = Math.max(1, page || pageNumber.value);
     itemsPerPage.value = Math.max(15, perPage || itemsPerPage.value);
-    transactions.value = await useAllTransactions(pageNumber.value - 1, itemsPerPage.value, emailFilter.value);
+    transactions.value = await useAllTransactions(pageNumber.value - 1, itemsPerPage.value, emailSearch.value);
 });
 await updateTransactions(pageNumber.value, itemsPerPage.value);
 </script>
@@ -102,7 +109,6 @@ await updateTransactions(pageNumber.value, itemsPerPage.value);
 }
 
 .status {
-    min-width: 120px !important;
     text-align: center;
 }
 
@@ -120,13 +126,20 @@ await updateTransactions(pageNumber.value, itemsPerPage.value);
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--light-gray);
     text-overflow: ellipsis;
 }
 
 .avatar-name img {
-    width: 25px;
-    height: 25px;
+    width: 16px;
+    height: 16px;
     border-radius: 100%;
+}
+
+.avatar-name:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 table .empty-notice {

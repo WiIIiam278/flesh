@@ -1,5 +1,3 @@
-## Terms & Conditions
-
 I offer support for my plugins on the [HuskHelp Discord server](https://discord.gg/tVYhJfyDWG). We try and respond to enquiries as quickly as possible there.
 Once you have joined the Discord, you can use the button in the `#create-ticket` channel to open a ticket and explain your issue and a member of staff will get back to you.
 

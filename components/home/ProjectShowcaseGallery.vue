@@ -1,19 +1,17 @@
 <template>
-    <div>
-        <div v-if="projects?.length && slides?.length" class="gallery shadow" @mouseover="hovering = true" @mouseleave="hovering = false">
-            <div v-for="(slide, index) in slides" class="gallery-item" :key="index"
-                :style="`transform: translateY(-${slideOffset}%); z-index: ${index + 1};`">
-                <PageAsset class="image" :src="slide.img" :alt="slide.alt" sizes="md:550px sm:300px" @click="navigateTo(slide.link)" />
-            </div>
-            <div class="button">
-                <NuxtLink class="link shadow" :to="slides[slide].link">{{ slides[slide].name }}</NuxtLink>
-            </div>
-            <div class="progress-pips">
-                <div v-for="(_, index) in slides" @click="slide = index" :class="`pip ${slide === index ? 'selected' : ''}`"></div>
-            </div>
+    <div v-if="projects?.length && slides?.length" class="gallery shadow" @mouseover="hovering = true" @mouseleave="hovering = false">
+        <div v-for="(slide, index) in slides" class="gallery-item" :key="index"
+            :style="`transform: translateY(-${slideOffset}%); z-index: ${index + 1};`">
+            <PageAsset class="image" :src="slide.img" :alt="slide.alt" sizes="md:550px sm:300px" @click="navigateTo(slide.link)" />
         </div>
-        <div v-else class="gallery pulsing"></div>
+        <div class="button">
+            <NuxtLink class="link shadow" :to="slides[slide].link">{{ slides[slide].name }}</NuxtLink>
+        </div>
+        <div class="progress-pips">
+            <div v-for="(_, index) in slides" @click="slide = index" :class="`pip ${slide === index ? 'selected' : ''}`"></div>
+        </div>
     </div>
+    <div v-else class="gallery pulsing"></div>
 </template>
 
 <script setup>

@@ -6,7 +6,7 @@ Welcome! This is the general help centre for William278.net and the [HuskHelp Di
 * [[Translate]] &ndash; Information about translating William278.net
 
 ## Links
-* 🔔 [Terms of Service](https://william278.net/terms#terms-and-conditions)
+* 🔔 [Terms of Service](https://william278.net/terms)
 * 💻 [Site Frontend Code](https://github.com/WiIIiam278/flesh)
 * 🧑‍💻 [Site Backend Code](https://github.com/WiIIiam278/bones)
 * 💬 [Discord Support](https://discord.gg/tVYhJfyDWG)
