@@ -1,9 +1,3 @@
----
-title: 'Redis Server Hosts'
-description: 'A list of Minecraft server hosts and whether they offer Redis, either as standard or on request.'
-locale: 'en'
----
-
 This page contains a list of Minecraft server hosts and whether they offer Redis, either as standard or on request.
 
 Most of my plugins support Redis, or in the case of HuskSync, _require_ it. If you're not sure what Redis is, it's a type of in-memory data store with caching and messaging capabilities. I use it for efficient cross-server data handling and communication.
