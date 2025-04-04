@@ -128,10 +128,14 @@ export default defineNuxtConfig({
 
   // Content config (https://content.nuxtjs.org/api/configuration)
   content: {
-      highlight: {
+     build: {
+      markdown: {
+        highlight: {
           theme: 'github-dark-dimmed',
-          preload: ['js', 'java', 'yaml', 'toml', 'xml', 'groovy']
+          langs: ['js', 'java', 'yaml','toml', 'xml', 'groovy']
+        }
       }
+    }
   },
 
   // Internationalization
