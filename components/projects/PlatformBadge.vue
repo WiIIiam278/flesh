@@ -1,6 +1,6 @@
 <template>
     <a :href="link" :title="`${verb} ${name}`" target="_blank">
-        <NuxtImg :src="`/images/badges/${type}/${platform}.svg`" height="60px" format="webp" />
+        <NuxtImg placeholder="/images/placeholder-badge.png" :src="`/images/badges/${type}/${platform}.svg`" height="60px" format="webp" />
     </a>
 </template>
 
