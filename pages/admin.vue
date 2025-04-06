@@ -5,6 +5,9 @@
                 <article class="admin-page">
                     <Breadcrumbs :crumbs="[{ name: $t('link-home'), link: '/' }]" />
                     <h1>{{ tabs.find(t => t.id === activeTab)?.name ?? $t('admin-panel') }}</h1>
+                    <div v-if="activeTab === 'dashboard'">
+                        <AdminDashboard />
+                    </div>
                     <div v-if="activeTab === 'projects'">
                         <ProjectEditor />
                     </div>
@@ -52,11 +55,15 @@
 
 <script setup>
 const user = await useUser();
+const activeTab = defineModel('activeTab')
+const searchPrefill = defineModel('')
+
 const tabs = [];
 if (useIsUserRole(user.value, 'staff')) {
     tabs.unshift({ id: 'tickets', name: 'Tickets', icon: 'fa6-solid:ticket', path: '/admin#tickets' })
     tabs.unshift({ id: 'users', name: 'Users', icon: 'fa6-solid:user', path: '/admin#users' })
     tabs.unshift({ id: 'assets', name: 'Assets', icon: 'fa6-solid:image', path: '/admin#assets' })
+    activeTab.value = 'tickets'
 }
 if (useIsUserRole(user.value, 'admin')) {
     tabs.unshift({ id: 'transactions', name: 'Transactions', icon: 'mdi:coins', path: '/admin#transactions' })
@@ -64,10 +71,9 @@ if (useIsUserRole(user.value, 'admin')) {
     tabs.unshift({ id: 'upload', name: 'Upload', icon: 'mdi:upload', path: '/admin#upload' })
     tabs.unshift({ id: 'pages', name: 'Pages', icon: 'mdi:globe', path: '/admin#pages' })
     tabs.unshift({ id: 'projects', name: 'Projects', icon: 'fa6-solid:star', path: '/admin#projects' })
+    tabs.unshift({ id: 'dashboard', name: 'Dashboard', icon: 'mdi:chart-line', path: '/admin#dashboard' })
+    activeTab.value = 'dashboard'
 }
-const activeTab = defineModel('activeTab')
-const searchPrefill = defineModel('')
-activeTab.value = 'projects'
 
 definePageMeta({
     middleware: ['staff']
