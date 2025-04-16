@@ -16,14 +16,14 @@
 import { provide } from 'vue'
 
 const QUERY_OPTIONS = {
-    'Past 30 days': { days: 30, grouping: 7 },
-    'Past 60 days': { days: 60, grouping: 14 },
-    'Past 120 days': { days: 120, grouping: 30 },
-    'Past year': { days: 365, grouping: 30 },
-    'All time': { days: 999999, grouping: 60 }
+    'Last 7 days': { days: 7, grouping: 1 },
+    'Last 30 days': { days: 30, grouping: 1 },
+    'Last 3 months': { days: 120, grouping: 7 },
+    'Last 12 months': { days: 365, grouping: 30 },
+    'All time': { days: 99999999, grouping: 30 }
 }
 const transactionQuery = defineModel('transactionQuery')
-transactionQuery.value = 'Past 30 days'
+transactionQuery.value = 'Last 30 days'
 
 const transactionsOption = ref({});
 const updateTransactions = async() => {

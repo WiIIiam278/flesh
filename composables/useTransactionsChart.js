@@ -17,13 +17,14 @@ export const useTransactionsChart = async (pastDays, dayGrouping, title) => {
     const selectedList = {};
     series.map(s => {
         selectedList[s.name] = true;
-        s.areaStyle = {};
-        s.emphasis = { focus: 'series' };
-        s.label = {
-            normal: {
-                show: true,
-                position: 'top',
-                formatter: '£{c}'
+        if (s.name === 'Total') {
+            s.emphasis = { focus: 'series' };
+            s.label = {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    formatter: '£{c}'
+                }
             }
         }
     });
@@ -37,7 +38,7 @@ export const useTransactionsChart = async (pastDays, dayGrouping, title) => {
             }
         },
         legend: { 
-            data: series.map(s => s.name),
+            data: series.map(s => s.name).sort((s1, s2) => s1 === 'Total' ? 100 : s1.localeCompare(s2)),
             bottom: '0',
             itemGap: 20,
             textStyle: {
