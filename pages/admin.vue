@@ -72,7 +72,7 @@ if (useIsUserRole(user.value, 'admin')) {
     tabs.unshift({ id: 'pages', name: 'Pages', icon: 'mdi:globe', path: '/admin#pages' })
     tabs.unshift({ id: 'projects', name: 'Projects', icon: 'fa6-solid:star', path: '/admin#projects' })
     tabs.unshift({ id: 'dashboard', name: 'Dashboard', icon: 'mdi:chart-line', path: '/admin#dashboard' })
-    activeTab.value = 'dashboard'
+    activeTab.value = 'transactions'
 }
 
 definePageMeta({

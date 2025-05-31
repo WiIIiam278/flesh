@@ -14,10 +14,10 @@
                     <th class="project">{{ t('transactions-header-project') }}</th>
                     <th class="processor">{{ t('transactions-header-processor') }}</th>
                     <th class="marketplace">{{ t('transactions-header-marketplace') }}</th>
-                    <th class="reference">{{ t('transactions-header-reference') }}</th>
-                    <th class="email">{{ t('transactions-header-email') }}</th>
+                    <th class="email-ref">{{ t('transactions-header-email-ref') }}</th>
                     <th class="amount">{{ t('transactions-header-amount') }}</th>
                     <th class="status">{{ t('transactions-header-status') }}</th>
+                    <th class="actions">{{ t('transactions-header-actions') }}</th>
                 </tr>
             </thead>
             <tbody v-if="transactions.value">
@@ -26,8 +26,10 @@
                     <td class="project"><IconifiedProject v-if="transaction.projectGrantSlug" :project="getProject(transaction.projectGrantSlug)" size="24px" /></td>
                     <td class="processor"><Icon :name="`fa6-brands:${transaction.processor?.toLowerCase()}`" />&nbsp;{{ formatProcessor(transaction.processor) }}</td>
                     <td class="marketplace">{{ transaction.marketplace }}</td>
-                    <td class="reference">{{ transaction.transactionReference }}</td>
-                    <td class="email">{{ transaction.email }}</td>
+                    <td class="email-ref"><div class="ref-container">
+                        <div class="email">{{ transaction.email }}</div>
+                        <div class="ref">{{ transaction.transactionReference }}</div>
+                    </div></td>
                     <td class="amount">{{ formatAmount(transaction.currency, transaction.amount) }}</td>
                     <td class="status">
                         <div class="text">{{ getStatus(transaction) }}</div>
@@ -36,6 +38,12 @@
                                 alt="User avatar" placeholder="/images/placeholder-avatar.png" />
                             <span>{{ transaction.grantedToName ?? $t('user-deleted') }}</span>
                         </div>
+                    </td>
+                    <td class="actions">
+                        <span class="actions">
+                            <button v-if="!transaction.refunded" class="red" @click="refundTransaction(transaction)">{{ $t('refund-transaction-button') }}</button>
+                            <button v-if="!transaction.refunded && transaction.passedValidation && !transaction.grantedToName?.length" @click="linkTransaction(transaction)">{{$t('link-transaction-button')}}</button>
+                        </span>
                     </td>
                 </tr>
             </tbody>
@@ -50,6 +58,9 @@
 <script setup>
 const CURRENCY_FORMAT = 'en-GB';
 const { t } = useI18n();
+const { auth, xsrf } = useAuth();
+
+const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 
 const pageNumber = ref(1);
 const itemsPerPage = ref(15);
@@ -91,10 +102,60 @@ const getStatus = (transaction) => {
     return t('transaction-status-failed-validation');
 }
 
+const linkTransaction = (toLink) => useInput(
+    'Enter the user ID to link this transaction to:',
+    'Enter user ID to link',
+    '185792275899613184',
+    (id) => /^(?<id>\d{17,20})$/.test(id),
+    async (confirm, id) => {
+        if (!confirm) return;
+        try {
+            toLink.refunded = false;
+            toLink.passedValidation = true;
+            await $fetch(`${BASE_URL}/v1/transactions/${toLink.id}/link`, {
+                method: 'POST',
+                credentials: auth ? 'include' : 'omit',
+                headers: {
+                    'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
+                    'X-XSRF-TOKEN': xsrf
+                },
+                body: id
+            });
+            updateTransactions(pageNumber.value, itemsPerPage.value);
+        } catch (err) {
+            useAlert('Failed to link transaction: ' + err, 'Error');
+            return;
+        }
+    }
+);
+
+const refundTransaction = async (toRefund) => {
+    useConfirm(t('refund-transaction-confirm', {'email': toRefund.email}), t('refund-transaction'), async (confirm) => {
+        if (!confirm) return;
+        try {
+            toRefund.refunded = true;
+            await $fetch(`${BASE_URL}/v1/transactions/${toRefund.id}`, {
+                method: 'PUT',
+                credentials: auth ? 'include' : 'omit',
+                headers: {
+                    'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
+                    'X-XSRF-TOKEN': xsrf
+                },
+                body: JSON.stringify(toRefund)
+            });
+            updateTransactions(pageNumber.value, itemsPerPage.value);
+        } catch (err) {
+            useAlert('Failed to mark transaction as refunded: ' + err, 'Error');
+            return;
+        }
+    });
+};
+
 const updateTransactions = (async (page, perPage) => {
     pageNumber.value = Math.max(1, page || pageNumber.value);
     itemsPerPage.value = Math.max(15, perPage || itemsPerPage.value);
     transactions.value = await useAllTransactions(pageNumber.value - 1, itemsPerPage.value, emailSearch.value);
+    console.log(transactions.value)
 });
 await updateTransactions(pageNumber.value, itemsPerPage.value);
 </script>
@@ -116,8 +177,25 @@ await updateTransactions(pageNumber.value, itemsPerPage.value);
     margin: 0.2rem 0;
 }
 
-.project, .processor, .reference {
+.project, .processor, .email-ref {
     width: 12% !important;
+}
+
+.email-ref .ref-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.ref-container .ref {
+    color: var(--light-gray);
+    font-size: 0.8rem;
+}
+
+td .actions {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
 }
 
 .status .avatar-name {
