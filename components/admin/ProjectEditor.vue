@@ -150,7 +150,7 @@
                         <textarea v-model="editing.metadata.images[index].description" type="text" placeholder="Image Description"></textarea>
                         <span class="image-picker">
                             <NuxtImg v-if="editing.metadata.images[index].url?.length" :src="`${ASSETS_URL}/${editing.metadata.images[index].url}`" />
-                            <input disabled :id="`${format}-icon`" v-model="editing.metadata.images[index].url" type="text" placeholder="(None)" />
+                            <input disabled v-model="editing.metadata.images[index].url" type="text" placeholder="(None)" />
                             <button @click="useAssetInput('Please choose an image.', 'Select image...', (_, chosen) => editing.metadata.images[index].url = chosen)">Select</button>
                         </span>
                     </div>

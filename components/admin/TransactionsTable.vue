@@ -155,7 +155,6 @@ const updateTransactions = (async (page, perPage) => {
     pageNumber.value = Math.max(1, page || pageNumber.value);
     itemsPerPage.value = Math.max(15, perPage || itemsPerPage.value);
     transactions.value = await useAllTransactions(pageNumber.value - 1, itemsPerPage.value, emailSearch.value);
-    console.log(transactions.value)
 });
 await updateTransactions(pageNumber.value, itemsPerPage.value);
 </script>
