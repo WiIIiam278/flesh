@@ -4,8 +4,8 @@
             <Head>
                 <Title>William278.net &ndash; {{ $t('posts-title') }} &ndash; {{ post.title }}</Title>
                 <Meta name="description" content="Latest news and update posts from William278.net." />
-                <Meta name="og:image" :content="post.imageUrl ? post.imageUrl : `/images/thumbnails/posts/${slug}/card.png`" />
-                <Meta name="twitter:image" :content="post.imageUrl ? post.imageUrl : `/images/thumbnails/posts/${slug}/card.png`" />
+                <Meta name="og:image" content="thumbnail.png" />
+                <Meta name="twitter:image" content="thumbnail.png" />
                 <Meta name="twitter:card" content="summary_large_image" />
                 <Meta name="twitter:creator" content="@William27528" />
             </Head>

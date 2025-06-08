@@ -2,15 +2,19 @@
     <div>
         <NuxtLayout v-if="content" name="sidebar">
             <template #default>
+
                 <Head>
-                    <Title>{{ title }} &ndash; {{ $t('docs-title', {'project': meta.name}) }} &ndash; {{ $t('index-title') }}</Title>
-                    <Meta name="og:title" :content="`${title} &ndash; ${t('docs-title', {'project': meta.name})} &ndash; ${t('index-title')}`" />
-                    <Meta name="twitter:title" :content="`${title} &ndash; ${t('docs-title', {'project': meta.name})} &ndash; ${t('index-title')}`" />
+                    <Title>{{ title }} &ndash; {{ $t('docs-title', { 'project': meta.name }) }} &ndash; {{
+                        $t('index-title') }}</Title>
+                    <Meta name="og:title"
+                        :content="`${title} &ndash; ${t('docs-title', { 'project': meta.name })} &ndash; ${t('index-title')}`" />
+                    <Meta name="twitter:title"
+                        :content="`${title} &ndash; ${t('docs-title', { 'project': meta.name })} &ndash; ${t('index-title')}`" />
                     <Meta name="description" :content="description" />
                     <Meta name="og:description" :content="description" />
                     <Meta name="twitter:description" :content="description" />
-                    <Meta name="og:image" :content="`/images/thumbnails/docs/${project.slug}/${params.topic ?? 'home'}/card.png`" />
-                    <Meta name="twitter:image" :content="`/images/thumbnails/docs/${project.slug}/${params.topic ?? 'home'}/card.png`" />
+                    <Meta name="og:image" content="thumbnail.png" />
+                    <Meta name="twitter:image" content="thumbnail.png" />
                     <Meta name="twitter:card" content="summary_large_image" />
                     <Meta name="twitter:creator" content="@William27528" />
                 </Head>
@@ -75,7 +79,7 @@ const description = computed(() => {
     if (desc.includes('\n')) {
         desc = desc.split('\n')[0];
     }
-    
+
     return desc.length > 128 ? `${desc.slice(0, 128)}...` : desc;
 });
 

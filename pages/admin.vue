@@ -17,9 +17,6 @@
                     <div v-if="activeTab === 'upload'">
                         <VersionUploader />
                     </div>
-                    <div v-if="activeTab === 'import'">
-                        <VersionImporter />
-                    </div>
                     <div v-if="activeTab === 'users'">
                         <UsersTable :user="user" @show-tickets="showUserTickets" :searchPrefill="searchPrefill" />
                     </div>
@@ -67,7 +64,6 @@ if (useIsUserRole(user.value, 'staff')) {
 }
 if (useIsUserRole(user.value, 'admin')) {
     tabs.unshift({ id: 'transactions', name: 'Transactions', icon: 'mdi:coins', path: '/admin#transactions' })
-    tabs.unshift({ id: 'import', name: 'Import', icon: 'mdi:import', path: '/admin#import' })
     tabs.unshift({ id: 'upload', name: 'Upload', icon: 'mdi:upload', path: '/admin#upload' })
     tabs.unshift({ id: 'pages', name: 'Pages', icon: 'mdi:globe', path: '/admin#pages' })
     tabs.unshift({ id: 'projects', name: 'Projects', icon: 'fa6-solid:star', path: '/admin#projects' })

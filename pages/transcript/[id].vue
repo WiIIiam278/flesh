@@ -8,8 +8,8 @@
                 <Meta name="twitter:description" :content="t('ticket-transcript-description')" />
                 <Meta name="og:title" :content="`${t('ticket-transcript-title', {'ticket': data.ticket.id})} &ndash; ${t('index-title')}`" />
                 <Meta name="twitter:title" :content="`${t('ticket-transcript-title', {'ticket': data.ticket.id})} &ndash; ${t('index-title')}`" />
-                <Meta name="og:image" content="/images/thumbnails/page/Ticket%20Transcript/card.png" />
-                <Meta name="twitter:image" content="/images/thumbnails/page/Ticket%20Transcript/card.png" />
+                <Meta name="og:image" content="thumbnail.png" />
+                <Meta name="twitter:image" content="thumbnail.png" />
                 <Meta name="twitter:card" content="summary_large_image" />
                 <Meta name="twitter:creator" content="@William27528" />
             </Head>

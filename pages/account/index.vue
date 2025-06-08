@@ -4,9 +4,9 @@
             <Head>
                 <Title>{{ t('account-title') }}</Title>
                 <Meta name="description" :content="t('account-description')" />
-                <Meta name="og:image" content="/images/thumbnails/page/home/card.png" />
+                <Meta name="og:image" content="thumbnail.png" />
                 <Meta name="twitter:description" :content="t('account-description')" />
-                <Meta name="twitter:image" content="/images/thumbnails/page/home/card.png" />
+                <Meta name="twitter:image" content="thumbnail.png" />
                 <Meta name="twitter:card" content="summary_large_image" />
                 <Meta name="twitter:creator" content="@William27528" />
             </Head>
@@ -230,12 +230,13 @@ definePageMeta({
     gap: 1rem;
 }
 
-@keyframes slide {
+@keyframes pan {
   0% {
-    transform: translate3d(0, -52vh, 0);
+    transform: translate(-50%, 0%)
   }
+
   100% {
-    transform: translate3d(-30vw, 0, 0); /* The image width */
+    transform: translate(0%, 0%)
   }
 }
 
@@ -264,14 +265,13 @@ definePageMeta({
 }
 
 .profile-bg {
-    height: 100vh !important;
-    width: 100vw !important;
-    position: absolute;
+    background-image: url('/images/icons/promo-grid.svg');
+    animation: pan 60s linear infinite;
+    height: 100%;
+    width: 200%;
     z-index: -1;
-    /* todo move this? */
-    background-image: url('/images/icons/promo-grid.png');
-    background-size: 125px;
-    animation: slide 60s linear infinite;
+    opacity: 25%;
+    position: absolute;
 }
 
 .purchases-grid {

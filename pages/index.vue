@@ -4,9 +4,9 @@
             <Head>
                 <Title>{{ $t('index-title') }}</Title>
                 <Meta name="description" :content="t('index-intro')" />
-                <Meta name="og:image" content="/images/thumbnails/page/home/card.png" />
+                <Meta name="og:image" content="thumbnail.png" />
                 <Meta name="twitter:description" :content="t('index-intro')" />
-                <Meta name="twitter:image" content="/images/thumbnails/page/home/card.png" />
+                <Meta name="twitter:image" content="thumbnail.png" />
                 <Meta name="twitter:card" content="summary_large_image" />
                 <Meta name="twitter:creator" content="@William27528" />
             </Head>

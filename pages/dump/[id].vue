@@ -8,8 +8,8 @@
                 <Meta name="twitter:description" :content="t('dump-viewer-description')" />
                 <Meta name="og:title" :content="`${t('dump-viewer-title-project', { 'project': project.metadata.name })} &ndash; ${t('index-title')}`" />
                 <Meta name="twitter:title" :content="`${t('dump-viewer-title-project', { 'project': project.metadata.name })} &ndash; ${t('index-title')}`" />
-                <Meta name="og:image" content="/images/thumbnails/page/Dump%20Viewer/card.png" />
-                <Meta name="twitter:image" content="/images/thumbnails/page/Dump%20Viewer/card.png" />
+                <Meta name="og:image" content="thumbnail.png" />
+                <Meta name="twitter:image" content="thumbnail.png" />
                 <Meta name="twitter:card" content="summary_large_image" />
                 <Meta name="twitter:creator" content="@William27528" />
             </Head>
