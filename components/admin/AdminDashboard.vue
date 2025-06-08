@@ -23,7 +23,7 @@ const QUERY_OPTIONS = {
     'All time': { days: 99999999, grouping: 30 }
 }
 const transactionQuery = defineModel('transactionQuery')
-transactionQuery.value = 'Last 30 days'
+transactionQuery.value = 'Last 3 months'
 
 const transactionsOption = ref({});
 const updateTransactions = async() => {
