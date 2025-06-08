@@ -12,13 +12,15 @@
                 <p class="content">
                     {{ $t(`email-address-${status}-description`) }}
                 </p>
-                <ButtonLink class="button" to="/account/login" icon="fa6-solid:key">{{ $t('link-log-in') }}</ButtonLink>
+                <ButtonLink v-if="auth" class="button" type="primary" to="/account" icon="fa6-solid:user">{{ $t('link-account') }}</ButtonLink>
+                <ButtonLink v-else class="button" to="/account/login" icon="fa6-solid:key">{{ $t('link-log-in') }}</ButtonLink>
             </div>
         </NuxtLayout>
     </div>
 </template>
 
 <script setup>
+const { auth } = await useAuth();
 const { status } = useRoute()?.query;
 if (!status || !['verified', 'expired'].includes(status)) {
     await navigateTo('/')

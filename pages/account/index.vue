@@ -50,9 +50,9 @@
                         </div>
                         <Tabs class="tabs grid-item" :tabs="tabs" v-model:selected="activeTab">
                             <div v-if="activeTab === 'your-purchases'" class="item-body library">
-                                <div v-if="user.purchases.length">
+                                <div v-if="purchases.length">
                                     <div class="purchases-grid">
-                                        <div v-for="project in restricted.filter(r => user.purchases.includes(r.slug))" class="purchase">
+                                        <div v-for="project in purchases.map(s => projects.find(p => p.slug === s))" class="purchase">
                                             <NuxtLink :to="`/project/${project.slug}`" class="cover shadow">
                                                 <ProjectIcon :project="project" size="85px" transparent />
                                             </NuxtLink>
@@ -70,12 +70,14 @@
                                     </div>
                                     <div class="notice">
                                         <IconifiedText icon="fa6-solid:box">{{ $t('refresh-purchases-notice') }}</IconifiedText>
-                                        <ButtonLink link="/account/logout" type="primary" icon="fa6-solid:arrows-rotate">{{ $t('link-refresh') }}</ButtonLink>
+                                        <ButtonLink v-if="user.emailVerified" @click="refreshPurchases()" type="primary" icon="fa6-solid:arrows-rotate">{{ $t('link-refresh') }}</ButtonLink>
+                                        <ButtonLink v-else @click="editEmail(user.email)" type="primary" icon="fa6-solid:envelope">{{ $t('verify-email') }}</ButtonLink>
                                     </div>
                                 </div>
                                 <div v-else class="notice">
                                     <IconifiedText icon="fa6-solid:bag-shopping">{{ $t('no-products-notice') }} {{ $t('refresh-purchases-notice') }}</IconifiedText>
-                                    <ButtonLink link="/account/logout" type="primary" icon="fa6-solid:arrows-rotate">{{ $t('link-refresh') }}</ButtonLink>
+                                    <ButtonLink v-if="user.emailVerified" @click="refreshPurchases()" type="primary" icon="fa6-solid:arrows-rotate">{{ $t('link-refresh') }}</ButtonLink>
+                                    <ButtonLink v-else @click="editEmail(user.email)" type="primary" icon="fa6-solid:envelope">{{ $t('verify-email') }}</ButtonLink>
                                 </div>
                             </div>
                             <div v-if="activeTab === 'your-support-tickets'" class="item-body tickets">
@@ -90,18 +92,19 @@
 </template>
 
 <script setup>
+import { validate } from 'email-validator'
+
 const { locale, t } = useI18n();
 const { auth, xsrf } = useAuth();
-
-import { validate } from 'email-validator'
-import ProjectIcon from '../../components/ProjectIcon.vue';
 
 const BASE_URL = useRuntimeConfig().public.API_BASE_URL;
 const ASSETS_URL = useRuntimeConfig().public.ASSETS_BASE_URL;
 
 const user = await useUser();
-const restricted = await useRestrictedProjects();
+const projects = await useAllProjects()
 const hasRequestedCode = ref(false)
+const purchases = ref([]);
+purchases.value = user.value.purchases;
 
 const deleteAccount = () => {
     useConfirm(t('delete-account-confirm'), t('delete-account'), async (confirm) => {
@@ -118,9 +121,26 @@ const deleteAccount = () => {
             });
             navigateTo('/account/logout')
         } catch (err) {
-            
+            useAlert('Failed to delete account: ' + err, 'Error');
         }
     })
+}
+
+const refreshPurchases = async () => {
+    try {
+        const refreshed = await $fetch(`${BASE_URL}/v1/users/@me/purchases`, 
+        { 
+            method: 'GET',
+            credentials: auth ? 'include' : 'omit',
+            headers: {
+                'Cookie': `JSESSIONID=${auth}; XSRF-TOKEN=${xsrf}`,
+                'X-XSRF-TOKEN': xsrf
+            }
+        });
+        purchases.value = Object.keys(refreshed);
+    } catch (err) {
+        useAlert('Failed to refresh purchases: ' + err, 'Error');
+    }
 }
 
 const editEmail = (currentEmail) => {
