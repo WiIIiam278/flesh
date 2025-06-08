@@ -33,7 +33,6 @@
     "7zip-min": "^1.4.5",
     "algoliasearch": "^4.22.1",
     "buffer": "^6.0.3",
-    "canvas": "^3.1.0",
     "email-validator": "^2.0.4",
     "mineget": "^3.1.1",
     "nuxt-icon": "^0.4.2",
